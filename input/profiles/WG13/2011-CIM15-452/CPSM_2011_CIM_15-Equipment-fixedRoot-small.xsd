@@ -1,0 +1,2548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:a="http://langdale.com.au/2005/Message#" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns="http://langdale.com.au/2005/Message#" xmlns:m="http://iec.ch/TC57/2009/CPSM-Equipment#" targetNamespace="http://iec.ch/TC57/2009/CPSM-Equipment#" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>This profile represents the equipment of the power system and their hierarchical relationships.</xs:documentation>
+	</xs:annotation>
+	<xs:element name="CPSM-Equipment" type="m:CPSM-Equipment"/>
+	<xs:complexType name="CPSM-Equipment">
+		<xs:sequence>
+			<xs:element name="ACLineSegment" type="m:ACLineSegment" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ActivePowerLimit" type="m:ActivePowerLimit" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Analog" type="m:Analog" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="AnalogValue" type="m:AnalogValue" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="BaseVoltage" type="m:BaseVoltage" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Breaker" type="m:Breaker" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="BusbarSection" type="m:BusbarSection" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ConformLoad" type="m:ConformLoad" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ConformLoadGroup" type="m:ConformLoadGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ConformLoadSchedule" type="m:ConformLoadSchedule" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ConnectivityNode" type="m:ConnectivityNode" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ControlArea" type="m:ControlArea" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ControlAreaGeneratingUnit" type="m:ControlAreaGeneratingUnit" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="CurveData" type="m:CurveData" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="DayType" type="m:DayType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Discrete" type="m:Discrete" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="DiscreteValue" type="m:DiscreteValue" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="EnergyConsumer" type="m:EnergyConsumer" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GeneratingUnit" type="m:GeneratingUnit" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GeographicalRegion" type="m:GeographicalRegion" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="GrossToNetActivePowerCurve" type="m:GrossToNetActivePowerCurve" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="HydroPump" type="m:HydroPump" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IEC61970CIMVersion" type="m:IEC61970CIMVersion" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Line" type="m:Line" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LoadArea" type="m:LoadArea" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LoadBreakSwitch" type="m:LoadBreakSwitch" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="LoadResponseCharacteristic" type="m:LoadResponseCharacteristic" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MeasurementValueSource" type="m:MeasurementValueSource" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OperationalLimitSet" type="m:OperationalLimitSet" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OperationalLimitType" type="m:OperationalLimitType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PhaseTapChangerAsymetrical" type="m:PhaseTapChangerAsymetrical" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PhaseTapChangerLinear" type="m:PhaseTapChangerLinear" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PhaseTapChangerSymetrical" type="m:PhaseTapChangerSymetrical" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PhaseTapChangerTabular" type="m:PhaseTapChangerTabular" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PhaseTapChangerTabularPoint" type="m:PhaseTapChangerTabularPoint" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PowerTransformer" type="m:PowerTransformer" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="PowerTransformerEnd" type="m:PowerTransformerEnd" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RatioTapChanger" type="m:RatioTapChanger" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RatioTapChangerTabular" type="m:RatioTapChangerTabular" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RatioTapChangerTabularPoint" type="m:RatioTapChangerTabularPoint" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ReactiveCapabilityCurve" type="m:ReactiveCapabilityCurve" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RegularTimePoint" type="m:RegularTimePoint" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RegulatingControl" type="m:RegulatingControl" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="RegulationSchedule" type="m:RegulationSchedule" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Season" type="m:Season" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StaticVarCompensator" type="m:StaticVarCompensator" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="StationSupply" type="m:StationSupply" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SubGeographicalRegion" type="m:SubGeographicalRegion" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SubLoadArea" type="m:SubLoadArea" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Substation" type="m:Substation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Switch" type="m:Switch" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SwitchSchedule" type="m:SwitchSchedule" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SynchronousMachine" type="m:SynchronousMachine" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="TapChangerControl" type="m:TapChangerControl" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="TapSchedule" type="m:TapSchedule" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Terminal" type="m:Terminal" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="TieFlow" type="m:TieFlow" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="VoltageLevel" type="m:VoltageLevel" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="WindGeneratingUnit" type="m:WindGeneratingUnit" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ACLineSegment" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ACLineSegment">
+		<xs:annotation>
+			<xs:documentation>A wire or combination of wires, with consistent electrical characteristics, building a single electrical system, used to carry alternating current between points in the power system.</xs:documentation>
+			<xs:documentation>For symmetrical, transposed 3ph lines, it is sufficient to use ACLineSegment attributes, which describe sequence impedances and admittances for the entire length of the segment.</xs:documentation>
+			<xs:documentation>If per lenght impedance data is available from a library of standard types, impedances and admittances can be calculated in one of the following ways:</xs:documentation>
+			<xs:documentation>- calculate electrical parameters from asset data, using associated ConductorInfo, with values then multiplied by Conductor.length to produce a matrix model.</xs:documentation>
+			<xs:documentation>- calculate unbalanced electrical parameters from associated PerLengthPhaseImpedance, then multiplied by Conductor.length to produce a matrix model.</xs:documentation>
+			<xs:documentation>- calculate transposed electrical parameters from associated PerLengthSequenceImpedance, then multiplied by Conductor.length to produce a sequence model.</xs:documentation>
+			<xs:documentation>-  [R4.5] and [R4.7] are satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  Each ACLineSegment is required to have an association to a BaseVoltage.  The association to Line is not required.</xs:documentation>
+			<xs:documentation>-  Using the “MemberOf_EquipmentContainer” association, an ACLineSegment can only be contained by a Line, but the association to Line is not required.</xs:documentation>
+			<xs:documentation>-  Attributes b0ch, g0ch, gch, r0, and x0 are for short circuit only and are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Conductor">
+				<xs:sequence>
+					<xs:element name="b0ch" type="m:Susceptance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-ext1#ACLineSegment.b0ch">
+						<xs:annotation>
+							<xs:documentation>Zero sequence shunt (charging) susceptance, uniformly distributed, of the entire line section.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bch" type="m:Susceptance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-ext2#ACLineSegment.bch">
+						<xs:annotation>
+							<xs:documentation>Positive sequence shunt (charging) susceptance, uniformly distributed, of the entire line section.  This value represents the full charging over the full length of the line.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="r" type="m:Resistance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ACLineSegment.r">
+						<xs:annotation>
+							<xs:documentation>Positive sequence series resistance of the entire line section.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivePowerLimit" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ActivePowerLimit">
+		<xs:annotation>
+			<xs:documentation>Limit on active power flow.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:OperationalLimit">
+				<xs:sequence>
+					<xs:element name="value" type="m:ActivePower" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ActivePowerLimit.value">
+						<xs:annotation>
+							<xs:documentation>Value of active power limit.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Analog" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Analog">
+		<xs:annotation>
+			<xs:documentation>Analog represents an analog Measurement.</xs:documentation>
+			<xs:documentation>-  The positiveFlowIn attribute is only required if the Measurement measures a directional flow of power.</xs:documentation>
+			<xs:documentation>-  The association to Terminal may not be required depending on how the Measurement is being used.  See section Use of Measurement Class for details.</xs:documentation>
+			<xs:documentation>-  The MeasurementType class is used to define the quantity being measured (Voltage, ThreePhaseActivePower, etc.) by a Measurement.  A Measurement must be associated with one and only one measurementType.  The valid values for MeasurementType.name are defined in Normative String Tables.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Measurement">
+				<xs:sequence>
+					<xs:element name="positiveFlowIn" type="xs:boolean" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Analog.positiveFlowIn">
+						<xs:annotation>
+							<xs:documentation>If true then this measurement is an active power, reactive power or current with the convention that a positive value measured at the Terminal means power is flowing into the related PowerSystemResource.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AnalogValue" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#AnalogValue">
+		<xs:annotation>
+			<xs:documentation>AnalogValue represents an analog MeasurementValue.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:MeasurementValue">
+				<xs:sequence>
+					<xs:element name="Analog" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#AnalogValue.Analog">
+						<xs:annotation>
+							<xs:documentation>Measurement to which this value is connected.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BaseVoltage" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BaseVoltage">
+		<xs:annotation>
+			<xs:documentation>Defines a system base voltage which is referenced.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="nominalVoltage" type="m:Voltage" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BaseVoltage.nominalVoltage">
+						<xs:annotation>
+							<xs:documentation>The PowerSystemResource's base voltage.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BasicIntervalSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BasicIntervalSchedule">
+		<xs:annotation>
+			<xs:documentation>Schedule of values at points in time.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="startTime" type="xs:dateTime" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BasicIntervalSchedule.startTime">
+						<xs:annotation>
+							<xs:documentation>The time for the first time point.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="value1Unit" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BasicIntervalSchedule.value1Unit">
+						<xs:annotation>
+							<xs:documentation>Value1 units of measure.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="value2Unit" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BasicIntervalSchedule.value2Unit">
+						<xs:annotation>
+							<xs:documentation>Value2 units of measure.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Breaker" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Breaker">
+		<xs:annotation>
+			<xs:documentation>A mechanical switching device capable of making, carrying, and breaking currents under normal circuit conditions and also making, carrying for a specified time, and breaking currents under specified abnormal circuit conditions e.g.  those of short circuit.</xs:documentation>
+			<xs:documentation>-  [R6.2] and [R6.3] are satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  [R6.4] is satisfied by the class name.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Switch">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BusbarSection" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#BusbarSection">
+		<xs:annotation>
+			<xs:documentation>A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation.</xs:documentation>
+			<xs:documentation>Voltage measurements are typically obtained from VoltageTransformers that are connected to busbar sections. A bus bar section may have many physical terminals but for analysis is modelled with exactly one logical terminal.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:ConductingEquipment">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConductingEquipment" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConductingEquipment">
+		<xs:annotation>
+			<xs:documentation>The parts of the power system that are designed to carry current or that are conductively connected therewith. ConductingEquipment is contained within an EquipmentContainer that may be a Substation, or a VoltageLevel or a Bay within a Substation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Equipment">
+				<xs:sequence>
+					<xs:element name="BaseVoltage" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConductingEquipment.BaseVoltage">
+						<xs:annotation>
+							<xs:documentation>Use association to ConductingEquipment only when there is no VoltageLevel container used.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Conductor" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Conductor">
+		<xs:annotation>
+			<xs:documentation>Combination of conducting material with consistent electrical characteristics, building a single electrical system, used to carry current between points in the power system.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:ConductingEquipment">
+				<xs:sequence>
+					<xs:element name="length" type="m:Length" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Conductor.length">
+						<xs:annotation>
+							<xs:documentation>Segment length for calculating line section capabilities</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConformLoad" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConformLoad">
+		<xs:annotation>
+			<xs:documentation>ConformLoad represent loads that follow a daily load change pattern where the pattern can be used to scale the load with a system load.</xs:documentation>
+			<xs:documentation>-  [R8.2] is satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  The definition of the real and reactive power injections for an EnergyConsumer can be done using different sets of attributes.  In the simplest case, the injections can be defined directly using only the attributes “pfixed” and “qfixed”.</xs:documentation>
+			<xs:documentation>-  The injections for a ConformLoad can be defined as a percentage of the ConformLoadGroup with the attributes “pfixedPct” and “qfixedPct”.  In this case, the associated ConformLoadGroup would have to have an associated ConformLoadSchedule.</xs:documentation>
+			<xs:documentation>-  See EnergyConsumer for specific notes about inherited attributes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EnergyConsumer">
+				<xs:sequence>
+					<xs:element name="LoadGroup" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConformLoad.LoadGroup">
+						<xs:annotation>
+							<xs:documentation>Group of this ConformLoad.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConformLoadGroup" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConformLoadGroup">
+		<xs:annotation>
+			<xs:documentation>A group of loads conforming to an allocation pattern.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:LoadGroup">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConformLoadSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConformLoadSchedule">
+		<xs:annotation>
+			<xs:documentation>A curve of load  versus time (X-axis) showing the active power values (Y1-axis) and reactive power (Y2-axis) for each unit of the period covered. This curve represents a typical pattern of load over the time period for a given day type and season.</xs:documentation>
+			<xs:documentation>-  Because value1 will always be specified in MW and value2 will always be specified in MVAr, the value1Multiplier and value2Multiplier attributes do not need to be specified.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:SeasonDayTypeSchedule">
+				<xs:sequence>
+					<xs:element name="ConformLoadGroup" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConformLoadSchedule.ConformLoadGroup">
+						<xs:annotation>
+							<xs:documentation>The ConformLoadGroup where the ConformLoadSchedule belongs.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConnectivityNode" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConnectivityNode">
+		<xs:annotation>
+			<xs:documentation>Connectivity nodes are points where terminals of conducting equipment are connected together with zero impedance.</xs:documentation>
+			<xs:documentation>- [R3.2] is - satisfied by navigation to SubControlArea.</xs:documentation>
+			<xs:documentation>- [R3.3] is satisfied by navigation to BaseVoltage.</xs:documentation>
+			<xs:documentation>- [R3.5] is satisfied by navigation to VoltageLevel</xs:documentation>
+			<xs:documentation>- By convention, ConnectivityNodes may only be placed within VoltageLevels.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="ConnectivityNodeContainer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConnectivityNode.ConnectivityNodeContainer">
+						<xs:annotation>
+							<xs:documentation>Container of this connectivity node.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConnectivityNodeContainer" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ConnectivityNodeContainer">
+		<xs:annotation>
+			<xs:documentation>A base class for all objects that may contain ConnectivityNodes or TopologicalNodes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PowerSystemResource">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ControlArea" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlArea">
+		<xs:annotation>
+			<xs:documentation>A &lt;b&gt;control area &lt;/b&gt;is a grouping of &lt;b&gt;generating units&lt;/b&gt; and/or loads and a cutset of tie lines (as &lt;b&gt;terminals&lt;/b&gt;) which may be used for a variety of purposes including automatic generation control, powerflow solution area interchange control specification, and input to load forecasting.   Note that any number of overlapping control area specifications can be superimposed on the physical model.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PowerSystemResource">
+				<xs:sequence>
+					<xs:element name="netInterchange" type="m:ActivePower" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlArea.netInterchange">
+						<xs:annotation>
+							<xs:documentation>The specified positive net interchange into the control area.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pTolerance" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlArea.pTolerance">
+						<xs:annotation>
+							<xs:documentation>Active power net interchange tolerance</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlArea.type">
+						<xs:annotation>
+							<xs:documentation>The type of control area defintion used to determine if this is used for automatic generation control, for planning interchange control, or other purposes.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="EnergyArea" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlArea.EnergyArea">
+						<xs:annotation>
+							<xs:documentation>The energy area that is forecast from this control area specification.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ControlAreaGeneratingUnit" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlAreaGeneratingUnit">
+		<xs:annotation>
+			<xs:documentation>A control area generating unit. This class is needed so that alternate control area definitions may include the same generating unit.   Note only one instance within a control area should reference a specific generating unit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ControlArea" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlAreaGeneratingUnit.ControlArea">
+				<xs:annotation>
+					<xs:documentation>The parent control area for the generating unit specifications.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GeneratingUnit" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlAreaGeneratingUnit.GeneratingUnit">
+				<xs:annotation>
+					<xs:documentation>The generating unit specified for this control area.  Note that a control area should include a GeneratingUnit only once.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ControlAreaTypeKind" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ControlAreaTypeKind">
+		<xs:annotation>
+			<xs:documentation>The type of control area.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AGC">
+				<xs:annotation>
+					<xs:documentation>Used for automatic generatoin control.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Forecast">
+				<xs:annotation>
+					<xs:documentation>Used for load forecast.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Interchange">
+				<xs:annotation>
+					<xs:documentation>Used for interchange specification or control.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Curve" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Curve">
+		<xs:annotation>
+			<xs:documentation>A multi-purpose curve or functional relationship between an independent variable (X-axis) and dependent (Y-axis) variables.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="curveStyle" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Curve.curveStyle">
+						<xs:annotation>
+							<xs:documentation>The style or shape of the curve.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="xUnit" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Curve.xUnit">
+						<xs:annotation>
+							<xs:documentation>The X-axis units of measure.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="y1Unit" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Curve.y1Unit">
+						<xs:annotation>
+							<xs:documentation>The Y1-axis units of measure.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="y2Unit" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Curve.y2Unit">
+						<xs:annotation>
+							<xs:documentation>The Y2-axis units of measure.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CurveData" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurveData">
+		<xs:annotation>
+			<xs:documentation>Multi-purpose data points for defining a curve.</xs:documentation>
+			<xs:documentation>-  The CurveData class is used to represent points for various curves that derive from the Curve class.  The curves defined in this profile are:</xs:documentation>
+			<xs:documentation>GrossToNetActivePowerCurve</xs:documentation>
+			<xs:documentation>ReactiveCapabilityCurve</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="xvalue" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurveData.xvalue">
+				<xs:annotation>
+					<xs:documentation>The data value of the X-axis variable,  depending on the X-axis units</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="y1value" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurveData.y1value">
+				<xs:annotation>
+					<xs:documentation>The data value of the  first Y-axis variable, depending on the Y-axis units</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="y2value" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurveData.y2value">
+				<xs:annotation>
+					<xs:documentation>The data value of the second Y-axis variable (if present), depending on the Y-axis units</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Curve" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurveData.Curve">
+				<xs:annotation>
+					<xs:documentation>The Curve defined by this CurveData.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CurveStyle" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurveStyle">
+		<xs:annotation>
+			<xs:documentation>Style or shape of curve.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="constantYValue">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="formula">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="rampYValue">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="straightLineYValues">
+				<xs:annotation/>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DayType" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#DayType">
+		<xs:annotation>
+			<xs:documentation>Group of similar days, e.g., Mon/Tue/Wed, Thu/Fri, Sat/Sun, Holiday1, Holiday2</xs:documentation>
+			<xs:documentation>-  The name attribute indicates the days of the week that a given DayType represents.</xs:documentation>
+			<xs:documentation>-  If the name attribute is “All”, it represents all seven days of the week.</xs:documentation>
+			<xs:documentation>-  If the name attribute is “Weekday”, it represents Monday through Friday.</xs:documentation>
+			<xs:documentation>-  If the name attribute is “Weekend”, it represents Saturday and Sunday.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Discrete" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Discrete">
+		<xs:annotation>
+			<xs:documentation>Discrete represents a discrete Measurement, i.e. a Measurement reprsenting discrete values, e.g. a Breaker position.</xs:documentation>
+			<xs:documentation>-  The association to Terminal may not be required depending on how the Measurement is being used.  See section Use of Measurement Class for details.</xs:documentation>
+			<xs:documentation>-  The MeasurementType class is used to define the quantity being measured (Voltage, ThreePhaseActivePower, etc.) by a Measurement.  A Measurement must be associated with one and only one measurementType.  The valid values for the MeasurementType name are defined in Normative String Tables.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Measurement">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DiscreteValue" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#DiscreteValue">
+		<xs:annotation>
+			<xs:documentation>DiscreteValue represents a discrete MeasurementValue.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:MeasurementValue">
+				<xs:sequence>
+					<xs:element name="Discrete" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#DiscreteValue.Discrete">
+						<xs:annotation>
+							<xs:documentation>Measurement to which this value is connected.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnergyArea" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyArea">
+		<xs:annotation>
+			<xs:documentation>The class describes an area having energy production or consumption. The class is the basis for further specialization.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnergyConsumer" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyConsumer">
+		<xs:annotation>
+			<xs:documentation>Generic user of energy - a  point of consumption on the power system model</xs:documentation>
+			<xs:documentation>-  [R8.2] is satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  The definition of the real and reactive power injections for an EnergyConsumer can be done using different sets of attributes.  In the simplest case, the injections can be defined directly using only the attributes “pfixed” and “qfixed”.</xs:documentation>
+			<xs:documentation>-  To specify conforming and nonconforming loads, the classes ConformLoad, NonConformLoad, or their subtypes should be used.</xs:documentation>
+			<xs:documentation>-  The attributes defining the affect of voltage and frequency on the injection defined by an associated LoadResponseCharacteristic should be supplied, if they are available, but are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:ConductingEquipment">
+				<xs:sequence>
+					<xs:element name="pfixed" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyConsumer.pfixed">
+						<xs:annotation>
+							<xs:documentation>Active power of the load that is a fixed quantity. Load sign convention is used, i.e. positive sign means flow out from a node.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pfixedPct" type="m:PerCent" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyConsumer.pfixedPct">
+						<xs:annotation>
+							<xs:documentation>Fixed active power as per cent of load group fixed active power. Load sign convention is used, i.e. positive sign means flow out from a node.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qfixed" type="m:ReactivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyConsumer.qfixed">
+						<xs:annotation>
+							<xs:documentation>Reactive power of the load that is a fixed quantity. Load sign convention is used, i.e. positive sign means flow out from a node.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qfixedPct" type="m:PerCent" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyConsumer.qfixedPct">
+						<xs:annotation>
+							<xs:documentation>Fixed reactive power as per cent of load group fixed reactive power. Load sign convention is used, i.e. positive sign means flow out from a node.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LoadResponse" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EnergyConsumer.LoadResponse">
+						<xs:annotation>
+							<xs:documentation>The load response characteristic of this load.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Equipment" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Equipment">
+		<xs:annotation>
+			<xs:documentation>The parts of a power system that are physical devices, electronic or mechanical</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PowerSystemResource">
+				<xs:sequence>
+					<xs:element name="aggregate" type="xs:boolean" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Equipment.aggregate">
+						<xs:annotation>
+							<xs:documentation>The single instance of equipment represents multiple pieces of equipment that have been modeled together as an aggregate.  Examples would be PowerTransformers or SychronousMachines operating in parallel modeled as a single aggregate PowerTransformer or aggregate SynchronousMachine.  This is not to be used to indicate equipment that is part of a group of interdependent equipment produced by a network production program.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EquipmentContainer" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Equipment.EquipmentContainer">
+						<xs:annotation>
+							<xs:documentation>The association is used in the naming hierarchy.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EquipmentContainer" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#EquipmentContainer">
+		<xs:annotation>
+			<xs:documentation>A modeling construct to provide a root class for containing equipment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:ConnectivityNodeContainer">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeneratingUnit" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit">
+		<xs:annotation>
+			<xs:documentation>A single or set of synchronous machines for converting mechanical power into alternating-current power. For example, individual machines within a set may be defined for scheduling purposes while a single control signal is derived for the set. In this case there would be a GeneratingUnit for each member of the set and an additional GeneratingUnit corresponding to the set.</xs:documentation>
+			<xs:documentation>-  To define a GeneratingUnit requires defining the initial real power injection, net real power limits, and the status of the unit.  The initial injection is defined using  the attribute “initialP”.</xs:documentation>
+			<xs:documentation>-  The net real power limits can be defined in three ways; 1) with the attributes “maxOperatingP” and “minOperatingP”, or 2) with the attribute  “ratedNetMaxP” or 3) with the attributes “ratedGrossMinP” and “ratedGrossMaxP” used in conjunction with an associated GrossToNetActivePowerCurve.</xs:documentation>
+			<xs:documentation>-  The control status of the unit is defined with the attribute “genControlSource”, but it is not required.  The participation factor attributes “longPF”, “normalPF”, and “shortPF” are not required.</xs:documentation>
+			<xs:documentation>-  The GeneratingUnit class should only be used in cases where the more specific classes, HydroGeneratingUnit and ThermalGeneratingUnit, do not apply.</xs:documentation>
+			<xs:documentation>-  The attributes governorSCD, maximumAllowableSpinningReserve, nominalP, startupCost, and variableCost are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Equipment">
+				<xs:sequence>
+					<xs:element name="genControlSource" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.genControlSource">
+						<xs:annotation>
+							<xs:documentation>The source of controls for a generating unit.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="governorSCD" type="m:PerCent" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.governorSCD">
+						<xs:annotation>
+							<xs:documentation>Governor Speed Changer Droop.   This is the change in generator power output divided by the change in frequency normalized by the nominal power of the generator and the nominal frequency and expressed in percent and negated. A positive value of speed change droop provides additional generator output upon a drop in frequency.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="initialP" type="m:ActivePower" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.initialP">
+						<xs:annotation>
+							<xs:documentation>Default Initial active power  which is used to store a powerflow result for the initial active power for this unit in this network configuration</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="longPF" type="xs:float" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.longPF">
+						<xs:annotation>
+							<xs:documentation>Generating unit economic participation factor</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="maximumAllowableSpinningReserve" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.maximumAllowableSpinningReserve">
+						<xs:annotation>
+							<xs:documentation>Maximum allowable spinning reserve. Spinning reserve will never be considered greater than this value regardless of the current operating point.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="maxOperatingP" type="m:ActivePower" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.maxOperatingP">
+						<xs:annotation>
+							<xs:documentation>This is the maximum operating active power limit the dispatcher can enter for this unit</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="minOperatingP" type="m:ActivePower" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.minOperatingP">
+						<xs:annotation>
+							<xs:documentation>This is the minimum operating active power limit the dispatcher can enter for this unit.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nominalP" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.nominalP">
+						<xs:annotation>
+							<xs:documentation>The nominal power of the generating unit.  Used to give precise meaning to percentage based attributes such as the govenor speed change droop (govenorSCD attribute).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="normalPF" type="xs:float" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.normalPF">
+						<xs:annotation>
+							<xs:documentation>Generating unit economic participation factor</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedGrossMaxP" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.ratedGrossMaxP">
+						<xs:annotation>
+							<xs:documentation>The unit's gross rated maximum capacity (Book Value).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedGrossMinP" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.ratedGrossMinP">
+						<xs:annotation>
+							<xs:documentation>The gross rated minimum generation level which the unit can safely operate at while delivering power to the transmission grid</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedNetMaxP" type="m:ActivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.ratedNetMaxP">
+						<xs:annotation>
+							<xs:documentation>The net rated maximum capacity determined by subtracting the auxiliary power used to operate the internal plant machinery from the rated gross maximum capacity</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="shortPF" type="xs:float" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.shortPF">
+						<xs:annotation>
+							<xs:documentation>Generating unit economic participation factor</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="startupCost" type="m:Money" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.startupCost">
+						<xs:annotation>
+							<xs:documentation>The initial startup cost incurred for each start of the GeneratingUnit.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="variableCost" type="m:Money" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratingUnit.variableCost">
+						<xs:annotation>
+							<xs:documentation>The variable cost component of production per unit of ActivePower.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="GeneratorControlSource" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeneratorControlSource">
+		<xs:annotation>
+			<xs:documentation>The source of controls for a generating unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="offAGC">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="onAGC">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="plantControl">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="unavailable">
+				<xs:annotation/>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="GeographicalRegion" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GeographicalRegion">
+		<xs:annotation>
+			<xs:documentation>A geographical region of a power system network model.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GrossToNetActivePowerCurve" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GrossToNetActivePowerCurve">
+		<xs:annotation>
+			<xs:documentation>Relationship between the generating unit's gross active power output on the X-axis (measured at the terminals of the machine(s)) and the generating unit's net active power output on the Y-axis (based on utility-defined measurements at the power station). Station service loads, when modeled, should be treated as non-conforming bus loads. There may be more than one curve, depending on the auxiliary equipment that is in service.</xs:documentation>
+			<xs:documentation>-  Because the x and y values will always be specified in MW, the xMultiplier and y1Multiplier attributes do not need to be supplied.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Curve">
+				<xs:sequence>
+					<xs:element name="GeneratingUnit" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#GrossToNetActivePowerCurve.GeneratingUnit">
+						<xs:annotation>
+							<xs:documentation>A generating unit may have a gross active power to net active power curve, describing the losses and auxiliary power requirements of the unit</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="HydroPump" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#HydroPump">
+		<xs:annotation>
+			<xs:documentation>A synchronous motor-driven pump, typically associated with a pumped storage plant</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PowerSystemResource">
+				<xs:sequence>
+					<xs:element name="SynchronousMachine" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#HydroPump.SynchronousMachine">
+						<xs:annotation>
+							<xs:documentation>The synchronous machine drives the turbine which moves the water from a low elevation to a higher elevation. The direction of machine rotation for pumping may or may not be the same as for generating.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IEC61970CIMVersion" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#IEC61970CIMVersion">
+		<xs:annotation>
+			<xs:documentation>This is the IEC 61970 CIM version number assigned to this UML model file.</xs:documentation>
+			<xs:documentation>-  The two IEC61970CIMVersion attributes should be assigned the values defined as the initial values in the CIM UML.  Currently the initial value for version is IEC61970CIM14v15.  The current initial value for date is 2010-04-28.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="date" type="xs:date" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#IEC61970CIMVersion.date">
+				<xs:annotation>
+					<xs:documentation>Form is YYYY-MM-DD for example for January 5, 2009 it is 2009-01-05.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="version" type="xs:string" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#IEC61970CIMVersion.version">
+				<xs:annotation>
+					<xs:documentation>Form is IEC61970CIMXXvYY where XX is the major CIM package version and the YY is the minor version. For ecample IEC61970CIM13v18.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdentifiedObject" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#IdentifiedObject">
+		<xs:annotation>
+			<xs:documentation>This is a root class to provide common identification for all classes needing identification and naming attributes</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="aliasName" type="xs:string" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#IdentifiedObject.aliasName">
+				<xs:annotation>
+					<xs:documentation>The aliasName is free text human readable name of the object alternative to IdentifiedObject.name. It may be non unique and may not correlate to a naming hierarchy.</xs:documentation>
+					<xs:documentation>The attribute aliasName is put back because of backwards compatibility between CIM relases. It is however recommended to replace aliasName with the Name class as aliasName is planned for retirement at a future time.</xs:documentation>
+					<xs:documentation>This was decided at a joint WG13/14 meeting in Minneapolis 2010-10-06.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#IdentifiedObject.name">
+				<xs:annotation>
+					<xs:documentation>The name is any free human readable and possibly non unique text naming the object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Line" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Line">
+		<xs:annotation>
+			<xs:documentation>Contains equipment beyond a substation belonging to a power transmission line.</xs:documentation>
+			<xs:documentation>-  Use of the Line class is not required.  If used, it can only be used as a container for ACLineSegments and SeriesCompensators.</xs:documentation>
+			<xs:documentation>-  A Line is not required to be associated with a SubGeographicalRegion.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EquipmentContainer">
+				<xs:sequence>
+					<xs:element name="Region" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Line.Region">
+						<xs:annotation>
+							<xs:documentation>A Line can be contained by a SubGeographical Region.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LoadArea" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadArea">
+		<xs:annotation>
+			<xs:documentation>The class is the root or first level in a hierarchical structure for grouping of loads for the purpose of load flow load scaling.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EnergyArea">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LoadBreakSwitch" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadBreakSwitch">
+		<xs:annotation>
+			<xs:documentation>A mechanical switching device capable of making, carrying, and breaking currents under normal operating conditions.</xs:documentation>
+			<xs:documentation>-  [R6.2] and [R6.3] are satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  [R6.4] is satisfied by the class name.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Switch">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LoadGroup" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadGroup">
+		<xs:annotation>
+			<xs:documentation>The class is the third level in a hierarchical structure for grouping of loads for the purpose of load flow load scaling.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="SubLoadArea" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadGroup.SubLoadArea">
+						<xs:annotation>
+							<xs:documentation>The SubLoadArea where the Loadgroup belongs.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LoadResponseCharacteristic" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic">
+		<xs:annotation>
+			<xs:documentation>Models the characteristic response of the load demand due to to changes in system conditions such as voltage and frequency. This is not related to demand response.</xs:documentation>
+			<xs:documentation>If LoadResponseCharacteristic.exponentModel is True, the voltage exponents are specified and used as to calculate:</xs:documentation>
+			<xs:documentation>Active power component = Pnominal * (Voltage/cim:BaseVoltage.nominalVoltage) ** cim:LoadResponseCharacteristic.pVoltageExponent</xs:documentation>
+			<xs:documentation>Reactive power component = Qnominal * (Voltage/cim:BaseVoltage.nominalVoltage)** cim:LoadResponseCharacteristic.qVoltageExponent</xs:documentation>
+			<xs:documentation>Where  * means "multiply" and ** is "raised to power of".</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="exponentModel" type="xs:boolean" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.exponentModel">
+						<xs:annotation>
+							<xs:documentation>Indicates the exponential voltage dependency model (pVoltateExponent and qVoltageExponent) is to be used.   If false, the coeficient model (consisting of pConstantImpedance, pConstantCurrent, pConstantPower, qConstantImpedance, qConstantCurrent, and qConstantPower) is to be used.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pConstantCurrent" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.pConstantCurrent">
+						<xs:annotation>
+							<xs:documentation>Portion of active power load modeled as constant current. Used only if the useExponentModel is false.    This value is noralized against the sum of pZ, pI, and pP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pConstantImpedance" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.pConstantImpedance">
+						<xs:annotation>
+							<xs:documentation>Portion of active power load modeled as constant impedance.  Used only if the useExponentModel is false.    This value is noralized against the sum of pZ, pI, and pP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pConstantPower" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.pConstantPower">
+						<xs:annotation>
+							<xs:documentation>Portion of active power load modeled as constant power. Used only if the useExponentModel is false.    This value is noralized against the sum of pZ, pI, and pP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pFrequencyExponent" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.pFrequencyExponent">
+						<xs:annotation>
+							<xs:documentation>Exponent of per unit frequency effecting active power</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="pVoltageExponent" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.pVoltageExponent">
+						<xs:annotation>
+							<xs:documentation>Exponent of per unit voltage effecting real power.   This model used only when "useExponentModel" is true.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qConstantCurrent" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.qConstantCurrent">
+						<xs:annotation>
+							<xs:documentation>Portion of reactive power load modeled as constant current. Used only if the useExponentModel is false.    This value is noralized against the sum of qZ, qI, and qP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qConstantImpedance" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.qConstantImpedance">
+						<xs:annotation>
+							<xs:documentation>Portion of reactive power load modeled as constant impedance.  Used only if the useExponentModel is false.    This value is noralized against the sum of qZ, qI, and qP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qConstantPower" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.qConstantPower">
+						<xs:annotation>
+							<xs:documentation>Portion of reactive power load modeled as constant power. Used only if the useExponentModel is false.    This value is noralized against the sum of qZ, qI, and qP.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qFrequencyExponent" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.qFrequencyExponent">
+						<xs:annotation>
+							<xs:documentation>Exponent of per unit frequency effecting reactive power</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="qVoltageExponent" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#LoadResponseCharacteristic.qVoltageExponent">
+						<xs:annotation>
+							<xs:documentation>Exponent of per unit voltage effecting reactive power.   This model used only when "useExponentModel" is true.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Measurement" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Measurement">
+		<xs:annotation>
+			<xs:documentation>A Measurement represents any measured, calculated or non-measured non-calculated quantity. Any piece of equipment may contain Measurements, e.g. a substation may have temperature measurements and door open indications, a transformer may have oil temperature and tank pressure measurements, a bay may contain a number of power flow measurements and a Breaker may contain a switch status measurement.</xs:documentation>
+			<xs:documentation>The PSR - Measurement association is intended to capture this use of Measurement and is included in the naming hierarchy based on EquipmentContainer. The naming hierarchy typically has Measurements as leafs, e.g. Substation-VoltageLevel-Bay-Switch-Measurement.</xs:documentation>
+			<xs:documentation>Some Measurements represent quantities related to a particular sensor location in the network, e.g. a voltage transformer (PT) at a busbar or a current transformer (CT) at the bar between a breaker and an isolator. The sensing position is not captured in the PSR - Measurement association. Instead it is captured by the Measurement - Terminal association that is used to define the sensing location in the network topology. The location is defined by the connection of the Terminal to ConductingEquipment.</xs:documentation>
+			<xs:documentation>Two possible paths exist:</xs:documentation>
+			<xs:documentation>1) Measurement-Terminal- ConnectivityNode-Terminal-ConductingEquipment</xs:documentation>
+			<xs:documentation>2) Measurement-Terminal-ConductingEquipment</xs:documentation>
+			<xs:documentation>Alternative 2 is the only allowed use.</xs:documentation>
+			<xs:documentation>When the sensor location is needed both Measurement-PSR and Measurement-Terminal are used. The Measurement-Terminal association is never used alone.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="measurementType" type="xs:string" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Measurement.measurementType">
+						<xs:annotation>
+							<xs:documentation>Specifies the type of Measurement, e.g. IndoorTemperature, OutDoorTemperature, BusVoltage, GeneratorVoltage, LineFlow etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="unitMultiplier" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Measurement.unitMultiplier">
+						<xs:annotation>
+							<xs:documentation>The unit multiplier of the measured quantity.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="unitSymbol" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Measurement.unitSymbol">
+						<xs:annotation>
+							<xs:documentation>The unit of measure of the measured quantity.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="PowerSystemResource" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Measurement.PowerSystemResource">
+						<xs:annotation>
+							<xs:documentation>The PowerSystemResource that contains the Measurement in the naming hierarchy</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Terminal" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Measurement.Terminal">
+						<xs:annotation>
+							<xs:documentation>One or more measurements may be associated with a terminal in the network</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MeasurementValue" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#MeasurementValue">
+		<xs:annotation>
+			<xs:documentation>The current state for a measurement. A state value is an instance of a measurement from a specific source. Measurements can be associated with many state values, each representing a different source for the measurement.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="MeasurementValueSource" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#MeasurementValue.MeasurementValueSource">
+						<xs:annotation>
+							<xs:documentation>A reference to the type of source that updates the MeasurementValue, e.g. SCADA, CCLink, manual, etc. User conventions for the names of sources are contained in the introduction to IEC 61970-301.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MeasurementValueSource" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#MeasurementValueSource">
+		<xs:annotation>
+			<xs:documentation>MeasurementValueSource describes the alternative sources updating a MeasurementValue. User conventions for how to use the MeasurementValueSource attributes are described in the introduction to IEC 61970-301.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OperationalLimit" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimit">
+		<xs:annotation>
+			<xs:documentation>A value associated with a specific kind of limit.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="OperationalLimitSet" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimit.OperationalLimitSet">
+						<xs:annotation>
+							<xs:documentation>The limit set to which the limit values belong.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="OperationalLimitDirectionKind" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitDirectionKind">
+		<xs:annotation>
+			<xs:documentation>The direction of an operational limit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="absoluteValue">
+				<xs:annotation>
+					<xs:documentation>If the absolute value of the monitored value is above the limit value, the limit is violated.  In effect, the limit is both a high limit and its negative a low limit.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="high">
+				<xs:annotation>
+					<xs:documentation>The limit is a high limit.   If applied to a terminal flow, the positive direction is into the terminal.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="low">
+				<xs:annotation>
+					<xs:documentation>The limit is a low limit.   If applied to a terminal flow, the positive direction is into the terminal.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="OperationalLimitSet" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitSet">
+		<xs:annotation>
+			<xs:documentation>A set of limits associated with equipmnet.  Sets of limits might apply to a specific temperature, or season for example. A set of limits may contain may different severities of limit levels that would apply to the same equipment.   The set may contain limits of different types such as apparent power and current limits or high and low voltage limits  that are logically applied together as a set.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="Equipment" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitSet.Equipment">
+						<xs:annotation>
+							<xs:documentation>The equpment to which the limit set applies.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Terminal" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitSet.Terminal">
+						<xs:annotation>
+							<xs:documentation>The terminal specifically associated to this operational limit set.  If no terminal is associated, all terminals of the equipment are implied.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OperationalLimitType" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitType">
+		<xs:annotation>
+			<xs:documentation>A type of limit.  The meaning of a specific limit is described in this class.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="acceptableDuration" type="m:Seconds" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitType.acceptableDuration">
+						<xs:annotation>
+							<xs:documentation>The nominal acceptable duration of the limit.  Limits are commonly expressed in terms of the a time limit for which the limit is normally acceptable.   The actual acceptable duration of a specific limit may depend on other local factors such as temperature or wind speed.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="direction" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#OperationalLimitType.direction">
+						<xs:annotation>
+							<xs:documentation>The direction of the limit.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChanger" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChanger">
+		<xs:annotation>
+			<xs:documentation>A PhaseTapChanger controls the phase angle difference across the power transformer and hence the activer power flow through it. A PhaseTapChanger may also impact the voltage magnitude.</xs:documentation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:TapChanger">
+				<xs:sequence>
+					<xs:element name="PhaseTapChangerTabular" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChanger.PhaseTapChangerTabular">
+						<xs:annotation/>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="TransformerEnd" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChanger.TransformerEnd">
+						<xs:annotation>
+							<xs:documentation>Transformer end to which this phase tap changer belongs.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChangerAsymetrical" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerAsymetrical">
+		<xs:annotation>
+			<xs:documentation>In a PhaseTapChangerAsymetrical tranformer the difference voltage vector adds to the primary side voltage. The angle between the primary side voltage and the difference voltage is named the winding connection angle. The phase shift, &amp;alpha;, depends on both the difference voltage magnitude, &amp;Delta;U, and the winding connection angle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PhaseTapChangerNonLinear">
+				<xs:sequence>
+					<xs:element name="windingConnectionAngle" type="m:AngleDegrees" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerAsymetrical.windingConnectionAngle">
+						<xs:annotation>
+							<xs:documentation>The phase angle between the in-phase winding and the out-of -phase winding used for creating phase shift.   It is only possible to have a symmemtrical transformer if this angle is 90 degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChangerLinear" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerLinear">
+		<xs:annotation>
+			<xs:documentation>PhaseTapChangerLinear describes a linear relation between the tap step and the phase angle difference across the transformer. This is a mathematical model that is an approximation of a real phase tap changer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PhaseTapChanger">
+				<xs:sequence>
+					<xs:element name="stepPhaseShiftIncrement" type="m:AngleDegrees" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerLinear.stepPhaseShiftIncrement">
+						<xs:annotation>
+							<xs:documentation>Phase shift per step position. A positive value indicates a positive phase shift from the winding where the tap is located to the other winding (for a two-winding transformer).</xs:documentation>
+							<xs:documentation>The actual phase shift increment might be more accurately computed from the symmetrical or asymmetrical models or a tap step table lookup if those are available.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChangerNonLinear" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerNonLinear">
+		<xs:annotation>
+			<xs:documentation>PhaseTapChangerNonLinear describe the non linear behavior of a phase tap changer. This is a base class for the symmetrical and asymmetrical models. The details of these models can be found in the IEC 61970-301 document.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PhaseTapChanger">
+				<xs:sequence>
+					<xs:element name="voltageStepIncrement" type="m:Voltage" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerNonLinear.voltageStepIncrement">
+						<xs:annotation>
+							<xs:documentation>The voltage step increment on the out of phase winding. This voltage step on the out of phase winding of the phase shifter.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="xMax" type="m:Reactance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerNonLinear.xMax">
+						<xs:annotation>
+							<xs:documentation>The reactance at the maximum tap step.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="xMedian" type="m:Reactance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerNonLinear.xMedian">
+						<xs:annotation>
+							<xs:documentation>The reactance at the mid tap step.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChangerSymetrical" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerSymetrical">
+		<xs:annotation>
+			<xs:documentation>In a PhaseTapChangerSymetrical tranformer the secondary side voltage magnitude is the same as at the primary side. The difference voltage magnitude, &amp;Delta;U, is the base in an equal-sided triangle where the sides corresponds to the primary and secondary voltages. The phase angle difference correpsonds the top angle and can be expressed as follows</xs:documentation>
+			<xs:documentation>&amp;alpha; = 2arctan(&amp;Delta;U/2)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PhaseTapChangerNonLinear">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChangerTabular" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerTabular">
+		<xs:annotation>
+			<xs:documentation>With PhaseTapChangerTabular it is possible to describe curve how the the phase angle difference and reactance varies with the tap step.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="PhaseTapChangerTabularPoint" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerTabularPoint">
+		<xs:annotation>
+			<xs:documentation>PhaseTapChangerTabularPoint describe each tap step in the curve.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PhaseTapChangerTabular" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PhaseTapChangerTabularPoint.PhaseTapChangerTabular">
+				<xs:annotation/>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PowerSystemResource" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerSystemResource">
+		<xs:annotation>
+			<xs:documentation>A power system resource can be an item of equipment such as a Switch, an EquipmentContainer containing many individual items of equipment such as a</xs:documentation>
+			<xs:documentation>Substation, or an organisational entity such as Company or SubControlArea.  This provides for the nesting of collections of PowerSystemResources within other PowerSystemResources. For example, a Switch could be a member of a Substation and a Substation could be a member of a division of a Company.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PowerTransformer" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformer">
+		<xs:annotation>
+			<xs:documentation>An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits. Transformers can be used to control voltage and phase shift (active power flow).</xs:documentation>
+			<xs:documentation>A power transformer may be composed of separate transformer tanks that need not be identical.</xs:documentation>
+			<xs:documentation>The same power transformer can be modelled in two ways, namely with and without tanks:</xs:documentation>
+			<xs:documentation>&lt;ol&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;The power transformer that uses power transformer ends directly (without tanks) is suitable for balanced three-phase models. This is typical for transmission and sub-transmission network modelling. Such a transformer will require one power transformer end for each physical winding. There must be a one-to-one association between PowerTransformerEnd and Core::Terminal.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;The power transformer that uses transformer tanks is suitable for an unbalanced transformer, a balanced transformer within a single tank, or a balanced transformer made up of three tanks. This is typical for distribution network modelling and the only choice when modelling an unbalanced transformer, or a transformer that has more than three windings. Power transformer modelled with tanks will require for each tank, one transformer tank end per physical winding in the tank. There may be one, two, or three phases in the transformer tank end.  Examples: 3 phases for 3-phase delta or wye connected windings, 2 for one phase-to-phase winding, and 1 for a phase-to-neutral or phase-to-ground winding.  With 1 or 2 phases, more than one transformer tank end may be associated to the same 3-phase Core::Terminal instance, while with 3 phases there should be a one-to-one association.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>&lt;/ol&gt;</xs:documentation>
+			<xs:documentation>This power transformer model is flexible in order to support different kinds of data exchange requirements. There are 5 possible ways to combine available classes and their attributes:</xs:documentation>
+			<xs:documentation>&lt;ol&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;Instance parameters - Use the r, x, r0, x0, b, b0, g, and g0 attributes on PowerTransformerEnd and ignore related TransformerStarImpedance, TransformerMeshImpedance, or TransformerCoreAdmittance. This option assumes a star connection of the series impedances. It is suitable for typical transmission, balanced three-phase transformer models, for transformers with 2 or three windings.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;Star instance parameters by association - Instead of the r, x, r0, x0, b, b0, g, and g0 attributes, use associations to TransformerStarImpedance and TransformerCoreAdmitance. This option is suitable in same scenarios as option 1, but when catalogue data is available for transformers.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;Mesh instance parameters by association: Instead of the r, x, r0, x0, b, b0, g, and g0 attributes, use associations to TransformerMeshImpedance and TransformerCoreAdmittance. This option supports transformers with more than three windings.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;Catalog mesh parameters by association - Instead of attributes r, x, r0, x0, b, b0, g, and g0 and associations to TransformerStarImpedance, TransformerMeshImpedance, or TransformerCoreAdmittance, use the association to TransformerEndInfo. The TransformerEnd.endNumber should match the corresponding TransformerEndInfo.endNumber, following the IEC standard convention of numbering from the highest voltage ends to the lowest, starting at 1. This matching supports higher-level use of a catalog, through just one association between TransformerTank and TransformerTankInfo, with simpler exchanges and incremental updates. The associated TransformerEndInfo will have associations to TransformerMeshImpedance and TransformerCoreAdmittance. This option supports unbalanced transformer, with more than three windings and is suitable whenever the transformer test data has been converted to an electrical model.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>	&lt;li&gt;Catalog test data by association - This is the same as option 4, except TransformerEndInfo will have associations to AssetModels::TransformerTest decendents, instead of to TransformerMeshImpedance and TransformerCoreAdmittance.  This option is suitable when the test data is available, and the receiving application is able to interpret the test data.&lt;/li&gt;</xs:documentation>
+			<xs:documentation>&lt;/ol&gt;</xs:documentation>
+			<xs:documentation>Every profile should specify which one or more of these options are supported.</xs:documentation>
+			<xs:documentation>A PowerTransformer can be either two winding or three winding.</xs:documentation>
+			<xs:documentation>-  A two winding transformer has two PowerTransformerEnds</xs:documentation>
+			<xs:documentation>-  A three winding transformer has three PowerTransformerEnds</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Equipment">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PowerTransformerEnd" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd">
+		<xs:annotation>
+			<xs:documentation>A PowerTransformerEnd is associated with each Terminal of a PowerTransformer.</xs:documentation>
+			<xs:documentation>The impdedance values r, r0, x, and x0 of a PowerTransformerEnd represents a star equivalentas follows</xs:documentation>
+			<xs:documentation>1) for a two Terminal PowerTransformer the high voltage PowerTransformerEnd has non zero values on r, r0, x, and x0 while the low voltage PowerTransformerEnd has zero values for r, r0, x, and x0.</xs:documentation>
+			<xs:documentation>2) for a three Terminal PowerTransformer the three PowerTransformerEnds represents a star equivalent with each leg in the star represented by r, r0, x, and x0 values.</xs:documentation>
+			<xs:documentation>3) for a PowerTransformer with more than three Terminals the PowerTransformerEnd impedance values cannot be used. Instead use the TransformerMeshImpedance or split the transformer into multiple PowerTransformers.</xs:documentation>
+			<xs:documentation>- [R5.4], [R5.6], and [R5.10] are satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>- Each PowerTransformerEnd must be contained by a PowerTransformer. Because a PowerTransformerEnd (or any other object) can not be contained by more than one parent, a PowerTransformerEnd can not have an association to an EquipmentContainer (Substation, VoltageLevel, etc).</xs:documentation>
+			<xs:documentation>- The attributes ratedS, b0, g0, r0, x0, and connectionKind are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:TransformerEnd">
+				<xs:sequence>
+					<xs:element name="b" type="m:Susceptance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.b">
+						<xs:annotation>
+							<xs:documentation>Magnetizing branch susceptance (B mag).  The value can be positive or negative.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="b0" type="m:Susceptance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.b0">
+						<xs:annotation>
+							<xs:documentation>Zero sequence magnetizing branch susceptance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="connectionKind" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.connectionKind">
+						<xs:annotation>
+							<xs:documentation>Kind of connection.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="g0" type="m:Conductance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.g0">
+						<xs:annotation>
+							<xs:documentation>Zero sequence magnetizing branch conductance (star-model).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="r" type="m:Resistance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.r">
+						<xs:annotation>
+							<xs:documentation>Resistance (star-model) of the transformer end.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="r0" type="m:Resistance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.r0">
+						<xs:annotation>
+							<xs:documentation>Zero sequence series resistance (star-model) of the transformer end.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedS" type="m:ApparentPower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.ratedS">
+						<xs:annotation>
+							<xs:documentation>Normal apparent power rating.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ratedU" type="m:Voltage" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.ratedU">
+						<xs:annotation>
+							<xs:documentation>Rated voltage: phase-phase for three-phase windings, and either phase-phase or phase-neutral for single-phase windings.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="x" type="m:Reactance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.x">
+						<xs:annotation>
+							<xs:documentation>Positive sequence series reactance (star-model) of the transformer end.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="x0" type="m:Reactance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.x0">
+						<xs:annotation>
+							<xs:documentation>Zero sequence series reactance of the transformer end.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PowerTransformer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PowerTransformerEnd.PowerTransformer">
+						<xs:annotation/>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RatioTapChanger" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChanger">
+		<xs:annotation>
+			<xs:documentation>A tap changer that changes the voltage ratio impacting the voltage magnitude but not the phase angle across the transformer.</xs:documentation>
+			<xs:documentation>-  The attribute TapChanger.ltcflag specifies whether or not a TapChanger has load tap changing capabilities.  If the ltcFlag is true,  the attribute "stepVoltageIncrement” is required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:TapChanger">
+				<xs:sequence>
+					<xs:element name="stepVoltageIncrement" type="m:PerCent" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChanger.stepVoltageIncrement">
+						<xs:annotation>
+							<xs:documentation>Tap step increment, in per cent of nominal voltage, per step position.  For a symmetrical PhaseTapChanger, the stepVoltageIncrement is used in the formula for calculation of the phase angle.  For a symmetrical PhaseTapChanger, the voltage magnitude does not change with tap step.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tculControlMode" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChanger.tculControlMode">
+						<xs:annotation>
+							<xs:documentation>Specifies the regulation control mode (voltage or reactive) of the RatioTapChanger.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="RatioTapChangerTabular" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChanger.RatioTapChangerTabular">
+						<xs:annotation/>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="TransformerEnd" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChanger.TransformerEnd">
+						<xs:annotation>
+							<xs:documentation>Transformer end to which this ratio tap changer belongs.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RatioTapChangerTabular" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChangerTabular">
+		<xs:annotation>
+			<xs:documentation>With RatioTapChangerTabular it is possible to describe curve how the voltage magnitude and reactance varies with the tap step.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="RatioTapChangerTabularPoint" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChangerTabularPoint">
+		<xs:annotation>
+			<xs:documentation>RatioTapChangerTabularPoint describe each tap step in the curve.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="RatioTapChangerTabular" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RatioTapChangerTabularPoint.RatioTapChangerTabular">
+				<xs:annotation/>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReactiveCapabilityCurve" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ReactiveCapabilityCurve">
+		<xs:annotation>
+			<xs:documentation>Reactive power rating envelope versus the synchronous machine's active power, in both the generating and motoring modes. For each active power value there is a corresponding high and low reactive power limit  value. Typically there will be a separate curve for each coolant condition, such as hydrogen pressure.  The Y1 axis values represent reactive minimum and the Y2 axis values represent reactive maximum.</xs:documentation>
+			<xs:documentation>-  ReactiveCapabilityCurves are not required if the reactive power limits of the SynchronousMachine do not vary with real power output.</xs:documentation>
+			<xs:documentation>-  By convention, the Y1 axis values represent reactive minimum and the Y2 axis values represent reactive maximum.</xs:documentation>
+			<xs:documentation>-  Because the x value will always be specified in MW and the y values will always be specified in MVAr, the xMultiplier, y1Multiplier, and y2Multiplier attributes do not need to be supplied.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:Curve">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RegularIntervalSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularIntervalSchedule">
+		<xs:annotation>
+			<xs:documentation>The schedule has TimePoints where the time between them is constant.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:BasicIntervalSchedule">
+				<xs:sequence>
+					<xs:element name="endTime" type="xs:dateTime" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularIntervalSchedule.endTime">
+						<xs:annotation>
+							<xs:documentation>The time for the last time point.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="timeStep" type="m:Seconds" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularIntervalSchedule.timeStep">
+						<xs:annotation>
+							<xs:documentation>The time between each pair of subsequent RegularTimePoints.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RegularTimePoint" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularTimePoint">
+		<xs:annotation>
+			<xs:documentation>TimePoints for a schedule where the time between the points is constant.</xs:documentation>
+			<xs:documentation>-  The RegularTimePoint class is used to represent points for various schedules that derive from the RegularIntervalSchedule class.  The schedules defined in this profile are:</xs:documentation>
+			<xs:documentation>ConformLoadSchedule</xs:documentation>
+			<xs:documentation>NonConformLoadSchedule</xs:documentation>
+			<xs:documentation>RegulationSchedule</xs:documentation>
+			<xs:documentation>-  The first SequenceNumber for a schedule is 1.  0 is not an allowed value.  The first time point is defined with SequenceNumber = 1.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sequenceNumber" type="xs:integer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularTimePoint.sequenceNumber">
+				<xs:annotation>
+					<xs:documentation>The position of the RegularTimePoint in the sequence. Note that time points don't have to be sequential, i.e. time points may be omitted. The actual time for a RegularTimePoint is computed by multiplying the RegularIntervalSchedule.timeStep with the RegularTimePoint.sequenceNumber and add the BasicIntervalSchedule.startTime.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value1" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularTimePoint.value1">
+				<xs:annotation>
+					<xs:documentation>The first value at the time. The meaning of the value is defined by the class inhering the RegularIntervalSchedule.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value2" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularTimePoint.value2">
+				<xs:annotation>
+					<xs:documentation>The second value at the time. The meaning of the value is defined by the class inhering the RegularIntervalSchedule.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IntervalSchedule" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegularTimePoint.IntervalSchedule">
+				<xs:annotation>
+					<xs:documentation>A RegularTimePoint belongs to a RegularIntervalSchedule.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RegulatingCondEq" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingCondEq">
+		<xs:annotation>
+			<xs:documentation>A type of conducting equipment that can regulate a quanity (i.e. voltage or flow) at a specific point in the network.</xs:documentation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:ConductingEquipment">
+				<xs:sequence>
+					<xs:element name="RegulatingControl" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingCondEq.RegulatingControl">
+						<xs:annotation>
+							<xs:documentation>The regulating control scheme in which this equipment participates.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RegulatingControl" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl">
+		<xs:annotation>
+			<xs:documentation>Specifies a set of equipment that works together to control a power system quantity such as voltage or flow.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PowerSystemResource">
+				<xs:sequence>
+					<xs:element name="discrete" type="xs:boolean" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl.discrete">
+						<xs:annotation>
+							<xs:documentation>The regulation is performed in a discrete mode.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="mode" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl.mode">
+						<xs:annotation>
+							<xs:documentation>The regulating control mode presently available.  This specifications allows for determining the kind of regualation without need for obtaining the units from a schedule.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="targetRange" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl.targetRange">
+						<xs:annotation>
+							<xs:documentation>This is the case input target range.   This performs the same function as the value2 attribute on the regulation schedule in the case that schedules are not used.   The units of those appropriate for the mode.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="targetValue" type="xs:float" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl.targetValue">
+						<xs:annotation>
+							<xs:documentation>The target value specified for case input.   This value can be used for the target value wihout the use of schedules. The value has the units appropriate to the mode attribute.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RegulationSchedule" minOccurs="1" maxOccurs="unbounded" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl.RegulationSchedule">
+						<xs:annotation>
+							<xs:documentation>Schedule for this Regulating regulating control.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Terminal" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControl.Terminal">
+						<xs:annotation>
+							<xs:documentation>The terminal associated with this regulating control.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="RegulatingControlModeKind" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulatingControlModeKind">
+		<xs:annotation>
+			<xs:documentation>The kind of regulation model.   For example regulating voltage, reactive power, active power, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="activePower">
+				<xs:annotation>
+					<xs:documentation>Active power is specified.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="admittance">
+				<xs:annotation>
+					<xs:documentation>Admittance is specified</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="currentFlow">
+				<xs:annotation>
+					<xs:documentation>Current flow is specified.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fixed">
+				<xs:annotation>
+					<xs:documentation>The regulation mode is fixed, and thus not regulating.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="powerFactor">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="reactivePower">
+				<xs:annotation>
+					<xs:documentation>Reactive power is specified.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="temperature">
+				<xs:annotation>
+					<xs:documentation>Control switches on/off based on the local temperature (i.e., a thermostat).</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="timeScheduled">
+				<xs:annotation>
+					<xs:documentation>Control switches on/off by time of day. The times may change on the weekend, or in different seasons.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="voltage">
+				<xs:annotation>
+					<xs:documentation>Voltage is specified.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RegulationSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#RegulationSchedule">
+		<xs:annotation>
+			<xs:documentation>A pre-established pattern over time for a controlled variable, e.g., busbar voltage.</xs:documentation>
+			<xs:documentation>-  By convention, ”value1” represents the target voltage or real power.  “value2” is the deviation. A value1 of 100 and value2 of 1 means regulating to 100KV plus or minus 1KV.  The range would be from 99 KV to 101 KV. Because the regulation values will be specified in either kV for voltage or MW for real power, the value1Multiplier and value2Multiplier attributes do not need to be specified.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:SeasonDayTypeSchedule">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="SVCControlMode" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SVCControlMode">
+		<xs:annotation>
+			<xs:documentation>Static VAr Compensator control mode.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="off">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="reactivePower">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="voltage">
+				<xs:annotation/>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Season" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Season">
+		<xs:annotation>
+			<xs:documentation>A specified time period of the year, e.g., Spring, Summer, Fall, Winter</xs:documentation>
+			<xs:documentation>-  To specify a relative date as the startDate or endDate for a Season, the year component of the ISO 8601 date format (“YYYY-MM-DD”) can be omitted.  The resulting format would be “MM-DD”.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="endDate" type="xs:dateTime" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Season.endDate">
+				<xs:annotation>
+					<xs:documentation>Date season ends</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Season.name">
+				<xs:annotation>
+					<xs:documentation>Name of the Season</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="startDate" type="xs:dateTime" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Season.startDate">
+				<xs:annotation>
+					<xs:documentation>Date season starts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SeasonDayTypeSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SeasonDayTypeSchedule">
+		<xs:annotation>
+			<xs:documentation>The schedule specialize RegularIntervalSchedule with type curve data for a specific type of day and season. This means that curves of this type cover a 24 hour period.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:RegularIntervalSchedule">
+				<xs:sequence>
+					<xs:element name="DayType" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SeasonDayTypeSchedule.DayType">
+						<xs:annotation>
+							<xs:documentation>DayType for the Schedule.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Season" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SeasonDayTypeSchedule.Season">
+						<xs:annotation>
+							<xs:documentation>Season for the Schedule.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="SeasonName" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SeasonName">
+		<xs:annotation>
+			<xs:documentation>Name of season</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="fall">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="spring">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="summer">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="winter">
+				<xs:annotation/>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="StaticVarCompensator" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StaticVarCompensator">
+		<xs:annotation>
+			<xs:documentation>A facility for providing variable and controllable shunt reactive power. The SVC typically consists of a stepdown transformer, filter, thyristor-controlled reactor, and thyristor-switched capacitor arms.</xs:documentation>
+			<xs:documentation>The SVC may operate in fixed MVar output mode or in voltage control mode.  When in voltage control mode, the output of the SVC will be proportional to the deviation of voltage at the controlled bus from the voltage setpoint.  The SVC characteristic slope defines the proportion.  If the voltage at the controlled bus is equal to the voltage setpoint, the SVC MVar output is zero.</xs:documentation>
+			<xs:documentation>-  The value of the “inductiveRating” attribute must always be negative.</xs:documentation>
+			<xs:documentation>-  The value of the “capactiveRating” attribute must always be positive.</xs:documentation>
+			<xs:documentation>-  [R9.3] is satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:RegulatingCondEq">
+				<xs:sequence>
+					<xs:element name="capacitiveRating" type="m:Reactance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StaticVarCompensator.capacitiveRating">
+						<xs:annotation>
+							<xs:documentation>Maximum available capacitive reactive power</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="inductiveRating" type="m:Reactance" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StaticVarCompensator.inductiveRating">
+						<xs:annotation>
+							<xs:documentation>Maximum available inductive reactive power</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="slope" type="m:VoltagePerReactivePower" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StaticVarCompensator.slope">
+						<xs:annotation>
+							<xs:documentation>The characteristics slope of an SVC defines how the reactive power output changes in proportion to the difference between the regulated bus voltage and the voltage setpoint.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sVCControlMode" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StaticVarCompensator.sVCControlMode">
+						<xs:annotation>
+							<xs:documentation>SVC control mode.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="voltageSetPoint" type="m:Voltage" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StaticVarCompensator.voltageSetPoint">
+						<xs:annotation>
+							<xs:documentation>The reactive power output of the SVC is proportional to the difference between the voltage at the regulated bus and the voltage setpoint.  When the regulated bus voltage is equal to the voltage setpoint, the reactive power output is zero.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StationSupply" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#StationSupply">
+		<xs:annotation>
+			<xs:documentation>Station supply with load derived from the station output.</xs:documentation>
+			<xs:documentation>-  [R8.2] is satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  See EnergyConsumer for specific notes about inherited attributes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EnergyConsumer">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SubGeographicalRegion" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SubGeographicalRegion">
+		<xs:annotation>
+			<xs:documentation>A subset of a geographical region of a power system network model.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="Region" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SubGeographicalRegion.Region">
+						<xs:annotation>
+							<xs:documentation>The association is used in the naming hierarchy.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SubLoadArea" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SubLoadArea">
+		<xs:annotation>
+			<xs:documentation>The class is the second level in a hierarchical structure for grouping of loads for the purpose of load flow load scaling.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EnergyArea">
+				<xs:sequence>
+					<xs:element name="LoadArea" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SubLoadArea.LoadArea">
+						<xs:annotation>
+							<xs:documentation>The LoadArea where the SubLoadArea belongs.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Substation" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Substation">
+		<xs:annotation>
+			<xs:documentation>A collection of equipment for purposes other than generation or utilization, through which electric energy in bulk is passed for the purposes of switching or modifying its characteristics.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EquipmentContainer">
+				<xs:sequence>
+					<xs:element name="Region" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Substation.Region">
+						<xs:annotation>
+							<xs:documentation>The association is used in the naming hierarchy.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Switch" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Switch">
+		<xs:annotation>
+			<xs:documentation>A generic device designed to close, or open, or both, one or more electric circuits.</xs:documentation>
+			<xs:documentation>-  [R6.2] and [R6.3] are satisfied by navigation to ConnectivityNode and Substation</xs:documentation>
+			<xs:documentation>-  [R6.4] is satisfied by the class name.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:ConductingEquipment">
+				<xs:sequence>
+					<xs:element name="normalOpen" type="xs:boolean" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Switch.normalOpen">
+						<xs:annotation>
+							<xs:documentation>The attribute is used in cases when no Measurement for the status value is present. If the Switch has a status measurment the Discrete.normalValue is expected to match with the Switch.normalOpen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SwitchSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SwitchSchedule">
+		<xs:annotation>
+			<xs:documentation>A schedule of switch positions.  If RegularTimePoint.value1 is 0, the switch is open.  If 1, the switch is closed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:SeasonDayTypeSchedule">
+				<xs:sequence>
+					<xs:element name="Switch" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SwitchSchedule.Switch">
+						<xs:annotation>
+							<xs:documentation>A SwitchSchedule is associated with a Switch.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SynchronousMachine" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine">
+		<xs:annotation>
+			<xs:documentation>An electromechanical device that operates with shaft rotating synchronously with the network. It is a single machine operating either as a generator or synchronous condenser or pump.</xs:documentation>
+			<xs:documentation>-  [R7.2] and [R9.3] are satisfied by navigation to ConnectivityNode and Substation.</xs:documentation>
+			<xs:documentation>-  If a SynchronousMachine is not associated with a ReactiveCapabilityCurve, then the minQ and maxQ attributes will be used.</xs:documentation>
+			<xs:documentation>-  If a ReactiveCapabilityCurve is supplied, then the minQ and maxQ attributes are not required.</xs:documentation>
+			<xs:documentation>-  If a synchronous condenser is being modeled so that there is no capability for real power output, the SynchronousMachine is not required to be associated with a GeneratingUnit.  In this case, the type and operatingMode attributes must both be set to “condenser”.</xs:documentation>
+			<xs:documentation>-  Attributes qPercent, r, r0, r2, x, x0, x2, ratedS and referencePriority are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:RegulatingCondEq">
+				<xs:sequence>
+					<xs:element name="maxQ" type="m:ReactivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.maxQ">
+						<xs:annotation>
+							<xs:documentation>Maximum reactive power limit. This is the maximum (nameplate) limit for the unit.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="minQ" type="m:ReactivePower" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.minQ">
+						<xs:annotation>
+							<xs:documentation>Minimum reactive power limit for the unit.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="operatingMode" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.operatingMode">
+						<xs:annotation>
+							<xs:documentation>Current mode of operation.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="qPercent" type="m:PerCent" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.qPercent">
+						<xs:annotation>
+							<xs:documentation>Percent of the coordinated reactive control that comes from this machine.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="r" type="m:Resistance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.r">
+						<xs:annotation>
+							<xs:documentation>Positive sequence resistance of the synchronous machine.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="r0" type="m:Resistance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.r0">
+						<xs:annotation>
+							<xs:documentation>Zero sequence resistance of the synchronous machine.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="r2" type="m:Resistance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.r2">
+						<xs:annotation>
+							<xs:documentation>Negative sequence resistance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.type">
+						<xs:annotation>
+							<xs:documentation>Modes that this synchronous machine can operate in.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="x" type="m:Reactance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.x">
+						<xs:annotation>
+							<xs:documentation>Positive sequence reactance of the synchronous machine.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="x0" type="m:Reactance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.x0">
+						<xs:annotation>
+							<xs:documentation>Zero sequence reactance of the synchronous machine.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="x2" type="m:Reactance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.x2">
+						<xs:annotation>
+							<xs:documentation>Negative sequence reactance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="GeneratingUnit" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.GeneratingUnit">
+						<xs:annotation>
+							<xs:documentation>A synchronous machine may operate as a generator and as such becomes a member of a generating unit</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="InitialReactiveCapabilityCurve" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachine.InitialReactiveCapabilityCurve">
+						<xs:annotation>
+							<xs:documentation>The default ReactiveCapabilityCurve for use by a SynchronousMachine</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="SynchronousMachineOperatingMode" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachineOperatingMode">
+		<xs:annotation>
+			<xs:documentation>Synchronous machine operating mode.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="condenser">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="generator">
+				<xs:annotation/>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SynchronousMachineType" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#SynchronousMachineType">
+		<xs:annotation>
+			<xs:documentation>Synchronous machine type.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="condenser">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="generator">
+				<xs:annotation/>
+			</xs:enumeration>
+			<xs:enumeration value="generator_or_condenser">
+				<xs:annotation/>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TapChanger" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger">
+		<xs:annotation>
+			<xs:documentation>Mechanism for changing transformer winding tap positions.</xs:documentation>
+			<xs:documentation>-  The attribute ltcflag specifies whether or not a TapChanger has load tap changing capabilities.  If the ltcFlag is true, the attributes “highStep”, “lowStep”, “neutralStep”, and “normalStep” are all required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:PowerSystemResource">
+				<xs:sequence>
+					<xs:element name="highStep" type="xs:integer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.highStep">
+						<xs:annotation>
+							<xs:documentation>Highest possible tap step position, advance from neutral</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lowStep" type="xs:integer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.lowStep">
+						<xs:annotation>
+							<xs:documentation>Lowest possible tap step position, retard from neutral</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ltcFlag" type="xs:boolean" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.ltcFlag">
+						<xs:annotation>
+							<xs:documentation>Specifies whether or not a TapChanger has load tap changing capabilities.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="neutralStep" type="xs:integer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.neutralStep">
+						<xs:annotation>
+							<xs:documentation>The neutral tap step position for this winding.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="neutralU" type="m:Voltage" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.neutralU">
+						<xs:annotation>
+							<xs:documentation>Voltage at which the winding operates at the neutral tap setting.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="normalStep" type="xs:integer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.normalStep">
+						<xs:annotation>
+							<xs:documentation>The tap step position used in "normal" network operation for this winding. For a "Fixed" tap changer indicates the current physical tap setting.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="regulationStatus" type="xs:boolean" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.regulationStatus">
+						<xs:annotation>
+							<xs:documentation>Specifies the default regulation status of the TapChanger.  True is regulating.  False is not regulating.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TapChangerControl" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChanger.TapChangerControl">
+						<xs:annotation/>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TapChangerControl" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChangerControl">
+		<xs:annotation>
+			<xs:documentation>TapChangerControl discribe behaviour specific to tap changers, e.g. how the voltage at the end of a line varies with the load level and compensation of the voltage drop by tap adjustment.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:RegulatingControl">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="TapChangerKind" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapChangerKind">
+		<xs:annotation>
+			<xs:documentation>Transformer tap changer type. Indicates the capabilities of the tap changer independent of the operating mode.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="fixed">
+				<xs:annotation>
+					<xs:documentation>Not capable of control.   This is also indicated by by no association of TapChanger to a RegulatingControl.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="phaseControl">
+				<xs:annotation>
+					<xs:documentation>Capable of phase control.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="voltageAndPhaseControl">
+				<xs:annotation>
+					<xs:documentation>Capable of voltage and phase control.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="voltageControl">
+				<xs:annotation>
+					<xs:documentation>Capable of voltage control.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TapSchedule" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapSchedule">
+		<xs:annotation>
+			<xs:documentation>A pre-established pattern over time for a tap step.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:SeasonDayTypeSchedule">
+				<xs:sequence>
+					<xs:element name="TapChanger" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TapSchedule.TapChanger">
+						<xs:annotation>
+							<xs:documentation>A TapSchedule is associated with a TapChanger.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Terminal" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Terminal">
+		<xs:annotation>
+			<xs:documentation>An electrical connection point to a piece of conducting equipment. Terminals are connected at physical connection points called "connectivity nodes".</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="sequenceNumber" type="xs:integer" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Terminal.sequenceNumber">
+						<xs:annotation>
+							<xs:documentation>The orientation of the terminal connections for a multiple terminal conducting equipment.  The sequence numbering starts with 1 and additional terminals should follow in increasing order.   The first terminal is the "starting point" for a two terminal branch.   In the case of class TransformerWinding only one terminal is used so its sequenceNumber must be 1.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ConductingEquipment" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Terminal.ConductingEquipment">
+						<xs:annotation>
+							<xs:documentation>ConductingEquipment has 1 or 2 terminals that may be connected to other ConductingEquipment terminals via ConnectivityNodes</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="ConnectivityNode" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Terminal.ConnectivityNode">
+						<xs:annotation>
+							<xs:documentation>Terminals interconnect with zero impedance at a node.  Measurements on a node apply to all of its terminals.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TieFlow" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TieFlow">
+		<xs:annotation>
+			<xs:documentation>A flow specification in terms of location and direction for a control area.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="positiveFlowIn" type="xs:boolean" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TieFlow.positiveFlowIn">
+				<xs:annotation>
+					<xs:documentation>The flow is positive into the terminal.  A flow is positive if it is an import into the control area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ControlArea" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TieFlow.ControlArea">
+				<xs:annotation>
+					<xs:documentation>The control area of the tie flows.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Terminal" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TieFlow.Terminal">
+				<xs:annotation>
+					<xs:documentation>The terminal to which this tie flow belongs.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType sawsdl:modelReference="">
+					<xs:attribute name="ref" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TransformerControlMode" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TransformerControlMode">
+		<xs:annotation>
+			<xs:documentation>Control modes for a transformer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="reactive">
+				<xs:annotation>
+					<xs:documentation>Reactive power flow control</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="volt">
+				<xs:annotation>
+					<xs:documentation>Voltage control</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransformerEnd" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TransformerEnd">
+		<xs:annotation>
+			<xs:documentation>TransformerEnd is a conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In earlier CIM versions, the TransformerWinding class served a similar purpose. This successor TransformerEnd class is more flexible and has important differences with TransformerWinding.</xs:documentation>
+			<xs:documentation>- The attributes rground and xground are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:IdentifiedObject">
+				<xs:sequence>
+					<xs:element name="rground" type="m:Resistance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TransformerEnd.rground">
+						<xs:annotation>
+							<xs:documentation>(for Yn and Zn connections) Resistance part of neutral impedance where 'grounded' is true.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="xground" type="m:Reactance" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TransformerEnd.xground">
+						<xs:annotation>
+							<xs:documentation>(for Yn and Zn connections) Reactive part of neutral impedance where 'grounded' is true.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Terminal" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#TransformerEnd.Terminal">
+						<xs:annotation>
+							<xs:documentation>External terminal of the power transformer to which this end belongs.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="UnitSymbol" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#UnitSymbol">
+		<xs:annotation>
+			<xs:documentation>The units defiend for usage in the CIM</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Current in ampere</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="F">
+				<xs:annotation>
+					<xs:documentation>Capacitance in farad</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="H">
+				<xs:annotation>
+					<xs:documentation>Inductance in henry</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hz">
+				<xs:annotation>
+					<xs:documentation>Frequency in hertz</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="J">
+				<xs:annotation>
+					<xs:documentation>Energy in joule</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N">
+				<xs:annotation>
+					<xs:documentation>Force in newton</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pa">
+				<xs:annotation>
+					<xs:documentation>Pressure in pascal (n/m2)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Conductance in siemens</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="V">
+				<xs:annotation>
+					<xs:documentation>Voltage in volt</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VA">
+				<xs:annotation>
+					<xs:documentation>Apparent power in volt ampere</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAh">
+				<xs:annotation>
+					<xs:documentation>Apparent energy in volt ampere hours</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAr">
+				<xs:annotation>
+					<xs:documentation>Reactive power in volt ampere reactive</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VArh">
+				<xs:annotation>
+					<xs:documentation>Reactive energy in volt ampere reactive hours</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="W">
+				<xs:annotation>
+					<xs:documentation>Active power in watt</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Wh">
+				<xs:annotation>
+					<xs:documentation>Real energy in what hours</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="deg">
+				<xs:annotation>
+					<xs:documentation>Plane angle in degrees</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="g">
+				<xs:annotation>
+					<xs:documentation>Mass in gram</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="h">
+				<xs:annotation>
+					<xs:documentation>Time in hours</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="m">
+				<xs:annotation>
+					<xs:documentation>Length in meter</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="m2">
+				<xs:annotation>
+					<xs:documentation>Area in square meters</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="m3">
+				<xs:annotation>
+					<xs:documentation>Volume in cubic meters</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="min">
+				<xs:annotation>
+					<xs:documentation>Time in minutes</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="none">
+				<xs:annotation>
+					<xs:documentation>Dimension less quantity, e.g. count, per unit, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ohm">
+				<xs:annotation>
+					<xs:documentation>Resistance in ohm</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="rad">
+				<xs:annotation>
+					<xs:documentation>Plane angle in radians</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="s">
+				<xs:annotation>
+					<xs:documentation>Time in seconds</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="VoltageLevel" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#VoltageLevel">
+		<xs:annotation>
+			<xs:documentation>A collection of equipment at one common system voltage forming a switchgear. The equipment typically consist of breakers, busbars, instrumentation, control, regulation and protection devices as well as assemblies of all these.</xs:documentation>
+			<xs:documentation>-  The attributes highVoltageLimit and lowVoltageLimit are not required.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:EquipmentContainer">
+				<xs:sequence>
+					<xs:element name="highVoltageLimit" type="m:Voltage" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#VoltageLevel.highVoltageLimit">
+						<xs:annotation>
+							<xs:documentation>The bus bar's high voltage limit</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lowVoltageLimit" type="m:Voltage" minOccurs="0" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#VoltageLevel.lowVoltageLimit">
+						<xs:annotation>
+							<xs:documentation>The bus bar's low voltage limit</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BaseVoltage" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#VoltageLevel.BaseVoltage">
+						<xs:annotation>
+							<xs:documentation>The base voltage used for all equipment within the VoltageLevel.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Substation" minOccurs="1" maxOccurs="1" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#VoltageLevel.Substation">
+						<xs:annotation>
+							<xs:documentation>The association is used in the naming hierarchy.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType sawsdl:modelReference="">
+							<xs:attribute name="ref" type="xs:string"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WindGeneratingUnit" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#WindGeneratingUnit">
+		<xs:annotation>
+			<xs:documentation>A wind driven generating unit.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="m:GeneratingUnit">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="WindingConnection" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#WindingConnection">
+		<xs:annotation>
+			<xs:documentation>Winding connection type.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Autotransformer common winding</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D">
+				<xs:annotation>
+					<xs:documentation>Delta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I">
+				<xs:annotation>
+					<xs:documentation>Independent winding, for single-phase connections</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Y">
+				<xs:annotation>
+					<xs:documentation>Wye</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Yn">
+				<xs:annotation>
+					<xs:documentation>Wye, with neutral brought out for grounding.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Z">
+				<xs:annotation>
+					<xs:documentation>ZigZag</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Zn">
+				<xs:annotation>
+					<xs:documentation>ZigZag, with neutral brought out for grounding.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Voltage" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Voltage">
+		<xs:annotation>
+			<xs:documentation>Electrical voltage.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="Reactance" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Reactance">
+		<xs:annotation>
+			<xs:documentation>Reactance (imaginary part of impedance), at rated frequency.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="ActivePower" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ActivePower">
+		<xs:annotation>
+			<xs:documentation>Product of RMS value of the voltage and the RMS value of the in-phase component of the current</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="ApparentPower" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ApparentPower">
+		<xs:annotation>
+			<xs:documentation>Product of the RMS value of the voltage and the RMS value of the current</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="Conductance" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Conductance">
+		<xs:annotation>
+			<xs:documentation>Factor by which voltage must be multiplied to give corresponding power lost from a circuit. Real part of admittance.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="ReactivePower" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#ReactivePower">
+		<xs:annotation>
+			<xs:documentation>Product of RMS value of the voltage and the RMS value of the quadrature component of the current.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="Susceptance" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Susceptance">
+		<xs:annotation>
+			<xs:documentation>Imaginary part of admittance.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="PerCent" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#PerCent">
+		<xs:annotation>
+			<xs:documentation>Normally 0 - 100 on a defined base</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="Money" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Money">
+		<xs:annotation>
+			<xs:documentation>Amount of money</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="Resistance" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Resistance">
+		<xs:annotation>
+			<xs:documentation>Resistance (real part of impedance).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="AngleDegrees" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#AngleDegrees">
+		<xs:annotation>
+			<xs:documentation>Measurement of angle in degrees</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="CurrentFlow" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#CurrentFlow">
+		<xs:annotation>
+			<xs:documentation>Electrical current (positive flow is out of the ConductingEquipment into the ConnectivityNode)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="Seconds" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Seconds">
+		<xs:annotation>
+			<xs:documentation>Time, in seconds</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="Length" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#Length">
+		<xs:annotation>
+			<xs:documentation>Unit of length.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="VoltagePerReactivePower" sawsdl:modelReference="http://iec.ch/TC57/2010/CIM-schema-cim15#VoltagePerReactivePower">
+		<xs:annotation>
+			<xs:documentation>Voltage variation with reactive power</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,32 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./Util.html" title="org.tanjakostic.jcleancim.util.Util" alt="" coords="16,11,721,1439"/>
+<area shape="rect" id="node1" href="./Util.html" title="&lt;TABLE&gt;" alt="" coords="5,5,732,1444"/>
+<area shape="rect" id="node2_1" href="./Util.StringDecreasingLengthComparator.html" title="org.tanjakostic.jcleancim.util.Util.StringDecreasingLengthComparator" alt="" coords="767,678,1011,771"/>
+<area shape="rect" id="node2" href="./Util.StringDecreasingLengthComparator.html" title="&lt;TABLE&gt;" alt="" coords="756,673,1021,777"/>
+<area shape="rect" id="node3_2" href="./Util.HTMLSelection.html" title="org.tanjakostic.jcleancim.util.Util.HTMLSelection" alt="" coords="1057,635,1385,815"/>
+<area shape="rect" id="node3" href="./Util.HTMLSelection.html" title="&lt;TABLE&gt;" alt="" coords="1046,629,1395,820"/>
+<area shape="rect" id="node4_3" href="./Util.ImageFormat.html" title="org.tanjakostic.jcleancim.util.Util.ImageFormat" alt="" coords="1430,661,1566,789"/>
+<area shape="rect" id="node4" href="./Util.ImageFormat.html" title="&lt;TABLE&gt;" alt="" coords="1419,655,1577,794"/>
+<area shape="rect" id="node5_4" href="./Util.ImageSelection.html" title="org.tanjakostic.jcleancim.util.Util.ImageSelection" alt="" coords="1611,652,1939,797"/>
+<area shape="rect" id="node5" href="./Util.ImageSelection.html" title="&lt;TABLE&gt;" alt="" coords="1601,647,1950,803"/>
+<area shape="rect" id="node6_5" href="./ResourceNotOnClasspathException.html" title="org.tanjakostic.jcleancim.util.ResourceNotOnClasspathException" alt="" coords="1985,661,2435,789"/>
+<area shape="rect" id="node6" href="./ResourceNotOnClasspathException.html" title="&lt;TABLE&gt;" alt="" coords="1975,655,2445,794"/>
+<area shape="rect" id="node7_6" href="./ProgressBar.html" title="org.tanjakostic.jcleancim.util.ProgressBar" alt="" coords="2480,583,2788,867"/>
+<area shape="rect" id="node7" href="./ProgressBar.html" title="&lt;TABLE&gt;" alt="" coords="2469,577,2799,872"/>
+<area shape="rect" id="node8_7" href="./ProgrammerErrorException.html" title="org.tanjakostic.jcleancim.util.ProgrammerErrorException" alt="" coords="2834,669,3242,780"/>
+<area shape="rect" id="node8" href="./ProgrammerErrorException.html" title="&lt;TABLE&gt;" alt="" coords="2823,664,3253,785"/>
+<area shape="rect" id="node9_8" href="./MapOfSets.html" title="org.tanjakostic.jcleancim.util.MapOfSets" alt="" coords="3229,1497,3417,1608"/>
+<area shape="rect" id="node9" href="./MapOfSets.html" title="&lt;TABLE&gt;" alt="" coords="3219,1492,3428,1613"/>
+<area shape="rect" id="node10_9" href="./MapOfMaps.html" title="org.tanjakostic.jcleancim.util.MapOfMaps" alt="" coords="3639,591,3919,858"/>
+<area shape="rect" id="node10" href="./MapOfMaps.html" title="&lt;TABLE&gt;" alt="" coords="3629,586,3930,863"/>
+<area shape="rect" id="node11_10" href="./MapOfLists.html" title="org.tanjakostic.jcleancim.util.MapOfLists" alt="" coords="3463,1497,3653,1608"/>
+<area shape="rect" id="node11" href="./MapOfLists.html" title="&lt;TABLE&gt;" alt="" coords="3453,1492,3663,1613"/>
+<area shape="rect" id="node12_11" href="./MapOfCollections.html" title="org.tanjakostic.jcleancim.util.MapOfCollections" alt="" coords="3287,591,3594,858"/>
+<area shape="rect" id="node12" href="./MapOfCollections.html" title="&lt;TABLE&gt;" alt="" coords="3277,586,3605,863"/>
+<area shape="rect" id="node13_12" href="./HTMLUtil.html" title="org.tanjakostic.jcleancim.util.HTMLUtil" alt="" coords="3965,496,4185,953"/>
+<area shape="rect" id="node13" href="./HTMLUtil.html" title="&lt;TABLE&gt;" alt="" coords="3955,491,4196,959"/>
+<area shape="rect" id="node14_13" href="./BMPFile.html" title="org.tanjakostic.jcleancim.util.BMPFile" alt="" coords="4231,461,4675,988"/>
+<area shape="rect" id="node14" href="./BMPFile.html" title="&lt;TABLE&gt;" alt="" coords="4220,456,4685,993"/>
+<area shape="rect" id="node15_14" href="./ApplicationException.html" title="org.tanjakostic.jcleancim.util.ApplicationException" alt="" coords="4721,661,5094,789"/>
+<area shape="rect" id="node15" href="./ApplicationException.html" title="&lt;TABLE&gt;" alt="" coords="4710,655,5105,794"/>
+</map>

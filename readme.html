@@ -1,0 +1,772 @@
+<!-- $Id: readme.html 35 2019-12-20 20:58:26Z dev978 $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>jCleanCim readme</title>
+</head>
+<body>
+  <h1>jCleanCim readme</h1>
+
+  <p>
+    jCleanCim is an open source tool for validation and documentation generation from <a
+      href="http://www.sparxsystems.com/products/ea">Enterprise Architect</a> UML models of IEC TC57
+    CIM and IEC61850 UML models.
+  </p>
+  <p>
+    Up until end of 2015 it has been hosted by the <a
+      href="http://cimug.ucaiug.org/MTEI/Shared Documents/jCleanCim">CIM Methods &amp; Tools for
+      Enterprise Integration group</a> on the CIM Users Group web site, with access limited to the CIM
+    and IEC61850 users community members only.
+  </p>
+  <p>
+    To make it accessible also to non-CIMug members, since 2016, I decided to share it as a full
+    open source tool and host it at my <a href="http://www.tanjakostic.org/jcleancim">web space</a>.
+  </p>
+
+  <p>This is a non-GUI Java application and the Java code is fully platform independent.
+    However, it unfortunately must be run on MS Windows machine due to the usage of Enterprise
+    Architect and MS Word automation libraries (.dlls).</p>
+
+  <ul>
+    <li><a href="#doc">Documentation</a></li>
+    <li><a href="#dist">Which distribution should I download?</a></li>
+    <li><a href="#deps">Dependencies</a></li>
+    <li><a href="#perf">Performance indicators</a></li>
+    <li><a href="#hints">Hints - please read carefully before reporting problems!</a></li>
+    <li><a href="#cfgDoc">Configuration documentation</a></li>
+    <li><a href="#discl">Disclaimer</a></li>
+    <li><a href="#relnotes">What's new in this release</a></li>
+  </ul>
+
+  <p>
+    (<a href="oldReleaseNotes.html">Old release notes</a>)
+  </p>
+
+  <h2>
+    <a id="doc">Documentation</a>
+  </h2>
+
+  <p>
+    Once you unzip a jCleanCim distribution,
+    <code>doc</code>
+    directory contains the full documentation. The important parts of the source code are documented
+    and that documentation is generated as so-called <i>javadoc</i> - namely, a set of web pages
+    that allow for easy navigation.
+  </p>
+  <ul>
+    <li>Each distribution contains an up to date set of slides <code>doc/jCleanCimIntro.pptx</code>
+      - you may want to start from there.
+    </li>
+    <li>Each distribution contains the javadoc in <code>doc/api/index.html</code>. The
+      documentation of the root package <code>org.tanjakostic.jcleancim</code> (Description section)
+      is a good starting point.
+    </li>
+    <li>Binary distribution contains also the PDF version of that same javadoc, in a file <code>
+        doc/jCleanCim-[<i>version</i>].pdf
+      </code> (source distribution contains the Apache ant build script to produce this document, so it is
+      not packaged in source distributions).
+    </li>
+    <li>Source distribution contains the PDF version of the depency graph of the Apache ant
+      build targets (this is useful for a developer only).</li>
+    <li>Finally, each distribution contains the test report, run during the build of the
+      distribution, under <code>doc/testReport/index.html</code>. For most users this is not really
+      of interest (but keeps our developer spirit in peace :-).
+    </li>
+  </ul>
+
+
+  <h2>
+    <a id="dist">Which distribution should I download?</a>
+  </h2>
+  <p>jCleanCim is available in two distributions, depending on how you want to use it.</p>
+  <p>
+    <em>Even if you have a 64-bit Windows OS,</em> ensure you install a 32-bit Java (JRE: runtime)
+    or SDK (software development kit) and have it appear on your PATH before the potentially already
+    installed 64-bit Java, because Enterprise Architect is still a 32-bit application and requires a
+    32-bit Java. See the commented text in the run.bat script.
+  </p>
+
+  <table border="1">
+    <tr>
+      <th>Distribution</th>
+      <th>User kind</th>
+      <th>Prerequisites</th>
+      <th>Installing</th>
+    </tr>
+    <tr>
+      <td>Binary distribution jCleanCim-[version]-bin.zip</td>
+      <td>Run jCleanCim from the console (cmd.exe).</td>
+      <td>
+        <ul>
+          <li><a href="http://java.sun.com/javase/downloads/index.jsp">32-bit Java 7+</a>
+            runtime (JRE). To verify whether you already have it installed, open the console window
+            and type <code>java -version</code></li>
+          <li>Enterprise Architect build 834+ (version 7.1+)</li>
+          <li>(optional: to run doc generation) MS Word 2003+</li>
+        </ul>
+      </td>
+      <td>Unzip the distribution anywhere on your file system; it will uncompress in its own
+        directory tagged with the version so there is no danger of overwriting an older
+        installation. For example, using WinZip, select "Extract to here" command.</td>
+    </tr>
+    <tr>
+      <td>Source distribution jCleanCim-[version]-src.zip</td>
+      <td>Run jCleanCim from the console (cmd.exe) or from within eclipse.
+        <p>Develop and build it with Apache ant or with eclipse.</p>
+      </td>
+      <td>
+        <ul>
+          <li><a href="http://java.sun.com/javase/downloads/index.jsp">32-bit Java 7+</a>
+            software development kit (SDK). To verify whether you already have it installed, open
+            the console window and type <code>javac -version</code></li>
+          <li>Something to compile the code and create executable, e.g.:
+            <ul>
+              <li>Apache <a
+                href="http://archive.apache.org/dist/ant/binaries/apache-ant-1.7.1-bin.zip">ant
+                  1.7.1+</a>. To verify whether you already have it installed, open the console window
+                and type <code>ant -version</code>.
+              </li>
+              <li>or an IDE if you are already a Java developer.</li>
+            </ul>
+          </li>
+          <li>Enterprise Architect build 834+ (version 7.1+)</li>
+          <li>(optional, runtime: to run doc generation) MS Word 2003+</li>
+          <li>(optional, during ant build: to build javadoc with UML for any distribution, and
+            to document ant build targets dependencies graph) <a href="http://www.graphviz.org/">GraphViz
+              application</a>. To verify whether you already have it installed, open the console window
+            and type <code>dot -version</code>
+          </li>
+        </ul>
+      </td>
+      <td><p>Same as for binary distribution (jCleanCim-[version]-bin.zip).</p>
+        <p>If used with eclipse, start eclipse SDK and after unzipping, use Import -&gt;Existing
+          project and browse to the unzipped directory.</p>
+        <p>Note: This is the most flexible option if you are developing, as you can have the
+          eclipse project anywhere on your disk (not necessarily in an eclipse workspace).</p>
+        <p>
+          <img src="http://eclipse.org/donate/images/friendslogo160.png" />
+        </p></td>
+    </tr>
+  </table>
+  <p>
+    <em>Note for source distribution (and if you need to create the distribution yourself):</em> Ant
+    build file contains targets that invoke GraphViz application for creation of graphical elements
+    for the documentation (UML-enhanced javadoc, and javadoc in pdf format). If you do not have
+    GraphViz installed on your local system, these targets will be just skipped during the build
+    (even if you get exceptions from the doclet, the javadoc gets generated, just without the UML
+    diagrams). However, if you want to produce jCleanCim distributions, you should install GraphViz
+    in order to have nicer documentation.
+  </p>
+
+  <h2>
+    <a id="deps">Dependencies</a>
+  </h2>
+
+  <p>
+    To be self-contained, jCleanCim distributions bundle relevant third party open
+    source/distributable libraries. Java jars are in the project's
+    <code>lib</code>
+    directory, and MS Windows dlls are in the
+    <code>dlls</code>
+    directory.
+  </p>
+  <p>The following libraries are packaged with all the distributions of jCleanCim:</p>
+  <ul>
+    <li>For access to EA model file:
+      <ul>
+        <li>When we need to export images or XMI, we use EA Java API, which in turn depends on
+          a MS Windows dll. By working directly with EA model file, jCleanCim tries to identify
+          problems at the source (.eap file), before any XMI or other artefact generation takes
+          place.</li>
+        <li>When we don't need to export images or XMI, we use <a
+          href="http://sourceforge.net/projects/jackcess/files/">Jackcess</a> library that enables
+          light-fast access from Java to MS Access database (EA model file is exactly that), so this
+          is totally OS independent.
+        </li>
+      </ul>
+    </li>
+    <li>For document generation functionality, we use <a
+      href="http://sourceforge.net/projects/jacob-project/files/">Jacob</a> library that enables
+      access from Java to MS Word automation interface, wrapped into a dll for 32bit MS Windows. The
+      MS Word/Office used is the one on your local machine, and not distributed here.
+    </li>
+    <li>For logging, we use Apache's <a href="http://logging.apache.org/log4j/">log4j</a>.
+    </li>
+    <li>For command line processing, we use Apache's <a href="http://commons.apache.org/cli/">Commons
+        CLI</a>.
+    </li>
+    <li>For string markup processing and some stopwatch functionality, we use Apache's <a
+      href="http://commons.apache.org/lang/">Commons Lang</a>.
+    </li>
+  </ul>
+
+  <p>The following libraries are packaged only with source distribution of jCleanCim:</p>
+  <ul>
+    <li>For unit testing, we use <a href="http://www.junit.org/">JUnit 4</a>. You will need
+      this only if you run or develop tests, or if you are producing distributions (that include
+      running tests and producing rest reports).
+    </li>
+    <li>For generation of ant target dependencies graph, we use <a
+      href="http://www.ggtools.net/grand/#download">Grand</a> library; it will be ignored if you do
+      not have <a href="http://www.graphviz.org/Download..php">GraphViz</a> installed. These are not
+      used from the jCleanCim source code.
+    </li>
+    <li>For enhancement of regular javadoc with the UML class diagrams, we use <a
+      href="http://www.umlgraph.org/">UmlGraph</a> library; it will be ignored if you do not have <a
+      href="http://www.graphviz.org/Download..php">GraphViz</a> installed. These are not used from
+      the jCleanCim source code.
+    </li>
+    <li>For pdf generation from the javadoc, we use <a
+      href="http://sourceforge.net/projects/pdfdoclet/">PDFDoclet</a> application. You will need
+      this only if you generate the pdf documentation for binary distribution (from an ant target).
+      The application is otherwise not used from the jCleanCim source code.
+    </li>
+  </ul>
+
+  <h2>
+    <a id="perf">Performance indicators</a>
+  </h2>
+
+  <p>Since we talk to EA and to MS Word through their automation APIs, the model building (as a
+    first step in the application) and the MS Word document generation (if enabled) take time:</p>
+  <ul>
+    <li>EA automation API implementation unfortunately does not know of bulk CRUD operation, so
+      for every <i>single</i> item to be returned through the API, they perform an SQL query on the
+      underlying Access RDBMS (even for items in a collection!). Determinant factor for performance
+      here are: number of elements (classes, attributes, ...) and the number of diagrams that need
+      to be saved to file. In release 01v07, we had provided a fully new implementation for reading
+      the UML model from EA (with option <code>model.useSql = true</code>, in that release only). <b>Since
+        release 01v08</b>, we added one more implementation (see <a href="oldReleaseNotes.html#db">Fast
+        loading of .eap file</a>) and replaced the <code>model.useSql</code> boolean option with the one
+      taking one of three pre-defined string values. <b><i>In short, if you need to export
+          XMI for a model release, or diagrams for document generation, ensure you use <code>model.builder=sqlxml</code>,
+          otherwise leave the option empty or set it to <code>model.builder=db</code>. See also <a
+          href="#eaErrorOrdering">hint on fixing ordering errors</a>
+      </i></b>.
+    </li>
+    <li>MS Word is extremely slow at inserting captions for figures, and in particular for
+      tables, as well as in populating and formatting tables. As the number of figures/tables grows,
+      MS Word takes more and more time to insert their captions - similar would happen if you insert
+      captions by hand in an open Word document: higher the number of captions in the document, more
+      time MS Word takes to calculate the number for the caption (and it is impossible to disable
+      this automatic calculation if we want to create tables of figures/tables). <b>Since
+        release 01v05, we provide a configuration option <code>docgen.saveReopenEvery</code> that
+        you should definitely use to speed up MS Word document generation
+    </b>. Default value is 12, but you should play with your document to find out whether higher value
+      would make it faster. See also <a href="oldReleaseNotes.html#saveReopen">discussion on
+        this option</a> and its resulting performance improvement.
+    </li>
+  </ul>
+  <p>Java processing - for validation, statistics calculation and documentation collection from
+    in-memory model to pass to the actual writer (s), as well as XML document generation for
+    web-access - takes a couple of seconds for all the models and scenarios tested.</p>
+
+  <h2>
+    <a id="hints">Hints</a>
+  </h2>
+
+  <p>Here items thay may be considered as issues (but will likely not be addressed soon) and
+    performance-related advice, so please take them into account when running jCleanCim:</p>
+  <ul>
+    <li><b>If you run only to validate the model or generated XML or Word doc without
+        diagrams, you should use <code>model.builder=db</code> as the fastest way; notice that no
+        digrams can ever get exported with this builder.
+    </b> With any other builder option, and when <code>docgen.on=true</code>, diagrams get exported from
+      the EA model (in order to be used in the generated doc), while if <code>docgen.on=false</code>
+      (or empty, or absent), document generation is disabled and we know that we don't need
+      diagrams, so they don't get exported at all. Not exporting diagrams saves a lot of time:
+      between 300-500 ms per normative diagram - for 100 normative diagrams, you save at least half
+      a minute to read the model.</li>
+    <li><a id="eaErrorOrdering">EA ordering errors</a>. (since 01v08) In the initial, model
+      building phase, you may see logged ERROR (+++ EA ordering error) for several UML elements
+      (diagrams, packages, classes, etc.). This comes from the fact that EA internal storage for
+      some reason does not always keep up to date the order of items in a container. When using API
+      (very slow), we just follow the order of elements as returned by the EA API. However, when
+      processing SQL query results (faster) or reading the tables directly (the fastest),those
+      position indices may be uninitialised (that's how they are stored in the repository). To
+      ensure the order gets preserved, just open the model and manually move an item from the
+      indicated list up and down - this should trigger the EA internal update mechanism - and then
+      you're set as the error should disappear on the next run.</li>
+    <li>If for some reason you're still using <code>model.builder=japi</code> for reading from
+      EA file:
+      <ul>
+        <li>Remove any baselines. They grow the size of data in the underlying RDBMS and every
+          SQL query that EA does (unfortunately: 1 for each single
+          attribute/association/class/package/tagged value/constraint/dependency) will take longer
+          on a larger dataset.</li>
+        <li>Compact EAP file. From within EA, run regularly Tools - Manage .EAP file - Compact
+          .EAP file. There is no effect if this is executed from EA that you've opened with your own
+          model (that is why this is not feasible programmatically either), so you must open EA with
+          an arbitrary, another model (or just launch EA alone), then select your file to compact.</li>
+      </ul>
+    </li>
+    <li>When running MS Word document generation:
+      <ul>
+        <li>(since 01v08) If you can, save your template as native Office 2007+ document
+          (.docx), without compatibility enabled. This will run much faster, because in this case
+          only, it is possible to programmatically disable field updates.</li>
+        <li>This should run correctly only on an English version of MS Office. <i>Reason</i>:
+          We create MS Word documents primarily for IEC, and these need to be in English. We have
+          tried hard, but it is literally impossible to have implementation portable among different
+          language versions of MS Word.
+
+          <p>
+            Note that caption labels and styles are notoriously non-portable among installations of
+            MS Word (same user - 2 computers; different users on the same computer; different
+            installation languages). Caption labels are said to be contained in the user's
+            Normal.dotm template, see <a
+              href="https://answers.microsoft.com/en-us/office/forum/office_2007-word/new-caption-label-doesnt-display-in-new-version-of/18b9408d-148f-4c76-8d92-917c875406d8">here</a>,
+            but not really so, see <a
+              href="https://www.msofficeforums.com/word/15715-captions-self-defined.html">here</a>.
+            Additionally, it seems that MS Word sometimes decides and changes things on its own,
+            which affects the global template and/or registry in a way nobody sees it (and every
+            document you'll edit). For example, if you happen to somehow get language for captions
+            changed, see for example <a
+              href="https://superuser.com/questions/55311/microsoft-word-is-in-english-but-figure-equation-and-table-appear-in-span#55326>Microsoft">
+              Word is in English but â€œFigureâ€?, â€œEquationâ€? and â€œTableâ€? appear in Spanish</a>. jCleanCim
+            does NOT want to modify any user-specific installation of MS Word ! You may need to add
+            by yourself into your Word installation what is missing and what you would like to see
+            printed (e.g., caption label in English if you have German MS Word).
+          </p>
+          <p>
+            <b>If somebody finds a portable way without modifying user's registry, please
+              provide the code with test cases and I will integrate into baseline! Until then, if
+              you are running non-English installation of MS Word, ensure you add custom caption
+              labels in English (Figure, Table). If jCleanCim crashes and you are running a
+              non-English installation of MS Word, it is most likely that you forgot to define
+              for-your-language-non-native caption labels Figure and Table.</b>
+          </p>
+        </li>
+        <li>Ensure to update all fields in the MS Word template before starting document
+          generation <b><i>with change tracking turned OFF</i> </b>, in particular if you have
+          added/removed tables/figures and their captions. MS Word is known to screw up caption
+          numbers (read: identifiers) when you edit them with change tracking enabled.
+        </li>
+        <li>Disable automatic spell checking in the styles 'PARAGRAPH', 'TABLE-cell' and
+          'Normal'.</li>
+        <li>[old] On our developer Windows 7 machine, we have noticed that for some special
+          formatting of diagrams (with resizing or such), the process PrintSpooler (the Windows
+          printing service) kicks in immediately after EA repository gets opened. This manifests at
+          building Domain package from the sample EA repository, when it seems like never-ending.
+          When stopping the PrintSpoolerService (Computer/Manage/Services and
+          Applications/Services/PrintSpooler/Stop) at that point, there are about 20 popups from EA
+          process reporting on some font problem (that is how we concluded it is about some
+          interaction of EA with the OS). If this manifests on your machine, the easiest is to
+          temporarily stop PrintSpooler service while running jCleanCim. Note that this has never
+          happened on Windows XP, only on Windows 7.</li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <h2>
+    <a id="cfgDoc">Configuration documentation</a>
+  </h2>
+
+  <p>
+    For an overview of all configuration options, once you have unpacked the release into your local
+    directory, this link to the javadoc documentation should work: <a
+      href="./doc/api/org/tanjakostic/jcleancim/common/Config.html">Config</a>. You can access the
+    same page from your installation subdirectory <a href="./doc/api/index.html">doc/api/index.html</a>,
+    by selecting from the class list the class
+    <code>Config</code>
+    .
+  </p>
+
+  <h2>
+    <a id="discl">Disclaimer</a>
+  </h2>
+
+  <p>
+    Starting with release 02v00, jCleanCim has been licensed under the terms of GNU LGPLv3 <a
+      href="license.txt">license</a> and includes a modified <a href="copyright.html">copyright</a>.
+    The copyright as well as a reference to the license for this software is available at the
+    download site, and is included in every distribution and in every java source file.
+  </p>
+  <p>
+    Have a look <a href="http://choosealicense.com/licenses/#lgpl-v3">here</a> for a relatively
+    accessible comparison of licenses.
+  </p>
+  <p>This software has been developed in my free time. The contained IP is not related in any
+    way to my previous or current employer.</p>
+
+  <hr />
+  <h2>
+    <a id="relnotes">Release notes for jCleanCim-02v03 (=jCleanCim-02v02.beta-3), 2019-12-20</a>
+  </h2>
+  <hr />
+
+  <p>Note that there is no jCleanCim-02v02, only 2 beta milestones (02v02.beta-2 and
+    02v02.beta-3) that were made available for local needs of WG13 and ENTSO-E CGMES SG work - used
+    to validate CIM canonical and profile models and produce various WG13 documents before the end
+    of the year. As these have been developed, debugged, tested, feature implementation reverted
+    back after failed tests (MS Word caption labels), and over all incorporated new features on the
+    fly - I decided to simply declare the 02v02.beta-3 as 02v03, eventhough the time was too short
+    for a proper update of the .pptx tutorial. This is my first task for next release, I promise
+    :-).</p>
+  <p>In the meantime, I hope you can enjoy the following new features.</p>
+
+  <h3>New features</h3>
+  <p>In this release, main focus was on generic namespace support, stereotypes, document
+    generation options (especially on generating documents from UML profile models), and tireless
+    attempt at supporting English document generation with non-English versions of MS Word. The
+    release also features the contribution used for generation of MIBs for IEC62351-7 (thanks Gigi!)
+    as well as several smaller changes to better support IEC61850 modelling and document generation
+    (more coming in the next release - thanks Laurent!). And as usual, there are a number of new
+    tests and bug fixes.</p>
+  <h4>
+    Stereotype
+    <code>informative</code>
+  </h4>
+  <p>
+    From this release, you can add stereotype
+    <code>informative</code>
+    to <em>any</em> UML model element and it will also be picked for determining whether something
+    is informative, along with the other existing and new logic. The only ignored
+    <code>informative</code>
+    stereotype is for dependency as it does not really make sense to tag a dependency as informative
+    (until proven otherwise :-)).
+  </p>
+  <p>
+    Along with this change, filtering on printing informative elements (controlled by configuration
+    option
+    <code>docgen.includeInformative</code>
+    ) has been largely improved, to ensure to really exclude informative content of any kind by
+    default, i.e., when option is set to ("false", "", null). You may want to set that option to
+    <code>true</code>
+    to print the informative content for debuging purposes, or during extensions development, but
+    never for official standard documents.
+  </p>
+
+  <h4>
+    New configuration option
+    <code>docgen.showCustomStereotypes</code>
+    (TODO - add to .ppt:docgen.showCustomStereotypes=true)
+  </h4>
+  <p>If set "true", it allows to show in the generated document custom UML stereotypes on UML
+    model elements, in addition to built-in stereotypes already handled per model nature. Default is
+    ("false", "", null) to preserve old behaviour, in which all custom stereotypes (non-built-in for
+    a model nature) are not explicitly shown in generated documents. UML model managers in
+    standardisation bodies want to keep this empty/false for main standard documents, and set it to
+    true for these use cases:</p>
+  <ol>
+    <li>peer reviews during standard model development (through use of custom stereotypes such
+      as changed, new, old, delete, discuss, etc.);</li>
+    <li>review of proposed extensions marked with a given stereotype;</li>
+    <li>standard document generation from standard extensions model (e.g., European
+      extensions);</li>
+    <li>users of the tool with models which are neither CIM nor IEC61850 may want to generate
+      UML documentation (MS Word or XML) with their own stereotypes. Default model nature is CIM
+      (unless explicitly specified as IEC61850 with configuration property <code>model.nature.iec61850</code>),
+      so the built-in CIM stereotypes are "reserved" and cannot be modified at present.
+    </li>
+  </ol>
+  <p>Note: This option does not filter elements for document generation, it merely allows you to
+    "hide" and show the custom stereotypes on UML elements in the generated document. For actual
+    filtered printing based on custom stereotypes, see the next section.</p>
+
+  <h4>
+    New configuration option
+    <code>docgen.skipForCustomStereotypes</code>
+    (TODO - add to .ppt e.g.: docgen.skipForCustomStereotypes=European,new)
+  </h4>
+  <p>This new option allows for selective document generation from UML models of a given nature
+    that contain both standard model parts and extensions tagged with a custom stereotype for that
+    nature. You can use this option now to explicitly skip during document generation all UML
+    elements that have any of the custom stereotypes in the list specified here. This is useful in
+    at least these use cases:</p>
+  <ol>
+    <li>a WG develops extensions which are mixed with the normative parts of the model and tags
+      those extensions with a stereotype (e.g., <code>new</code>), and wants to be able to generate
+      documentation both with and without these extensions, e.g. for peer review
+    </li>
+    <li>an organisation or a project develops extensions tagged with a custom stereotype which
+      are either mixed with the normative parts of the model or are in extension package, but the
+      inheritance and associations result in stereotyped extensions being mixed with the normative
+      parts of the model. The standardisation WG then wants to be able to skip these when generating
+      documents, without manually removing anything from the model (they add the custom
+      stereotype(s) in this option), and the organisation or project owning extensions want to leave
+      this option empty (to see their extensions printed).</li>
+  </ol>
+  <p>
+    This list is matched against the built-in, standard stereotypes according to modelling rules and
+    any built-in stereotype (per model nature) from this list is removed (i.e., there is no
+    overriding of built-in stereotype consideration for document generation). Empty list is valid
+    and reflects default behaviour, i.e., everything found in the model according to other specified
+    filtering options is printed. Not having this option or having it with an empty value preserves
+    the default behaviour: to <i>not</i> exclude anything based on stereotype only, i.e., to include
+    everything not disabled by other options (e.g., informative or private model elements).
+  </p>
+  <p>Important: The list given here ignores any built-in stereotype per nature in order to not
+    modify the behaviour established and defined for built-in stereotypes. So, any built-in
+    stereotype you specify here will simply be ignored. Examples of built-in stereotypes:</p>
+  <ul>
+    <li><code>enumeration</code> for classes; <code>informative</code>, <code>deprecated</code>
+      for any UML element in model of any nature - you cannot modify built-in behaviour for these in
+      any case (at present);</li>
+    <li><code>Primitive</code>, <code>CIMDatatype</code> for CIM classes - you cannot modify
+      built-in behaviour for these in <em>CIM models</em>, but these are custom if ever used in
+      non-CIM models; and inversly,</li>
+    <li><code>cond</code> for IEC61850 presence condition enumeration - you cannot modify
+      built-in behaviour for these in <em>IEC61850 models</em>, but these are custom if ever used in
+      non-IEC61850 models.</li>
+  </ul>
+
+  <h4>
+    New configuration option
+    <code>docgen.showNamespacePackages</code>
+    (TODO - add to .ppt model.showNamespacePackages = Base, Dynamics, Part303, IEC61968, IEC62325,
+    ExtEuBase)
+  </h4>
+  <p>
+    According to CIM modelling guidelines, we can use tagged values
+    <code>nsuri</code>
+    and
+    <code>nsprefix</code>
+    to support namespace definition within the UML model itself, as well as for extensions and for
+    generation of various implementation afterfacts. We typically specify these two tagged values at
+    the top level (e.g., TC57CIM) and then everything below that package will have the same
+    namespace, unless an element of UML model overwrites it. Almost every element of UML that
+    supports tagged values can use this mechanism. So, from this release, you can control document
+    generation inclusion or not of this information, by specifying for which UML packages to output
+    in the MS Word document a line of text with the namespace information. Examples include Base and
+    ExtEuBase (for 61970-301 main part and Annex A, respectively), Dynamics (for 61970-302), etc. If
+    you don't specify any package name, or use an older config.properties file, no namespace
+    information gets printed (default).
+  </p>
+  <p>Note that this mechanism of namespace (the usual URI and optional prefix) is supported for
+    any UML model nature, so in theory, for IEC61850 models as well.</p>
+  <p>However, IEC61850 has a special definition for document namespace and dedicated UML
+    modelling for this. The IEC61850Namespace mechanism will be supported in the next jCleanCim
+    release.</p>
+
+  <h4>
+    New configuration option
+    <code>docgen.word.includeInheritancePath</code>
+    (TODO - add to .ppt:docgen.word.includeInheritancePath = true)
+  </h4>
+  <p>This options allows to include the list of classes along the inheritance path for a class.
+    Default is false, as well as when the option is missing from the configuration, to preserve the
+    default behaviour. In the supplied configuration file we have enabled this option as it is
+    rather useful and you can see with the test run how the result looks like and whether to keep
+    it.</p>
+  <p>Important: jCleanCim does not support multiple inheritance, but it should not crash if it
+    finds it in the model. The behaviour for multiple inheritance is undefined.</p>
+
+  <h4>Support for custom styles (TODO - update .ppt)</h4>
+  <p>
+    <i>Disclaimer: The MS Word and its API are for certain features unpredictable, as are all
+      the people who edited in the past 25 years the document you use as template. This is the best
+      I can give at the moment. Please pay attention to the WARN or ERROR log entries (what you see
+      on the screen and what gets saved in the ./log/jCleanCim.log file). And please, be careful
+      about style names in MS Word (see <a
+      href="https://word.tips.net/T007601_Style_Names_Can_Affect_Style_Definitions.html">how MS
+        Word can smart you out</a>).
+    </i>
+
+  </p>
+  <p>You can now try using the following new configuration options:</p>
+  <ul>
+    <li><code>docgen.word.styles.prefix.toc</code> and <code>docgen.word.styles.prefix.head</code>:
+      for TOC and heading styles prefix, and,</li>
+    <li><code>docgen.word.styles.para</code>, <code>docgen.word.styles.fig</code>, <code>docgen.word.styles.tabhead</code>,
+      <code>docgen.word.styles.tabcell</code>, <code>docgen.word.styles.figcapt</code> and <code>docgen.word.styles.tabcapt</code>:
+      for styles names for paragraphs text, figure, table heading, table cell, figure caption and
+      table captions,</li>
+  </ul>
+  <p>
+    to specify a comma-separated list of style names, in order of your preference. To accommodate
+    for non-portable style handling accross some application locales (English vs. non-English
+    installation of MS Word), we expect the user to configure preferred styles in order of
+    preference, and the first one found in the <em>existing document</em> will be used all allong.
+    If none of configured styles exists in the document, the built-in one from the document will be
+    used. jCleanCim never modifies your PC registry and/or global application templates (such as
+    Normal.dot for MS Word), so if you are unhappy with the fall-back solution, please go ahead and
+    add in the document generation application (such as MS Word) the desired styles as custom and
+    rerun document generation. On that next run, the document should contain your desired style
+    name(s).
+  </p>
+
+  <h4>MIBs generation (for IEC62351-7) - contribution by Gigi Pugni (TODO - add to .ppt)</h4>
+  <p>This is the new feature developed by WG15 for their IEC62351-7. This jCleanCim release
+    incorporates that new feature into the baseline with the code provided by Gigi Pugni, and it can
+    be used by means of three new configuration options:</p>
+  <ul>
+    <li><code>mibgen.on</code>: set it to true to enable MIBs generation.</li>
+    <li><code>mibgen.outDirFull</code>: directory where to save full MIBs (including complete
+      description); default is <code>mibs</code>, under the ./output/.</li>
+    <li><code>mibgen.outDirLight</code>: directory where to save light MIBs (UML elements
+      without descriptions); default value is <code>mibslight</code>, under the ./output/.</li>
+  </ul>
+  <p>MIBs generation can be enabled simultaneously with the MS Word document generation if you
+    need both outputs.</p>
+  <p>Some small test model and template to exercise this function should be available in the
+    next release. In the meantime, WG15 can use the feature now integrated into the baseline.</p>
+
+  <h4>
+    New configuration option
+    <code>statistics.tagsToIgnore</code>
+    (TODO - add to .ppt statistics.tagsToIgnore = GUIDBasedOn)
+  </h4>
+  <p>
+    This option allows you to add which tags to NOT export into statistics log (to shorten log). You
+    may want to use this in case you discover that the custom tool / add-on that you use heavily
+    marks your model with tagged values and you don't want to end up with (tens of) thousands of
+    lines of log listing every single item in your model. In the supplied configuration file we have
+    already added one such tagged value, known to be present in CIM profiles created and maintained
+    with <a href="https://www.cimcontextor.net">CimConteXtor</a>:
+    <code>GUIDBasedOn</code>
+    .
+  </p>
+
+  <h4>Credits</h4>
+  <p>Gigi Pugni has contributed java code package with fully functional generation of MIB
+    syntax, based on the modelling as used to support IEC62351-7. He also provided documentation
+    describing in detail how WG15 does modelling and generates MIBs.</p>
+  <p>Laurent Guise has provided a prototype that inspired the implementation of most of
+    IEC61850-specific features in this release. Thanks for beeing the sparring partner for
+    non-English MS Word tests and discussions :-).</p>
+
+  <h3>Performance changes in release 02v03</h3>
+  <p>None. Note however that newer versions of Enterprise Architect seem to always be somewhat
+    slower than the older ones (we noticed the slow down in diagram generation for factor 3-4).</p>
+
+  <h3>Deprecated API</h3>
+  <ul>
+    <li>Method <code>UmlAssociation.getDirection()</code>: use UmlAssociation.getNavigable()
+      instead.
+    </li>
+  </ul>
+
+  <h3>Potential backwards compatibility breaking changes for the application user</h3>
+  <ul>
+    <li>If you have used jCleanCim previously to generate documentation from UML profiles, both
+      association ends used to be printed without distinction on navigability, which was
+      semantically wrong. This has been fixed in this release, which means that your previously
+      generated profile documents will have only one half of association ends: those that are
+      navigable only. This makes the documents shorter and profiles more precise.</li>
+  </ul>
+
+  <h3>Potential forwards incompatibility for the application user: old jCleanCim with new EA</h3>
+  <ul>
+    <li>-</li>
+  </ul>
+
+  <h3>Other user-visible changes</h3>
+  <ul>
+    <li>model.build logging: Unclassified classes, associations and attributes: log as ERROR,
+      not as WARN or INFO</li>
+    <li>improved logging and logging level (less chatty for happy path)</li>
+    <li>docgen.writer - added FIGURE to preferred styles</li>
+    <li>CIM-specific:
+      <ul>
+        <li>model, validation: added new dependency stereotypes as built-in: <code></code>IsBasedOn
+          and import.
+        </li>
+        <li>docgen.collector: added basic support for printing additional paragraph after class
+          that has constraints, starting with "Constraint" and listing constraints as [name]:[new
+          line][description].</li>
+        <li>docgen.collector: added support for seggregating navigability of association ends
+          for CIM profiles and printing only the navigable end (as has always been done with <a
+          href="http://cimtool.org">CIMTool</a>, used to generate profiles up to now)
+        </li>
+      </ul>
+    </li>
+    <li>IEC61850-specific:
+      <ul>
+        <li>docgen.collector, docgen.writer.xml, IECDomain.xsd schema: Added support for two
+          underlying enumeration types for ENC CDC. Note that this breaks the underlying meta-model
+          by a) assigning two DA types to one ENC, and b) by creating totally unrelated second DA
+          type (this has been done on request by IEC61850 model managers and applies to IEC61850
+          model only).</li>
+        <li>docgen.collector: Added support for enumeration inheritance. Note that this is
+          against the semantic of enumerated types (this has been done on request by IEC61850 model
+          managers and applies to IEC61850 model only).</li>
+      </ul>
+    </li>
+    <li>Other</li>
+    <ul>
+      <li>-</li>
+    </ul>
+  </ul>
+  <h3>Validation rules:</h3>
+  <ul>
+    <li>util (validation): -</li>
+    <li>New common / general validation rules:
+      <ul>
+        <li>-</li>
+      </ul>
+    </li>
+    <li>New CIM-specific rules:
+      <ul>
+        <li>-</li>
+      </ul>
+    </li>
+    <li>New IEC61850-specific rules:
+      <ul>
+        <li>-</li>
+      </ul>
+    </li>
+  </ul>
+  <h3>Bug fixes:</h3>
+  <ul>
+    <li>docgen.writer.word: Now also figure reference when below figure gets inserted as field
+      (can be updated).</li>
+    <li>model: Corrected kind assignment to IEC61850 classes through stereotypes, so as to
+      ignore stereotypes <code>informative</code> and <code>deprecated</code>, as these are
+      applicable to any UML model element (thanks to Laurent Guise for reporting).
+    </li>
+    <li>Fixed several potential NPEs (thanks to Jacob Dall and Laurent Guise for reporting) and
+      added some tests:
+      <ul>
+        <li>model: In two methods on package containment.</li>
+        <li>docgen.collector.impl: Returning empty list instead of null.</li>
+        <li>docgen.collector.impl: When IEC61850 enumerated type inherits literals.</li>
+        <li>statistics: When due to missing config61850.properties file there is mismatch
+          between model class kind and nature.</li>
+      </ul>
+    </li>
+    <li>model: IEC61850 unclassified classes now logged as ERROR, not as INFO.</li>
+    <li>validation: ensured that Iec61850ClassesWithInvalidConstraints and
+      Iec61850LNClassesWithSuperfluousConstraints actually do checks only on classes with IEC61850
+      nature.</li>
+    <li>docgen.word: now rethrowing exception when a post-processor provided (from tests; in
+      real life it is important to finish smoothly, for tests we want tests to fail on exception).</li>
+  </ul>
+
+  <h3>Known issues / limitations:</h3>
+  <ul>
+    <li>nothing new.</li>
+  </ul>
+
+  <h3>Implementation and packaging:</h3>
+  <ul>
+    <li>added new tests.</li>
+    <li>implemented manual insert caption for figures with hope it would be faster, but it is
+      not.</li>
+    <li>upgraded libraries: Sparx Enterprise Architect 14 (jar and dll).</li>
+    <li>TODO: include in build the new doc, input and output files (mibs).</li>
+    <li>all sources: updated copyright year.</li>
+  </ul>
+  <h3>Documentation:</h3>
+  <ul>
+    <li>TODO update the presentation.</li>
+  </ul>
+
+  <hr></hr>
+  <p>Built on 2019-12-20T22:05:24</p>
+  <p>
+    <a href="copyright.html">Copyright</a> <a href="license.txt">License</a>
+  </p>
+  <p>
+    <a href="mailto:tatjana-dot-kostic-atNoSpam-ieee-dot-org">Feedback</a>
+  </p>
+  <p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+      src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31"
+      width="88" /></a>
+  </p>
+</body>
+</html>

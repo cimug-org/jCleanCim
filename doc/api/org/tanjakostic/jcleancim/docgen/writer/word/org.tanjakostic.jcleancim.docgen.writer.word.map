@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./WordWriterInput.html" title="org.tanjakostic.jcleancim.docgen.writer.word.WordWriterInput" alt="" coords="16,123,3740,875"/>
+<area shape="rect" id="node1" href="./WordWriterInput.html" title="&lt;TABLE&gt;" alt="" coords="5,118,3751,881"/>
+<area shape="rect" id="node2_1" href="./WordWriter.html" title="org.tanjakostic.jcleancim.docgen.writer.word.WordWriter" alt="" coords="3785,349,4357,650"/>
+<area shape="rect" id="node2" href="./WordWriter.html" title="&lt;TABLE&gt;" alt="" coords="3775,343,4368,655"/>
+<area shape="rect" id="node6_2" href="./AbstractWordWriter.html" title="org.tanjakostic.jcleancim.docgen.writer.word.AbstractWordWriter" alt="" coords="4035,1047,4844,2041"/>
+<area shape="rect" id="node6" href="./AbstractWordWriter.html" title="&lt;TABLE&gt;" alt="" coords="4024,1041,4855,2047"/>
+<area shape="rect" id="node3_3" href="./WordPatternFinder.html" title="org.tanjakostic.jcleancim.docgen.writer.word.WordPatternFinder" alt="" coords="5260,444,5429,555"/>
+<area shape="rect" id="node3" href="./WordPatternFinder.html" title="&lt;TABLE&gt;" alt="" coords="5249,439,5440,560"/>
+<area shape="rect" id="node4_4" href="./WordHelper.html" title="org.tanjakostic.jcleancim.docgen.writer.word.WordHelper" alt="" coords="4403,11,5215,988"/>
+<area shape="rect" id="node4" href="./WordHelper.html" title="&lt;TABLE&gt;" alt="" coords="4392,5,5225,993"/>
+<area shape="rect" id="node5_5" href="./WordHelper.PostProcessor.html" title="org.tanjakostic.jcleancim.docgen.writer.word.WordHelper.PostProcessor" alt="" coords="5475,453,5587,546"/>
+<area shape="rect" id="node5" href="./WordHelper.PostProcessor.html" title="&lt;TABLE&gt;" alt="" coords="5465,447,5598,551"/>
+</map>

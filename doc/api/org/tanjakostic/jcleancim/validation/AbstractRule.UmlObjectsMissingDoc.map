@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./PackageValidator.PackagesMissingDoc.html" title="org.tanjakostic.jcleancim.validation.PackageValidator.PackagesMissingDoc" alt="" coords="16,419,264,512"/>
+<area shape="rect" id="node1" href="./PackageValidator.PackagesMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="5,413,275,517"/>
+<area shape="rect" id="node2_1" href="./OperationValidator.OperationsMissingDoc.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationsMissingDoc" alt="" coords="309,419,557,512"/>
+<area shape="rect" id="node2" href="./OperationValidator.OperationsMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="299,413,568,517"/>
+<area shape="rect" id="node3_2" href="./OperationValidator.OperationParametersMissingDoc.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationParametersMissingDoc" alt="" coords="603,410,943,521"/>
+<area shape="rect" id="node3" href="./OperationValidator.OperationParametersMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="593,405,954,526"/>
+<area shape="rect" id="node4_3" href="./DiagramValidator.DiagramsMissingDoc.html" title="org.tanjakostic.jcleancim.validation.DiagramValidator.DiagramsMissingDoc" alt="" coords="989,419,1237,512"/>
+<area shape="rect" id="node4" href="./DiagramValidator.DiagramsMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="979,413,1248,517"/>
+<area shape="rect" id="node5_4" href="./ClassValidator.ClassesMissingDoc.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.ClassesMissingDoc" alt="" coords="1283,410,1535,521"/>
+<area shape="rect" id="node5" href="./ClassValidator.ClassesMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="1273,405,1546,526"/>
+<area shape="rect" id="node6_5" href="./AttributeValidator.AttributesMissingDoc.html" title="org.tanjakostic.jcleancim.validation.AttributeValidator.AttributesMissingDoc" alt="" coords="1581,410,1849,521"/>
+<area shape="rect" id="node6" href="./AttributeValidator.AttributesMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="1570,405,1859,526"/>
+<area shape="rect" id="node7_6" href="./AssociationValidator.AssociationEndsMissingDoc.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator.AssociationEndsMissingDoc" alt="" coords="1894,401,2266,529"/>
+<area shape="rect" id="node7" href="./AssociationValidator.AssociationEndsMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="1883,396,2277,535"/>
+<area shape="rect" id="node8_7" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.AbstractRuleWithSubobjectsAndSkips" alt="" coords="592,11,1635,173"/>
+<area shape="rect" id="node8" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="&lt;TABLE&gt;" alt="" coords="581,5,1645,179"/>
+<area shape="rect" id="node9_8" href="./AbstractRule.UmlObjectsMissingDoc.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsMissingDoc" alt="" coords="943,232,1284,343"/>
+<area shape="rect" id="node9" href="./AbstractRule.UmlObjectsMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="932,227,1295,348"/>
+</map>

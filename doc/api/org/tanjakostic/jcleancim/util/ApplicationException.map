@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="../docgen/UnsupportedOutputFormatException.html" title="org.tanjakostic.jcleancim.docgen.UnsupportedOutputFormatException" alt="" coords="16,401,479,529"/>
+<area shape="rect" id="node1" href="../docgen/UnsupportedOutputFormatException.html" title="&lt;TABLE&gt;" alt="" coords="5,396,489,535"/>
+<area shape="rect" id="node2_1" href="../docgen/UnsupportedInputFormatException.html" title="org.tanjakostic.jcleancim.docgen.UnsupportedInputFormatException" alt="" coords="524,401,976,529"/>
+<area shape="rect" id="node2" href="../docgen/UnsupportedInputFormatException.html" title="&lt;TABLE&gt;" alt="" coords="513,396,987,535"/>
+<area shape="rect" id="node3_2" href="./ApplicationException.html" title="org.tanjakostic.jcleancim.util.ApplicationException" alt="" coords="311,215,685,343"/>
+<area shape="rect" id="node3" href="./ApplicationException.html" title="&lt;TABLE&gt;" alt="" coords="301,209,695,348"/>
+<area shape="rect" id="node4_3" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Exception.html" title="java.lang.Exception" alt="" coords="273,11,723,156"/>
+<area shape="rect" id="node4" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Exception.html" title="&lt;TABLE&gt;" alt="" coords="262,5,734,161"/>
+</map>

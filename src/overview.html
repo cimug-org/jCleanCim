@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>jCleanCim overview</title>
+</head>
+<body>
+
+  <p>jCleanCim is an open source tool for validation and documentation generation from
+    Enterprise Architect CIM and IEC61850 UML models.</p>
+
+  <h1>Quick intro to jCleanCim</h1>
+
+  <p><b>Note: The content below is hard to keep up to date. Please refer to the jCleanCim
+    presentation, available in the documentation directory.</b></p>
+
+  <p>This is jCleanCim open source application, initially developed to perform validation of CIM
+    EA model file, then extended to do clean-up of left-overs from Rose and to show some basic
+    statistics (thus addressing combined CIM issue #1103). Finally, it has been extended to allow
+    for IEC (and custom) document generation, mainly driven by special needs of generating IEC
+    61850-7-3 and IEC 61850-7-4 from UML model developed by ABB and handed over to IEC TC57 WG19 in
+    October 2009. On the fly, the support for CIM-based IEC documents (IEC 61970-301 and IEC
+    61968-11) has been added - after all, this was an easy part :-).</p>
+
+  <p>
+    Since February 2010, jCleanCim has been used by CIM editors of IEC TC57 WG13, WG14 and recently
+    WG16 to generate IEC 61970-301, IEC 61968-11 and IEC 62325-301 documents, respectively, as well
+    as for the documentation describing CIM extensions developed in the European FP7 project <a
+      href="http://www.addressfp7.org/">ADDRESS</a>.
+  </p>
+
+  <p>Since September 2010, it has also been used by 61850 UML taskforce of WG10 to validate IEC
+    61850 UML and to automatically generate IEC 61850-7-4 and IEC 61850-7-3. As other IEC working
+    groups start moving their IEC 61850-based specifications to UML as master model, jCleanCim will
+    allow for automatic document generation for these, as well. Furthermore, since 01v06, the tool
+    supports serialisation of the UML model of IEC 61850 to an XML format, that would be suitable
+    for publishing on the web, and in support of the WebAccess taskforce of WG10. As a by-product,
+    the same feature is available for CIM UML model.</p>
+
+  <p>NOTE: From this point on, the documentation is likely obsolete; we try to maintain up to
+    date the jCleanCim presentation, so have a look there.</p>
+
+  <h2>Main functions</h2>
+
+  <p>jCleanCim has four main functions:</p>
+  <ol>
+    <li>validation of a UML model provided in an .eap file, bulk or per IEC TC57 WG,</li>
+    <li>calculation and printing of statistics of the UML model,</li>
+    <li>generation of MS Word documentation from the UML model,</li>
+    <li>generation of XML documentation from the UML model.</li>
+  </ol>
+
+  <p>
+    In addition to support for the standard IEC TC57 CIM and custom CIM extensions compliant with
+    CIM desing rules, jCleanCim supports the same functionality for the UML model of IEC 61850 being
+    developed by the 61850 UML taskforce. Having both families of standards in UML is expected to
+    facilitate one day harmonisation efforts between CIM and 61850, lead by IEC TC57 WG19. Since the
+    IEC 61850 <i>UML model</i> is still not a standard, in the following we refer to CIM only,
+    although the descriptions apply to the UML model of IEC 61850 as well.
+  </p>
+
+  <h2>Intended users</h2>
+  <p>(TODO: needs update)</p>
+  <p>Intended users are primarily those who edit CIM UML and publish its documentation, thus:</p>
+  <ul>
+    <li>official IEC CIM model editors, responsible for maintaining the CIM information model
+      (UML) and for generating official IEC documents, and,</li>
+    <li>those who define custom non-standard CIM extensions who want to ensure they have
+      followed standard CIM rules and who want to generate documentation for those extensions.</li>
+  </ul>
+
+  <p>
+    If you are already a user of the excellent <a href="http://www.cimtool.org/">CIMTool</a>, you
+    may wonder where within the process of CIM development and maintenance the jCleanCim fits. The
+    answer is:
+  </p>
+  <ol>
+    <li>You would first use jCleanCim to validate correctness of the CIM information model
+      (UML), and if required, to generate the information model documentation in MS Word format, as
+      required by the IEC process.</li>
+    <li>You would then use CIMTool to create CIM profiles (XSD, RDF, OWL) and their
+      documentation (HTML) from the imported CIM UML model, and to validate instance files created
+      based on those profiles.</li>
+  </ol>
+
+  <h2>Available distributions</h2>
+
+  <p>
+    See <a href="{@docRoot}/../../readme.html">readme</a> file.
+  </p>
+
+  <h2>Prerequisites</h2>
+
+  <p>
+    See <a href="{@docRoot}/../../readme.html">readme</a> file.
+  </p>
+
+  <h2>Installation</h2>
+
+  <p>
+    See <a href="{@docRoot}/../../readme.html">readme</a> file.
+  </p>
+
+  <h3>Sample files</h3>
+
+  <p>
+    Project's <a href="{@docRoot}/../../input">input</a> directory contains a very small model file
+    (you need at least one model file to run jCleanCim at all), and a sample template file (required
+    for doc generation only).
+  </p>
+  <p>base-small.eap is a tiny subset of IEC 61970 UML plus home-made dumb extensions, with
+    intentionally-introduced several modelling bugs and constructs never supposed to be found in CIM
+    - this is for testing purposes. You can use base-small-template.doc and tailor it for your needs
+    to produce the MS Word documentation.</p>
+  <p>Tailoring the template for your needs means modifying, adding or removing different kinds
+    of {@link org.tanjakostic.jcleancim.docgen.writer.Placeholder}s.</p>
+
+  <p>
+    If you want to run jCleanCim with your own models (and potentially template files), you need to
+    copy them to the <a href="{@docRoot}/../../input">input</a> directory.
+  </p>
+
+  <p>This directory also contains a blank image file that must be available when running
+    jCleanCim for certain scenarios (e.g., if you don't generate documentation, but only run
+    validation, this file will be used in place of real UML diagrams).</p>
+
+  <h2>Running jCleanCim out of the box</h2>
+
+  <h3>Binary distribution</h3>
+
+  <p>
+    After you have unzipped the <b>eclipse-independent binary</b> distribution
+    (jCleanCim-[version]-bin.zip), you will be using the run script
+    <code>run.bat</code>
+    from console.
+  </p>
+  <ol>
+    <li>In the Windows Start menu, select "Run..." and type <code>cmd</code>. This will open a
+      console window.
+    </li>
+    <li>In the console window, type <code>cd</code> followed by a space. From the file
+      explorer, just drag and drop the directory where you have unzipped the binary distribution
+      onto the console window (so you don't have to type the whole path), then press enter. This
+      will change the directory to where your jCleanCim has been installed.
+    </li>
+    <li>In the console window, type <code>run</code> and press enter. This will run the
+      jCleanCim jar with default configuration (validation and statistics) and the provided example
+      files.
+    </li>
+  </ol>
+
+  <h3>Source distribution</h3>
+
+  <p>
+    After you have unzipped the <b>eclipse-independent source</b> distribution
+    (jCleanCim-[version]-src.zip) and installed <a href="http://ant.apache.org/bindownload.cgi">Apache
+      ant</a>, you will be using the Apache ant script
+    <code>build.xml</code>
+    from console.
+  </p>
+  <ol>
+    <li>In the Windows Start menu, select "Run..." and type <code>cmd</code>. This will open a
+      console window.
+    </li>
+    <li>In the console window, type <code>cd</code> followed by a space. From the file
+      explorer, just drag and drop the directory where you have unzipped the source distribution
+      onto the console window (so you don't have to type the whole path), then press enter. This
+      will change the directory to where your jCleanCim has been installed.
+    </li>
+    <li>In the console window, type <code>ant jCleanCim</code> and press enter. This will build
+      the jCleanCim jar from sources and run it with the default configuration (validation and
+      statistics) and the provided example files. To see all available ant targets contained in the
+      <a href="{@docRoot}/../../build.xml">ant build file</a>, type <code>ant -p</code> (or <code>ant
+        -projecthelp</code>) and have a look at the <a href="{@docRoot}/../../build-graph.jpg">graph of
+        targets and their dependencies</a>.
+    </li>
+  </ol>
+  <p>
+    Alternatively, you may want to unzip the directory and import the project into your eclipse
+    installation. <i>Note: If you already have an earlier version of jCleanCim in your eclipse
+      workspace, you will first have to rename old jCleanCim project before importing new one. For
+      example, if you want to import new version 01v04, rename first your existing jCleanCim project
+      to jCleanCim-01v03, then import the new one. If you want to keep the old project
+      jCleanCim-01v03 and use it, you will also have to update the build path for the directory
+      where dll-s reside, otherwise eclipse shows you classpath error (eclipse does not use relative
+      paths for dlls directories!).</i>
+  </p>
+
+  <p>
+    After you have imported the <b>eclipse existing project</b> from unzipped source distribution
+    (jCleanCim-[version]-src.zip), you should create the default eclipse launch configuration as
+    follows:
+  </p>
+  <ul>
+    <li>Navigate to <code>src</code> directory
+    </li>
+    <li>locate the source file {@link org.tanjakostic.jcleancim.JCleanCim
+      org.tanjakostic.jcleancim.JCleanCim}</li>
+    <li>right click on the class and select "Run as / Java Application".</li>
+  </ul>
+  <p>This will launch the application and also create the run configuration, that you can later
+    on copy to create custom configurations. Cached launch configurations are available from the
+    eclipse "Run" icon (green icon with white arrow).
+  <p>
+    Note that you can also open the <a href="{@docRoot}/../../build.xml">ant build file</a> from
+    within eclipse (Window / Show Views / ant) and run any of its tasks from the eclipse Outline
+    window, the same way as from the console.
+  </p>
+
+  <h2>Configuring jCleanCim</h2>
+
+  <h3>Application configuration</h3>
+
+  <p>
+    To configure any run of jCleanCim application, you use the standard Java properties file
+    available in the project's config directory. Default name for that properties file is <a
+      href="{@docRoot}/../../config/config.properties">config.properties</a> and you can override
+    this default with a command line argument if you want to use different stable configurations for
+    different jCleanCim runs - see documentation in the application class {@link
+    org.tanjakostic.jcleancim.JCleanCim} and the configuration class {@link
+    org.tanjakostic.jcleancim.common.Config}.
+  </p>
+
+  <p>
+    The supplied default properties file contains reasonable defaults, and several tested
+    configurations are commented. By default (out of the box), jCleanCim will run validation and
+    statistics on base-small.eap model file, and will <em>not</em> generate any documentation.
+  </p>
+
+  <h3>Logging configuration</h3>
+
+  <p>
+    Project's config directory contains also the logging configuration file <a
+      href="{@docRoot}/../../config/log4j.xml">log4j.xml</a>. We have set up the console output
+    level to INFO (within the element
+    <code>appender name="CONSOLE"...</code>
+    ), and the level for everything else to the most verbose, TRACE (within the element
+    <code>logger name="org.tanjakostic.jcleancim"</code>
+    ). The first time you run jCleanCim application, the project's <a href="{@docRoot}/../../log">log</a>
+    directory gets created automatically.
+  </p>
+  <p>
+    If you get too noisy log files, you can dicrease the jCleanCim logger level in the <a
+      href="{@docRoot}/../../config/log4j.xml">log4j.xml</a> file, from TRACE to DEBUG. If you want
+    to post the jCleanCim log file with a model release, you can either:
+  </p>
+  <ul>
+    <li>Copy the console output to a jCleanCim-[version]-[UMLpackageVersions].log file - this
+      is easy when running jCleanCim from within eclipse, but may be impossible if running from
+      console window.</li>
+    <li>First dicrease the log level for the jCleanCim logger in <a
+      href="{@docRoot}/../../config/log4j.xml">log4j.xml</a> file, from TRACE to INFO, then remove
+      old log files, run jCleanCim and save the produced jCleanCim.log file as
+      jCleanCim-[version]-[UMLpackageVersions].log; then revert the log level change in the <a
+      href="{@docRoot}/../../config/log4j.xml">log4j.xml</a> file.
+    </li>
+  </ul>
+
+  <h2>Typical usage patterns</h2>
+
+  <h3>UML model validation and statistics</h3>
+
+  <p>
+    To select what functions of jCleanCim to run, you need to set one or more of the main properties
+    in the <a href="{@docRoot}/../../config/config.properties">config/config.properties</a> file:
+    <code>validation.on</code>
+    ,
+    <code>statistics.on</code>
+    and
+    <code>docgen.on</code>
+    . In every case, you have to provide a valid EA model file name to work with, in the property
+    <code>model.filename</code>
+    . That file is expected to be on the jCleanCim classpath, so the best is to put the file in the
+    <a href="{@docRoot}/../../input">input</a> directory which is already set to be on the
+    classpath.
+  </p>
+
+  <p>Typical usage will be to first enable validation and statistics mode after you have edited
+    the model, then address the problems in the model, and revalidate before releasing. Here is an
+    example of a minimum config.properties file to do that:</p>
+  <pre>
+model.filename    = base-small.eap
+validation.on     = true
+statistics.on     = true
+
+validation.scope  = 
+</pre>
+
+  <p>If you are validating IEC 61850 UML models, there are several other properties; see
+    documentation in {@link org.tanjakostic.jcleancim.common.Config}.</p>
+
+  <p>
+    If you have a big model, with potentially parts that are informative/buggy, you may want to set
+    a filter and perform initial validation of your changes for only some top-level packages. For
+    instance, to validate only standard CIM packages IEC61970 and IEC61968, you would set the
+    <code>validation.scope</code>
+    property so:
+  </p>
+  <pre>
+validation.scope = WG13, WG14
+</pre>
+
+  <p>and to validate only custom (non-IEC) extensions:</p>
+  <pre>
+validation.scope = OTHER_CIM, OTHER_IEC61850
+</pre>
+
+  <p>
+    It is recommended to <i>validate the full content of the EA model (by leaving the value of <code>validation.scope</code>
+      property empty) at least before releasing the model
+    </i>, to ensure there are no cross-package issues. See classes in the package {@link
+    org.tanjakostic.jcleancim.validation} for available validators and rules they fire - the names of
+    classes should be descriptive enough.
+  </p>
+
+  <h3>MS Word documentation generation</h3>
+
+  <p>
+    If you want to generate IEC (or custom) MS Word documentation from the UML model, in addition to
+    the model file name in <a href="{@docRoot}/../../config/config.properties">config/config.properties</a>
+    you must provide the names for template (input) file, the resulting (output) file, and enable
+    document generation by setting the property
+    <code>docgen.on = true</code>
+    .
+  </p>
+
+  <p>
+    The template file is a regular MS Word document (<em>not</em> Word template with .dot
+    extension), in which you put placeholders to control what jCleanCim should pick from the UML
+    model and print into MS Word document. Detailed description of available placeholders and their
+    usage is provided in the {@link org.tanjakostic.jcleancim.docgen.writer.Placeholder} class, and the
+    templates distributed with jCleanCim in the project's <a href="{@docRoot}/../../input">input</a>
+    directory should serve you as examples (of what is correct and what is not). If using your own
+    template, you should put it into that directory before running jCleanCim for document
+    generation.
+  </p>
+
+  <p>When generating documentation, jCleanCim does the following:</p>
+  <ul>
+    <li>copies your template file into the projects <code>output</code> directory, created
+      automatically the first time you run the document generation,
+    </li>
+    <li>renames the copied file to the name given in the properties file, and</li>
+    <li>fills that copy with the contents from the EA model in place of the placeholders.</li>
+  </ul>
+  <p>
+    You can safely run document generation several times with the same name of the output file,
+    without overwriting existing output files - if the output file exists, jCleanCim will rename it
+    by appending a system nanosecond time. The disadvantage is that you will need to delete those
+    discarded files from the
+    <code>output</code>
+    directory from time to time, but at least nothing gets lost without your control.
+  </p>
+
+  <p>You may want to disable validation and statistics when enabling document generation to have
+    the console log focused on document generation only.</p>
+
+  <p>
+    Because document generation takes pretty long, you will first want to ensure that the
+    placeholders in your template are correct, without generating the full package content. Here the
+    minimum configuration to do this for a CIM model (IEC61850 model needs more properties; see <a
+      href="{@docRoot}/../../config/config.properties">config/config.properties</a> file):
+  </p>
+  <pre>
+model.filename = base-small.eap
+
+docgen.on = true
+profiles.docgen.on = 
+docgen.inTemplate = base-small-template.doc
+docgen.outDocument = base-small.doc
+
+docgen.analysePlaceholders = true
+</pre>
+
+  <p>
+    Running only placeholder analysis (
+    <code>docgen.analysePlaceholders=true</code>
+    ) will still produce the output document, but without UML package contents (classes, attributes,
+    etc.). More importantly, that half-baked output document will contain placeholder errors, if any
+    - do text search for string "$ERROR".
+  </p>
+
+  <p>
+    After you have fixed the placeholders in the template, you can reset
+    <code>docgen.analysePlaceholders</code>
+    to empty string to generate the full documentation.
+  </p>
+
+  <p>
+    There are further options documented in {@link org.tanjakostic.jcleancim.common.Config} and in
+    properties file <a href="{@docRoot}/../../config/config.properties">config/config.properties</a>.
+    Playing with the provided sample small model and template files will hopefully get you started.
+  </p>
+
+  <h4>Other considerations</h4>
+
+  <p>When generating official IEC documentation, the template should contain the IEC styles
+    (this is probably already the case with CDV or FDIS documents that you as editor already have).
+    To prevent MS Word exceptions when generating non-IEC documentation for extensions, jCleanCim
+    defines default MS Word styles as replacement for the IEC styles. So, for example, 'Caption' is
+    used if 'FIGURE-title' and 'TABLE-title' are not present in the template, or 'Normal' is used if
+    'PARAGRAPH' is not present. Below is the code snippet of the static initialiser for {@link
+    org.tanjakostic.jcleancim.docgen.writer.Style} for the full list of default mappings: first
+    argument is IEC style name and the second is the MS Word default style:</p>
+  <pre>
+  para("PARAGRAPH", "Normal"),
+  fig("Picture", "Normal"),
+  figcapt("FIGURE-title", "Caption"),
+  tabcapt("TABLE-title", "Caption"),
+  tabhead("TABLE-col-heading", "Normal"),
+  tabcell("TABLE-cell", "Normal"),
+  h1("Heading 1", "Heading 1"),
+  h2("Heading 2", "Heading 2"),
+  h3("Heading 3", "Heading 3"),
+  h4("Heading 4", "Heading 4"),
+  h5("Heading 5", "Heading 5"),
+  h6("Heading 6", "Heading 6"),
+  h7("Heading 7", "Heading 7"),
+  h8("Heading 8", "Heading 8"),
+  h9("Heading 9", "Heading 9");
+</pre>
+  <p>
+    <b>It is essential to use correct styles for paragraphs containing figure and table captions
+      in the template,</b> because jCleanCim must deduce the number of figures and tables already
+    existing in the template to calculate on the fly the correct numbering for new figures and
+    tables (when inserting/appending the documentation for the UML model elements and diagrams). If
+    jCleanCim throws an exception during document generation, it is very likely that the MS Word
+    threw exception due to wrong/inexisting/negative number for the figure or table caption. <em>Note:
+      We cannot check those numbers from within the code, because the MS Word automation API does
+      not provide reliable access to them. In the worst case, when we catch an exception from MS
+      Word, we gracefully close the MS Word document and exit the MS Word application, before
+      exiting jCleanCim.</em>
+  </p>
+
+  <p>Document generation may take pretty long, depending on how many classes the UML model has.
+    The reason is that MS Word updates its fields evey time there is a table or any numbered
+    paragraph (heading or figure/table caption) added to the document. To make that time somewhat
+    shorter, consider the following when editing the template:</p>
+  <ul>
+    <li>disable automatic spell checking in the styles 'PARAGRAPH', 'TABLE-cell' and 'Normal'</li>
+    <li>disable overall change tracking</li>
+  </ul>
+
+  <p>Since version 01v03, jCleanCim has the MS Word application run in background by default
+    (which is faster than having the window visible and updating all the time).</p>
+
+  <h4>Known issues</h4>
+
+  <p>
+    Doc generation obviously relies on MS Word automation API, accessed from within Java through
+    Java-COM bridge (<a href="http://sourceforge.net/projects/jacob-project/files/">Jacob</a>). With
+    certain MS Word files (used as jCleanCim template), we encounter from time to time issues when
+    invoking COM objects for unknown reason, and with undetermined patterns (= an absolute horror
+    for a programmer!). Therefore, the Java implementation of the writer catches those COM
+    exceptions, prints the stack trace and attempts to continue, so you get at least some of the
+    desired output.
+  </p>
+
+  <p>Here some known issues related to MS Word automation API:</p>
+  <ul>
+    <li>When you print a relatively large part of the UML model, you may get the Word pop-up
+      window "memory insufficient. Do you want to continue?" several times. To prevent this,
+      jCleanCim regularly invokes the COM method (<code>UndoClear</code>) in attempt to clear cache
+      of the running Word instance, but this call sometimes fails for an unknown reason. Disabling
+      change tracking, and spell checking in styles 'PARAGRAPH', 'TABLE-cell' and 'Normal' in the
+      template document may help here.
+    </li>
+
+    <li>In most cases, despite the above COM exceptions (and those that follow), your generated
+      Word document will be complete, even if it stays open. Just save it and see what is in it. In
+      cases it does not work, try to create a fresh Word document as a jCleanCim template, and copy
+      only necessary styles from the original template, disable change tracking and spell checking.</li>
+
+    <li>We also suspect issues with localised versions of MS Word related to style definition.
+      Michael Specht (OFFIS, Germany) reported COM exceptions with base-small-template.doc bundled
+      in the <a href="{@docRoot}/../../input">input</a> with JCleanCim-01v01. He also reported that
+      installing English language pack for MS Office solves the problem.
+    </li>
+  </ul>
+
+  <p>If the problems persist, feel free to help fixing jCleanCim/Jacob/MS Word stuff.</p>
+
+  <p>If despite that we cannot find a workaround, we should convince IEC to allow us to generate
+    our documents at least as HTML (or still better, as XML), to get rid of binary dependencies on
+    MS Word.</p>
+
+  <h4>Success stories</h4>
+
+  <p>All that said, we have sucessfully generated:</p>
+  <ul>
+    <li>IEC 61970-301 since Ed.4 (base CIM14)</li>
+    <li>IEC 61968-11 since Ed.1 (DCIM10), and</li>
+    <li>IEC 62325-301 since CDV (market CIM01), and various EU profile documents</li>
+  </ul>
+
+  <p>We have also demonstrated the generation of Ed.2 IEC 61850-7-4 and IEC 61850-7-3, but these
+    auto-generated documents from UML are not the official IEC documents yet.</p>
+
+  <p>The requirements for generation of the above documents (and what will be needed for IEC
+    61850-7-2 and other IEC CIM and 61850 family of standards) are the highest priority ones at this
+    moment.</p>
+
+  <h2>Checklist for the developer that produces jCleanCim distributions</h2>
+
+  <p>Once after you've fixed bugs or added new features to jCleanCim, follow these steps to
+    build and publish the three jCleanCim distributions:</p>
+  <ol>
+    <li>update release notes (including date and version) in the <a
+      href="{@docRoot}/../../readme.html">readme</a> file.
+    </li>
+    <li>in the <a href="{@docRoot}/../../config/build.properties">version properties file</a>,
+      update the property <code>project.version</code>.
+    </li>
+    <li>if you provide new libraries or upgraded versions, ensure you update appropriate ant
+      properties.</li>
+    <li>clean-up local config.properties file (keep only public defaults).</li>
+    <li>run <code>ant clean, unzip-all</code> and verify that the content unzipped under the
+      build directory is ok.
+    </li>
+    <li>run jCleanCim from within both unzipped directories (to verify it actually runs as
+      described)</li>
+    <li>(copy locally the content of dist directory into jCleanCim releases directory)</li>
+    <li>on CIMug SharePoint, create new sub-directory within jCleanCim directory under <a
+      href="http://cimug.ucaiug.org/MTEI/Shared Documents">CIM Methods &amp; Tools for
+        Enterprise Integration group Shared Documents</a>; call it <code>jCleanCim-[version]</code></li>
+    <li>upload into that new sub-directory all artefacts from dist directory</li>
+    <li>notify CIM model managers, IEC61850 UML task force and known users</li>
+  </ol>
+
+</body>
+</html>

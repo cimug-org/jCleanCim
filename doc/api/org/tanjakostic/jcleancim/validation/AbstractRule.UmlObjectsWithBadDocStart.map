@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./PackageValidator.PackagesWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.PackageValidator.PackagesWithBadDocStart" alt="" coords="16,427,264,521"/>
+<area shape="rect" id="node1" href="./PackageValidator.PackagesWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="5,422,275,526"/>
+<area shape="rect" id="node2_1" href="./OperationValidator.OperationsWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationsWithBadDocStart" alt="" coords="309,427,557,521"/>
+<area shape="rect" id="node2" href="./OperationValidator.OperationsWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="299,422,568,526"/>
+<area shape="rect" id="node3_2" href="./OperationValidator.OperationParametersWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationParametersWithBadDocStart" alt="" coords="603,419,943,529"/>
+<area shape="rect" id="node3" href="./OperationValidator.OperationParametersWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="593,413,954,535"/>
+<area shape="rect" id="node4_3" href="./DiagramValidator.DiagramsWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.DiagramValidator.DiagramsWithBadDocStart" alt="" coords="989,427,1237,521"/>
+<area shape="rect" id="node4" href="./DiagramValidator.DiagramsWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="979,422,1248,526"/>
+<area shape="rect" id="node5_4" href="./ClassValidator.ClassesWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.ClassesWithBadDocStart" alt="" coords="1283,427,1531,521"/>
+<area shape="rect" id="node5" href="./ClassValidator.ClassesWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="1272,422,1541,526"/>
+<area shape="rect" id="node6_5" href="./AttributeValidator.AttributesWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.AttributeValidator.AttributesWithBadDocStart" alt="" coords="1577,419,1845,529"/>
+<area shape="rect" id="node6" href="./AttributeValidator.AttributesWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="1566,413,1855,535"/>
+<area shape="rect" id="node7_6" href="./AssociationValidator.AssociationEndsWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator.AssociationEndsWithBadDocStart" alt="" coords="1890,419,2262,529"/>
+<area shape="rect" id="node7" href="./AssociationValidator.AssociationEndsWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="1879,413,2273,535"/>
+<area shape="rect" id="node8_7" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.AbstractRuleWithSubobjectsAndSkips" alt="" coords="592,11,1635,173"/>
+<area shape="rect" id="node8" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="&lt;TABLE&gt;" alt="" coords="581,5,1645,179"/>
+<area shape="rect" id="node9_8" href="./AbstractRule.UmlObjectsWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithBadDocStart" alt="" coords="926,232,1301,360"/>
+<area shape="rect" id="node9" href="./AbstractRule.UmlObjectsWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="915,227,1311,365"/>
+</map>

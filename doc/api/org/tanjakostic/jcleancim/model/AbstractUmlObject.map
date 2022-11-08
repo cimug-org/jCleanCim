@@ -1,0 +1,26 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UmlStructure.html" title="org.tanjakostic.jcleancim.model.UmlStructure" alt="" coords="16,1736,700,2245"/>
+<area shape="rect" id="node1" href="./UmlStructure.html" title="&lt;TABLE&gt;" alt="" coords="5,1731,711,2251"/>
+<area shape="rect" id="node2_1" href="./UmlSkipped.html" title="org.tanjakostic.jcleancim.model.UmlSkipped" alt="" coords="745,1736,1293,2245"/>
+<area shape="rect" id="node2" href="./UmlSkipped.html" title="&lt;TABLE&gt;" alt="" coords="735,1731,1304,2251"/>
+<area shape="rect" id="node3_2" href="./UmlParameter.html" title="org.tanjakostic.jcleancim.model.UmlParameter" alt="" coords="1339,1762,1865,2219"/>
+<area shape="rect" id="node3" href="./UmlParameter.html" title="&lt;TABLE&gt;" alt="" coords="1328,1757,1876,2225"/>
+<area shape="rect" id="node4_3" href="./UmlOperation.html" title="org.tanjakostic.jcleancim.model.UmlOperation" alt="" coords="1911,1641,2634,2341"/>
+<area shape="rect" id="node4" href="./UmlOperation.html" title="&lt;TABLE&gt;" alt="" coords="1901,1635,2645,2346"/>
+<area shape="rect" id="node5_4" href="./UmlObject.html" title="org.tanjakostic.jcleancim.model.UmlObject" alt="" coords="3121,11,3553,451"/>
+<area shape="rect" id="node5" href="./UmlObject.html" title="&lt;TABLE&gt;" alt="" coords="3110,5,3563,456"/>
+<area shape="rect" id="node12_5" href="./AbstractUmlObject.html" title="org.tanjakostic.jcleancim.model.AbstractUmlObject" alt="" coords="2945,509,3728,1296"/>
+<area shape="rect" id="node12" href="./AbstractUmlObject.html" title="&lt;TABLE&gt;" alt="" coords="2935,504,3739,1301"/>
+<area shape="rect" id="node6_6" href="./UmlDiagram.html" title="org.tanjakostic.jcleancim.model.UmlDiagram" alt="" coords="2679,1762,3287,2219"/>
+<area shape="rect" id="node6" href="./UmlDiagram.html" title="&lt;TABLE&gt;" alt="" coords="2669,1757,3298,2225"/>
+<area shape="rect" id="node7_7" href="./UmlDependency.html" title="org.tanjakostic.jcleancim.model.UmlDependency" alt="" coords="3333,1797,4047,2185"/>
+<area shape="rect" id="node7" href="./UmlDependency.html" title="&lt;TABLE&gt;" alt="" coords="3323,1791,4057,2190"/>
+<area shape="rect" id="node8_8" href="./UmlConstraint.html" title="org.tanjakostic.jcleancim.model.UmlConstraint" alt="" coords="4092,1736,4731,2245"/>
+<area shape="rect" id="node8" href="./UmlConstraint.html" title="&lt;TABLE&gt;" alt="" coords="4081,1731,4741,2251"/>
+<area shape="rect" id="node9_9" href="./UmlAttribute.html" title="org.tanjakostic.jcleancim.model.UmlAttribute" alt="" coords="4777,1355,5449,2627"/>
+<area shape="rect" id="node9" href="./UmlAttribute.html" title="&lt;TABLE&gt;" alt="" coords="4766,1349,5459,2632"/>
+<area shape="rect" id="node10_10" href="./UmlAssociationEnd.html" title="org.tanjakostic.jcleancim.model.UmlAssociationEnd" alt="" coords="5494,1667,6115,2315"/>
+<area shape="rect" id="node10" href="./UmlAssociationEnd.html" title="&lt;TABLE&gt;" alt="" coords="5483,1661,6126,2320"/>
+<area shape="rect" id="node11_11" href="./UmlAssociation.html" title="org.tanjakostic.jcleancim.model.UmlAssociation" alt="" coords="6161,1667,6989,2315"/>
+<area shape="rect" id="node11" href="./UmlAssociation.html" title="&lt;TABLE&gt;" alt="" coords="6151,1661,7000,2320"/>
+</map>

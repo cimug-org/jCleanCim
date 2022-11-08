@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./DependencyValidator.DependenciesWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.DependencyValidator.DependenciesWithUnallowedTagNames" alt="" coords="93,180,362,273"/>
+<area shape="rect" id="node1" href="./DependencyValidator.DependenciesWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="82,175,373,279"/>
+<area shape="rect" id="node2_1" href="./AbstractRule.UmlObjectsWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithUnallowedTagNames" alt="" coords="16,11,439,121"/>
+<area shape="rect" id="node2" href="./AbstractRule.UmlObjectsWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="5,5,449,127"/>
+</map>

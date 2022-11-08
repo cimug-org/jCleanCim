@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./StatsPerOwner.html" title="org.tanjakostic.jcleancim.statistics.StatsPerOwner" alt="" coords="16,71,816,910"/>
+<area shape="rect" id="node1" href="./StatsPerOwner.html" title="&lt;TABLE&gt;" alt="" coords="5,66,827,915"/>
+<area shape="rect" id="node2_1" href="./ModelStats.html" title="org.tanjakostic.jcleancim.statistics.ModelStats" alt="" coords="861,11,1368,971"/>
+<area shape="rect" id="node2" href="./ModelStats.html" title="&lt;TABLE&gt;" alt="" coords="851,5,1379,976"/>
+<area shape="rect" id="node3_2" href="./CrossPackageStats.html" title="org.tanjakostic.jcleancim.statistics.CrossPackageStats" alt="" coords="1413,305,2893,676"/>
+<area shape="rect" id="node3" href="./CrossPackageStats.html" title="&lt;TABLE&gt;" alt="" coords="1403,300,2904,681"/>
+<area shape="rect" id="node4_3" href="./CrossPackageStats.CrossPackageStatsData.html" title="org.tanjakostic.jcleancim.statistics.CrossPackageStats.CrossPackageStatsData" alt="" coords="2939,357,3288,624"/>
+<area shape="rect" id="node4" href="./CrossPackageStats.CrossPackageStatsData.html" title="&lt;TABLE&gt;" alt="" coords="2928,352,3299,629"/>
+<area shape="rect" id="node5_4" href="./Counter.html" title="org.tanjakostic.jcleancim.statistics.Counter" alt="" coords="3334,392,3495,589"/>
+<area shape="rect" id="node5" href="./Counter.html" title="&lt;TABLE&gt;" alt="" coords="3323,387,3506,595"/>
+</map>

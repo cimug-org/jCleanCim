@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books:booklist xmlns:books="http://univNaSpResolver/booklist" xmlns="http://univNaSpResolver/book"
+  xmlns:fiction="http://univNaSpResolver/fictionbook">
+  <!--
+    From: http://www.ibm.com/developerworks/xml/library/x-nmspccontext/index.html?ca=drs-
+
+    This XML example has three namespaces declared in the root element and one declared on an element
+    deeper in the structure. The element 'booklist' has three children, all named 'book'. But the first
+    child has the namespace 'science', while the following children have the namespace 'fiction'. This
+    means that these elements are completely different to XPath.
+  -->
+  <science:book xmlns:science="http://univNaSpResolver/sciencebook">
+    <title>Learning XPath</title>
+    <author>Michael Schmidt</author>
+  </science:book>
+  <fiction:book>
+    <title>Faust I</title>
+    <author>Johann Wolfgang von Goethe</author>
+  </fiction:book>
+  <fiction:book>
+    <title>Faust II</title>
+    <author>Johann Wolfgang von Goethe</author>
+  </fiction:book>
+</books:booklist>

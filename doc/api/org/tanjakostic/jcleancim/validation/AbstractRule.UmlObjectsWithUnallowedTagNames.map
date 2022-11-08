@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./PackageValidator.PackagesWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.PackageValidator.PackagesWithUnallowedTagNames" alt="" coords="16,410,264,503"/>
+<area shape="rect" id="node1" href="./PackageValidator.PackagesWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="5,405,275,509"/>
+<area shape="rect" id="node2_1" href="./OperationValidator.OperationsWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationsWithUnallowedTagNames" alt="" coords="309,410,560,503"/>
+<area shape="rect" id="node2" href="./OperationValidator.OperationsWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="299,405,571,509"/>
+<area shape="rect" id="node3_2" href="./OperationValidator.OperationParametersWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationParametersWithUnallowedTagNames" alt="" coords="606,401,946,512"/>
+<area shape="rect" id="node3" href="./OperationValidator.OperationParametersWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="595,396,957,517"/>
+<area shape="rect" id="node4_3" href="./DependencyValidator.DependenciesWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.DependencyValidator.DependenciesWithUnallowedTagNames" alt="" coords="992,410,1261,503"/>
+<area shape="rect" id="node4" href="./DependencyValidator.DependenciesWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="981,405,1272,509"/>
+<area shape="rect" id="node5_4" href="./ClassValidator.ClassesWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.ClassesWithUnallowedTagNames" alt="" coords="1307,410,1555,503"/>
+<area shape="rect" id="node5" href="./ClassValidator.ClassesWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="1296,405,1565,509"/>
+<area shape="rect" id="node6_5" href="./AttributeValidator.AttributesWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.AttributeValidator.AttributesWithUnallowedTagNames" alt="" coords="1600,410,1848,503"/>
+<area shape="rect" id="node6" href="./AttributeValidator.AttributesWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="1589,405,1859,509"/>
+<area shape="rect" id="node7_6" href="./AssociationValidator.AssociationsWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator.AssociationsWithUnallowedTagNames" alt="" coords="1894,410,2157,503"/>
+<area shape="rect" id="node7" href="./AssociationValidator.AssociationsWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="1883,405,2167,509"/>
+<area shape="rect" id="node8_7" href="./AssociationValidator.AssociationEndsWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator.AssociationEndsWithUnallowedTagNames" alt="" coords="2203,410,2488,503"/>
+<area shape="rect" id="node8" href="./AssociationValidator.AssociationEndsWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="2192,405,2499,509"/>
+<area shape="rect" id="node9_8" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.AbstractRuleWithSubobjectsAndSkips" alt="" coords="757,11,1800,173"/>
+<area shape="rect" id="node9" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="&lt;TABLE&gt;" alt="" coords="747,5,1811,179"/>
+<area shape="rect" id="node10_9" href="./AbstractRule.UmlObjectsWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithUnallowedTagNames" alt="" coords="1067,232,1490,343"/>
+<area shape="rect" id="node10" href="./AbstractRule.UmlObjectsWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="1057,227,1501,348"/>
+</map>

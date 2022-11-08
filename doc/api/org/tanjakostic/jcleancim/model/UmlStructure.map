@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./UmlStructure.html" title="org.tanjakostic.jcleancim.model.UmlStructure" alt="" coords="589,856,1273,1365"/>
+<area shape="rect" id="node1" href="./UmlStructure.html" title="&lt;TABLE&gt;" alt="" coords="579,851,1284,1371"/>
+<area shape="rect" id="node2_1" href="./UmlPackage.html" title="org.tanjakostic.jcleancim.model.UmlPackage" alt="" coords="16,2377,897,3372"/>
+<area shape="rect" id="node2" href="./UmlPackage.html" title="&lt;TABLE&gt;" alt="" coords="5,2372,908,3377"/>
+<area shape="rect" id="node3_2" href="./UmlClass.html" title="org.tanjakostic.jcleancim.model.UmlClass" alt="" coords="943,1424,1871,4325"/>
+<area shape="rect" id="node3" href="./UmlClass.html" title="&lt;TABLE&gt;" alt="" coords="933,1419,1882,4331"/>
+<area shape="rect" id="node4_3" href="./AbstractUmlObject.html" title="org.tanjakostic.jcleancim.model.AbstractUmlObject" alt="" coords="540,11,1323,797"/>
+<area shape="rect" id="node4" href="./AbstractUmlObject.html" title="&lt;TABLE&gt;" alt="" coords="529,5,1333,803"/>
+</map>
