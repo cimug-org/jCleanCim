@@ -9,13 +9,13 @@ To make it accessible also to non-CIMug members, since 2016, I decided to share 
 This is a non-GUI Java application and the Java code is fully platform independent. However, it unfortunately must be run on MS Windows machine due to the usage of Enterprise Architect and MS Word automation libraries (.dlls).
 
 *   [Documentation](#documentation)
-*   [Which distribution should I download?](#which-distribution-should-i-download?)
-*   [Dependencies](#deps)
-*   [Performance indicators](#perf)
-*   [Hints - please read carefully before reporting problems!](#hints)
-*   [Configuration documentation](#cfgDoc)
-*   [Disclaimer](#discl)
-*   [What's new in this release](#relnotes)
+*   [Which distribution should I download?](#which-distribution-should-i-download)
+*   [Dependencies](#dependencies)
+*   [Performance indicators](#performance-indicators)
+*   [Hints - please read carefully before reporting problems!](#hints---please-read-carefully-before-reporting-problems)
+*   [Configuration documentation](#configuration-documentation)
+*   [Disclaimer](#disclaimer)
+*   [What's new in this release](#what's-new-in-this-release)
 
 ([Old release notes](oldReleaseNotes.md))
 
