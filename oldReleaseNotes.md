@@ -1,29 +1,26 @@
  jCleanCim release notes
 
-jCleanCim release notes
-=======================
+# jCleanCim release notes
 
 *   [02v01](#release-notes-for-jcleancim-02v01)
 *   [02v00](#release-notes-for-jcleancim-02v00)
 *   [01v10](#release-notes-for-jcleancim-01v10)
 *   [01v09](#release-notes-for-jcleancim-01v09)
-*   [01v08a](#release-notes-for-jcleancim-01v08a)
-*   [01v07](#release-notes-for-jcleancim-01v07)
-*   [01v06](#release-notes-for-jcleancim-01v06)
-*   [01v05a](#release-notes-for-jcleancim-01v05a)
-*   [01v05](#release-notes-for-jcleancim-01v05)
-*   [01v04](#release-notes-for-jcleancim-01v04)
-*   [01v03](#release-notes-for-jcleancim-01v03)
-*   [01v02](#release-notes-for-jcleancim-01v02)
-*   [01v01](#release-notes-for-jcleancim-01v01)
-*   [01v00](#release-notes-for-jcleancim-01v00)
+*   [01v08a](#jcleancim-01v08a)
+*   [01v07](#jcleancim-01v07)
+*   [01v06](#jcleancim-01v06)
+*   [01v05a](#jcleancim-01v05a)
+*   [01v05](#jcleancim-01v05)
+*   [01v04](#jcleancim-01v04)
+*   [01v03](#jcleancim-01v03)
+*   [01v02](#jcleancim-01v02)
+*   [01v01](#jcleancim-01v01)
+*   [01v00](#jcleancim-01v00)
 
 [Readme file](README.md)
 
 * * *
-
-Release notes for jCleanCim-02v01
-
+## Release notes for jCleanCim-02v01
 * * *
 
 **Release Date: 23-Jul-2016**
@@ -126,7 +123,7 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 *   added description on how to use a custom config.properties file.
 
 * * *
-Release notes for jCleanCim-02v00
+## Release notes for jCleanCim-02v00
 * * *
 
 **Release Date: 19-May-2015**
@@ -208,7 +205,7 @@ None.
 *   updated the presentation.
 
 * * *
-Release notes for jCleanCim-01v10
+## Release notes for jCleanCim-01v10
 * * *
 
 **Release Date: 20-May-2014**
@@ -273,7 +270,7 @@ None.
 *   updated the presentation.
 
 * * *
-Release notes for jCleanCim-01v09, 2013-05-11
+## Release notes for jCleanCim-01v09
 * * *
 
 **Release Date: 11-May-2013**
@@ -389,7 +386,7 @@ Note that from this release, you will need Java 7 or higher.
 *   updated the presentation
 
 * * *
-jCleanCim-01v08a
+## jCleanCim-01v08a
 * * *
 
 **Release Date: 10-Feb-2013**
@@ -674,7 +671,7 @@ base-small
 *   updated the presentation
 
 * * *
-jCleanCim-01v07
+## jCleanCim-01v07
 * * *
 
 **Release Date: 26-Aug-2012**
@@ -848,7 +845,7 @@ IEC61850-7-4, with special table formatting
 *   updated the presentation
 
 * * *
-jCleanCim-01v06
+## jCleanCim-01v06
 * * *
 
 **Release Date: 25-Mar-2012**
@@ -1000,7 +997,7 @@ IEC61850-7-4, with special table formatting
 *   updated the presentation
 
 * * *
-jCleanCim-01v05a
+## jCleanCim-01v05a
 * * *
 
 **Release Date: 31-Jul-2011**
@@ -1012,7 +1009,7 @@ jCleanCim-01v05a
     *   totally removed all circular dependencies
 
 * * *
-jCleanCim-01v05
+## jCleanCim-01v05
 * * *
 
 **Release Date: 17-Jul-2011**
@@ -1211,7 +1208,7 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
     *   updated the presentation
 
 * * *
-jCleanCim-01v04
+## jCleanCim-01v04
 * * *
 
 **Release Date: 13-Mar-2011**
@@ -1326,7 +1323,7 @@ jCleanCim-01v04
     *   updated the presentation
 
 * * *
-jCleanCim-01v03, 2010-10-03
+## jCleanCim-01v03
 * * *
 
 **Release Date: 03-Oct-2010**
@@ -1382,7 +1379,7 @@ jCleanCim-01v03, 2010-10-03
     *   updated the presentation
 
 * * *
-jCleanCim-01v02, 2010-05-15
+## jCleanCim-01v02
 * * *
 
 **Release Date: 15-May-2010**
@@ -1407,7 +1404,7 @@ jCleanCim-01v02, 2010-05-15
     *   rebranded name to start with lower case letter
 
 * * *
-JCleanCim-01v01, 2010-02-21
+## JCleanCim-01v01
 * * *
 
 **Release Date: 21-Feb-2010**
@@ -1436,7 +1433,7 @@ JCleanCim-01v01, 2010-02-21
 *   eliminated all FindBugs max level warnings (so JCleanCim is a bit cleaner now :-)
 
 * * *
-JCleanCim-01v00, 2009-11-11
+## JCleanCim-01v00
 * * *
 
 **Release Date: 11-Nov-2009**
