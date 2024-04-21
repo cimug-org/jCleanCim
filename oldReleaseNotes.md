@@ -21,7 +21,9 @@ jCleanCim release notes
 [Readme file](README.md)
 
 * * *
+
 Release notes for jCleanCim-02v01
+
 * * *
 
 **Release Date: 23-Jul-2016**
