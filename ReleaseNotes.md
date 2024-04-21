@@ -1,5 +1,3 @@
- jCleanCim release notes
-
 # jCleanCim release notes
 
 *   [02v03](#release-notes-for-jcleancim-02v03)
