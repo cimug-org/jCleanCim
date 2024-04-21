@@ -359,7 +359,7 @@ None.
 *   upgraded EA dll and jar to version 12 (from EA build 1212).
 *   removed docx4j and dependencies, will try to use Apache POI instead at some later date.
 *   added some more unit tests.
-*   included oldReleaseNotes.html for distribution in the build script.
+*   included ReleaseNotes.md for distribution in the build script.
 
 ### Documentation:
 
