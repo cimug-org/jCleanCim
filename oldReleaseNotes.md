@@ -1459,7 +1459,7 @@ JCleanCim-01v00, 2009-11-11
 
 Built on 2019-12-20T22:05:24
 
-[Copyright](copyright.html) [License](license.txt)
+[Copyright](copyright.html) [License](LICENSE)
 
 [Feedback](mailto:tatjana-dot-kostic-atNoSpam-ieee-dot-org)
 
