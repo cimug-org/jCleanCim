@@ -18,7 +18,7 @@ jCleanCim release notes
 *   [01v01](#01v01)
 *   [01v00](#01v00)
 
-[Readme file](readme.html)
+[Readme file](README.md)
 
 * * *
 
@@ -1459,7 +1459,7 @@ JCleanCim-01v00, 2009-11-11
 
 Built on 2019-12-20T22:05:24
 
-[Copyright](copyright.html) [License](LICENSE)
+[Copyright](copyright.md) [License](LICENSE)
 
 [Feedback](mailto:tatjana-dot-kostic-atNoSpam-ieee-dot-org)
 
