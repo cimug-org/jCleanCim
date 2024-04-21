@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./WriterInput.html" title="org.tanjakostic.jcleancim.docgen.writer.WriterInput" alt="" coords="2943,11,3499,191"/>
+<area shape="rect" id="node1" href="./WriterInput.html" title="&lt;TABLE&gt;" alt="" coords="2932,5,3509,196"/>
+<area shape="rect" id="node2_1" href="./word/WordWriterInput.html" title="org.tanjakostic.jcleancim.docgen.writer.word.WordWriterInput" alt="" coords="16,249,3740,1001"/>
+<area shape="rect" id="node2" href="./word/WordWriterInput.html" title="&lt;TABLE&gt;" alt="" coords="5,244,3751,1007"/>
+<area shape="rect" id="node3_2" href="./xml/WAXWriterInput.html" title="org.tanjakostic.jcleancim.docgen.writer.xml.WAXWriterInput" alt="" coords="3785,492,5344,759"/>
+<area shape="rect" id="node3" href="./xml/WAXWriterInput.html" title="&lt;TABLE&gt;" alt="" coords="3775,487,5355,764"/>
+</map>

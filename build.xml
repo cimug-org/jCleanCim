@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- $Id: build.xml 26 2019-11-12 18:50:35Z dev978 $ -->
+<project name="jCleanCim" default="jar" basedir="." xmlns:jc="http://jcleancim.tc57.iec.org">
+	<property file="config/build.properties" />
+	<property file="${user.home}/build.properties" />
+
+	<!-- ========================================================== -->
+	<!-- Project data                                               -->
+	<!-- ========================================================== -->
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="project.release" value="${project.name}-${project.version}" />
+	<property name="doc.title" value="${project.release} API" />
+
+	<!-- ========================================================== -->
+	<!-- Properties                                                 -->
+	<!-- ========================================================== -->
+	<!--ANT 1.7.1 is required -->
+	<property name="proj.dir" location="${basedir}" />
+	<property name="macros.uri" value="http://jcleancim.tc57.iec.org" />
+	<property name="appclass.name" value="org.tanjakostic.jcleancim.JCleanCim" />
+
+	<!-- Input directories -->
+	<property name="bin.dir" location="${proj.dir}/bin" description="scripts" />
+	<property name="input.dir" location="${proj.dir}/input" description="input data directory" />
+	<property name="config.dir"
+	          location="${proj.dir}/config"
+	          description="configutation files directory" />
+	<property name="doc.dir"
+	          location="${proj.dir}/doc"
+	          description="documentation (including javadocs)" />
+	<property name="dlls.dir" location="${proj.dir}/dlls" description="dlls" />
+	<property name="lib.dir" location="${proj.dir}/lib" description="dependencies jars" />
+	<property name="libdoc.dir" location="${proj.dir}/lib-doc" description="dependencies javadocs" />
+	<property name="src.dir" location="${proj.dir}/src" description="source files" />
+	<property name="test.dir" location="${proj.dir}/test" description="test source files" />
+
+	<!-- Output directories -->
+	<property name="dist.dir" location="${proj.dir}/dist" description="[*] distribution directory" />
+	<property name="build.dir"
+	          location="${proj.dir}/build"
+	          description="[*] intermediary files' directory" />
+	<property name="output.dir"
+	          location="${proj.dir}/output"
+	          description="[*] outputs from production code" />
+	<property name="test.output.dir"
+	          location="${test.dir}/output"
+	          description="[*] outputs from testing" />
+	<property name="build.prod.dir"
+	          location="${build.dir}/prod"
+	          description="[*] root for product class files" />
+	<property name="build.test.dir"
+	          location="${build.dir}/test"
+	          description="[*] root for test class files" />
+	<property name="build.bin.dir"
+	          location="${build.dir}/bin"
+	          description="[*] dir for eol and chmod fixed scripts" />
+	<property name="build.api.dir"
+	          location="${build.dir}/api"
+	          description="[*] javadocs for developer" />
+	<property name="build.api-usr.dir"
+	          location="${build.dir}/api-usr"
+	          description="[*] javadocs for user" />
+
+	<!-- File patterns -->
+	<property name="resources.to.copy" value="**/*.properties,**/*.dtd,**/*.xml,**/*.xsd,**/*.jpg" />
+	<property name="unix.scripts" value="**/*.sh,**/*.pl,**/*.py" />
+	<property name="dos.scripts" value="**/*.bat,**/*.cmd" />
+	<property name="inputs.to.copy" value="base-small*,blank.png,IECDomain.xsd,**/profiles/**" />
+	<property name="txts.to.copy"
+	          value="readme.html,releaseNotes.html,oldReleaseNotes.html,copyright.html,license.txt" />
+	<property name="presentation.to.copy" value="jCleanCimIntro.pptx" />
+	<property name="antfiles.to.copy" value="build.xml,build.properties" />
+	<property name="eclipsefiles.to.copy" value=".classpath,.project" />
+	<property name="build.graph"
+	          value="build-graph"
+	          description="name (stem) for files documenting ant targets dependencies" />
+	<patternset id="failing.tests">
+		<exclude unless="run.failing.tests" name="org/iec/tc57/MyClass.*" />
+	</patternset>
+
+	<!-- Dependencies (libraries) -->
+	<property name="log4j.jar" value="log4j-1.2.17.jar" description="logging (compile dep; jackcess dep)" />
+	<property name="junit.jar" value="junit-4.8.2.jar" description="testing (compile dep)" />
+	<property name="commons-cli.jar"
+	          value="commons-cli-1.2.jar"
+	          description="comand line arguments parsing (compile dep)" />
+	<property name="commons-lang.jar"
+	          value="commons-lang-2.6.jar"
+	          description="time utils and string markup processing (compile dep; jackcess dep)" />
+	<property name="eaapi.jar"
+	          value="eaapi.jar"
+	          description="Enterprise Archichitect API (compile dep)" />
+	<property name="eaapi.dll"
+	          value="SSJavaCOM.dll"
+	          description="Enterprise Archichitect API (compile dep)" />
+	<property name="jacob.jar"
+	          value="jacob.jar"
+	          description="MS Word API binary/COM (compile dep)" />
+	<property name="jacob.dll"
+	          value="jacob-1.17-M2-x86.dll"
+	          description="MS Word API binary/COM (compile dep)" />
+	<property name="poi-ooxml.jar"
+	          value="poi-ooxml-3.15-beta2.jar"
+	          description="MS Word API OOXML (compile dep)" />
+	<property name="jackcess.jar"
+	          value="jackcess-2.1.0.jar"
+	          description="reading Access / EA (compile dep)" />
+	<property name="commons-logging.jar"
+	          value="commons-logging-1.1.1.jar"
+	          description="(jackcess dep)" />
+
+	<property name="pdfdoclet.jar"
+	          value="pdfdoclet-1.0.2-all.jar"
+	          description="executable to create API as pdf (build dep)" />
+	<property name="UmlGraph.jar"
+	          value="UmlGraph.jar"
+	          description="used to add UML of source code to javadoc (build dep, requires GraphViz)" />
+	<property name="grand.jar"
+	          value="grand-1.8.jar"
+	          description="used to generate dependency graph of this file as pdf (build dep, requires GraphViz)" />
+
+	<!-- Java compiler -->
+	<property name="javac.debug" value="yes" description="always keep yes!" />
+	<property name="javac.enc"
+	          value="iso8859-1"
+	          description="explicit (default value differs per OS)" />
+	<property name="javac.deprec" value="yes" description="always keep yes!" />
+	<property name="javac.source" value="1.7" description="using java 7 features" />
+	<property name="javac.target" value="1.7" description="using java 7 features" />
+	<!-- Java runtime -->
+	<property name="jvm" value="java" description="jvm used for java command" />
+	<property name="jvm.maxMem" value="512m" description="maximum jvm memory" />
+	<property name="jvm.type" value="-server" description="server/client" />
+	<property name="jvm.gc.args"
+	          value="-Xincgc"
+	          description="garbage collection space-separated options" />
+	<!-- Javadoc-->
+	<property name="jdk.javadoc" value="http://java.sun.com/javase/7/docs/api/" />
+	<!-- JUnit -->
+	<property name="junit.fork"
+	          value="true"
+	          description="spawn a new jvm for junit tests: faster on multi-CPU machine; must be used with ant when depending on native libraries (otherwise, we would have to launch ant itself with the -Djava.library.path set to dlls)." />
+	<property name="junit.haltonfailure" value="yes" description="stop on first test failure." />
+
+	<!-- ========================================================== -->
+	<!-- Deliverables                                               -->
+	<!-- ========================================================== -->
+	<property name="jar.name" value="${project.name}.jar" />
+	<property name="jar.path" location="${build.dir}/${jar.name}" />
+	<property name="pdfdoc.name" value="${project.release}.pdf" />
+	<property name="pdfdoc.path" location="${build.dir}/${pdfdoc.name}" />
+
+	<property name="zip-common.path" location="${dist.dir}/${project.release}-common.zip" />
+	<property name="zip-bin.path" location="${dist.dir}/${project.release}-bin.zip" />
+	<property name="zip-src.path" location="${dist.dir}/${project.release}-src.zip" />
+
+	<!-- ========================================================== -->
+	<!-- Classpaths                                                 -->
+	<!-- ========================================================== -->
+	<path id="compile.classpath">
+		<pathelement location="${lib.dir}/${log4j.jar}" />
+		<pathelement location="${lib.dir}/${commons-cli.jar}" />
+		<pathelement location="${lib.dir}/${commons-lang.jar}" />
+		<pathelement location="${lib.dir}/${eaapi.jar}" />
+		<pathelement location="${lib.dir}/${jacob.jar}" />
+		<pathelement location="${lib.dir}/${poi-ooxml.jar}" />
+		<pathelement location="${lib.dir}/${jackcess.jar}" />
+		<pathelement location="${lib.dir}/${commons-logging.jar}" />
+	</path>
+
+	<path id="test.compile.classpath">
+		<path refid="compile.classpath" />
+		<pathelement location="${jar.path}" />
+		<pathelement location="${lib.dir}/${junit.jar}" />
+	</path>
+
+	<path id="manifest.classpath">
+		<path refid="compile.classpath" />
+		<pathelement location="${config.dir}" />
+		<pathelement location="${input.dir}" />
+	</path>
+
+	<path id="run.classpath">
+		<path refid="manifest.classpath" />
+		<!-- <pathelement location="${build.prod.dir}/classes" /> -->
+		<pathelement location="${jar.path}" />
+	</path>
+
+	<path id="test.run.classpath">
+		<path refid="run.classpath" />
+		<pathelement location="${lib.dir}/${junit.jar}" />
+		<pathelement location="${build.test.dir}/classes" />
+		<pathelement location="${test.dir}/config" />
+		<pathelement location="${test.dir}/input" />
+		<!-- If using fork in java/junit task, insure the spawned process includes
+			     the same classpath used by the original Ant JVM: -->
+		<pathelement path="${java.class.path}" />
+	</path>
+
+	<!-- ================================================================ -->
+	<!--              Compilation                                         -->
+	<!-- ================================================================ -->
+
+	<target name="init">
+		<tstamp>
+			<format property="buildtime" pattern="yyyy-MM-dd'T'HH:mm:ss" locale="en" />
+		</tstamp>
+		<echo message="Build in ${basedir}" />
+		<echo message="Running ant build for ${ant.project.name}, version ${project.version}, at ${buildtime}." />
+		<echo message="java.home = ${java.home}" />
+		<echo message="java.library.path = ${java.library.path}" />
+	</target>
+
+	<target name="mkdirs" depends="init">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.prod.dir}" />
+		<mkdir dir="${build.prod.dir}/classes" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<target name="compile" depends="mkdirs" description="compile sources (without tests)">
+		<javac destdir="${build.prod.dir}/classes"
+		       debug="${javac.debug}"
+		       encoding="${javac.enc}"
+		       deprecation="${javac.deprec}"
+		       source="${javac.source}"
+		       target="${javac.target}"
+		       includeantruntime="false">
+			<classpath refid="compile.classpath" />
+			<src path="${src.dir}" />
+		</javac>
+		<copy todir="${build.prod.dir}/classes" preservelastmodified="yes">
+			<fileset dir="${src.dir}" includes="${resources.to.copy}" />
+		</copy>
+		<copy todir="${build.prod.dir}/input" preservelastmodified="yes">
+			<fileset dir="${input.dir}" />
+		</copy>
+		<copy todir="${build.prod.dir}/config" preservelastmodified="yes">
+			<fileset dir="${config.dir}" />
+		</copy>
+	</target>
+
+	<!-- ================================================================ -->
+	<!--                           Jars                                   -->
+	<!-- ================================================================ -->
+	<target name="jar" depends="compile">
+		<!-- <buildnumber file="build.num"/> -->
+		<property name="manifest.mf" location="${build.prod.dir}/MANIFEST.MF" />
+		<!-- <pathconvert property="class-path" dirsep="/" pathsep=" " refid="manifest.classpath">
+			<map from="${basedir}${file.separator}lib" to="lib" />
+			<map from="${basedir}${file.separator}dlls" to="dlls" />
+			<map from="${basedir}${file.separator}config" to="config/" />
+			<map from="${basedir}${file.separator}input" to="input/" />
+		</pathconvert> -->
+		<manifest file="${manifest.mf}">
+			<attribute name="Built-By" value="${user.name}" />
+			<attribute name="Sealed" value="no" />
+			<attribute name="Built-On" value="${buildtime}" />
+			<attribute name="Main-Class" value="${appclass.name}" />
+			<attribute name="Implementation-Version" value="${project.version}" />
+			<!-- <attribute name="Implementation-Version" value="${project.version}-b${build.number}"/> -->
+			<!-- <attribute name="Class-Path" value="./ ${class-path}" /> -->
+		</manifest>
+		<delete file="${jar.path}" />
+		<jar destfile="${jar.path}"
+		     manifest="${manifest.mf}"
+		     duplicate="preserve"
+		     index="yes"
+		     compress="no">
+			<fileset dir="${build.prod.dir}/classes" excludes="**/doc-files/*" />
+		</jar>
+	</target>
+
+	<!-- ================================================================ -->
+	<!--                       Application (run main)                     -->
+	<!-- ================================================================ -->
+
+	<target name="jCleanCim" depends="jar" description="[app] runs jCleanCim">
+		<java classname="${appclass.name}"
+		      classpathref="run.classpath"
+		      fork="true"
+		      dir="${build.prod.dir}"
+		      jvm="${jvm}"
+		      maxmemory="${jvm.maxMem}"
+		      failonerror="yes">
+			<sysproperty key="java.library.path" value="${dlls.dir}" />
+			<jvmarg value="${jvm.type}" />
+			<jvmarg line="${jvm.gc.args}" />
+		</java>
+	</target>
+
+	<!-- ================================================================ -->
+	<!--                       Testing                                    -->
+	<!-- ================================================================ -->
+
+	<target name="mkdirs-tests" depends="jar">
+		<mkdir dir="${build.test.dir}" />
+		<mkdir dir="${build.test.dir}/classes" />
+		<!-- Deletes old test reports and creates fresh directories." -->
+		<delete dir="${build.test.dir}/reports" />
+		<delete dir="${build.test.dir}/report-html" />
+		<mkdir dir="${build.test.dir}/reports" />
+		<mkdir dir="${build.test.dir}/report-html" />
+	</target>
+
+	<target name="compile-tests" depends="jar,mkdirs-tests">
+		<javac destdir="${build.test.dir}/classes"
+		       debug="${javac.debug}"
+		       encoding="${javac.enc}"
+		       deprecation="${javac.deprec}"
+		       source="${javac.source}"
+		       target="${javac.target}">
+			<classpath refid="test.compile.classpath" />
+			<src path="${test.dir}" />
+		</javac>
+		<!-- Copy all non-java resources into the testing classpath. -->
+		<copy todir="${build.test.dir}/classes" includeemptydirs="no" preservelastmodified="yes">
+			<fileset dir="${test.dir}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="test"
+	        depends="compile-tests"
+	        description="run JUnit tests (plain format output), or a single test if property 'testcase' is defined">
+		<jc:run-junit />
+	</target>
+
+	<target name="test-xmlFormatter"
+	        depends="compile-tests"
+	        description="run JUnit tests (XML format output), or a single test if property 'testcase' is defined">
+		<jc:run-junit formatterType="xml" useFile="yes" />
+	</target>
+
+	<macrodef name="run-junit"
+	          uri="${macros.uri}"
+	          description="allows us to have different output formats for regular tests and release tests (with test reports)">
+		<attribute name="formatterType" default="plain" />
+		<attribute name="useFile" default="no" />
+		<sequential>
+			      <!-- timeout was "90000", now needs at time even 150000ms -->
+			<junit fork="${junit.fork}"
+			       forkmode="once"
+			       printsummary="yes"
+			       timeout="150000"
+			       jvm="${jvm}"
+			       maxmemory="${jvm.maxMem}"
+			       haltonfailure="${junit.haltonfailure}"
+			       errorProperty="test.failed"
+			       failureProperty="test.failed">
+				<classpath refid="test.run.classpath" />
+				<sysproperty key="java.library.path" value="${dlls.dir}" />
+
+				<assertions enablesystemassertions="yes" description="works only with forked jvm">
+					<enable />
+				</assertions>
+				<formatter type="@{formatterType}" usefile="@{useFile}" />
+				<!-- This allows us to run a single test (define this prop in your build.properties) -->
+				<test name="${testcase}" todir="${build.test.dir}/reports" if="testcase" />
+				<!-- By default, we run all the tests: -->
+				<batchtest todir="${build.test.dir}/reports" unless="testcase">
+					<fileset dir="${build.test.dir}/classes">
+						<include name="**/*Test.class" />
+						<patternset refid="failing.tests" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</sequential>
+	</macrodef>
+
+	<target name="testreport" depends="test-xmlFormatter" description="create HTML test report">
+		<junitreport todir="${build.test.dir}/reports">
+			<fileset dir="${build.test.dir}/reports">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${build.test.dir}/report-html" />
+		</junitreport>
+		<fail if="test.failed"
+		      message=" #### Tests failed - check ${build.test.dir}/report-html/index.html." />
+		<echo message=" HTML test report: check ${build.test.dir}/report-html/index.html." />
+	</target>
+
+
+	<!-- ================================================================ -->
+	<!--                       Javadocs                                   -->
+	<!-- ================================================================ -->
+	<target name="probe-for-graphviz">
+		<property environment="env" />
+		<condition property="graphviz.present">
+			<or>
+				<available file="dot.exe" filepath="${env.Path}" />
+				<available file="dot" filepath="${env.PATH}" />
+			</or>
+		</condition>
+		<echo>GraphViz found = ${graphviz.present} </echo>
+	</target>
+
+	<target name="javadoc" depends="compile" description="create API documentation for developer">
+		<jc:run-javadoc srcdir="${src.dir}" destdir="${build.api.dir}" />
+	</target>
+
+	<target name="javadoc-user" depends="compile" description="create API documentation for user">
+		<jc:run-javadoc srcdir="${src.dir}"
+		                destdir="${build.api-usr.dir}"
+		                userKind="user"
+		                accessLevel="protected" />
+	</target>
+
+	<target name="javadoc-with-uml" depends="probe-for-graphviz,javadoc" if="graphviz.present">
+		<jc:insert-uml destdir="${build.api.dir}" />
+	</target>
+
+	<target name="javadoc-with-uml-user"
+	        depends="probe-for-graphviz,javadoc-user"
+	        if="graphviz.present">
+		<jc:insert-uml destdir="${build.api-usr.dir}" />
+	</target>
+
+	<macrodef name="run-javadoc"
+	          uri="${macros.uri}"
+	          description="allows us to create different javadocs for users and developers">
+		<attribute name="srcdir" />
+		<attribute name="destdir" />
+		<attribute name="cp" default="compile.classpath" />
+		<attribute name="userKind" default="developer" />
+		<attribute name="accessLevel" default="private" />
+		<sequential>
+			<delete dir="@{destdir}" />
+			<mkdir dir="@{destdir}" />
+			<echo>================== Using user=@{userKind}, access=@{accessLevel} ============</echo>
+			<echo>cp = @{cp}</echo>
+			<javadoc sourcepath="@{srcdir}"
+			         destdir="@{destdir}"
+			         packagenames="org.*"
+			         overview="${src.dir}/overview.html"
+			         author="yes"
+			         includenosourcepackages="yes"
+			         use="yes"
+			         access="@{accessLevel}"
+			         version="yes"
+			         splitindex="yes"
+			         linkoffline="${jdk.javadoc} ${jdk.javadoc}"
+			         windowtitle="${doc.title} (@{userKind})"
+			         doctitle="${project.release}"
+			         header="${project.release}"
+			         footer="${project.release}">
+				<bottom>
+					<![CDATA[Copyright 2009-2016 Tatjana (Tanja) Kostic]]>
+				</bottom>
+				<doclet name="org.umlgraph.doclet.UmlGraphDoc" path="${lib.dir}/${UmlGraph.jar}">
+					<param name="-all" />
+					<param name="-nodefontclassabstractname" value="Arial Italic" />
+					<param name="-nodefontabstractname" value="Arial Italic" />
+				</doclet>
+				<classpath refid="@{cp}" />
+			</javadoc>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="insert-uml"
+	          uri="${macros.uri}"
+	          description="allows us to insert UML into different javadocs for users and developers">
+		<attribute name="destdir" />
+		<sequential>
+			<apply executable="dot" dest="@{destdir}" parallel="false">
+				<arg value="-Tpng" />
+				<arg value="-o" />
+				<targetfile />
+				<srcfile />
+				<fileset dir="@{destdir}" includes="*.dot" />
+				<mapper type="glob" from="*.dot" to="*.png" />
+			</apply>
+		</sequential>
+	</macrodef>
+
+	<target name="javadoc-user-pdf"
+	        depends="compile"
+	        description="create pdf API documentation for user; does not support several options, thus we keep it as a separate target.">
+		<delete file="${pdfdoc.path}" />
+		<javadoc doclet="com.tarsec.javadoc.pdfdoclet.PDFDoclet"
+		         docletpath="${lib.dir}/${pdfdoclet.jar}"
+		         sourcepath="${src.dir}"
+		         packagenames="org.*"
+		         overview="${src.dir}/overview.html"
+		         author="yes"
+		         includenosourcepackages="yes"
+		         access="protected"
+		         version="yes"
+		         additionalparam="-pdf ${pdfdoc.path} -api.title.page -api.title.file readme.html -allow.printing -create.links">
+			<classpath refid="compile.classpath" />
+		</javadoc>
+	</target>
+
+	<!-- ================================================================ -->
+	<!--                      Scripts and documentation                   -->
+	<!-- ================================================================ -->
+
+	<target name="scripts" depends="mkdirs">
+		<copy todir="${build.bin.dir}" overwrite="yes">
+			<fileset dir="${bin.dir}" includes="${unix.scripts},${dos.scripts}" />
+		</copy>
+		<fixcrlf srcdir="${build.bin.dir}" eol="unix" includes="${unix.scripts}" />
+		<fixcrlf srcdir="${build.bin.dir}" eol="dos" includes="${dos.scripts}" />
+		<chmod perm="a+x" includes="${unix.scripts}" />
+	</target>
+
+	<target name="prepare-txt" depends="mkdirs">
+		<copy todir="${build.dir}" overwrite="yes" description="overwrite, since we use buildtime">
+			<fileset dir="${basedir}" includes="${txts.to.copy}" />
+			<filterset>
+				<filter token="TIMESTAMP" value="${buildtime}" />
+			</filterset>
+		</copy>
+	</target>
+
+	<!-- ================================================================ -->
+	<!--                         Packaging                                -->
+	<!-- ================================================================ -->
+
+	<target name='all'
+	        depends="dist-bin,dist-src"
+	        description="generate both bin and src distribution">
+		<delete file="${zip-common.path}" />
+	</target>
+
+	<zipfileset id="app.jars" dir="${lib.dir}" prefix="${project.release}/lib">
+		<include name="${log4j.jar}" />
+		<include name="${commons-cli.jar}" />
+		<include name="${commons-lang.jar}" />
+		<include name="${eaapi.jar}" />
+		<include name="${jacob.jar}" />
+		<include name="${poi-ooxml.jar}" />
+		<include name="${jackcess.jar}" />
+		<include name="${commons-logging.jar}" />
+	</zipfileset>
+
+	<zipfileset id="all.jars" dir="${lib.dir}" prefix="${project.release}/lib" includes="**/*" />
+
+	<zipfileset id="all.dlls" dir="${dlls.dir}" prefix="${project.release}/dlls">
+		<include name="${eaapi.dll}" />
+		<include name="${jacob.dll}" />
+	</zipfileset>
+
+	<target name="pack-zip-common" depends="prepare-txt,testreport">
+		<!-- readme and copyright, input, config, test report, jars, dlls -->
+		<delete dir="${test.output.dir}"
+		        description="this gets filled after running tests, we don't want these for distributions" />
+		<zip destfile="${zip-common.path}" duplicate="fail">
+			<zipfileset refid="app.jars" />
+			<zipfileset refid="all.dlls" />
+			<!-- <zipfileset dir="${input.dir}" prefix="${project.release}/input" includes="*small*" /> -->
+			<zipfileset dir="${input.dir}"
+			            prefix="${project.release}/input"
+			            includes="${inputs.to.copy}" />
+			<zipfileset dir="${config.dir}" prefix="${project.release}/config" includes="**/*" />
+			<zipfileset dir="${build.dir}" prefix="${project.release}" includes="${txts.to.copy}" />
+			<zipfileset dir="${doc.dir}" prefix="${project.release}/doc" includes="*" />
+			<zipfileset dir="${build.test.dir}/report-html" prefix="${project.release}/doc/testReport" />
+		</zip>
+		<copy todir="${dist.dir}" preservelastmodified="yes">
+			<fileset dir="${build.dir}" includes="${txts.to.copy}" />
+			<fileset dir="${doc.dir}" includes="${presentation.to.copy}" />
+		</copy>
+	</target>
+
+	<target name="dist-bin"
+	        depends="jar,pack-zip-common,javadoc-user,javadoc-with-uml-user,javadoc-user-pdf,scripts"
+	        description="generate binary distribution, with jar, user javadocs, pdf javadocs, and scripts in the root directory">
+		<delete file="${zip-bin.path}" />
+		<zip destfile="${zip-bin.path}" duplicate="fail">
+			<zipfileset src="${zip-common.path}" />
+			<zipfileset dir="${build.dir}" prefix="${project.release}" includes="${jar.name}" />
+			<zipfileset dir="${build.dir}" prefix="${project.release}/doc" includes="${pdfdoc.name}" />
+			<zipfileset dir="${build.api-usr.dir}" prefix="${project.release}/doc/api" />
+			<zipfileset dir="${build.bin.dir}" prefix="${project.release}" filemode="755" />
+		</zip>
+	</target>
+
+	<target name="build.dot"
+	        depends="mkdirs,probe-for-graphviz"
+	        if="graphviz.present"
+	        description="creates pdf with ant target dependencies graph">
+		<property name="file.type" value="pdf" />
+		<typedef resource="net/ggtools/grand/antlib.xml" classpath="${lib.dir}/${grand.jar}" />
+		<grand output="${build.dir}/${build.graph}.dot"
+		       buildfile="${basedir}/build.xml"
+		       showgraphname="yes" />
+		<exec executable="dot">
+			<arg line="-T${file.type} -Gsize=23.39,16.54 -Grotate=0 -o ${build.dir}/${build.graph}.${file.type} 
+			${build.dir}/${build.graph}.dot" />
+		</exec>
+	</target>
+
+	<target name="dist-src"
+	        depends="pack-zip-common,javadoc,javadoc-with-uml,scripts,build.dot"
+	        description="generate source distribution, with developer javadocs, build file and its targets' graph, scripts in their own directory, and sources">
+		<delete file="${zip-src.path}" />
+		<zip destfile="${zip-src.path}" duplicate="fail">
+			<zipfileset src="${zip-common.path}" />
+			<zipfileset dir="${build.api.dir}" prefix="${project.release}/doc/api" />
+
+			<zipfileset dir="${lib.dir}" prefix="${project.release}/lib">
+				<include name="${junit.jar}" />
+				<include name="${UmlGraph.jar}" />
+				<include name="${grand.jar}" />
+				<include name="${pdfdoclet.jar}" />
+			</zipfileset>
+			<zipfileset dir="${libdoc.dir}" prefix="${project.release}/lib-doc" />
+			<zipfileset dir="${build.bin.dir}" prefix="${project.release}/bin" filemode="755" />
+			<zipfileset dir="${src.dir}" prefix="${project.release}/src" excludes="**/output" />
+			<zipfileset dir="${test.dir}" prefix="${project.release}/test" excludes="**test/output" />
+			<zipfileset dir="${basedir}" prefix="${project.release}" includes="${antfiles.to.copy}" />
+			<zipfileset dir="${basedir}" prefix="${project.release}" includes="${eclipsefiles.to.copy}" />
+			<zipfileset dir="${build.dir}"
+			            prefix="${project.release}/doc"
+			            includes="${build.graph}.pdf" />
+		</zip>
+	</target>
+
+	<!-- ================================================================ -->
+	<!--                           Clean-up                               -->
+	<!-- ================================================================ -->
+
+	<target name="clean"
+	        description="delete all files that are generated by the build; does NOT touch 'output' directories (with application results.)">
+		<delete dir="${build.api-usr.dir}" />
+		<delete dir="${build.api.dir}" />
+		<delete dir="${build.prod.dir}" />
+		<delete dir="${build.test.dir}" />
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+
+		<delete dir="${test.output.dir}" />
+	</target>
+
+	<!-- ================================================================ -->
+	<!--               Build file debugging/verification                  -->
+	<!-- ================================================================ -->
+
+	<target name="unjar" depends="jar">
+		<delete dir="${build.dir}/unjar" />
+		<unjar src="${jar.path}" dest="${build.dir}/unjar" />
+	</target>
+
+	<target name="unzip-dist-bin" depends="dist-bin">
+		<delete dir="${build.dir}/unzip-bin" />
+		<unzip src="${zip-bin.path}" dest="${build.dir}/unzip-bin" />
+	</target>
+
+	<target name="unzip-dist-src" depends="dist-src">
+		<delete dir="${build.dir}/unzip-src" />
+		<unzip src="${zip-src.path}" dest="${build.dir}/unzip-src" />
+	</target>
+
+	<target name="unzip-all"
+	        depends="unzip-dist-bin,unzip-dist-src"
+	        description="run this one to create bin and src distributions AND to unpack them under build directory, so you can verify that the distributions contain everything they should.">
+		<delete file="${zip-common.path}" />
+	</target>
+
+	<target name="echoprops" description="displays all defined properties">
+		<echoproperties />
+	</target>
+</project>

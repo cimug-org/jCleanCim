@@ -1,0 +1,1912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- REMARKS:
+  - set language of schema (only XSD) to "en" (instead of "en-GB")
+  - element names follow the conventions in UML (e.g., they do not use 7-2 names) where applicable.
+  - no explicit modelling of primitive/composed CDC - not needed here
+  - only packed list attributes can have default values
+  - Data object/attribute semantic table are not included in the schema, they shall be computed from
+  the
+  specification.
+-->
+<!-- OPEN ISSUES/QUESTIONS:
+  - shall we use the XML tag FCDA? This might confuse many users as this is used in SCL to designate
+  data
+  set entries... => NO
+  - tLiteral.literalVal: currently an int. Should we make it more general and have it as an xs:Token?
+  (CIM
+  might require it.)
+  - agNamespaceName (namespace definition and referencing): we must have a way to uniquely identify a
+  namespace
+  corresponding to a UML version (which is not updated regularly - we need some kind of time, genTime
+  as
+  proposed is not good enough).
+  - there must be a way to keep the docIDs constant over generation to facilitate reuse of strings (and
+  their translations!)
+  - tDataAttribute defines minValue and maxValue, where the documentation says it is inclusive. Sometimes
+  we have > 0, so is it acceptable to put minVal 1 instead? Should we have minValueInclusive and Exclusive?
+  - [tk] In UML, we already correctly brought those to min/max inclusive (>0 == [1...])
+  - Shall we have children of a CodedEnum with a different XML tag (not Literal but e.g., CEL - coded
+  enum
+  literal) to easily differentiate with Enumeration literals? If yes, we duplicate...
+  - Abbreviations: shouldn't we distinguish if they are for data attributes or data? Further, there is
+  no single type for some data attributes... In any case, we might have several descriptions (depending
+  on usage) => several descID-s. Maybe the descID should be replaced by a sequence of elements (type,
+  descID)?
+  - constant value (initial?) value (only for CIM?): ignore for now (info in desc) - see valueRange in
+  old modelling
+  - do we have inheritance for packed lists? (if not, we need to think about the superClass attribute)
+  - do we want informative everywhere? I guess it applies only to packages and classes - no? - [tk] everything
+  (also attributes, associations and diagrams)
+  - tIEC61850PrettyStrings. There are two different modelings for a table, see the children CDCAttributesTable
+  and LNAttributesTable. Only one such modelling shall be used for all tables, to be decided (and harmonized).
+  - [tk] No, we cannot use single modelling, because 1) the columns are different; and 2) because the
+  categories
+  are different for CDC and LN attributes. (For Word printing, we actually have single model with so-called
+  attribute groups, but that model contains only strings and has strictly no notions of 61850 meta-model).
+  - Shouldn't Functions be part of any (61850) Package so that we can place these at the right place?
+  -
+  [tk] The only place this is used in 7-4 name space.
+  - tIEC61850Function: shouldn't "lns" and "rsName" be mandatory? - [tk] No; some LNs from part 5 are
+  not
+  in 7-4; and some from 7-4 are not in part 5.
+  - slimUmlObject?
+-->
+<xs:schema xmlns:iec="http://iec.ch/TC57/UML/2012/IECDomain"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://iec.ch/TC57/UML/2012/IECDomain" elementFormDefault="qualified"
+  attributeFormDefault="unqualified" version="0.13" xml:lang="en">
+  <!-- ============================ COMMON TYPES ============================ -->
+  <xs:simpleType name="tEmptyString">
+    <xs:annotation>
+      <xs:documentation>The empty string.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:maxLength value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tNamespaceID">
+    <xs:annotation>
+      <xs:documentation>Format of a namespace ID.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:pattern value="\p{IsBasicLatin}+" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tNamespaceVersion">
+    <xs:annotation>
+      <xs:documentation>Format of a namespace version.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:short">
+      <xs:minInclusive value="2000" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tNamespaceRevision">
+    <xs:annotation>
+      <xs:documentation>Format of a namespace revision.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:pattern value="[A-Z]" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attributeGroup name="agNamespaceName">
+    <xs:annotation>
+      <xs:documentation>Full namespace name.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="id" type="iec:tNamespaceID" use="required">
+      <xs:annotation>
+        <xs:documentation>Namespace identifier</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="version" type="iec:tNamespaceVersion" use="required">
+      <xs:annotation>
+        <xs:documentation>Namespace version (a year between 2000 and 2099).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="revision" type="iec:tNamespaceRevision" use="optional"
+      default="A">
+      <xs:annotation>
+        <xs:documentation>Namespace revision - an upper case letter (basic latin), by default 'A'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="umlVersion" type="xs:normalizedString" use="required">
+      <xs:annotation>
+        <xs:documentation>Version of the master UML.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="tissues" type="xs:normalizedString" use="optional" default="">
+      <xs:annotation>
+        <xs:documentation>Tissues implemented in this namespace since the last revision.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:simpleType name="tDocID">
+    <xs:annotation>
+      <xs:documentation>Type describing an identifier for a translatable documentation string. The
+        identifier is defined in an attribute within IECDomain, and the translatable string is in an
+        element Doc (of type tDoc) within the IECDomainDoc element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attributeGroup name="agPrettyString">
+    <xs:annotation>
+      <xs:documentation>Identifier for a translatable string for a "pretty string" for an element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="textID" type="iec:tDocID" use="required" />
+  </xs:attributeGroup>
+  <xs:complexType name="tColumnSpec">
+    <xs:sequence>
+      <xs:element name="Col" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="attributeName" type="xs:token" use="required">
+            <xs:annotation>
+              <xs:documentation>Name of the XML attribute to use for this column.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attributeGroup ref="iec:agPrettyString" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="tUmlName">
+    <xs:annotation>
+      <xs:documentation>UML-conformant name.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}]+" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tUmlNameOrEmpty">
+    <xs:union memberTypes="iec:tUmlName iec:tEmptyString" />
+  </xs:simpleType>
+  <xs:attributeGroup name="agInheritedFrom">
+    <xs:attribute name="inheritedFrom" type="iec:tUmlName" use="optional">
+      <xs:annotation>
+        <xs:documentation>Name of the super-class defining the element. Information missing in the
+          given element (e.g., descID) shall be fetched from the referenced super-class. Note that
+          you may need to repeat the same procedure when you reach the referenced super-class, for
+          its own super-class, up the inheritance hierarchy.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="tUnNamedObject" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of an element without a name.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="descID" type="iec:tDocID" use="optional">
+      <xs:annotation>
+        <xs:documentation>Identifier of a translatable string for the description of this UML
+          element. By default none (null).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="informative" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>Flag indicating whether this UML element is informative (i.e.,
+          non-normative). By default false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="deprecated" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>Flag indicating whether this UML element is deprecated. Optional, by
+          default false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="tUmlObject" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML element with a name.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUnNamedObject">
+        <xs:attribute name="name" type="iec:tUmlName" use="required">
+          <xs:annotation>
+            <xs:documentation>Name of the UML element (non translatable).</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="aliasID" type="iec:tDocID" use="optional">
+          <xs:annotation>
+            <xs:documentation>Identifier of a translatable string for the alias (pretty string) of
+              this UML element. By default none (null).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:attributeGroup name="agTableFigureTexts">
+    <xs:attribute name="introductionID" type="iec:tDocID" use="required">
+      <xs:annotation>
+        <xs:documentation>Identifier of a translatable string to be used as introduction to the
+          table or figure.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="captionID" type="iec:tDocID" use="required">
+      <xs:annotation>
+        <xs:documentation>Identifier of a translatable string to be used as caption for the table or
+          figure.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="tTable" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of infomration grouped in a table.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="iec:agTableFigureTexts" />
+  </xs:complexType>
+  <xs:simpleType name="tDiagramKind">
+    <xs:annotation>
+      <xs:documentation>Kinds of diagram.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="package">
+        <xs:annotation>
+          <xs:documentation>UML package diagram.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="class">
+        <xs:annotation>
+          <xs:documentation>UML class diagram.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="statechart">
+        <xs:annotation>
+          <xs:documentation>State chart diagram</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="object">
+        <xs:annotation>
+          <xs:documentation>Object diagram</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="custom">
+        <xs:annotation>
+          <xs:documentation>Custom diagram.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="tDiagram">
+    <xs:annotation>
+      <xs:documentation>Diagram specification.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="kind" type="iec:tDiagramKind" use="required">
+          <xs:annotation>
+            <xs:documentation>Kind of diagram.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="img" use="required">
+          <xs:annotation>
+            <xs:documentation>URI to the diagram (image).</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="1" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agTableFigureTexts" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tOperation">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML operation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="signature" type="xs:normalizedString" use="required">
+          <xs:annotation>
+            <xs:documentation>Operation's signature.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agInheritedFrom" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tOperations">
+    <xs:annotation>
+      <xs:documentation>Modelling of a set of UML operations.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="Operation" type="iec:tOperation" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Operation definition.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tAssociationEnd" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML association end (of one class with another).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="type" type="iec:tUmlName" use="required" />
+        <xs:attribute name="inheritedFrom" type="iec:tUmlName" use="optional" />
+        <xs:attribute name="mult" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tAssociationEnds" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="iec:tTable" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tClass" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML class.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:sequence>
+          <xs:element name="Diagram" type="iec:tDiagram" minOccurs="0"
+            maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Diagram explaining the class.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Operations" type="iec:tOperations" minOccurs="0"
+            maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="abstract" type="xs:boolean" use="optional" default="false">
+          <xs:annotation>
+            <xs:documentation>Flag indicating whether this class is abstract. By default false.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="superClass" type="iec:tUmlName" use="optional">
+          <xs:annotation>
+            <xs:documentation>Name of the (direct) super-class, if any.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="titleID" type="iec:tDocID" use="optional">
+          <xs:annotation>
+            <xs:documentation>Identifier of a translatable string to be used as title for this
+              class. If not provided, the client application shall use the sibling name and/or
+              aliasID (if available).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPackage" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML package. The "pretty string" title of the package shall
+        be the concatenation of name and aliasID (if provided); subtitleID, if provided, shall be
+        the title of a sub-section holding the introduction to the package (IEC convention); descID,
+        if provided, is the text to be displayed either below the introduction subsection if
+        subtitleID is given, otherwise shall be put right after the title.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:sequence>
+          <xs:element name="Diagram" type="iec:tDiagram" minOccurs="0"
+            maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Diagram explaining the package.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="subtitleID" type="iec:tDocID" use="optional">
+          <xs:annotation>
+            <xs:documentation>Identifier of a translatable string to be used as subtitle for this
+              package.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="titleID" type="iec:tDocID" use="optional">
+          <xs:annotation>
+            <xs:documentation>Identifier of a translatable string to be used as title for this
+              package. If not provided, the client application shall use the sibling name and/or
+              aliasID (if available).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tNeeds">
+    <xs:annotation>
+      <xs:documentation>Reference to the NameSpace that is extended.</xs:documentation>
+    </xs:annotation>
+    <xs:attributeGroup ref="iec:agNamespaceName" />
+  </xs:complexType>
+  <xs:complexType name="tNameSpace" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a NameSpace</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Needs" type="iec:tNeeds" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Reference to another namespace this namespace depends on. All relevant
+            namespaces shall be included (including those "needed" by this one).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attributeGroup ref="iec:agNamespaceName" />
+  </xs:complexType>
+  <!-- ============================ IEC 618650 TYPES =========================== -->
+  <xs:simpleType name="tDataOrPackedListAttributeTypeKind">
+    <xs:annotation>
+      <xs:documentation>Kind of type of a data or structured or packed list attribute.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="BASIC">
+        <xs:annotation>
+          <xs:documentation>The type of the data attribute is a basic one (e.g., BOOLEAN, INT32).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ENUMERATED">
+        <xs:annotation>
+          <xs:documentation>The type of the data attribute is an enumeration.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CODED ENUM">
+        <xs:annotation>
+          <xs:documentation>The type of the data attribute is a coded enum.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CONSTRUCTED">
+        <xs:annotation>
+          <xs:documentation>The type of the data attribute is a constructed (composed) one.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PACKED LIST">
+        <xs:annotation>
+          <xs:documentation>The type of the data attribute is a packed list.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tDACategoryKind">
+    <xs:annotation>
+      <xs:documentation>Category for a group of data attributes of a CDC.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="daStatus" />
+      <xs:enumeration value="daMeas" />
+      <xs:enumeration value="daCtlMirror" />
+      <xs:enumeration value="daSubst" />
+      <xs:enumeration value="daSetting" />
+      <xs:enumeration value="daDesc" />
+      <xs:enumeration value="daTracking" />
+      <xs:enumeration value="daControl" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="tDOCategoryKind">
+    <xs:annotation>
+      <xs:documentation>Kind for a group of data objects of an LN.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="doDesc" />
+      <xs:enumeration value="doStatus" />
+      <xs:enumeration value="doMeas" />
+      <xs:enumeration value="doControl" />
+      <xs:enumeration value="doSetting" />
+      <xs:enumeration value="doTracking" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attributeGroup name="agPresenceCondition">
+    <xs:annotation>
+      <xs:documentation>Full presence condition.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="presCond" type="xs:normalizedString" use="required">
+      <xs:annotation>
+        <xs:documentation>Presence condition (M, O, etc.).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="presCondArgs" type="xs:normalizedString" use="optional">
+      <xs:annotation>
+        <xs:documentation>Arguments to sibling attribute presCond, comma-separated if needed. E.g.,
+          sibling name, "min,max", "group"...
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="presCondArgsID" type="iec:tDocID" use="optional">
+      <xs:annotation>
+        <xs:documentation>Identifier of a translatable string for the condID. Shall only be provided
+          for presence conditions with a condID.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="agDerivedStatisticsPresenceCondition">
+    <xs:annotation>
+      <xs:documentation>Full presence condition for derived statistics DO.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="dsPresCond" type="xs:normalizedString" use="optional"
+      default="F">
+      <xs:annotation>
+        <xs:documentation>Presence condition (M, O, etc.).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dsPresCondArgs" type="xs:normalizedString" use="optional">
+      <xs:annotation>
+        <xs:documentation>Arguments to sibling attribute dsPresCond, comma-separated if needed.
+          E.g., sibling name, "min,max", "group"...
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dsPresCondArgsID" type="iec:tDocID" use="optional">
+      <xs:annotation>
+        <xs:documentation>Identifier of a translatable string for the condID. Shall only be provided
+          for presence conditions with a condID.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="agFCTrgOp">
+    <xs:annotation>
+      <xs:documentation>Modelling of the functional constraint and triggering options of a
+        (functionally constrained) data attribute.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="fc" type="xs:token" use="required">
+      <xs:annotation>
+        <xs:documentation>Functional constraint.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dchg" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>Flag indicating whether the triggering option data change is set. Default
+          is false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="qchg" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>Flag indicating whether the triggering option quality change is set.
+          Default is false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dupd" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>Flag indicating whether the triggering option data update is set. Default
+          is false.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="agMinMaxValue">
+    <xs:attribute name="minValue" type="xs:normalizedString">
+      <xs:annotation>
+        <xs:documentation>Allowed minimal value (inclusive) for the data attribute (either a number
+          or a data attribute's name holding that minimum). If not provided the minimal value
+          according to the type is allowed. May only be allowed for data attributes with
+          typeKind="basic".
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="maxValue" type="xs:normalizedString">
+      <xs:annotation>
+        <xs:documentation>Allowed maximal value (inclusive) for the data attribute (either a number
+          or a data attribute's name holding that maximum). If not provided the maximal value
+          according to the type is allowed. May only be allowed for data attributes with
+          typeKind="basic".
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="agArray">
+    <xs:annotation>
+      <xs:documentation>Array indication.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="isArray" type="xs:boolean" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>Array indication.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="minIndex" use="optional">
+      <xs:annotation>
+        <xs:documentation>For ARRAY SDO/data attributes, maxIndex corresponds to the maximal index
+          of the array. Shall not be provided for non-array types.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:normalizedString">
+          <xs:minLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="maxIndex" use="optional">
+      <xs:annotation>
+        <xs:documentation>For ARRAY SDO/data attributes, mixIndex corresponds to the maximal index
+          of the array. Shall not be provided for non-array types.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:normalizedString">
+          <xs:minLength value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:complexType name="tIEC61850PrettyStrings">
+    <xs:annotation>
+      <xs:documentation>Definition of translatable strings for the different IEC 61850 tables.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="FunctionalConstraintsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the functional constraints table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TriggerOptionsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the tigger options table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PresenceConditionsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the presence conditions table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AbbreviationsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the DO abbreviations table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FunctionsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the functions table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CoreTypeAttributesTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the structured core types table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ConstructedDAsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the constructed DAs table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CDCAttributesTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the functional constraints table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LNAttributesTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the LN attributes (i.e., data) table, i.e., an
+            tDOTable.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LiteralsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the literals table of an enumeration or coded enum.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OtherAttributesTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for an arbitrary IEC 61850 structured type table.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OperationsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Column specification for the operations table of a class.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AssociationEndsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the association ends table.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DACategoryKindPrettyStrings" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the XSD enumeration "tDACategoryKind".
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="PS" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attribute name="kind" type="iec:tDACategoryKind" use="required">
+                  <xs:annotation>
+                    <xs:documentation>DA category.</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attributeGroup ref="iec:agPrettyString" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DOCategoryKindPrettyStrings" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Pretty strings for the XSD enumeration "tDOCategoryKind".
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="PS" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attribute name="kind" type="iec:tDOCategoryKind" use="required">
+                  <xs:annotation>
+                    <xs:documentation>DO category.</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attributeGroup ref="iec:agPrettyString" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tLiteral61850">
+    <xs:annotation>
+      <xs:documentation>Definition of an enumeration litteral (an enumeration value).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUnNamedObject">
+        <xs:attribute name="name" type="iec:tUmlNameOrEmpty" use="required">
+          <xs:annotation>
+            <xs:documentation>Name of the UML element (non translatable).</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="literalVal" type="xs:int" use="optional">
+          <xs:annotation>
+            <xs:documentation>Enumeration literal integer value (like in information models or SCL)
+              or code (like in CIM profiles).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="aliasID" type="iec:tDocID" use="optional">
+          <xs:annotation>
+            <xs:documentation>Identifier of a translatable string for the alias (pretty string) of
+              this UML element. By default none (null).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tLiteralsTable61850">
+    <xs:annotation>
+      <xs:documentation>Modelling of a table of literals for an enumeration.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="Literal" type="iec:tLiteral61850" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Enumeration literal (enumeration value).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tEnumeration61850">
+    <xs:annotation>
+      <xs:documentation>Definition of an enumeration.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tClass">
+        <xs:sequence>
+          <xs:element name="Literals" type="iec:tLiteralsTable61850">
+            <xs:annotation>
+              <xs:documentation>Table of child literals of this enumeration.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Enumeration">
+    <xs:annotation>
+      <xs:documentation>Definition of an ENUMERATION for the IEC 61850 domain.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tEnumeration61850" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tCodedEnum">
+    <xs:annotation>
+      <xs:documentation>Definition of a CODED ENUM for the IEC 61850 domain.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tEnumeration61850" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Class">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML class for the IEC 61850 domain.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tClass" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tBasic">
+    <xs:annotation>
+      <xs:documentation>Modelling of a basic data attribute type.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Attribute">
+    <xs:annotation>
+      <xs:documentation>Modelling of generic IEC61850 attribute; see tIEC61850Attributes.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="type" type="iec:tUmlName" use="required">
+          <xs:annotation>
+            <xs:documentation>Type of the data attribute.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="defaultValue" type="xs:normalizedString" use="optional">
+          <xs:annotation>
+            <xs:documentation>Default value (if any) of the PLA.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agPresenceCondition" />
+        <xs:attributeGroup ref="iec:agInheritedFrom" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDataOrPackedListAttribute" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a (data or structured or packed list) attribute.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Attribute">
+        <xs:attribute name="typeKind" type="iec:tDataOrPackedListAttributeTypeKind"
+          use="optional" default="BASIC">
+          <xs:annotation>
+            <xs:documentation>Kind of the type of the data attribute. By default "BASIC".
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agMinMaxValue" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPLA">
+    <xs:annotation>
+      <xs:documentation>Modelling of a packed list attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tDataOrPackedListAttribute" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPLATable">
+    <xs:annotation>
+      <xs:documentation>Modelling of a table of packed list attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="Attribute" type="iec:tPLA" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Packed List Attribute.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPackedList">
+    <xs:annotation>
+      <xs:documentation>Modelling of a packed list. Corresponds to one of the basic types in SCL.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class">
+        <xs:sequence>
+          <xs:element name="Features" type="iec:tPLATable">
+            <xs:annotation>
+              <xs:documentation>Table of all child packed list attributes of this packed list.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tOtherIEC61850Class">
+    <xs:annotation>
+      <xs:documentation>Modelling of other 61850 class; see tIEC61850Attributes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class">
+        <xs:sequence>
+          <xs:element name="Features" type="iec:tIEC61850Attributes" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Table of all child packed list attributes of this packed list.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="AssociationEnds" type="iec:tIEC61850AssociationEnds"
+            minOccurs="0" />
+        </xs:sequence>
+        <xs:attributeGroup ref="iec:agMinMaxValue" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tStructuredOrDataAttribute" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of data or structured attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tDataOrPackedListAttribute">
+        <xs:attributeGroup ref="iec:agArray" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDataAttribute">
+    <xs:annotation>
+      <xs:documentation>Modelling of a data attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tStructuredOrDataAttribute" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tStructuredAttribute">
+    <xs:annotation>
+      <xs:documentation>Modelling of a structured attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tStructuredOrDataAttribute" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDATable">
+    <xs:annotation>
+      <xs:documentation>Modelling of the UML attributes of a ConstructedDA, i.e., the DAs.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="DA" type="iec:tDataAttribute" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Attributes">
+    <xs:annotation>
+      <xs:documentation>Modelling of a table of any IEC 61850 list of attributes on a class. Note:
+        this is to be able to generate some 7-2 content at present; in the future, this may be
+        removed and replaced with other 7-2 specific tables.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="Attribute" type="iec:tIEC61850Attribute"
+            maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Generic attribute..</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850AssociationEnd">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML association end (of one class with another) in IEC61850.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tAssociationEnd" />
+      <!-- <xs:attributeGroup ref="iec:agPresenceCondition"/> -->
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850AssociationEnds">
+    <xs:complexContent>
+      <xs:extension base="iec:tAssociationEnds">
+        <xs:sequence>
+          <xs:element name="AssociationEnd" type="iec:tIEC61850AssociationEnd"
+            maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tConstructedDA">
+    <xs:annotation>
+      <xs:documentation>Modelling of a constructed (composed) data attribute type. When
+        instantiated, it corresponds to a DAType in SCL.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class">
+        <xs:sequence>
+          <xs:element name="Features" type="iec:tDATable">
+            <xs:annotation>
+              <xs:documentation>Table of all child DAs of this constructed DA.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tStructuredAttributeTable">
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="Attribute" type="iec:tStructuredAttribute"
+            maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tStructured">
+    <xs:annotation>
+      <xs:documentation>Modeling of a structure, which can be used as a type for services as well as
+        for a ConstructedDA.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class">
+        <xs:sequence>
+          <xs:element name="Features" type="iec:tStructuredAttributeTable" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tFCDA">
+    <xs:annotation>
+      <xs:documentation>Modelling of a functionally constrained data attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tDataAttribute">
+        <xs:attributeGroup ref="iec:agFCTrgOp" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDACategory">
+    <xs:annotation>
+      <xs:documentation>Modelling of a group of data attributes belonging to the same category
+        (tDACategoryKind).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="FCDA" type="iec:tFCDA" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="kind" type="iec:tDACategoryKind" use="required">
+      <xs:annotation>
+        <xs:documentation>Category of the child data attributes.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="tSDO">
+    <xs:annotation>
+      <xs:documentation>Modelling of a SubDataObject (SDO).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="type" type="iec:tUmlName" use="required">
+          <xs:annotation>
+            <xs:documentation>Reference to the CDC (name) of this SDO.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agPresenceCondition" />
+        <xs:attributeGroup ref="iec:agArray" />
+        <xs:attributeGroup ref="iec:agInheritedFrom" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tSDOs">
+    <xs:annotation>
+      <xs:documentation>Modelling of all SDOs of a CDC.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="SDO" type="iec:tSDO" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>SubDataObject.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tCDCServiceParameter">
+    <xs:annotation>
+      <xs:documentation>Modelling of a CDC service parameter.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="type" type="iec:tUmlName" use="required">
+          <xs:annotation>
+            <xs:documentation>Type of the data attribute.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="typeKind" type="iec:tDataOrPackedListAttributeTypeKind"
+          use="optional" default="BASIC">
+          <xs:annotation>
+            <xs:documentation>Kind of the type of the data attribute. By default "BASIC".
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tCDCServiceParameters">
+    <xs:annotation>
+      <xs:documentation>Modelling of all CDC service parameters.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ServiceParameter" type="iec:tCDCServiceParameter"
+        maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Description of a CDC service parameter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tSDOandDATable">
+    <xs:annotation>
+      <xs:documentation>Modelling of the UML attributes of a CDC, i.e., the SDOs and DAs.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="SDOs" type="iec:tSDOs" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>All SDOs for this CDC.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DACategory" type="iec:tDACategory" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Group of data attribute(s) according to their categorization (see
+                tDACategoryKind).
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ServiceParameters" type="iec:tCDCServiceParameters"
+            minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>All service parameters for this CDC.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tCDC">
+    <xs:annotation>
+      <xs:documentation>Modelling of a common data class. When instantiated, it corresponds to a
+        DOType in SCL.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class">
+        <xs:sequence>
+          <xs:element name="Features" type="iec:tSDOandDATable" />
+        </xs:sequence>
+        <xs:attribute name="statistics" type="xs:boolean" default="false" />
+        <xs:attribute name="cdcId" type="iec:tUmlName" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDO">
+    <xs:annotation>
+      <xs:documentation>Modelling of a data object (DO).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="type" type="iec:tUmlName" use="required">
+          <xs:annotation>
+            <xs:documentation>Reference to the CDC (name) of this DO.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agPresenceCondition" />
+        <xs:attribute name="transient" type="xs:boolean" use="optional" default="false">
+          <xs:annotation>
+            <xs:documentation>Flag indicating whether the DO is transient. By default false.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="underlyingType" type="iec:tUmlName" use="optional">
+          <xs:annotation>
+            <xs:documentation>Enumeration to be used for enumeration-based CDCs (ENS, ENC, ENG).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="underlyingControlType" type="iec:tUmlName" use="optional" />
+        <xs:attributeGroup ref="iec:agInheritedFrom" />
+        <xs:attributeGroup ref="iec:agDerivedStatisticsPresenceCondition" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDOCategory">
+    <xs:annotation>
+      <xs:documentation>Modelling of a group of data objects belonging to the same category
+        (tDOCategoryKind).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DO" type="iec:tDO" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="kind" type="iec:tDOCategoryKind" use="required">
+      <xs:annotation>
+        <xs:documentation>Category of the child data objects.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="tDOTable">
+    <xs:annotation>
+      <xs:documentation>Modelling of the UML attributes of a logical node, i.e., the DOs.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="DOCategory" type="iec:tDOCategory" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Group of DO(s) according to their categorization (see
+                tDOCategoryKind).
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tLN">
+    <xs:annotation>
+      <xs:documentation>Modelling of a logical node. When instantiated, it corresponds to an
+        LNodeType in SCL.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tIEC61850Class">
+        <xs:sequence>
+          <xs:element name="Features" type="iec:tDOTable" />
+        </xs:sequence>
+        <xs:attribute name="admin" type="xs:boolean" default="false" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Package">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML package for the IEC 61850 domain.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tPackage">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Basic" type="iec:tBasic">
+              <xs:annotation>
+                <xs:documentation>Basic type definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Enumeration" type="iec:tIEC61850Enumeration">
+              <xs:annotation>
+                <xs:documentation>Enumeration definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="CodedEnum" type="iec:tCodedEnum">
+              <xs:annotation>
+                <xs:documentation>Coded enumeration definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="PackedList" type="iec:tPackedList">
+              <xs:annotation>
+                <xs:documentation>Packed list definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Structured" type="iec:tStructured">
+              <xs:annotation>
+                <xs:documentation>Structure definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="IEC61850Class" type="iec:tOtherIEC61850Class">
+              <xs:annotation>
+                <xs:documentation>Generic IEC 61850 class definition (typically for the meta-model).
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ConstructedDA" type="iec:tConstructedDA">
+              <xs:annotation>
+                <xs:documentation>Constructed (composed) data attribute definition.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="CDC" type="iec:tCDC">
+              <xs:annotation>
+                <xs:documentation>Common Data Class definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="LN" type="iec:tLN">
+              <xs:annotation>
+                <xs:documentation>Logical node definition.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+          <xs:element name="Package" type="iec:tIEC61850Package" minOccurs="0"
+            maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Sub-package definition.</xs:documentation>
+            </xs:annotation>
+            <xs:unique name="uniqueSubPackage">
+              <xs:selector xpath="iec:Package" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tSpecialIEC61850Package" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Modelling of a special package for the IEC 61850 domain. Will hold only one
+        "table". The "pretty string" title of the package shall be the concatenation of name and
+        aliasID (if provided).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="titleID" type="iec:tDocID" use="optional">
+          <xs:annotation>
+            <xs:documentation>Identifier of a translatable string to be used as title for this
+              package.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="iec:agTableFigureTexts" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tFC">
+    <xs:annotation>
+      <xs:documentation>Modelling of a functional constraint.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tFunctionalConstraints">
+    <xs:annotation>
+      <xs:documentation>Modelling of a special package for the functional constraints.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tSpecialIEC61850Package">
+        <xs:sequence>
+          <xs:element name="FC" type="iec:tFC" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Description of a functional constraint.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tTrgOp">
+    <xs:annotation>
+      <xs:documentation>Modelling of a triggering option.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tTriggerOptions">
+    <xs:annotation>
+      <xs:documentation>Modelling of a special package for the triggering options.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tSpecialIEC61850Package">
+        <xs:sequence>
+          <xs:element name="TrgOp" type="iec:tTrgOp" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Description of a triggering option.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tCondition">
+    <xs:annotation>
+      <xs:documentation>Modelling of a presence condition.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPresenceConditions">
+    <xs:annotation>
+      <xs:documentation>Modelling of a special package for the presence conditions.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tSpecialIEC61850Package">
+        <xs:sequence>
+          <xs:element name="Condition" type="iec:tCondition" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Description of a presence condition.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDOAbbreviatedTerm">
+    <xs:annotation>
+      <xs:documentation>Modelling of a DO abbreviated term.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tDOAbbreviatedTerms">
+    <xs:annotation>
+      <xs:documentation>Modelling of a special package for the DO abbreviated terms.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tSpecialIEC61850Package">
+        <xs:sequence>
+          <xs:element name="Term" type="iec:tDOAbbreviatedTerm" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>DO abbreviated term. Attribute "name" is the abbrieviated term, and
+                descID is the explanation for it.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Function">
+    <xs:annotation>
+      <xs:documentation>Modelling of a function (relationship between Parts 7-4, 5, and IEEE
+        references.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="ieeeRef" type="xs:normalizedString" use="optional">
+          <xs:annotation>
+            <xs:documentation>IEEE C37.2 reference (for protection functions only).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="iecRef" type="xs:normalizedString" use="optional">
+          <xs:annotation>
+            <xs:documentation>IEC 60617 reference (for protection functions only).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="rsName" type="xs:normalizedString" use="optional">
+          <xs:annotation>
+            <xs:documentation>Logical nodes (of IEC 61850-5, i.e., "requirements") for the function.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="lns" type="xs:normalizedString" use="optional">
+          <xs:annotation>
+            <xs:documentation>Logical nodes (of IEC 61850-7-4) for the function.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Functions">
+    <xs:annotation>
+      <xs:documentation>Modelling of functions.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tSpecialIEC61850Package">
+        <xs:sequence>
+          <xs:element name="Function" type="iec:tIEC61850Function" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Definition of a function.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850NameSpace">
+    <xs:annotation>
+      <xs:documentation>Modelling of a NameSpace for the IEC 61850 domain.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tNameSpace">
+        <xs:sequence>
+          <xs:element name="FunctionalConstraints" type="iec:tFunctionalConstraints"
+            minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Special package for describing the functional constraints.
+              </xs:documentation>
+            </xs:annotation>
+            <xs:unique name="uniqueFC">
+              <xs:selector xpath="iec:FC" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="TriggerOptions" type="iec:tTriggerOptions" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Special package for describing the triggering options.
+              </xs:documentation>
+            </xs:annotation>
+            <xs:unique name="uniqueTrgOp">
+              <xs:selector xpath="iec:TrgOp" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="PresenceConditions" type="iec:tPresenceConditions"
+            minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Special package for describing the presence conditions.
+              </xs:documentation>
+            </xs:annotation>
+            <xs:unique name="uniqueCondition">
+              <xs:selector xpath="iec:Condition" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="Abbreviations" type="iec:tDOAbbreviatedTerms" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Special package for describing the DO abbreviated terms.
+              </xs:documentation>
+            </xs:annotation>
+            <xs:unique name="uniqueDOATname">
+              <xs:selector xpath="iec:Term" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="Functions" type="iec:tIEC61850Functions" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Special package for describing functions.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Package" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Package in the IEC 61850 domain.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:complexContent>
+                <xs:extension base="iec:tIEC61850Package" />
+              </xs:complexContent>
+            </xs:complexType>
+            <xs:unique name="uniquePackage">
+              <xs:selector xpath="iec:Package" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniqueLN">
+              <xs:selector xpath="iec:LN" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniqueCDC">
+              <xs:selector xpath="iec:CDC" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniqueConstructedDA">
+              <xs:selector xpath="iec:ConstructedDA" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniqueEnumeration">
+              <xs:selector xpath="iec:Enumeration" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniquePackedList">
+              <xs:selector xpath="iec:PackedList" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniqueCodedEnum">
+              <xs:selector xpath="iec:CodedEnum" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+            <xs:unique name="uniqueBasicDA">
+              <xs:selector xpath="iec:Basic" />
+              <xs:field xpath="@name" />
+            </xs:unique>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tIEC61850Domain">
+    <xs:annotation>
+      <xs:documentation>Definition of an IEC 61850 domain.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PrettyStrings" type="iec:tIEC61850PrettyStrings" minOccurs="0" />
+      <xs:element name="NameSpace" type="iec:tIEC61850NameSpace" minOccurs="0"
+        maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Definition of an IEC 61850-related namespace.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- ============================ CIM TYPES ================================= -->
+  <xs:complexType name="tLiteral">
+    <xs:annotation>
+      <xs:documentation>Definition of an enumeration litteral (an enumeration value).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="literalVal" type="xs:string" use="optional">
+          <xs:annotation>
+            <xs:documentation>Enumeration literal integer value (like in information models or SCL)
+              or code (like in CIM profiles).
+            </xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tLiteralsTable">
+    <xs:annotation>
+      <xs:documentation>Modelling of a table of literals for an enumeration.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:sequence>
+          <xs:element name="Literal" type="iec:tLiteral" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>Enumeration literal (enumeration value).</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tEnumeration">
+    <xs:annotation>
+      <xs:documentation>Definition of an enumeration.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tClass">
+        <xs:sequence>
+          <xs:element name="Literals" type="iec:tLiteralsTable">
+            <xs:annotation>
+              <xs:documentation>Table of child literals of this enumeration.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tAttribute">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tUmlObject">
+        <xs:attribute name="type" type="iec:tUmlName" use="required" />
+        <xs:attribute name="mult" type="xs:normalizedString" use="optional" />
+        <xs:attribute name="defaultValue" type="xs:normalizedString" use="optional" />
+        <xs:attribute name="inheritedFrom" type="iec:tUmlName" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tAssociationEndCIM">
+    <xs:annotation>
+      <xs:documentation>Modelling of a UML association end (of one class with another).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="iec:tAssociationEnd">
+        <xs:attribute name="myMult" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tAttributesCIM">
+    <xs:complexContent>
+      <xs:extension base="iec:tTable">
+        <xs:choice>
+          <xs:element name="Attribute" type="iec:tAttribute" maxOccurs="unbounded" />
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tAssociationEndsCIM">
+    <xs:complexContent>
+      <xs:extension base="iec:tAssociationEnds">
+        <xs:sequence>
+          <xs:element name="AssociationEnd" type="iec:tAssociationEndCIM"
+            maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tClassCIM">
+    <xs:complexContent>
+      <xs:extension base="iec:tClass">
+        <xs:sequence>
+          <xs:element name="Attributes" type="iec:tAttributesCIM" minOccurs="0" />
+          <xs:element name="AssociationEnds" type="iec:tAssociationEndsCIM" minOccurs="0" />
+        </xs:sequence>
+        <xs:attribute name="isRoot" use="optional" default="false" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPackageCIM">
+    <xs:complexContent>
+      <xs:extension base="iec:tPackage">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Primitive" type="iec:tClassCIM" minOccurs="0"
+              maxOccurs="unbounded" />
+            <xs:element name="Enumeration" type="iec:tEnumeration" minOccurs="0"
+              maxOccurs="unbounded" />
+            <xs:element name="Compound" type="iec:tClassCIM" minOccurs="0"
+              maxOccurs="unbounded" />
+            <xs:element name="Datatype" type="iec:tClassCIM" minOccurs="0"
+              maxOccurs="unbounded" />
+            <xs:element name="CIMClass" type="iec:tClassCIM" minOccurs="0"
+              maxOccurs="unbounded" />
+          </xs:choice>
+          <xs:element name="Package" type="iec:tPackageCIM" minOccurs="0"
+            maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tNameSpaceCIM">
+    <xs:complexContent>
+      <xs:extension base="iec:tNameSpace">
+        <xs:sequence>
+          <xs:element name="Package" type="iec:tPackageCIM" minOccurs="0"
+            maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="tPrettyStringsCIM">
+    <xs:sequence>
+      <xs:element name="LiteralsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Column specification for the literals of an enumeration.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AttributesTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Column specification for the attributes of a class.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AssociationEndsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Column specification for the association ends of a class.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OperationsTable" type="iec:tColumnSpec" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Column specification for the operations of a class.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tTC57CIM">
+    <xs:annotation>
+      <xs:documentation>Definition of a TC57 CIM domain.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PrettyStrings" type="iec:tPrettyStringsCIM" />
+      <xs:element name="NameSpace" type="iec:tNameSpaceCIM" minOccurs="0"
+        maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <!-- ============================ ROOT ELEMENT FOR SPEC ==================== -->
+  <xs:complexType name="tIECDomainSpec">
+    <xs:annotation>
+      <xs:documentation>Modelling of a domain in scope of IEC.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="IEC61850Domain" type="iec:tIEC61850Domain" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Modelling of an IEC 61850 domain.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TC57CIM" type="iec:tTC57CIM" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Modelling of a TC57 CIM domain.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IECDomainSpec" type="iec:tIECDomainSpec" />
+  <!-- ============================ TYPES AND ELEMENT FOR DOC ===================== -->
+  <xs:complexType name="tDoc" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Tranlatable documentation string corresponding to an identifier (attribute
+        id).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:any namespace="##any" processContents="lax" />
+    </xs:sequence>
+    <xs:attribute name="id" type="iec:tDocID" use="required">
+      <xs:annotation>
+        <xs:documentation>Identifier of the translatable documentation string contained as value of
+          this element.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="tSubDomainDoc">
+    <xs:annotation>
+      <xs:documentation>Tranlatable documentation strings for an IEC domain</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Doc" type="iec:tDoc" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Translatable documentation string for a given identifier.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="lang" type="xs:language" use="optional" default="en-GB">
+      <xs:annotation>
+        <xs:documentation>Language of the documentation strings, by default GB English.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="tIECDomainDoc">
+    <xs:annotation>
+      <xs:documentation>Translatable documentation strings for the domains in scope of IEC.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="IEC61850Domain" type="iec:tSubDomainDoc" minOccurs="0"
+        maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Translatable documentation strings for the IEC 61850 domain.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TC57CIM" type="iec:tSubDomainDoc" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Translatable documentation strings for the TC57 CIM domain.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IECDomainDoc" type="iec:tIECDomainDoc">
+    <xs:unique name="uniqueID">
+      <xs:annotation>
+        <xs:documentation>Identifiers for a translatable documentation string shall be unique
+          regardless of the specific application domain.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:selector xpath="*/iec:Doc" />
+      <xs:field xpath="@id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

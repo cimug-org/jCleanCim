@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./ProfileObject.html" title="org.tanjakostic.jcleancim.experimental.builder.xsd.ProfileObject" alt="" coords="778,11,1478,173"/>
+<area shape="rect" id="node1" href="./ProfileObject.html" title="&lt;TABLE&gt;" alt="" coords="767,5,1489,179"/>
+<area shape="rect" id="node2_1" href="./ProfileLiteral.html" title="org.tanjakostic.jcleancim.experimental.builder.xsd.ProfileLiteral" alt="" coords="16,258,715,351"/>
+<area shape="rect" id="node2" href="./ProfileLiteral.html" title="&lt;TABLE&gt;" alt="" coords="5,253,725,357"/>
+<area shape="rect" id="node3_2" href="./ProfileEnumeration.html" title="org.tanjakostic.jcleancim.experimental.builder.xsd.ProfileEnumeration" alt="" coords="760,232,1496,377"/>
+<area shape="rect" id="node3" href="./ProfileEnumeration.html" title="&lt;TABLE&gt;" alt="" coords="749,227,1507,383"/>
+<area shape="rect" id="node4_3" href="./ProfileDatatype.html" title="org.tanjakostic.jcleancim.experimental.builder.xsd.ProfileDatatype" alt="" coords="1542,258,2258,351"/>
+<area shape="rect" id="node4" href="./ProfileDatatype.html" title="&lt;TABLE&gt;" alt="" coords="1531,253,2269,357"/>
+</map>

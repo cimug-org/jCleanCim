@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Generated automatically from UML model file base-small.eap with jCleanCim-01v06 (Aug 20, 2011 11:34:27 PM)-->
+<iecDoc:IECDomainDoc xmlns:iecDoc="http://iec.ch/TC57/UML/2011/IECDomainDoc#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <iecDoc:IEC61850Domain>
+    <iecDoc:Doc id="1">FC</iecDoc:Doc>
+    <iecDoc:Doc id="2"><![CDATA[<p>...The syntax shall be: LDName/LNName[.Name[. ...]].</p><ul><li>The "/" shall separate the instance name of a logical device (LDName) from the name of an instance of a logical node (LNName). </li><li>The "." shall separate the further names in the hierarchy. </li><li>The "[. ]" indicates an option. </li><li>The "[. ...]" indicates further names of recursively nested definitions. </li><li>The "(&hellip;)" shall indicate an array element</li></ul><p>NOTE In any case where the context of the text provides sufficient information that an instance of a class is meant, the term "instance of" is not used.</p><p>The constraints defined in Clause 22 on the use of this type shall be applied.</p>]]></iecDoc:Doc>
+    <!--
+    <iecDoc:Doc id="3"><p>...The syntax shall be: LDName/LNName[.Name[. ...]].</p><ul><li>The "/" shall separate the instance name of a logical device (LDName) from the name of an instance of a logical node (LNName). </li><li>The "." shall separate the further names in the hierarchy. </li><li>The "[. ]" indicates an option. </li><li>The "[. ...]" indicates further names of recursively nested definitions. </li><li>The "(&hellip;)" shall indicate an array element</li></ul><p>NOTE In any case where the context of the text provides sufficient information that an instance of a class is meant, the term "instance of" is not used.</p><p>The constraints defined in Clause 22 on the use of this type shall be applied.</p>></iecDoc:Doc>
+	-->
+  </iecDoc:IEC61850Domain>
+</iecDoc:IECDomainDoc>

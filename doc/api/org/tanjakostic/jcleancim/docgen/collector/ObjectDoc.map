@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./RawData.html" title="org.tanjakostic.jcleancim.docgen.collector.RawData" alt="" coords="612,11,963,208"/>
+<area shape="rect" id="node1" href="./RawData.html" title="&lt;TABLE&gt;" alt="" coords="601,5,973,213"/>
+<area shape="rect" id="node4_1" href="./ObjectDoc.html" title="org.tanjakostic.jcleancim.docgen.collector.ObjectDoc" alt="" coords="665,267,909,429"/>
+<area shape="rect" id="node4" href="./ObjectDoc.html" title="&lt;TABLE&gt;" alt="" coords="655,261,920,435"/>
+<area shape="rect" id="node2_2" href="./PropertiesDoc.html" title="org.tanjakostic.jcleancim.docgen.collector.PropertiesDoc" alt="" coords="16,644,287,963"/>
+<area shape="rect" id="node2" href="./PropertiesDoc.html" title="&lt;TABLE&gt;" alt="" coords="5,639,297,968"/>
+<area shape="rect" id="node3_3" href="./PackageDoc.html" title="org.tanjakostic.jcleancim.docgen.collector.PackageDoc" alt="" coords="333,592,626,1015"/>
+<area shape="rect" id="node3" href="./PackageDoc.html" title="&lt;TABLE&gt;" alt="" coords="322,587,637,1020"/>
+<area shape="rect" id="node5_4" href="./FigureDoc.html" title="org.tanjakostic.jcleancim.docgen.collector.FigureDoc" alt="" coords="671,731,903,876"/>
+<area shape="rect" id="node5" href="./FigureDoc.html" title="&lt;TABLE&gt;" alt="" coords="661,725,914,881"/>
+<area shape="rect" id="node6_5" href="./ClassDoc.html" title="org.tanjakostic.jcleancim.docgen.collector.ClassDoc" alt="" coords="949,627,1279,980"/>
+<area shape="rect" id="node6" href="./ClassDoc.html" title="&lt;TABLE&gt;" alt="" coords="938,621,1290,985"/>
+<area shape="rect" id="node7_6" href="./impl/AbstractObjectDoc.html" title="org.tanjakostic.jcleancim.docgen.collector.impl.AbstractObjectDoc" alt="" coords="1325,488,2738,1119"/>
+<area shape="rect" id="node7" href="./impl/AbstractObjectDoc.html" title="&lt;TABLE&gt;" alt="" coords="1314,483,2749,1124"/>
+</map>

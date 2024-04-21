@@ -1,0 +1,24 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./PackageValidator.PackagesWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.PackageValidator.PackagesWithUnallowedStereotype" alt="" coords="16,445,345,538"/>
+<area shape="rect" id="node1" href="./PackageValidator.PackagesWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="5,439,356,543"/>
+<area shape="rect" id="node2_1" href="./OperationValidator.OperationsWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationsWithUnallowedStereotype" alt="" coords="391,445,720,538"/>
+<area shape="rect" id="node2" href="./OperationValidator.OperationsWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="380,439,731,543"/>
+<area shape="rect" id="node3_2" href="./OperationValidator.OperationParametersWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.OperationValidator.OperationParametersWithUnallowedStereotype" alt="" coords="765,436,1105,547"/>
+<area shape="rect" id="node3" href="./OperationValidator.OperationParametersWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="755,431,1116,552"/>
+<area shape="rect" id="node4_3" href="./DiagramValidator.DiagramsWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.DiagramValidator.DiagramsWithUnallowedStereotype" alt="" coords="1151,445,1480,538"/>
+<area shape="rect" id="node4" href="./DiagramValidator.DiagramsWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="1140,439,1491,543"/>
+<area shape="rect" id="node5_4" href="./DependencyValidator.DependenciesWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.DependencyValidator.DependenciesWithUnallowedStereotype" alt="" coords="1525,445,1855,538"/>
+<area shape="rect" id="node5" href="./DependencyValidator.DependenciesWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="1515,439,1865,543"/>
+<area shape="rect" id="node6_5" href="./ClassValidator.ClassesWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.ClassesWithUnallowedStereotype" alt="" coords="1900,445,2229,538"/>
+<area shape="rect" id="node6" href="./ClassValidator.ClassesWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="1889,439,2240,543"/>
+<area shape="rect" id="node7_6" href="./AttributeValidator.AttributesWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.AttributeValidator.AttributesWithUnallowedStereotype" alt="" coords="2275,445,2604,538"/>
+<area shape="rect" id="node7" href="./AttributeValidator.AttributesWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="2264,439,2615,543"/>
+<area shape="rect" id="node8_7" href="./AssociationValidator.AssociationsWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator.AssociationsWithUnallowedStereotype" alt="" coords="2649,445,2979,538"/>
+<area shape="rect" id="node8" href="./AssociationValidator.AssociationsWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="2639,439,2989,543"/>
+<area shape="rect" id="node9_8" href="./AssociationValidator.AssociationEndsWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator.AssociationEndsWithUnallowedStereotype" alt="" coords="3025,436,3369,547"/>
+<area shape="rect" id="node9" href="./AssociationValidator.AssociationEndsWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="3014,431,3379,552"/>
+<area shape="rect" id="node10_9" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.AbstractRuleWithSubobjectsAndSkips" alt="" coords="1169,11,2211,173"/>
+<area shape="rect" id="node10" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="&lt;TABLE&gt;" alt="" coords="1158,5,2222,179"/>
+<area shape="rect" id="node11_10" href="./AbstractRule.UmlObjectsWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithUnallowedStereotype" alt="" coords="1365,232,2015,377"/>
+<area shape="rect" id="node11" href="./AbstractRule.UmlObjectsWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="1355,227,2025,383"/>
+</map>

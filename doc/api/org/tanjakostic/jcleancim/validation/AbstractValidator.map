@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./PackageValidator.html" title="org.tanjakostic.jcleancim.validation.PackageValidator" alt="" coords="16,622,592,750"/>
+<area shape="rect" id="node1" href="./PackageValidator.html" title="&lt;TABLE&gt;" alt="" coords="5,617,603,755"/>
+<area shape="rect" id="node2_1" href="./OperationValidator.html" title="org.tanjakostic.jcleancim.validation.OperationValidator" alt="" coords="638,613,1229,759"/>
+<area shape="rect" id="node2" href="./OperationValidator.html" title="&lt;TABLE&gt;" alt="" coords="627,608,1239,764"/>
+<area shape="rect" id="node3_2" href="./DiagramValidator.html" title="org.tanjakostic.jcleancim.validation.DiagramValidator" alt="" coords="1274,622,1841,750"/>
+<area shape="rect" id="node3" href="./DiagramValidator.html" title="&lt;TABLE&gt;" alt="" coords="1263,617,1851,755"/>
+<area shape="rect" id="node4_3" href="./DependencyValidator.html" title="org.tanjakostic.jcleancim.validation.DependencyValidator" alt="" coords="1886,622,2527,750"/>
+<area shape="rect" id="node4" href="./DependencyValidator.html" title="&lt;TABLE&gt;" alt="" coords="1875,617,2538,755"/>
+<area shape="rect" id="node5_4" href="./ClassValidator.html" title="org.tanjakostic.jcleancim.validation.ClassValidator" alt="" coords="2573,622,3101,750"/>
+<area shape="rect" id="node5" href="./ClassValidator.html" title="&lt;TABLE&gt;" alt="" coords="2563,617,3112,755"/>
+<area shape="rect" id="node6_5" href="./AttributeValidator.html" title="org.tanjakostic.jcleancim.validation.AttributeValidator" alt="" coords="3147,605,3717,767"/>
+<area shape="rect" id="node6" href="./AttributeValidator.html" title="&lt;TABLE&gt;" alt="" coords="3137,599,3727,773"/>
+<area shape="rect" id="node7_6" href="./AssociationValidator.html" title="org.tanjakostic.jcleancim.validation.AssociationValidator" alt="" coords="3763,596,4389,776"/>
+<area shape="rect" id="node7" href="./AssociationValidator.html" title="&lt;TABLE&gt;" alt="" coords="3752,591,4400,781"/>
+<area shape="rect" id="node8_7" href="./AbstractValidator.html" title="org.tanjakostic.jcleancim.validation.AbstractValidator" alt="" coords="1949,11,2464,537"/>
+<area shape="rect" id="node8" href="./AbstractValidator.html" title="&lt;TABLE&gt;" alt="" coords="1939,5,2475,543"/>
+</map>

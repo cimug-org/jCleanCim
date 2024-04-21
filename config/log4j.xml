@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: log4j.xml 22 2019-08-14 16:07:08Z dev978 $ -->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ================================================== -->
+<!-- see http://www.vipan.com/htdocs/log4jhelp.html     -->
+<!-- ================================================== -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="null">
+
+  <!-- ==============   Appenders  ================== -->
+  <!--
+    Configure an appender that prints out log messages to the console.
+    The minimum level it should print out is INFO.
+  -->
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%t] %-5p %m%n" />
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="INFO" />
+      <param name="AcceptOnMatch" value="true" />
+    </filter>
+  </appender>
+
+  <!-- 
+    Setup a debug log file. This file will contain messages that have a priority
+    ranging from TRACE to ERROR. The max file size of the log is 20MB after
+    which the log is rotated, and up to 3 backup files are kept.
+    This is the appender for debugging.
+    NOTE: the directory where log files are created is here hard-coded
+    ("log") to avoid the need to define any property file or similar.
+    If you want to change its name, do the same in build.xml.
+  -->
+  <appender name="ROLL-DBG" class="org.apache.log4j.RollingFileAppender">
+    <param name="MaxFileSize" value="20MB" />
+    <param name="MaxBackupIndex" value="3" />
+    <param name="File" value="${user.dir}/log/jCleanCim-detailed.log" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p %c{1} - %m%n" />
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="TRACE" />
+      <param name="LevelMax" value="ERROR" />
+      <param name="AcceptOnMatch" value="true" />
+    </filter>
+    <filter class="org.apache.log4j.varia.DenyAllFilter" />
+  </appender>
+
+  <!-- 
+    Setup an info log file. This file will contain messages that have a priority
+    ranging from INFO to ERROR, from a single program execution. The max file
+    size of the log is 10MB after
+    which the log is rotated, and up to 3 backup files are kept.
+    This is the appender for regular console application output.
+    NOTE: the directory where log files are created is here hard-coded
+    ("log") to avoid the need to define any property file or similar.
+    If you want to change its name, do the same in build.xml.
+  -->
+  <appender name="ROLL" class="org.apache.log4j.RollingFileAppender">
+    <param name="Append" value="false" />
+    <param name="MaxFileSize" value="10MB" />
+    <param name="MaxBackupIndex" value="3" />
+    <param name="File" value="${user.dir}/log/jCleanCim.log" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%t] %-5p %m%n" />
+    </layout>
+    <!--
+    <param name="File" value="${user.dir}/log/jCleanCim.log.html" />
+    <layout class="org.apache.log4j.HTMLLayout">
+      <param name="Title" value="jCleanCim log" />
+    </layout>
+    -->
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="INFO" />
+      <param name="LevelMax" value="ERROR" />
+      <param name="AcceptOnMatch" value="true" />
+    </filter>
+    <filter class="org.apache.log4j.varia.DenyAllFilter" />
+  </appender>
+
+  <!-- ============    Loggers   ==================== -->
+  <!-- 
+    Set the log level for a package to {TRACE|DEBUG|INFO|WARNING|ERROR} and print the
+    messages to the ROLL-DBG appender. The logger is not additive (the messages 
+    from the package will only be sent to the ROLL-DBG appender, not
+    the root appender.
+  -->
+  <logger name="org.tanjakostic.jcleancim" additivity="true">
+    <!-- Here we want to see info on the console, thus additivity is true. -->
+    <level value="TRACE" />
+    <appender-ref ref="ROLL-DBG" />
+    <appender-ref ref="ROLL" />
+  </logger>
+  <logger name="com.healthmarketscience.jackcess" additivity="true">
+    <level value="WARN" />
+    <appender-ref ref="ROLL-DBG" />
+    <appender-ref ref="ROLL" />
+  </logger>
+  <!-- 
+    If you want to debug another package, add a logger for that package.
+  -->
+
+  <!-- ============    Root logger   ================ -->
+  <!-- 
+    The CONSOLE appender should receive messages from the root appender. The
+    root logger receives all messages and forwards them to the CONSOLE
+    appender (which was configured to show only log messages with a priority
+    of INFO and higher).
+  -->
+  <root>
+    <appender-ref ref="CONSOLE" />
+  </root>
+
+</log4j:configuration>

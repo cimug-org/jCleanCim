@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SimpleRule.html" title="org.tanjakostic.jcleancim.validation.SimpleRule" alt="" coords="183,158,449,251"/>
+<area shape="rect" id="node1" href="./SimpleRule.html" title="&lt;TABLE&gt;" alt="" coords="173,153,459,257"/>
+<area shape="rect" id="node2_1" href="./ClassValidator.ClassesWithQuestionableAttributeCount.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.ClassesWithQuestionableAttributeCount" alt="" coords="293,457,963,568"/>
+<area shape="rect" id="node2" href="./ClassValidator.ClassesWithQuestionableAttributeCount.html" title="&lt;TABLE&gt;" alt="" coords="283,452,973,573"/>
+<area shape="rect" id="node3_2" href="./ClassValidator.EnumClassesWithNoLiterals.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.EnumClassesWithNoLiterals" alt="" coords="16,627,288,755"/>
+<area shape="rect" id="node3" href="./ClassValidator.EnumClassesWithNoLiterals.html" title="&lt;TABLE&gt;" alt="" coords="5,621,299,760"/>
+<area shape="rect" id="node4_3" href="./ClassValidator.CimCompoundClassesWithNoAttributes.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.CimCompoundClassesWithNoAttributes" alt="" coords="333,627,605,755"/>
+<area shape="rect" id="node4" href="./ClassValidator.CimCompoundClassesWithNoAttributes.html" title="&lt;TABLE&gt;" alt="" coords="323,621,616,760"/>
+<area shape="rect" id="node5_4" href="./ClassValidator.EnumClassesWithSingleLiteral.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.EnumClassesWithSingleLiteral" alt="" coords="651,627,923,755"/>
+<area shape="rect" id="node5" href="./ClassValidator.EnumClassesWithSingleLiteral.html" title="&lt;TABLE&gt;" alt="" coords="640,621,933,760"/>
+<area shape="rect" id="node6_5" href="./ClassValidator.EnumClassesWithTwoLiterals.html" title="org.tanjakostic.jcleancim.validation.ClassValidator.EnumClassesWithTwoLiterals" alt="" coords="968,627,1240,755"/>
+<area shape="rect" id="node6" href="./ClassValidator.EnumClassesWithTwoLiterals.html" title="&lt;TABLE&gt;" alt="" coords="957,621,1251,760"/>
+<area shape="rect" id="node7_6" href="./AbstractRule.html" title="org.tanjakostic.jcleancim.validation.AbstractRule" alt="" coords="494,11,1386,399"/>
+<area shape="rect" id="node7" href="./AbstractRule.html" title="&lt;TABLE&gt;" alt="" coords="483,5,1397,404"/>
+</map>

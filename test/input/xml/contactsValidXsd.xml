@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE contacts SYSTEM "contacts.dtd">-->
+<contacts xsi:noNamespaceSchemaLocation="contacts.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> 
+  <contact>
+    <firstname>Edwin</firstname> 
+    <lastname>Dankert</lastname>
+  </contact> 
+</contacts>

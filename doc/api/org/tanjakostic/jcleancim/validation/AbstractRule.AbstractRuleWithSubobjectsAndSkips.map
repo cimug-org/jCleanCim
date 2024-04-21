@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node1_0" href="./SimpleRule.html" title="org.tanjakostic.jcleancim.validation.SimpleRule" alt="" coords="1107,158,1372,251"/>
+<area shape="rect" id="node1" href="./SimpleRule.html" title="&lt;TABLE&gt;" alt="" coords="1096,153,1383,257"/>
+<area shape="rect" id="node3_1" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.AbstractRuleWithSubobjectsAndSkips" alt="" coords="1030,457,2073,620"/>
+<area shape="rect" id="node3" href="./AbstractRule.AbstractRuleWithSubobjectsAndSkips.html" title="&lt;TABLE&gt;" alt="" coords="1019,452,2083,625"/>
+<area shape="rect" id="node2_2" href="./AbstractRule.html" title="org.tanjakostic.jcleancim.validation.AbstractRule" alt="" coords="1417,11,2309,399"/>
+<area shape="rect" id="node2" href="./AbstractRule.html" title="&lt;TABLE&gt;" alt="" coords="1407,5,2320,404"/>
+<area shape="rect" id="node4_3" href="./AbstractRule.UmlObjectsWithUnallowedStereotype.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithUnallowedStereotype" alt="" coords="16,679,665,824"/>
+<area shape="rect" id="node4" href="./AbstractRule.UmlObjectsWithUnallowedStereotype.html" title="&lt;TABLE&gt;" alt="" coords="5,673,676,829"/>
+<area shape="rect" id="node5_4" href="./AbstractRule.UmlObjectsWithUnallowedTagNames.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithUnallowedTagNames" alt="" coords="711,696,1133,807"/>
+<area shape="rect" id="node5" href="./AbstractRule.UmlObjectsWithUnallowedTagNames.html" title="&lt;TABLE&gt;" alt="" coords="700,691,1144,812"/>
+<area shape="rect" id="node6_5" href="./AbstractRule.UmlObjectsMissingDoc.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsMissingDoc" alt="" coords="1179,696,1521,807"/>
+<area shape="rect" id="node6" href="./AbstractRule.UmlObjectsMissingDoc.html" title="&lt;TABLE&gt;" alt="" coords="1169,691,1531,812"/>
+<area shape="rect" id="node7_6" href="./AbstractRule.UmlObjectsWithBadDocStart.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithBadDocStart" alt="" coords="1567,687,1941,815"/>
+<area shape="rect" id="node7" href="./AbstractRule.UmlObjectsWithBadDocStart.html" title="&lt;TABLE&gt;" alt="" coords="1556,682,1952,821"/>
+<area shape="rect" id="node8_7" href="./AbstractRule.UmlObjectsWithBadDocEnd.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithBadDocEnd" alt="" coords="1987,696,2356,807"/>
+<area shape="rect" id="node8" href="./AbstractRule.UmlObjectsWithBadDocEnd.html" title="&lt;TABLE&gt;" alt="" coords="1976,691,2367,812"/>
+<area shape="rect" id="node9_8" href="./AbstractRule.UmlObjectsWithBadCharacterInName.html" title="org.tanjakostic.jcleancim.validation.AbstractRule.UmlObjectsWithBadCharacterInName" alt="" coords="2402,687,2826,815"/>
+<area shape="rect" id="node9" href="./AbstractRule.UmlObjectsWithBadCharacterInName.html" title="&lt;TABLE&gt;" alt="" coords="2391,682,2837,821"/>
+</map>
