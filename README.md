@@ -100,7 +100,9 @@ Starting with release 02v00, jCleanCim has been licensed under the terms of GNU 
 
 Have a look [here](http://choosealicense.com/licenses/#lgpl-v3) for a relatively accessible comparison of licenses.
 
+***
 ### Release notes for jCleanCim-02v03 (=jCleanCim-02v02.beta-3)
+***
 
 **Released on 20-Dec-2019**
 
