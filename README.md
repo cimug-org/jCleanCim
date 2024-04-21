@@ -2,9 +2,7 @@
 
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](http://www.sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
-Up until end of 2015 it has been hosted by the [CIM Methods & Tools for Enterprise Integration group](http://cimug.ucaiug.org/MTEI/Shared%20Documents/jCleanCim) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only.
-
-To make it accessible also to non-CIMug members, since 2016, I decided to share it as a full open source tool and host it at my [web space](http://www.tanjakostic.org/jcleancim).
+Up until the end of 2015 it had been hosted by the [CIM Methods & Tools for Enterprise Integration group](http://cimug.ucaiug.org/MTEI/Shared%20Documents/jCleanCim) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only. To make it accessible to non-CIMug members, in 2016 it was transitioned to a fully open source tool and hosted at [Tanja's web space](http://www.tanjakostic.org/jcleancim). Finally, in November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated here as part of the CIMug's Open Source Initiatives effort.
 
 This is a non-GUI Java application and the Java code is fully platform independent. However, it unfortunately must be run on MS Windows machine due to the usage of Enterprise Architect and MS Word automation libraries (.dlls).
 
@@ -58,14 +56,14 @@ The following libraries are packaged with all the distributions of jCleanCim:
 The following libraries are packaged only with source distribution of jCleanCim:
 
 *   For unit testing, we use [JUnit 4](http://www.junit.org/). You will need this only if you run or develop tests, or if you are producing distributions (that include running tests and producing rest reports).
-*   For generation of ant target dependencies graph, we use [Grand](https://ant-grand.github.io/Grand/grand.html)library; it will be ignored if you do not have [GraphViz](http://www.graphviz.org/Download..php) installed. These are not used from the jCleanCim source code.
+*   For generation of ant target dependencies graph, we use [Grand](https://ant-grand.github.io/Grand/grand.html) library; it will be ignored if you do not have [GraphViz](http://www.graphviz.org/Download..php) installed. These are not used from the jCleanCim source code.
 *   For enhancement of regular javadoc with the UML class diagrams, we use [UmlGraph](http://www.umlgraph.org/) library; it will be ignored if you do not have [GraphViz](http://www.graphviz.org/Download..php) installed. These are not used from the jCleanCim source code.
 *   For pdf generation from the javadoc, we use [PDFDoclet](http://sourceforge.net/projects/pdfdoclet/) application. You will need this only if you generate the pdf documentation for binary distribution (from an ant target). The application is otherwise not used from the jCleanCim source code.
 
 Performance indicators
 ----------------------
 
-Since we talk to EA and to MS Word through their automation APIs, the model building (as a first step in the application) and the MS Word document generation (if enabled) take time:
+Since **jCleanCim** talks to EA and to MS Word through their automation APIs, the model building (as a first step in the application) and the MS Word document generation (if enabled) take time:
 
 *   EA automation API implementation unfortunately does not know of bulk CRUD operation, so for every _single_ item to be returned through the API, they perform an SQL query on the underlying Access RDBMS (even for items in a collection!). Determinant factor for performance here are: number of elements (classes, attributes, ...) and the number of diagrams that need to be saved to file. In release 01v07, we had provided a fully new implementation for reading the UML model from EA (with option `model.useSql = true`, in that release only). **Since release 01v08**, we added one more implementation (see [Fast loading of .eap file](oldReleaseNotes.md)) and replaced the `model.useSql` boolean option with the one taking one of three pre-defined string values. **_In short, if you need to export XMI for a model release, or diagrams for document generation, ensure you use `model.builder=sqlxml`, otherwise leave the option empty or set it to `model.builder=db`. See also [hint on fixing ordering errors](#eaErrorOrdering)_** .
 *   MS Word is extremely slow at inserting captions for figures, and in particular for tables, as well as in populating and formatting tables. As the number of figures/tables grows, MS Word takes more and more time to insert their captions - similar would happen if you insert captions by hand in an open Word document: higher the number of captions in the document, more time MS Word takes to calculate the number for the caption (and it is impossible to disable this automatic calculation if we want to create tables of figures/tables). **Since release 01v05, we provide a configuration option `docgen.saveReopenEvery` that you should definitely use to speed up MS Word document generation** . Default value is 12, but you should play with your document to find out whether higher value would make it faster. See also [discussion on this option](oldReleaseNotes.md) and its resulting performance improvement.
@@ -100,22 +98,17 @@ Starting with release 02v00, jCleanCim has been licensed under the terms of GNU 
 
 Have a look [here](http://choosealicense.com/licenses/#lgpl-v3) for a relatively accessible comparison of licenses.
 
-This software has been developed in my free time. The contained IP is not related in any way to my previous or current employer.
-
-
 * * *
 
 ### Release notes for jCleanCim-02v03 (=jCleanCim-02v02.beta-3), 2019-12-20
 
 * * *
 
-Note that there is no jCleanCim-02v02, only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for local needs of WG13 and ENTSO-E CGMES SG work - used to validate CIM canonical and profile models and produce various WG13 documents before the end of the year. As these have been developed, debugged, tested, feature implementation reverted back after failed tests (MS Word caption labels), and over all incorporated new features on the fly - I decided to simply declare the 02v02.beta-3 as 02v03, eventhough the time was too short for a proper update of the .pptx tutorial. This is my first task for next release, I promise :-).
-
-In the meantime, I hope you can enjoy the following new features.
+Note that there was no jCleanCim-02v02, but rather only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 02v02.beta-3 ended up being released as 02v03. Note that due to limited time a corresopnding update of the .pptx tutorial for 02v03 was not completed for the release.
 
 ### New features
 
-In this release, main focus was on generic namespace support, stereotypes, document generation options (especially on generating documents from UML profile models), and tireless attempt at supporting English document generation with non-English versions of MS Word. The release also features the contribution used for generation of MIBs for IEC62351-7 (thanks Gigi!) as well as several smaller changes to better support IEC61850 modelling and document generation (more coming in the next release - thanks Laurent!). And as usual, there are a number of new tests and bug fixes.
+In this release, the primary focus was on generic namespace support, stereotypes, document generation options (especially on generating documents from UML profile models), and ongoing work related to supporting English document generation with non-English versions of MS Word. The release also features the contribution used for generation of MIBs for IEC62351-7 (thanks Gigi!) as well as several smaller changes to better support IEC61850 modelling and document generation (more coming in the next release - thanks Laurent!). And as usual, there are a number of new tests and bug fixes.
 
 #### Stereotype `informative`
 
