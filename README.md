@@ -1,4 +1,4 @@
-# jCleanCim
+Gr# jCleanCim
 
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](http://www.sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
@@ -58,7 +58,7 @@ The following libraries are packaged with all the distributions of jCleanCim:
 The following libraries are packaged only with source distribution of jCleanCim:
 
 *   For unit testing, we use [JUnit 4](http://www.junit.org/). You will need this only if you run or develop tests, or if you are producing distributions (that include running tests and producing rest reports).
-*   For generation of ant target dependencies graph, we use [Grand](http://www.ggtools.net/grand/#download) library; it will be ignored if you do not have [GraphViz](http://www.graphviz.org/Download..php) installed. These are not used from the jCleanCim source code.
+*   For generation of ant target dependencies graph, we use [Grand](https://ant-grand.github.io/Grand/grand.html)library; it will be ignored if you do not have [GraphViz](http://www.graphviz.org/Download..php) installed. These are not used from the jCleanCim source code.
 *   For enhancement of regular javadoc with the UML class diagrams, we use [UmlGraph](http://www.umlgraph.org/) library; it will be ignored if you do not have [GraphViz](http://www.graphviz.org/Download..php) installed. These are not used from the jCleanCim source code.
 *   For pdf generation from the javadoc, we use [PDFDoclet](http://sourceforge.net/projects/pdfdoclet/) application. You will need this only if you generate the pdf documentation for binary distribution (from an ant target). The application is otherwise not used from the jCleanCim source code.
 
