@@ -2,7 +2,9 @@
 
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](http://www.sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
-Up until the end of 2015 it had been hosted by the [CIM Methods & Tools for Enterprise Integration group](http://cimug.ucaiug.org/MTEI/Shared%20Documents/jCleanCim) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only. To make it accessible to non-CIMug members, in 2016 it was transitioned to a fully open source tool and hosted at [Tanja's web space](http://www.tanjakostic.org/jcleancim). Finally, in November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated here as part of the CIMug's Open Source Initiatives effort.
+Up until the end of 2015 it had been hosted by the [CIM Methods & Tools for Enterprise Integration group](http://cimug.ucaiug.org/MTEI/Shared%20Documents/jCleanCim) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only. To make it accessible to non-CIMug members, in 2016 it was transitioned to a fully open source tool and hosted at [Tanja's web space](http://www.tanjakostic.org/jcleancim). 
+
+In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated here as part of the CIMug's Open Source Initiatives effort.
 
 This is a non-GUI Java application and the Java code is fully platform independent. However, it unfortunately must be run on MS Windows machine due to the usage of Enterprise Architect and MS Word automation libraries (.dlls).
 
@@ -13,7 +15,7 @@ This is a non-GUI Java application and the Java code is fully platform independe
 *   [Hints - please read carefully before reporting problems!](#hints)
 *   [Configuration documentation](#configuration-documentation)
 *   [Disclaimer](#disclaimer)
-*   [What's new in this release](#what-s-new-in-this-release)
+*   [What's new in this release](#release-notes-for-jcleancim-02v03-jcleancim-02v02beta-3) 
 
 ([Old release notes](oldReleaseNotes.md))
 
@@ -98,11 +100,9 @@ Starting with release 02v00, jCleanCim has been licensed under the terms of GNU 
 
 Have a look [here](http://choosealicense.com/licenses/#lgpl-v3) for a relatively accessible comparison of licenses.
 
-* * *
+### Release notes for jCleanCim-02v03 (=jCleanCim-02v02.beta-3)
 
-### Release notes for jCleanCim-02v03 (=jCleanCim-02v02.beta-3), 2019-12-20
-
-* * *
+**Released on 20-Dec-2019**
 
 Note that there was no jCleanCim-02v02, but rather only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 02v02.beta-3 ended up being released as 02v03. Note that due to limited time a corresopnding update of the .pptx tutorial for 02v03 was not completed for the release.
 
