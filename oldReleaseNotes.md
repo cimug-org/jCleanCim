@@ -3,8 +3,8 @@
 jCleanCim release notes
 =======================
 
-*   [02v01](oldReleaseNotes.md#release-notes-for-jcleancim-02v01-2016-07-23))
-*   [02v00](#02v00)
+*   [02v01](oldReleaseNotes.md#release-notes-for-jcleancim-02v01-2016-07-23)
+*   [02v00](#release-notes-for-jcleancim-02v00-2015-05-19)
 *   [01v10](#01v10)
 *   [01v09](#01v09)
 *   [01v08a](#01v08a)
