@@ -29,7 +29,7 @@ Release notes for jCleanCim-02v01, 2016-07-23
 
 ### New home
 
-From 2016 through 2022, jCleanCim was officially hosted at my [web space](http://www.tanjakostic.org/jcleancim) - which was accessible also to non-CIMug members.  In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated to this repository as part of the UCAIug's Open Source Intiatives effort.
+From 2016 through 2022, jCleanCim was officially hosted at [Tanja's web space](http://www.tanjakostic.org/jcleancim) - which was accessible also to non-CIMug members.  In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated to this repository as part of the CIMug's Open Source Intiatives effort.
 
 ### New features
 
