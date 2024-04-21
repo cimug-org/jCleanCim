@@ -17,7 +17,7 @@ This is a non-GUI Java application and the Java code is fully platform independe
 *   [Hints - please read carefully before reporting problems!](#hints)
 *   [Configuration documentation](#configuration-documentation)
 *   [Disclaimer](#disclaimer)
-*   [What's new in this release](#release-notes-for-jcleancim-02v03-jcleancim-02v02beta-3) 
+*   [What's new in this release](ReleaseNotes.md#release-notes-for-jcleancim-02v03) 
 
 ([Old release notes](ReleaseNotes.md))
 
