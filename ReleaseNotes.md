@@ -2,7 +2,7 @@
 
 *   [2.3.0](#release-notes-for-jcleancim-2.3.0)
 *   [2.1.0](#release-notes-for-jcleancim-2.1.0)
-*   [02v00](#release-notes-for-jcleancim-02v00)
+*   [2.0.0](#release-notes-for-jcleancim-2.0.0)
 *   [01v10](#release-notes-for-jcleancim-01v10)
 *   [01v09](#release-notes-for-jcleancim-01v09)
 *   [01v08a](#jcleancim-01v08a)
@@ -284,7 +284,7 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 *   added description on how to use a custom config.properties file.
 
 ***
-## Release notes for jCleanCim-02v00
+## Release notes for jCleanCim-2.0.0
 ***
 
 **Release Date: 19-May-2015**
@@ -301,7 +301,7 @@ Producing the distribution "Eclipse project archive jCleanCim-\[version\]-eclips
 
 This is a release with incremental changes and no "real" new feature.
 
-### Performance improvements in release 02v00
+### Performance improvements in release 2.0.0
 
 None.
 
@@ -312,7 +312,7 @@ None.
 
 ### Potential forwards incompatibility for the application user: old jCleanCim with new EA
 
-*   jCleanCim releases older than 02v00 may have a problem when closing .eap file with Enterprise Architect 12 and higher. The reason is that EA12 Java API changed (they removed a method that was used in the code just before closing the .eap file; and jCleanCim-02v00 replaces that method call appropriately). In our test installation (EA12 + jCleanCim-01v10), there was a pop-up window telling that EA application stopped running and clicking on "Close" application did a smooth shut down of EA - then the run continues normally.
+*   jCleanCim releases older than 2.0.0 may have a problem when closing .eap file with Enterprise Architect 12 and higher. The reason is that EA12 Java API changed (they removed a method that was used in the code just before closing the .eap file; and jCleanCim-2.0.0 replaces that method call appropriately). In our test installation (EA12 + jCleanCim-01v10), there was a pop-up window telling that EA application stopped running and clicking on "Close" application did a smooth shut down of EA - then the run continues normally.
 
 ### Other functional changes
 
