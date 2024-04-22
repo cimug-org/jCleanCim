@@ -1,8 +1,8 @@
 # jCleanCim release notes
 
-*   [2.3.0](#release-notes-for-jcleancim-2.3.0)
-*   [2.1.0](#release-notes-for-jcleancim-2.1.0)
-*   [2.0.0](#release-notes-for-jcleancim-2.0.0)
+*   [2.3.0](#release-notes-for-jcleancim-230)
+*   [2.1.0](#release-notes-for-jcleancim-210)
+*   [2.0.0](#release-notes-for-jcleancim-200)
 *   [01v10](#release-notes-for-jcleancim-01v10)
 *   [01v09](#release-notes-for-jcleancim-01v09)
 *   [01v08a](#jcleancim-01v08a)
