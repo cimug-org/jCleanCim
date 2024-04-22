@@ -24,7 +24,7 @@
 
 **Released on 20-Dec-2019**
 
-Note that there was no jCleanCim-02v02, but rather only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 02v02.beta-3 ended up being released as 2.3.0. Note that due to limited time a corresopnding update of the .pptx tutorial for 2.3.0 was not completed for the release.
+Note that there was no jCleanCim-2.2.0, but rather only 2 beta milestones (2.2.0.beta-2 and 2.2.0.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 2.2.0.beta-3 ended up being released as 2.3.0. Note that due to limited time a corresopnding update of the .pptx tutorial for 2.3.0 was not completed for the release.
 
 ### New features
 
