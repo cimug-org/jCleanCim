@@ -1,7 +1,6 @@
- jCleanCim release notes
-
 # jCleanCim release notes
 
+*   [02v03](#release-notes-for-jcleancim-02v03)
 *   [02v01](#release-notes-for-jcleancim-02v01)
 *   [02v00](#release-notes-for-jcleancim-02v00)
 *   [01v10](#release-notes-for-jcleancim-01v10)
@@ -19,9 +18,171 @@
 
 [Readme file](README.md)
 
+***
+## Release notes for jCleanCim-02v03
+***
 
+**Released on 20-Dec-2019**
+
+Note that there was no jCleanCim-02v02, but rather only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 02v02.beta-3 ended up being released as 02v03. Note that due to limited time a corresopnding update of the .pptx tutorial for 02v03 was not completed for the release.
+
+### New features
+
+In this release, the primary focus was on generic namespace support, stereotypes, document generation options (especially on generating documents from UML profile models), and ongoing work related to supporting English document generation with non-English versions of MS Word. The release also features the contribution used for generation of MIBs for IEC62351-7 (thanks Gigi!) as well as several smaller changes to better support IEC61850 modelling and document generation (more coming in the next release - thanks Laurent!). And as usual, there are a number of new tests and bug fixes.
+
+#### Stereotype `informative`
+
+From this release, you can add stereotype `informative` to _any_ UML model element and it will also be picked for determining whether something is informative, along with the other existing and new logic. The only ignored `informative` stereotype is for dependency as it does not really make sense to tag a dependency as informative (until proven otherwise :-)).
+
+Along with this change, filtering on printing informative elements (controlled by configuration option `docgen.includeInformative` ) has been largely improved, to ensure to really exclude informative content of any kind by default, i.e., when option is set to ("false", "", null). You may want to set that option to `true` to print the informative content for debuging purposes, or during extensions development, but never for official standard documents.
+
+#### New configuration option `docgen.showCustomStereotypes` (TODO - add to .ppt:docgen.showCustomStereotypes=true)
+
+If set "true", it allows to show in the generated document custom UML stereotypes on UML model elements, in addition to built-in stereotypes already handled per model nature. Default is ("false", "", null) to preserve old behaviour, in which all custom stereotypes (non-built-in for a model nature) are not explicitly shown in generated documents. UML model managers in standardisation bodies want to keep this empty/false for main standard documents, and set it to true for these use cases:
+
+1.  peer reviews during standard model development (through use of custom stereotypes such as changed, new, old, delete, discuss, etc.);
+2.  review of proposed extensions marked with a given stereotype;
+3.  standard document generation from standard extensions model (e.g., European extensions);
+4.  users of the tool with models which are neither CIM nor IEC61850 may want to generate UML documentation (MS Word or XML) with their own stereotypes. Default model nature is CIM (unless explicitly specified as IEC61850 with configuration property `model.nature.iec61850`), so the built-in CIM stereotypes are "reserved" and cannot be modified at present.
+
+Note: This option does not filter elements for document generation, it merely allows you to "hide" and show the custom stereotypes on UML elements in the generated document. For actual filtered printing based on custom stereotypes, see the next section.
+
+#### New configuration option `docgen.skipForCustomStereotypes` (TODO - add to .ppt e.g.: docgen.skipForCustomStereotypes=European,new)
+
+This new option allows for selective document generation from UML models of a given nature that contain both standard model parts and extensions tagged with a custom stereotype for that nature. You can use this option now to explicitly skip during document generation all UML elements that have any of the custom stereotypes in the list specified here. This is useful in at least these use cases:
+
+1.  a WG develops extensions which are mixed with the normative parts of the model and tags those extensions with a stereotype (e.g., `new`), and wants to be able to generate documentation both with and without these extensions, e.g. for peer review
+2.  an organisation or a project develops extensions tagged with a custom stereotype which are either mixed with the normative parts of the model or are in extension package, but the inheritance and associations result in stereotyped extensions being mixed with the normative parts of the model. The standardisation WG then wants to be able to skip these when generating documents, without manually removing anything from the model (they add the custom stereotype(s) in this option), and the organisation or project owning extensions want to leave this option empty (to see their extensions printed).
+
+This list is matched against the built-in, standard stereotypes according to modelling rules and any built-in stereotype (per model nature) from this list is removed (i.e., there is no overriding of built-in stereotype consideration for document generation). Empty list is valid and reflects default behaviour, i.e., everything found in the model according to other specified filtering options is printed. Not having this option or having it with an empty value preserves the default behaviour: to _not_ exclude anything based on stereotype only, i.e., to include everything not disabled by other options (e.g., informative or private model elements).
+
+Important: The list given here ignores any built-in stereotype per nature in order to not modify the behaviour established and defined for built-in stereotypes. So, any built-in stereotype you specify here will simply be ignored. Examples of built-in stereotypes:
+
+*   `enumeration` for classes; `informative`, `deprecated` for any UML element in model of any nature - you cannot modify built-in behaviour for these in any case (at present);
+*   `Primitive`, `CIMDatatype` for CIM classes - you cannot modify built-in behaviour for these in _CIM models_, but these are custom if ever used in non-CIM models; and inversly,
+*   `cond` for IEC61850 presence condition enumeration - you cannot modify built-in behaviour for these in _IEC61850 models_, but these are custom if ever used in non-IEC61850 models.
+
+#### New configuration option `docgen.showNamespacePackages` (TODO - add to .ppt model.showNamespacePackages = Base, Dynamics, Part303, IEC61968, IEC62325, ExtEuBase)
+
+According to CIM modelling guidelines, we can use tagged values `nsuri` and `nsprefix` to support namespace definition within the UML model itself, as well as for extensions and for generation of various implementation afterfacts. We typically specify these two tagged values at the top level (e.g., TC57CIM) and then everything below that package will have the same namespace, unless an element of UML model overwrites it. Almost every element of UML that supports tagged values can use this mechanism. So, from this release, you can control document generation inclusion or not of this information, by specifying for which UML packages to output in the MS Word document a line of text with the namespace information. Examples include Base and ExtEuBase (for 61970-301 main part and Annex A, respectively), Dynamics (for 61970-302), etc. If you don't specify any package name, or use an older config.properties file, no namespace information gets printed (default).
+
+Note that this mechanism of namespace (the usual URI and optional prefix) is supported for any UML model nature, so in theory, for IEC61850 models as well.
+
+However, IEC61850 has a special definition for document namespace and dedicated UML modelling for this. The IEC61850Namespace mechanism will be supported in the next jCleanCim release.
+
+#### New configuration option `docgen.word.includeInheritancePath` (TODO - add to .ppt:docgen.word.includeInheritancePath = true)
+
+This options allows to include the list of classes along the inheritance path for a class. Default is false, as well as when the option is missing from the configuration, to preserve the default behaviour. In the supplied configuration file we have enabled this option as it is rather useful and you can see with the test run how the result looks like and whether to keep it.
+
+Important: jCleanCim does not support multiple inheritance, but it should not crash if it finds it in the model. The behaviour for multiple inheritance is undefined.
+
+#### Support for custom styles (TODO - update .ppt)
+
+_Disclaimer: The MS Word and its API are for certain features unpredictable, as are all the people who edited in the past 25 years the document you use as template. This is the best I can give at the moment. Please pay attention to the WARN or ERROR log entries (what you see on the screen and what gets saved in the ./log/jCleanCim.log file). And please, be careful about style names in MS Word (see [how MS Word can smart you out](https://word.tips.net/T007601_Style_Names_Can_Affect_Style_Definitions.html))._
+
+You can now try using the following new configuration options:
+
+*   `docgen.word.styles.prefix.toc` and `docgen.word.styles.prefix.head`: for TOC and heading styles prefix, and,
+*   `docgen.word.styles.para`, `docgen.word.styles.fig`, `docgen.word.styles.tabhead`, `docgen.word.styles.tabcell`, `docgen.word.styles.figcapt` and `docgen.word.styles.tabcapt`: for styles names for paragraphs text, figure, table heading, table cell, figure caption and table captions,
+
+to specify a comma-separated list of style names, in order of your preference. To accommodate for non-portable style handling accross some application locales (English vs. non-English installation of MS Word), we expect the user to configure preferred styles in order of preference, and the first one found in the _existing document_ will be used all allong. If none of configured styles exists in the document, the built-in one from the document will be used. jCleanCim never modifies your PC registry and/or global application templates (such as Normal.dot for MS Word), so if you are unhappy with the fall-back solution, please go ahead and add in the document generation application (such as MS Word) the desired styles as custom and rerun document generation. On that next run, the document should contain your desired style name(s).
+
+#### MIBs generation (for IEC62351-7) - contribution by Gigi Pugni (TODO - add to .ppt)
+
+This is the new feature developed by WG15 for their IEC62351-7. This jCleanCim release incorporates that new feature into the baseline with the code provided by Gigi Pugni, and it can be used by means of three new configuration options:
+
+*   `mibgen.on`: set it to true to enable MIBs generation.
+*   `mibgen.outDirFull`: directory where to save full MIBs (including complete description); default is `mibs`, under the ./output/.
+*   `mibgen.outDirLight`: directory where to save light MIBs (UML elements without descriptions); default value is `mibslight`, under the ./output/.
+
+MIBs generation can be enabled simultaneously with the MS Word document generation if you need both outputs.
+
+Some small test model and template to exercise this function should be available in the next release. In the meantime, WG15 can use the feature now integrated into the baseline.
+
+#### New configuration option `statistics.tagsToIgnore` (TODO - add to .ppt statistics.tagsToIgnore = GUIDBasedOn)
+
+This option allows you to add which tags to NOT export into statistics log (to shorten log). You may want to use this in case you discover that the custom tool / add-on that you use heavily marks your model with tagged values and you don't want to end up with (tens of) thousands of lines of log listing every single item in your model. In the supplied configuration file we have already added one such tagged value, known to be present in CIM profiles created and maintained with [CimConteXtor](https://www.cimcontextor.net): `GUIDBasedOn` .
+
+#### Credits
+
+Gigi Pugni has contributed java code package with fully functional generation of MIB syntax, based on the modelling as used to support IEC62351-7. He also provided documentation describing in detail how WG15 does modelling and generates MIBs.
+
+Laurent Guise has provided a prototype that inspired the implementation of most of IEC61850-specific features in this release. Thanks for beeing the sparring partner for non-English MS Word tests and discussions :-).
+
+### Performance changes in release 02v03
+
+None. Note however that newer versions of Enterprise Architect seem to always be somewhat slower than the older ones (we noticed the slow down in diagram generation for factor 3-4).
+
+### Deprecated API
+
+*   Method `UmlAssociation.getDirection()`: use UmlAssociation.getNavigable() instead.
+
+### Potential backwards compatibility breaking changes for the application user
+
+*   If you have used jCleanCim previously to generate documentation from UML profiles, both association ends used to be printed without distinction on navigability, which was semantically wrong. This has been fixed in this release, which means that your previously generated profile documents will have only one half of association ends: those that are navigable only. This makes the documents shorter and profiles more precise.
+
+### Potential forwards incompatibility for the application user: old jCleanCim with new EA
+
+*   \-
+
+### Other user-visible changes
+
+*   model.build logging: Unclassified classes, associations and attributes: log as ERROR, not as WARN or INFO
+*   improved logging and logging level (less chatty for happy path)
+*   docgen.writer - added FIGURE to preferred styles
+*   CIM-specific:
+    *   model, validation: added new dependency stereotypes as built-in: IsBasedOn and import.
+    *   docgen.collector: added basic support for printing additional paragraph after class that has constraints, starting with "Constraint" and listing constraints as \[name\]:\[new line\]\[description\].
+    *   docgen.collector: added support for seggregating navigability of association ends for CIM profiles and printing only the navigable end (as has always been done with [CIMTool](http://cimtool.org), used to generate profiles up to now)
+*   IEC61850-specific:
+    *   docgen.collector, docgen.writer.xml, IECDomain.xsd schema: Added support for two underlying enumeration types for ENC CDC. Note that this breaks the underlying meta-model by a) assigning two DA types to one ENC, and b) by creating totally unrelated second DA type (this has been done on request by IEC61850 model managers and applies to IEC61850 model only).
+    *   docgen.collector: Added support for enumeration inheritance. Note that this is against the semantic of enumerated types (this has been done on request by IEC61850 model managers and applies to IEC61850 model only).
+*   Other
+
+*   \-
+
+### Validation rules:
+
+*   util (validation): -
+*   New common / general validation rules:
+    *   \-
+*   New CIM-specific rules:
+    *   \-
+*   New IEC61850-specific rules:
+    *   \-
+
+### Bug fixes:
+
+*   docgen.writer.word: Now also figure reference when below figure gets inserted as field (can be updated).
+*   model: Corrected kind assignment to IEC61850 classes through stereotypes, so as to ignore stereotypes `informative` and `deprecated`, as these are applicable to any UML model element (thanks to Laurent Guise for reporting).
+*   Fixed several potential NPEs (thanks to Jacob Dall and Laurent Guise for reporting) and added some tests:
+    *   model: In two methods on package containment.
+    *   docgen.collector.impl: Returning empty list instead of null.
+    *   docgen.collector.impl: When IEC61850 enumerated type inherits literals.
+    *   statistics: When due to missing config61850.properties file there is mismatch between model class kind and nature.
+*   model: IEC61850 unclassified classes now logged as ERROR, not as INFO.
+*   validation: ensured that Iec61850ClassesWithInvalidConstraints and Iec61850LNClassesWithSuperfluousConstraints actually do checks only on classes with IEC61850 nature.
+*   docgen.word: now rethrowing exception when a post-processor provided (from tests; in real life it is important to finish smoothly, for tests we want tests to fail on exception).
+
+### Known issues / limitations:
+
+*   nothing new.
+
+### Implementation and packaging:
+
+*   added new tests.
+*   implemented manual insert caption for figures with hope it would be faster, but it is not.
+*   upgraded libraries: Sparx Enterprise Architect 14 (jar and dll).
+*   TODO: include in build the new doc, input and output files (mibs).
+*   all sources: updated copyright year.
+
+### Documentation:
+
+*   TODO update the presentation.
+
+***
 ## Release notes for jCleanCim-02v01
-
+***
 
 **Release Date: 23-Jul-2016**
 
@@ -122,9 +283,9 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 *   updated the presentation.
 *   added description on how to use a custom config.properties file.
 
-
+***
 ## Release notes for jCleanCim-02v00
-
+***
 
 **Release Date: 19-May-2015**
 
@@ -198,15 +359,15 @@ None.
 *   upgraded EA dll and jar to version 12 (from EA build 1212).
 *   removed docx4j and dependencies, will try to use Apache POI instead at some later date.
 *   added some more unit tests.
-*   included oldReleaseNotes.html for distribution in the build script.
+*   included ReleaseNotes.md for distribution in the build script.
 
 ### Documentation:
 
 *   updated the presentation.
 
-
+***
 ## Release notes for jCleanCim-01v10
-
+***
 
 **Release Date: 20-May-2014**
 
@@ -269,9 +430,9 @@ None.
 
 *   updated the presentation.
 
-
+***
 ## Release notes for jCleanCim-01v09
-
+***
 
 **Release Date: 11-May-2013**
 
@@ -385,9 +546,9 @@ Note that from this release, you will need Java 7 or higher.
 *   added here section on dependencies
 *   updated the presentation
 
-
+***
 ## jCleanCim-01v08a
-
+***
 
 **Release Date: 10-Feb-2013**
 
@@ -670,9 +831,9 @@ base-small
 
 *   updated the presentation
 
-
+***
 ## jCleanCim-01v07
-
+***
 
 **Release Date: 26-Aug-2012**
 
@@ -844,9 +1005,9 @@ IEC61850-7-4, with special table formatting
 
 *   updated the presentation
 
-
+***
 ## jCleanCim-01v06
-
+***
 
 **Release Date: 25-Mar-2012**
 
@@ -996,9 +1157,9 @@ IEC61850-7-4, with special table formatting
 
 *   updated the presentation
 
-
+***
 ## jCleanCim-01v05a
-
+***
 
 **Release Date: 31-Jul-2011**
 
@@ -1008,9 +1169,9 @@ IEC61850-7-4, with special table formatting
     *   refactored docgen packages to collector and writer, and moved implementation-specific stuff under them
     *   totally removed all circular dependencies
 
-
+***
 ## jCleanCim-01v05
-
+***
 
 **Release Date: 17-Jul-2011**
 
@@ -1207,9 +1368,9 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
     *   added hyperlinks with TOC
     *   updated the presentation
 
-
+***
 ## jCleanCim-01v04
-
+***
 
 **Release Date: 13-Mar-2011**
 
@@ -1322,9 +1483,9 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
     *   updated performance measurements without anti-virus scan-on-access
     *   updated the presentation
 
-
+***
 ## jCleanCim-01v03
-
+***
 
 **Release Date: 03-Oct-2010**
 
@@ -1378,9 +1539,9 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
     *   updated URL to new MTEI site in the doc and in the presentation
     *   updated the presentation
 
-
+***
 ## jCleanCim-01v02
-
+***
 
 **Release Date: 15-May-2010**
 
@@ -1403,9 +1564,9 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
 *   makeup:
     *   rebranded name to start with lower case letter
 
-
+***
 ## JCleanCim-01v01
-
+***
 
 **Release Date: 21-Feb-2010**
 
@@ -1432,9 +1593,9 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
 *   added basic calculation and logging of cross-package dependencies
 *   eliminated all FindBugs max level warnings (so JCleanCim is a bit cleaner now :-)
 
-
+***
 ## JCleanCim-01v00
-
+***
 
 **Release Date: 11-Nov-2009**
 
