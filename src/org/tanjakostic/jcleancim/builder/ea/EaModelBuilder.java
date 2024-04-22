@@ -35,15 +35,13 @@ import org.tanjakostic.jcleancim.util.ProgrammerErrorException;
 import org.tanjakostic.jcleancim.util.Util;
 
 /**
- * Class that wraps the EA repository; currently supports a single root (in the EA project browser),
- * i.e., if there are more than one roots, all but the first will be ignored.
+ * Class that wraps the EA repository; currently supports a single root (in the
+ * EA project browser), i.e., if there are more than one roots, all but the
+ * first will be ignored.
  * <p>
  *
- * @param
- * 			<P>
- *            Type for package data
- * @param <S>
- *            Type for element as source
+ * @param <P> Type for package data
+ * @param <S> Type for element as source
  * @author tatjana.kostic@ieee.org
  * @version $Id: EaModelBuilder.java 21 2019-08-12 15:44:50Z dev978 $
  */
@@ -77,20 +75,18 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 		Util.logSubtitle(Level.INFO, "initialising EA builder...");
 		long start = System.currentTimeMillis();
 
-		String version = initRepoAndGetVersion();
+		String version = initRepoAndGetVersion(getCfg().getModelFileAbsPath());
 
 		_logger.info(String.format("EA version: build %s", version));
-		Util.logCompletion(Level.INFO, "initialised EA builder.", start,
-				getCfg().isAppSkipTiming());
+		Util.logCompletion(Level.INFO, "initialised EA builder.", start, getCfg().isAppSkipTiming());
 	}
 
-	abstract protected String initRepoAndGetVersion();
+	abstract protected String initRepoAndGetVersion(String modelFileAbsPath);
 
 	// ----------------- repository lifecycle -----------------------
 
 	private void openModel() throws ApplicationException {
-		Util.logSubtitle(Level.INFO,
-				String.format("opening EA file '%s'...", getCfg().getModelFileAbsPath()));
+		Util.logSubtitle(Level.INFO, String.format("opening EA file '%s'...", getCfg().getModelFileAbsPath()));
 		long start = System.currentTimeMillis();
 
 		openRepo(getCfg().getModelFileAbsPath());
@@ -103,8 +99,7 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 	abstract protected void bulkLoad() throws ApplicationException;
 
 	private void closeModel() throws ApplicationException {
-		Util.logSubtitle(Level.INFO,
-				String.format("closing EA file '%s'...", getCfg().getModelFileAbsPath()));
+		Util.logSubtitle(Level.INFO, String.format("closing EA file '%s'...", getCfg().getModelFileAbsPath()));
 		long start = System.currentTimeMillis();
 
 		try {
@@ -119,13 +114,14 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 	// ---------------------------------
 
 	/**
-	 * Creates the in-memory builders with the data from EA repository and returns the UUID of the
-	 * model root (needed for XMI export, if enabled by configuration).
+	 * Creates the in-memory builders with the data from EA repository and returns
+	 * the UUID of the model root (needed for XMI export, if enabled by
+	 * configuration).
 	 * <p>
 	 * Ensure you call {@link #linkBuilders()} after this one.
 	 *
-	 * @throws ApplicationException
-	 *             if model file is empty, or if there is a root in the model but without packages.
+	 * @throws ApplicationException if model file is empty, or if there is a root in
+	 *                              the model but without packages.
 	 */
 	private String populateBuilders() throws ApplicationException {
 		Util.logSubtitle(Level.INFO, getLogSubtitleStartPopulateBuilders());
@@ -154,8 +150,7 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 			}
 		}
 
-		Util.logCompletion(Level.INFO, getLogSubtitleEndPopulateBuilders(), start,
-				getCfg().isAppSkipTiming());
+		Util.logCompletion(Level.INFO, getLogSubtitleEndPopulateBuilders(), start, getCfg().isAppSkipTiming());
 		return rootUuid;
 	}
 
@@ -171,14 +166,12 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 
 	abstract protected List<P> getModels(P root);
 
-	protected static void assertModelNotEmptyWarnIfMultipleRoots(int count)
-			throws ApplicationException {
+	protected static void assertModelNotEmptyWarnIfMultipleRoots(int count) throws ApplicationException {
 		if (count == 0) {
 			throw new ApplicationException("EA repository contains no root.");
 		}
 		if (count > 1) {
-			_logger.warn(String.format(
-					"EA repository contains %d roots - all but the first will be ignored.",
+			_logger.warn(String.format("EA repository contains %d roots - all but the first will be ignored.",
 					Integer.valueOf(count)));
 		}
 	}
@@ -186,7 +179,8 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 	// -------------------
 
 	/**
-	 * Below is what needs to be processed after all class and packages builders have been created.
+	 * Below is what needs to be processed after all class and packages builders
+	 * have been created.
 	 */
 	private void linkBuilders() {
 		long start = System.currentTimeMillis();
@@ -274,14 +268,13 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 		}
 
 		withDiagrams = getCfg().isDocgenModelOn() ? " and exported normative diagrams" : "";
-		Util.logCompletion(Level.INFO, String.format("created in-memory model%s", withDiagrams),
-				start, getCfg().isAppSkipTiming());
+		Util.logCompletion(Level.INFO, String.format("created in-memory model%s", withDiagrams), start,
+				getCfg().isAppSkipTiming());
 		return resultModel;
 	}
 
 	/** Recursive. */
-	private void buildSubclasses(ClassBuilder<?, ?, ?, ?, ?, ?> cb,
-			Set<ClassBuilder<?, ?, ?, ?, ?, ?>> nonRoots) {
+	private void buildSubclasses(ClassBuilder<?, ?, ?, ?, ?, ?> cb, Set<ClassBuilder<?, ?, ?, ?, ?, ?>> nonRoots) {
 		for (ClassBuilder<?, ?, ?, ?, ?, ?> sub : cb.getSubclasses()) {
 			sub.build();
 			nonRoots.remove(sub);
@@ -343,7 +336,8 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 		return PackageBuilder.isEaPackage(findElementType(objId));
 	}
 
-	// FIXME: (used for operations and their parameters) handle multiple classes found for name
+	// FIXME: (used for operations and their parameters) handle multiple classes
+	// found for name
 	public final ClassBuilder<?, ?, ?, ?, ?, ?> findClass(String name) {
 		for (ClassBuilder<?, ?, ?, ?, ?, ?> clazz : _classes.values()) {
 			if (name.equals(clazz.getObjData().getName())) {
@@ -380,13 +374,15 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 	/** Returns tables resulting from the bulk initialisation (if applicable). */
 	abstract public EaTables getTables() throws UnsupportedOperationException;
 
-	// ===== Impl. of org.tanjakostic.jcleancim.builder.AbstractModelBuilder methods =====
+	// ===== Impl. of org.tanjakostic.jcleancim.builder.AbstractModelBuilder methods
+	// =====
 
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * This implementation is mainly working with EA model files. opens the EA model file, reads in
-	 * all it needs, closes the EA model file and creates the in-memory model.
+	 * This implementation is mainly working with EA model files. opens the EA model
+	 * file, reads in all it needs, closes the EA model file and creates the
+	 * in-memory model.
 	 */
 	@Override
 	public UmlModel build() throws ApplicationException {
@@ -398,11 +394,16 @@ abstract public class EaModelBuilder<P, S> extends AbstractModelBuilder {
 			getXMIExporter().exportToXMIs(rootGuid);
 		}
 
-		// For a clean design, we were exporting diagrams in populateBuilders() above, but we were
-		// exporting more than necessary, because the builder does not have the logic to decide
-		// whether a package is informative or not. Desperate by the time it takes, we broke the
-		// clean design: now we postpone the diagram export, if applicable, to the actual building
-		// where we can use methods of already constructed UmlPackage, in createInMemoryModel(), and
+		// For a clean design, we were exporting diagrams in populateBuilders() above,
+		// but we were
+		// exporting more than necessary, because the builder does not have the logic to
+		// decide
+		// whether a package is informative or not. Desperate by the time it takes, we
+		// broke the
+		// clean design: now we postpone the diagram export, if applicable, to the
+		// actual building
+		// where we can use methods of already constructed UmlPackage, in
+		// createInMemoryModel(), and
 		// we close the EA model immediately after that.
 		if (!getCfg().isDocgenOn()) {
 			closeModel(); // we don't need EA repository anymore

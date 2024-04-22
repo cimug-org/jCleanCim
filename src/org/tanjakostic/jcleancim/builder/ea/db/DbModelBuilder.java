@@ -63,14 +63,14 @@ public class DbModelBuilder extends EaModelBuilder<Map<String, String>, EaModelB
 	}
 
 	@Override
-	protected String initRepoAndGetVersion() {
-		_repo = new DbRepo();
+	protected String initRepoAndGetVersion(String modelFileAbsPath) {
+		_repo = DbRepo.create(modelFileAbsPath);
 		return _repo.getVersion();
 	}
 
 	@Override
 	protected void openRepo(String modelFileAbsPath) throws ApplicationException {
-		_repo.open(modelFileAbsPath);
+		_repo.open();
 	}
 
 	@Override
@@ -102,12 +102,12 @@ public class DbModelBuilder extends EaModelBuilder<Map<String, String>, EaModelB
 
 	@Override
 	protected String getLogSubtitleStartPopulateBuilders() {
-		return "building model from EA tables (as Access DB)...";
+		return "building model from EA tables (as " + _repo.getDbType() + " DB)...";
 	}
 
 	@Override
 	protected String getLogSubtitleEndPopulateBuilders() {
-		return "built model from EA tables (as Access DB)";
+		return "built model from EA tables (as " + _repo.getDbType() + " DB)";
 	}
 
 	@Override

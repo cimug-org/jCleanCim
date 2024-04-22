@@ -55,7 +55,7 @@ public class SqlXmlModelBuilder extends EaModelBuilder<Map<String, String>, EaMo
 	}
 
 	@Override
-	protected String initRepoAndGetVersion() {
+	protected String initRepoAndGetVersion(String nodelFileAbsPath) {
 		_repo = new JapiRepo();
 		return _repo.getVersion();
 	}

@@ -27,8 +27,6 @@ import org.apache.log4j.Logger;
 import org.tanjakostic.jcleancim.builder.ea.EaSelector;
 import org.tanjakostic.jcleancim.util.ApplicationException;
 
-import com.healthmarketscience.jackcess.Table;
-
 /**
  * EA repository supports a method to perform an SQL query and return the result set as XML. This
  * class is a wrapper to that EA functionality without dependency on EA.
@@ -57,7 +55,7 @@ class DbSelector implements EaSelector {
 		List<Map<String, String>> result = new ArrayList<Map<String, String>>();
 		Set<String> tags = new HashSet<String>(Arrays.asList(columnNames));
 
-		Table table = _repo.getTable(tableName);
+		Iterable<Map<String, Object>> table = _repo.getTable(tableName);
 		for (Map<String, Object> dbRow : table) {
 			Map<String, String> row = new HashMap<String, String>();
 			result.add(row);

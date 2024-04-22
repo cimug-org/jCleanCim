@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009-2019 Tatjana (Tanja) Kostic
+ * Copyright (C) 2009-2024 Tatjana (Tanja) Kostic
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
@@ -16,58 +16,50 @@
 package org.tanjakostic.jcleancim.builder.ea.db;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.Map;
 
 import org.tanjakostic.jcleancim.util.ApplicationException;
 
-import com.healthmarketscience.jackcess.Database;
-import com.healthmarketscience.jackcess.DatabaseBuilder;
-import com.healthmarketscience.jackcess.Table;
-
 /**
- * @author tatjana.kostic@ieee.org
- * @version $Id: DbRepo.java 21 2019-08-12 15:44:50Z dev978 $
+ * DbRepo defines the interface for all types of EA Project files. 
+ * <p>
+ * <b>Limitation:</b> Note that with this implementation we don't have access to the EA repository
+ * (API) methods, so we cannot export diagrams or XMI - although we do provide "empty" exporters, so
+ * that this implementation can hook into the existing framework.
+ * <p>
+ * This implementation should be used for very fast {edit UML - validate} cycles. When you need to
+ * produce a UML release (with XMI) and/or generate any kind of documentation with diagrams, ensure
+ * you swap this implementation with the one that can export XMI and diagrams.
+ *
+ * @author todd.viegut@gmail.com
+ * @version $Id: DbModelBuilder.java 21 2024-04-21 15:44:50Z dev978 $
  */
-class DbRepo {
+interface DbRepo {
 
-	private Database _db;
+	String getVersion();
+	
+	String getDbType();
 
-	/** Constructor. */
-	public DbRepo() {
-		// no-op
-	}
+	void open() throws ApplicationException;
 
-	public String getVersion() {
-		return "n/a";
-	}
+	void close() throws ApplicationException;
 
-	public void open(String modelFileAbsPath) throws ApplicationException {
-		try {
-			DatabaseBuilder dbBuilder = new DatabaseBuilder().setReadOnly(true).setFile(
-					new File(modelFileAbsPath));
-			_db = dbBuilder.open();
-		} catch (Exception e) {
-			throw new ApplicationException("Failed to open Access file (EA repository) '"
-					+ modelFileAbsPath + "'.", e);
-		}
-	}
+	Iterable<Map<String, Object>> getTable(String tableName) throws ApplicationException;
+	
+    // Simple static factory method.
+    static DbRepo create(String modelFileAbsPath) {
+    	File file = new File(modelFileAbsPath);
+		String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1).toLowerCase();
+		switch (ext) {
+			case "eap":
+			case "eapx":
+				return new EapDbRepo(modelFileAbsPath);
+			case "qea":
+			case "qeax":
+				return new QeaDbRepo(modelFileAbsPath);
+			default:
+				throw new IllegalArgumentException("Unsupported EA project file type: " + ext);
+			}
+    }
 
-	public void close() throws ApplicationException {
-		try {
-			_db.close();
-		} catch (Exception e) {
-			throw new ApplicationException("Failed to close Access file (EA repository).", e);
-		} finally {
-			_db = null;
-		}
-	}
-
-	public Table getTable(String tableName) throws ApplicationException {
-		try {
-			return _db.getTable(tableName);
-		} catch (IOException e) {
-			throw new ApplicationException("Cannot find table '" + tableName + "' in '"
-					+ _db.getFile() + "'", e);
-		}
-	}
 }
