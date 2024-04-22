@@ -2,8 +2,7 @@
 *.class
 
 bin/
-classes/
-*/classes/
+build/
 
 # Log file
 *.log
