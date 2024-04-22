@@ -1,8 +1,8 @@
 # jCleanCim release notes
 
-*   [02v03](#release-notes-for-jcleancim-02v03)
-*   [02v01](#release-notes-for-jcleancim-02v01)
-*   [02v00](#release-notes-for-jcleancim-02v00)
+*   [2.3.0](#release-notes-for-jcleancim-230)
+*   [2.1.0](#release-notes-for-jcleancim-210)
+*   [2.0.0](#release-notes-for-jcleancim-200)
 *   [01v10](#release-notes-for-jcleancim-01v10)
 *   [01v09](#release-notes-for-jcleancim-01v09)
 *   [01v08a](#jcleancim-01v08a)
@@ -19,12 +19,12 @@
 [Readme file](README.md)
 
 ***
-## Release notes for jCleanCim-02v03
+## Release notes for jCleanCim-2.3.0
 ***
 
 **Released on 20-Dec-2019**
 
-Note that there was no jCleanCim-02v02, but rather only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 02v02.beta-3 ended up being released as 02v03. Note that due to limited time a corresopnding update of the .pptx tutorial for 02v03 was not completed for the release.
+Note that there was no jCleanCim-02v02, but rather only 2 beta milestones (02v02.beta-2 and 02v02.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 02v02.beta-3 ended up being released as 2.3.0. Note that due to limited time a corresopnding update of the .pptx tutorial for 2.3.0 was not completed for the release.
 
 ### New features
 
@@ -109,7 +109,7 @@ Gigi Pugni has contributed java code package with fully functional generation of
 
 Laurent Guise has provided a prototype that inspired the implementation of most of IEC61850-specific features in this release. Thanks for beeing the sparring partner for non-English MS Word tests and discussions :-).
 
-### Performance changes in release 02v03
+### Performance changes in release 2.3.0
 
 None. Note however that newer versions of Enterprise Architect seem to always be somewhat slower than the older ones (we noticed the slow down in diagram generation for factor 3-4).
 
@@ -181,7 +181,7 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 *   TODO update the presentation.
 
 ***
-## Release notes for jCleanCim-02v01
+## Release notes for jCleanCim-2.1.0
 ***
 
 **Release Date: 23-Jul-2016**
@@ -219,7 +219,7 @@ In more recent versions of EA, on XMI import, EA refuses to import the original 
 
 This release provides proper handling for this case, as well - i.e., the EA Enumeration type is now recognised as enumerated type, the same way as a class with "enumeration" stereotype.
 
-### Performance changes in release 02v01
+### Performance changes in release 2.1.0
 
 None. Note however that newer versions of Enterprise Architect seem to always be somewhat slower than the older ones (we noticed the slow down in diagram generation).
 
@@ -284,7 +284,7 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 *   added description on how to use a custom config.properties file.
 
 ***
-## Release notes for jCleanCim-02v00
+## Release notes for jCleanCim-2.0.0
 ***
 
 **Release Date: 19-May-2015**
@@ -301,7 +301,7 @@ Producing the distribution "Eclipse project archive jCleanCim-\[version\]-eclips
 
 This is a release with incremental changes and no "real" new feature.
 
-### Performance improvements in release 02v00
+### Performance improvements in release 2.0.0
 
 None.
 
@@ -312,7 +312,7 @@ None.
 
 ### Potential forwards incompatibility for the application user: old jCleanCim with new EA
 
-*   jCleanCim releases older than 02v00 may have a problem when closing .eap file with Enterprise Architect 12 and higher. The reason is that EA12 Java API changed (they removed a method that was used in the code just before closing the .eap file; and jCleanCim-02v00 replaces that method call appropriately). In our test installation (EA12 + jCleanCim-01v10), there was a pop-up window telling that EA application stopped running and clicking on "Close" application did a smooth shut down of EA - then the run continues normally.
+*   jCleanCim releases older than 2.0.0 may have a problem when closing .eap file with Enterprise Architect 12 and higher. The reason is that EA12 Java API changed (they removed a method that was used in the code just before closing the .eap file; and jCleanCim-2.0.0 replaces that method call appropriately). In our test installation (EA12 + jCleanCim-01v10), there was a pop-up window telling that EA application stopped running and clicking on "Close" application did a smooth shut down of EA - then the run continues normally.
 
 ### Other functional changes
 
