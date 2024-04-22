@@ -133,7 +133,7 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 *   CIM-specific:
     *   model, validation: added new dependency stereotypes as built-in: IsBasedOn and import.
     *   docgen.collector: added basic support for printing additional paragraph after class that has constraints, starting with "Constraint" and listing constraints as \[name\]:\[new line\]\[description\].
-    *   docgen.collector: added support for seggregating navigability of association ends for CIM profiles and printing only the navigable end (as has always been done with [CIMTool](http://cimtool.org), used to generate profiles up to now)
+    *   docgen.collector: added support for seggregating navigability of association ends for CIM profiles and printing only the navigable end (as has always been done with [CIMTool](https://cimtool.ucaiug.io/), used to generate profiles up to now)
 *   IEC61850-specific:
     *   docgen.collector, docgen.writer.xml, IECDomain.xsd schema: Added support for two underlying enumeration types for ENC CDC. Note that this breaks the underlying meta-model by a) assigning two DA types to one ENC, and b) by creating totally unrelated second DA type (this has been done on request by IEC61850 model managers and applies to IEC61850 model only).
     *   docgen.collector: Added support for enumeration inheritance. Note that this is against the semantic of enumerated types (this has been done on request by IEC61850 model managers and applies to IEC61850 model only).
