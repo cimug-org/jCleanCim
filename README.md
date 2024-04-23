@@ -21,6 +21,13 @@ This is a non-GUI Java application and the Java code is fully platform independe
 
 For a full history of all release notes see [here](ReleaseNotes.md).
 
+## Latest Release
+
+  -   2.3.0
+
+      - The latest release is available on GitHub at [jCleanCim-2.3.0](https://github.com/cimug-org/jCleanCim/releases) and is delivered as a ZIP file.
+      - Information on features and fixes for the release can be found in the [release notes](ReleaseNotes.md).
+
 ## Documentation
 Once you unzip a jCleanCim distribution, `doc` directory contains the full documentation. The important parts of the source code are documented and that documentation is generated as so-called _javadoc_ - namely, a set of web pages that allow for easy navigation.
 
