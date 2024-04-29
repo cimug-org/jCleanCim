@@ -1,6 +1,7 @@
 # jCleanCim
 
-![image](readme-icons/image-header-1.png)
+![image](readme-icons/image-header-1.png)  
+\[[GitHub Repo](https://github.com/cimug-org/jcleancim)\]
 
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](http://www.sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
