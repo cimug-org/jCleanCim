@@ -11,6 +11,7 @@ In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migr
 
 This is a non-GUI Java application and the Java code is fully platform independent. However, it unfortunately must be run on MS Windows machine due to the usage of Enterprise Architect and MS Word automation libraries (.dlls).
 
+*   [Latest Release](#latest-release)
 *   [Documentation](#documentation)
 *   [Which distribution should I download?](#which-distribution-should-i-download)
 *   [Dependencies](#dependencies)
