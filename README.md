@@ -33,9 +33,9 @@ For a full history of all release notes see [here](ReleaseNotes.md).
 
 ## Introduction to jCleanCim
 
-Check out the "Introduction to jCleanCim" presentation presentation.  It is available in both PDF and PPT formats.
+Check out the "Introduction to jCleanCim" presentation.  It is available in both PDF and PPT formats.
 
-[![image](readme-icons/about-jcleancim.png)](doc/jCleanCimIntro.pdf)
+[![image](readme-icons/about-jcleancim.png)](https://jcleancim.ucaiug.io/doc/jCLeanCimIntro.pdf)
 
 ## Documentation
 Once you unzip a jCleanCim distribution, `doc` directory contains the full documentation. The important parts of the source code are documented and that documentation is generated as so-called _javadoc_ - namely, a set of web pages that allow for easy navigation.
