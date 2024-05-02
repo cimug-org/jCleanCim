@@ -1,6 +1,7 @@
 # jCleanCim
 
-![image](readme-icons/image-header-1.png)
+![image](readme-icons/image-header-1.png)  
+\[[GitHub Repo](https://github.com/cimug-org/jcleancim)\]
 
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](http://www.sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
@@ -10,6 +11,8 @@ In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migr
 
 This is a non-GUI Java application and the Java code is fully platform independent. However, it unfortunately must be run on MS Windows machine due to the usage of Enterprise Architect and MS Word automation libraries (.dlls).
 
+*   [Latest Release](#latest-release)
+*   [Introduction to jCleanCim](#inroduction-to-jcleancim)
 *   [Documentation](#documentation)
 *   [Which distribution should I download?](#which-distribution-should-i-download)
 *   [Dependencies](#dependencies)
@@ -21,10 +24,23 @@ This is a non-GUI Java application and the Java code is fully platform independe
 
 For a full history of all release notes see [here](ReleaseNotes.md).
 
+## Latest Release
+
+  -   2.3.0
+
+      - The latest release is available on GitHub at [jCleanCim-2.3.0](https://github.com/cimug-org/jCleanCim/releases) and is delivered as a ZIP file.
+      - Information on features and fixes for the release can be found in the [release notes](ReleaseNotes.md).
+
+## Introduction to jCleanCim
+
+Check out the "Introduction to jCleanCim" presentation.  It is available in both PDF and PPT formats.
+
+[![image](readme-icons/about-jcleancim.png)](doc/jCleanCimIntro.pdf)
+
 ## Documentation
 Once you unzip a jCleanCim distribution, `doc` directory contains the full documentation. The important parts of the source code are documented and that documentation is generated as so-called _javadoc_ - namely, a set of web pages that allow for easy navigation.
 
-*   Each distribution contains an up to date set of slides `doc/jCleanCimIntro.pptx` - you may want to start from there.
+*   Each distribution contains an up to date set of slides `doc/jCleanCimIntro.pptx` (`doc/jCleanCimIntro.pdf`) - you may want to start from there.
 *   Each distribution contains the javadoc in `doc/api/index.html`. The documentation of the root package `org.tanjakostic.jcleancim` (Description section) is a good starting point.
 *   Binary distribution contains also the PDF version of that same javadoc, in a file `doc/jCleanCim-[_version_].pdf` (source distribution contains the Apache ant build script to produce this document, so it is not packaged in source distributions).
 *   Source distribution contains the PDF version of the depency graph of the Apache ant build targets (this is useful for a developer only).
