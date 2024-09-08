@@ -37,7 +37,7 @@ Intended users are primarily those who edit CIM UML and publish its documentatio
 *   official IEC CIM model editors, responsible for maintaining the CIM information model (UML) and for generating official IEC documents, and,
 *   those who define custom non-standard CIM extensions who want to ensure they have followed standard CIM rules and who want to generate documentation for those extensions.
 
-If you are already a user of the excellent [CIMTool](https://github.com/CIMug-org/CIMTool), you may wonder where within the process of CIM development and maintenance the jCleanCim fits. The answer is:
+If you are already a user of the excellent [CIMTool](https://github.com/cimug-org/CIMTool), you may wonder where within the process of CIM development and maintenance the jCleanCim fits. The answer is:
 
 1.  You would first use jCleanCim to validate correctness of the CIM information model (UML), and if required, to generate the information model documentation in MS Word format, as required by the IEC process.
 2.  You would then use CIMTool to create CIM profiles (XSD, RDF, OWL) and their documentation (HTML) from the imported CIM UML model, and to validate instance files created based on those profiles.

@@ -28,7 +28,8 @@ import org.tanjakostic.jcleancim.util.Util;
  * Information required to describe a table and its columns for generating documentation.
  *
  * @author tatjana.kostic@ieee.org
- * @version $Id: TableSpec.java 21 2019-08-12 15:44:50Z dev978 $
+ * @author glpugni@gmail.com
+ * @version $Id: TableSpec.java 21 2023-09-15 15:44:50Z dev978 $
  */
 public class TableSpec {
 
@@ -58,6 +59,9 @@ public class TableSpec {
 
 	public static final TableSpec LITERALS = createLiteralsTable(Nature.CIM);
 	public static final TableSpec ATTRS = createAttributesTable(Nature.CIM);
+	//the following: IEC62351-7 specific table format
+	public static final TableSpec IEC62351ATTRS = createIec62351AttributesTable(Nature.CIM);
+
 	public static final TableSpec ASSOC_ENDS = createAssocEndsTable(Nature.CIM);
 	public static final TableSpec OPERATIONS = createOperationsTable("_", Nature.CIM);
 
@@ -183,6 +187,17 @@ public class TableSpec {
 		return createAndStoreTableSpec(WAX.E_AssociationEndsTable, cols, nature);
 	}
 
+	// IEC 62351-7 specific table format
+		private static TableSpec createIec62351AttributesTable(Nature nature) {
+			List<ColumnSpec> cols = new ArrayList<ColumnSpec>();
+			cols.add(ColumnSpec.createUnfmted(24, WAX.A_name, "attNameCol", "name"));
+			cols.add(ColumnSpec.createUnfmted(8, WAX.A_mult, "attMultCol", "M/O    or   mult")); //gigi??? was 7
+			cols.add(ColumnSpec.createUnfmted(23, WAX.A_type, "attTypeCol", "type"));	 //gigi??? was 24 
+			cols.add(ColumnSpec.createFmted(45, WAX.A_descID, "attDescCol", "description"));
+
+			return createAndStoreTableSpec(WAX.E_AttributesTable, cols, nature);
+		}
+	
 	// --------------- default / CIM tables -------------
 
 	private static TableSpec createLiteralsTable(Nature nature) {
@@ -197,13 +212,13 @@ public class TableSpec {
 	private static TableSpec createAttributesTable(Nature nature) {
 		List<ColumnSpec> cols = new ArrayList<ColumnSpec>();
 		cols.add(ColumnSpec.createUnfmted(24, WAX.A_name, "attNameCol", "name"));
-		cols.add(ColumnSpec.createUnfmted(7, WAX.A_mult, "attMultCol", "mult"));
-		cols.add(ColumnSpec.createUnfmted(24, WAX.A_type, "attTypeCol", "type"));
+		cols.add(ColumnSpec.createUnfmted(7, WAX.A_mult, "attMultCol", "mult")); 
+		cols.add(ColumnSpec.createUnfmted(24, WAX.A_type, "attTypeCol", "type"));	 
 		cols.add(ColumnSpec.createFmted(45, WAX.A_descID, "attDescCol", "description"));
 
 		return createAndStoreTableSpec(WAX.E_AttributesTable, cols, nature);
 	}
-
+	
 	private static TableSpec createAssocEndsTable(Nature nature) {
 		List<ColumnSpec> cols = new ArrayList<ColumnSpec>();
 		cols.add(ColumnSpec.createUnfmted(7, WAX.A_myMult, "aeMyMultCol", "mult from"));

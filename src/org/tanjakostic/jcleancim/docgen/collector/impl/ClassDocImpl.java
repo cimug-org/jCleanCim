@@ -39,6 +39,8 @@ import org.tanjakostic.jcleancim.model.UML;
 import org.tanjakostic.jcleancim.model.UmlClass;
 import org.tanjakostic.jcleancim.model.UmlConstraint;
 import org.tanjakostic.jcleancim.model.UmlDiagram;
+import org.tanjakostic.jcleancim.model.UmlModel;
+import org.tanjakostic.jcleancim.model.UmlPackage;
 import org.tanjakostic.jcleancim.model.UmlStereotype;
 import org.tanjakostic.jcleancim.util.Util;
 
@@ -46,7 +48,8 @@ import org.tanjakostic.jcleancim.util.Util;
  * Data required for documentation of classes. For the layout, see {@link ClassDoc}.
  *
  * @author tatjana.kostic@ieee.org
- * @version $Id: ClassDocImpl.java 31 2019-12-08 01:19:54Z dev978 $
+ * @author glpugni@gmail.com
+ * @version $Id: ClassDocImpl.java 31 2024-09-07 01:19:54Z dev978 $
  */
 class ClassDocImpl extends AbstractObjectDoc implements ClassDoc {
 	private static final Logger _logger = Logger.getLogger(ClassDocImpl.class.getName());
@@ -253,11 +256,34 @@ class ClassDocImpl extends AbstractObjectDoc implements ClassDoc {
 				return new DaAttributesDoc(docgenCfg, TableSpec.ODA_ATTRS, c, bmRegistry);
 			}
 		}
-
 		// defaults (regular UML, like for CIM):
 		if (c.isEnumeratedType()) {
 			return new DefaultLiteralsDoc(docgenCfg, c, bmRegistry);
 		}
+		
+		// 2024.09.07 - automatic recognition of IEC62351-7 model, 
+		// calling specific Attribute function "iec62351AttributesDoc"
+		
+		boolean iec62351 = false;
+		
+		UmlModel m = c.getModel();
+		int level = 0;
+		
+		for (UmlPackage p : m.getPackages()) {
+			String n = p.getName();
+			
+			if (level > 3) break;
+			
+			if (p.getName().equals("iec62351")) {
+				iec62351 = true;
+				return new iec62351AttributesDoc(docgenCfg, c, bmRegistry);
+			}
+			
+			log(_logger, "---- found iec62351 ...");
+		}
+		
+		//2024.09.15 - end of change
+		
 		return new DefaultAttributesDoc(docgenCfg, c, bmRegistry);
 	}
 
