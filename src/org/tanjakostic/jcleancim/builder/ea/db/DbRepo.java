@@ -32,7 +32,7 @@ import org.tanjakostic.jcleancim.util.ApplicationException;
  * you swap this implementation with the one that can export XMI and diagrams.
  *
  * @author todd.viegut@gmail.com
- * @version $Id: DbModelBuilder.java 21 2024-04-21 15:44:50Z dev978 $
+ * @version $Id: DbRepo.java 21 2024-04-21 15:44:50Z dev978 $
  */
 interface DbRepo {
 

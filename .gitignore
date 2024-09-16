@@ -2,6 +2,11 @@
 *.class
 
 build/
+input/
+output/
+dist/
+log/
+.settings/
 
 # Log file
 *.log

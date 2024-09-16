@@ -30,6 +30,7 @@
 	          description="documentation (including javadocs)" />
 	<property name="dlls.dir" location="${proj.dir}/dlls" description="dlls" />
 	<property name="lib.dir" location="${proj.dir}/lib" description="dependencies jars" />
+	<property name="lib.x32.dir" location="${proj.dir}/lib-x32" description="dependencies jars" />
 	<property name="libdoc.dir" location="${proj.dir}/lib-doc" description="dependencies javadocs" />
 	<property name="src.dir" location="${proj.dir}/src" description="source files" />
 	<property name="test.dir" location="${proj.dir}/test" description="test source files" />
@@ -67,7 +68,7 @@
 	<property name="dos.scripts" value="**/*.bat,**/*.cmd" />
 	<property name="inputs.to.copy" value="base-small*,blank.png,IECDomain.xsd,**/profiles/**" />
 	<property name="txts.to.copy"
-	          value="readme.html,releaseNotes.html,oldReleaseNotes.html,copyright.html,license.txt" />
+	          value="README.md,ReleaseNotes.md,copyright.md,LICENSE" />
 	<property name="presentation.to.copy" value="jCleanCimIntro.pptx" />
 	<property name="antfiles.to.copy" value="build.xml,build.properties" />
 	<property name="eclipsefiles.to.copy" value=".classpath,.project" />
@@ -97,18 +98,17 @@
 	          value="jacob.jar"
 	          description="MS Word API binary/COM (compile dep)" />
 	<property name="jacob.dll"
-	          value="jacob-1.17-M2-x86.dll"
+	          value="jacob-1.21-x86.dll"
 	          description="MS Word API binary/COM (compile dep)" />
 	<property name="poi-ooxml.jar"
 	          value="poi-ooxml-3.15-beta2.jar"
 	          description="MS Word API OOXML (compile dep)" />
 	<property name="jackcess.jar"
-	          value="jackcess-2.1.0.jar"
+	          value="jackcess-2.2.3.jar"
 	          description="reading Access / EA (compile dep)" />
 	<property name="commons-logging.jar"
-	          value="commons-logging-1.1.1.jar"
+	          value="commons-logging-1.1.3.jar"
 	          description="(jackcess dep)" />
-
 	<property name="pdfdoclet.jar"
 	          value="pdfdoclet-1.0.2-all.jar"
 	          description="executable to create API as pdf (build dep)" />
@@ -118,6 +118,12 @@
 	<property name="grand.jar"
 	          value="grand-1.8.jar"
 	          description="used to generate dependency graph of this file as pdf (build dep, requires GraphViz)" />
+	<property name="sqlite-jdbc.jar"
+	          value="sqlite-jdbc-3.45.2.0.jar"
+	          description="JDBC driver for SQLLite (build dep)" />
+	<property name="slf4j-api.jar"
+	          value="slf4j-api-1.7.36.jar"
+	          description="executable to create API as pdf (build dep)" />
 
 	<!-- Java compiler -->
 	<property name="javac.debug" value="yes" description="always keep yes!" />
@@ -125,8 +131,8 @@
 	          value="iso8859-1"
 	          description="explicit (default value differs per OS)" />
 	<property name="javac.deprec" value="yes" description="always keep yes!" />
-	<property name="javac.source" value="1.7" description="using java 7 features" />
-	<property name="javac.target" value="1.7" description="using java 7 features" />
+	<property name="javac.source" value="17" description="using java 17 features" />
+	<property name="javac.target" value="17" description="using java 17 features" />
 	<!-- Java runtime -->
 	<property name="jvm" value="java" description="jvm used for java command" />
 	<property name="jvm.maxMem" value="512m" description="maximum jvm memory" />
@@ -151,8 +157,8 @@
 	<property name="pdfdoc.path" location="${build.dir}/${pdfdoc.name}" />
 
 	<property name="zip-common.path" location="${dist.dir}/${project.release}-common.zip" />
-	<property name="zip-bin.path" location="${dist.dir}/${project.release}-bin.zip" />
-	<property name="zip-src.path" location="${dist.dir}/${project.release}-src.zip" />
+	<property name="zip-bin.path" location="${dist.dir}/${project.release}-x32-bin.zip" />
+	<property name="zip-src.path" location="${dist.dir}/${project.release}-x32-src.zip" />
 
 	<!-- ========================================================== -->
 	<!-- Classpaths                                                 -->
@@ -161,7 +167,7 @@
 		<pathelement location="${lib.dir}/${log4j.jar}" />
 		<pathelement location="${lib.dir}/${commons-cli.jar}" />
 		<pathelement location="${lib.dir}/${commons-lang.jar}" />
-		<pathelement location="${lib.dir}/${eaapi.jar}" />
+		<pathelement location="${lib.x32.dir}/${eaapi.jar}" />
 		<pathelement location="${lib.dir}/${jacob.jar}" />
 		<pathelement location="${lib.dir}/${poi-ooxml.jar}" />
 		<pathelement location="${lib.dir}/${jackcess.jar}" />
@@ -309,7 +315,8 @@
 		       encoding="${javac.enc}"
 		       deprecation="${javac.deprec}"
 		       source="${javac.source}"
-		       target="${javac.target}">
+		       target="${javac.target}"
+			   includeantruntime="false">
 			<classpath refid="test.compile.classpath" />
 			<src path="${test.dir}" />
 		</javac>
@@ -337,11 +344,11 @@
 		<attribute name="formatterType" default="plain" />
 		<attribute name="useFile" default="no" />
 		<sequential>
-			      <!-- timeout was "90000", now needs at time even 150000ms -->
+			      <!-- timeout was "90000", now needs at time even 300000ms -->
 			<junit fork="${junit.fork}"
 			       forkmode="once"
 			       printsummary="yes"
-			       timeout="150000"
+			       timeout="300000"
 			       jvm="${jvm}"
 			       maxmemory="${jvm.maxMem}"
 			       haltonfailure="${junit.haltonfailure}"
@@ -444,7 +451,7 @@
 			         header="${project.release}"
 			         footer="${project.release}">
 				<bottom>
-					<![CDATA[Copyright 2009-2016 Tatjana (Tanja) Kostic]]>
+					<![CDATA[Copyright 2009-2024 Tatjana (Tanja) Kostic]]>
 				</bottom>
 				<doclet name="org.umlgraph.doclet.UmlGraphDoc" path="${lib.dir}/${UmlGraph.jar}">
 					<param name="-all" />
@@ -526,11 +533,16 @@
 		<include name="${log4j.jar}" />
 		<include name="${commons-cli.jar}" />
 		<include name="${commons-lang.jar}" />
-		<include name="${eaapi.jar}" />
 		<include name="${jacob.jar}" />
 		<include name="${poi-ooxml.jar}" />
 		<include name="${jackcess.jar}" />
 		<include name="${commons-logging.jar}" />
+		<include name="${sqlite-jdbc.jar}" />
+		<include name="${slf4j-api.jar}" />
+	</zipfileset>
+	
+	<zipfileset id="app.x32.jars" dir="${lib.x32.dir}" prefix="${project.release}/lib">
+		<include name="${eaapi.jar}" />
 	</zipfileset>
 
 	<zipfileset id="all.jars" dir="${lib.dir}" prefix="${project.release}/lib" includes="**/*" />
@@ -546,6 +558,7 @@
 		        description="this gets filled after running tests, we don't want these for distributions" />
 		<zip destfile="${zip-common.path}" duplicate="fail">
 			<zipfileset refid="app.jars" />
+			<zipfileset refid="app.x32.jars" />
 			<zipfileset refid="all.dlls" />
 			<!-- <zipfileset dir="${input.dir}" prefix="${project.release}/input" includes="*small*" /> -->
 			<zipfileset dir="${input.dir}"

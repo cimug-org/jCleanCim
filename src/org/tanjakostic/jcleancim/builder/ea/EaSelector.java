@@ -18,6 +18,7 @@ package org.tanjakostic.jcleancim.builder.ea;
 import java.util.List;
 import java.util.Map;
 
+import org.tanjakostic.jcleancim.common.EAProjType;
 import org.tanjakostic.jcleancim.util.ApplicationException;
 
 /**
@@ -29,4 +30,27 @@ public interface EaSelector {
 	/** Select <code>columnNames</code> from <code>tableName</code>. */
 	public List<Map<String, String>> select(String tableName, String[] columnNames,
 			boolean skipTiming) throws ApplicationException;
+
+	/**
+	 * This is important as it determines if the columns require special syntax 
+	 * when building SQL queries. For example, EA 16.x .qea/.qeax project files  
+	 * utilize SQLite as the underlying database. The SQLLite SQL dialect has  
+	 * 'Constraint' and 'Default' as keywords. These keywords happen to also be 
+	 * column names within the EA schema of a project file and therefore require 
+	 * they appear in the SQL statement as:  [Constraint]
+	 */
+	default String[] convert(EAProjType type, String[] columnNames) {
+		switch (type) {
+		case QEA:
+		case QEAX:
+			for (int i = 0; i < columnNames.length; i++) {
+				if (EA.ATTR_DEFAULT.equals(columnNames[i]) || EA.CLASS_CONSTR_NAME.equals(columnNames[i]))
+					columnNames[i] = "[" + columnNames[i] + "]";
+			}
+			break;
+		default:
+			break;
+		}
+		return columnNames;
+	}
 }

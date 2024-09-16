@@ -80,7 +80,7 @@ public class DbModelBuilder extends EaModelBuilder<Map<String, String>, EaModelB
 
 	@Override
 	protected void bulkLoad() throws ApplicationException {
-		EaSelector selector = new DbSelector(_repo);
+		EaSelector selector = new DbSelector(_repo, getCfg().getEAProjectType());
 		_tables = new EaTables(selector, getCfg().isAppSkipTiming());
 	}
 

@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.tanjakostic.jcleancim.common.Config;
 import org.tanjakostic.jcleancim.common.XMIDialect;
 import org.tanjakostic.jcleancim.util.ApplicationException;
+import org.tanjakostic.jcleancim.util.JCleanCimUtils;
 import org.tanjakostic.jcleancim.util.Util;
 
 /**
@@ -54,19 +55,19 @@ abstract public class AbstractXMIExporter implements XMIExporter {
 
 		String modelFileAbsPath = this.getCfg().getModelFileAbsPath();
 		if (modelFileAbsPath == null) {
-			_logger.warn("You've enabled export to XMI, but there is no .eap file "
-					+ "- skipping XMI export.");
+			_logger.warn("You've enabled export to XMI, but there is no valid model file " + JCleanCimUtils.getSupportedModelTypes()
+					+ " - skipping XMI export.");
 			return;
 		}
 		String eaModelFileName = new File(modelFileAbsPath).getName();
-		if (!eaModelFileName.endsWith(".eap")) {
-			_logger.warn("Expecting an .eap model file, and don't know how to export XMI from "
+		if (!JCleanCimUtils.getSupportedModelTypes().contains(eaModelFileName.substring(eaModelFileName.lastIndexOf(".")).toLowerCase())) { 
+			_logger.warn("Expecting a supported model file " + JCleanCimUtils.getSupportedModelTypes() + ", and don't know how to export XMI from "
 					+ eaModelFileName + " - skipping XMI export.");
 			return;
 		}
 
-		// remove the extension ".eap"
-		String outFileName = eaModelFileName.substring(0, eaModelFileName.length() - 4);
+		// remove the extension (e.g. ".eap")
+		String outFileName = eaModelFileName.substring(0, eaModelFileName.lastIndexOf("."));
 
 		EnumSet<XMIDialect> xmiexportDialects = getCfg().getXmiexportDialects();
 		if (xmiexportDialects.contains(XMIDialect.ea_xmi11)) {

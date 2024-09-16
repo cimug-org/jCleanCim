@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.tanjakostic.jcleancim.builder.ea.EaSelector;
+import org.tanjakostic.jcleancim.common.EAProjType;
 import org.tanjakostic.jcleancim.util.ApplicationException;
 
 /**
@@ -38,9 +39,11 @@ class DbSelector implements EaSelector {
 	private static final Logger _logger = Logger.getLogger(DbSelector.class.getName());
 
 	private final DbRepo _repo;
+	private final EAProjType _projectType;
 
-	public DbSelector(DbRepo repo) {
+	public DbSelector(DbRepo repo, EAProjType projectType) {
 		_repo = repo;
+		_projectType = projectType;
 	}
 
 	// ===== Impl. of org.tanjakostic.jcleancim.builder.ea.EaSelector methods =====
@@ -49,6 +52,8 @@ class DbSelector implements EaSelector {
 	public List<Map<String, String>> select(String tableName, String[] columnNames,
 			boolean skipTiming) throws ApplicationException {
 
+		columnNames = convert(_projectType, columnNames);
+		
 		long start = System.currentTimeMillis();
 		_logger.info("loading table " + tableName);
 

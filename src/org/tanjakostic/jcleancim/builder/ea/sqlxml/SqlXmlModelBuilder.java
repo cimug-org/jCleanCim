@@ -72,7 +72,7 @@ public class SqlXmlModelBuilder extends EaModelBuilder<Map<String, String>, EaMo
 
 	@Override
 	protected void bulkLoad() throws ApplicationException {
-		EaSelector selector = new SqlXmlSelector(_repo);
+		EaSelector selector = new SqlXmlSelector(_repo, getCfg().getEAProjectType());
 		_tables = new EaTables(selector, getCfg().isAppSkipTiming());
 	}
 

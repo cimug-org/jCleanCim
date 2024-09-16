@@ -37,7 +37,7 @@ Intended users are primarily those who edit CIM UML and publish its documentatio
 *   official IEC CIM model editors, responsible for maintaining the CIM information model (UML) and for generating official IEC documents, and,
 *   those who define custom non-standard CIM extensions who want to ensure they have followed standard CIM rules and who want to generate documentation for those extensions.
 
-If you are already a user of the excellent [CIMTool](https://github.com/cimug-org/CIMTool), you may wonder where within the process of CIM development and maintenance the jCleanCim fits. The answer is:
+If you are already a user of the excellent [CIMTool](https://cimtool.ucaiug.io), you may wonder where within the process of CIM development and maintenance the jCleanCim fits. The answer is:
 
 1.  You would first use jCleanCim to validate correctness of the CIM information model (UML), and if required, to generate the information model documentation in MS Word format, as required by the IEC process.
 2.  You would then use CIMTool to create CIM profiles (XSD, RDF, OWL) and their documentation (HTML) from the imported CIM UML model, and to validate instance files created based on those profiles.
@@ -74,7 +74,7 @@ Running jCleanCim out of the box
 
 ### Binary distribution
 
-After you have unzipped the **eclipse-independent binary** distribution (jCleanCim-\[version\]-bin.zip), you will be using the run script `run.bat` from console.
+After you have unzipped the **eclipse-independent binary** distribution (jCleanCim-\[version\]-\[os\]-bin.zip) (e.g. `jCleanCim-2.4.0-x64-bin.zip`), you will be using the run script `run.bat` from console.
 
 1.  In the Windows Start menu, select "Run..." and type `cmd`. This will open a console window.
 2.  In the console window, type `cd` followed by a space. From the file explorer, just drag and drop the directory where you have unzipped the binary distribution onto the console window (so you don't have to type the whole path), then press enter. This will change the directory to where your jCleanCim has been installed.
@@ -82,32 +82,32 @@ After you have unzipped the **eclipse-independent binary** distribution (jCleanC
 
 ### Source distribution
 
-After you have unzipped the **eclipse-independent source** distribution (jCleanCim-\[version\]-src.zip) and installed [Apache ant](http://ant.apache.org/bindownload.cgi), you will be using the Apache ant script `build.xml` from console.
+After you have unzipped the **eclipse-independent source** distribution (jCleanCim-\[version\]-\[os\]-src.zip) and installed [Apache ant](http://ant.apache.org/bindownload.cgi), you will be using the Apache ant script `build.xml` from console.
 
 1.  In the Windows Start menu, select "Run..." and type `cmd`. This will open a console window.
 2.  In the console window, type `cd` followed by a space. From the file explorer, just drag and drop the directory where you have unzipped the source distribution onto the console window (so you don't have to type the whole path), then press enter. This will change the directory to where your jCleanCim has been installed.
-3.  In the console window, type `ant jCleanCim` and press enter. This will build the jCleanCim jar from sources and run it with the default configuration (validation and statistics) and the provided example files. To see all available ant targets contained in the [ant build file]({@docRoot}/../../build.xml), type `ant -p` (or `ant -projecthelp`) and have a look at the [graph of targets and their dependencies]({@docRoot}/../../build-graph.jpg).
+3.  In the console window, type `ant jCleanCim` and press enter. This will build the jCleanCim jar from sources and run it with the default configuration (validation and statistics) and the provided example files. To see all available ant targets contained in the [build-x86.xml or build-x64.xml](/../../build.xml) build files, type `ant -p` (or `ant -projecthelp`) and have a look at the [graph of targets and their dependencies]({@docRoot}/../../build-graph.jpg).
 
-Alternatively, you may want to unzip the directory and import the project into your eclipse installation. _Note: If you already have an earlier version of jCleanCim in your eclipse workspace, you will first have to rename old jCleanCim project before importing new one. For example, if you want to import new version 01v04, rename first your existing jCleanCim project to jCleanCim-01v03, then import the new one. If you want to keep the old project jCleanCim-01v03 and use it, you will also have to update the build path for the directory where dll-s reside, otherwise eclipse shows you classpath error (eclipse does not use relative paths for dlls directories!)._
+Alternatively, you may want to unzip the directory and import the project into your eclipse installation. _Note: If you already have an earlier version of jCleanCim in your eclipse workspace, you will first have to rename the old jCleanCim project before importing the new one. For example, if you want to import the new version 2.4.0, first rename your existing jCleanCim project to jCleanCim-2.3.0, then import the new one. If you want to keep the old project jCleanCim-2.3.0 and use it, you will also have to update the build path for the directory where the dll-s reside, otherwise eclipse shows you classpath error (eclipse does not use relative paths for dll directories!)._
 
-After you have imported the **eclipse existing project** from unzipped source distribution (jCleanCim-\[version\]-src.zip), you should create the default eclipse launch configuration as follows:
+After you have imported the **eclipse existing project** from an unzipped source distribution (e.g. `jCleanCim-2.4.0-x86-src.zip`), you should create the default eclipse launch configuration as follows:
 
 *   Navigate to `src` directory
-*   locate the source file {@link org.tanjakostic.jcleancim.JCleanCim org.tanjakostic.jcleancim.JCleanCim}
+*   locate the source file [org.tanjakostic.jcleancim.JCleanCim](./org/tanjakostic/jcleancim/JCleanCim.java)
 *   right click on the class and select "Run as / Java Application".
 
 This will launch the application and also create the run configuration, that you can later on copy to create custom configurations. Cached launch configurations are available from the eclipse "Run" icon (green icon with white arrow).
 
-Note that you can also open the [ant build file]({@docRoot}/../../build.xml) from within eclipse (Window / Show Views / ant) and run any of its tasks from the eclipse Outline window, the same way as from the console.
+Note that you can also open the [build-x86.xml or build-x64.xml](/../../build.xml) ANT build file from within eclipse (Window / Show Views / ant) and run any of its tasks from the eclipse Outline window, the same way as from the console.
 
 Configuring jCleanCim
 ---------------------
 
 ### Application configuration
 
-To configure any run of jCleanCim application, you use the standard Java properties file available in the project's config directory. Default name for that properties file is [config.properties]({@docRoot}/../../config/config.properties) and you can override this default with a command line argument if you want to use different stable configurations for different jCleanCim runs - see documentation in the application class {@link org.tanjakostic.jcleancim.JCleanCim} and the configuration class {@link org.tanjakostic.jcleancim.common.Config}.
+To configure any run of jCleanCim application, you use the standard Java properties file available in the project's config directory. Default name for that properties file is [config.properties](./../../config/config.properties) and you can override this default with a command line argument if you want to use different stable configurations for different jCleanCim runs - see documentation in the application class [org.tanjakostic.jcleancim.JCleanCim](./org/tanjakostic/jcleancim/JCleanCim.java) and the configuration class [org.tanjakostic.jcleancim.common.Config](./org/tanjakostic/jcleancim/common/Config.java).
 
-The supplied default properties file contains reasonable defaults, and several tested configurations are commented. By default (out of the box), jCleanCim will run validation and statistics on base-small.eap model file, and will _not_ generate any documentation.
+The supplied default properties file contains reasonable defaults, and several tested configurations are commented. By default (out of the box), jCleanCim will run validation and statistics on `base-small.eap` model file, and will  _not_  generate any documentation.
 
 ### Logging configuration
 
@@ -127,21 +127,23 @@ To select what functions of jCleanCim to run, you need to set one or more of the
 
 Typical usage will be to first enable validation and statistics mode after you have edited the model, then address the problems in the model, and revalidate before releasing. Here is an example of a minimum config.properties file to do that:
 
-model.filename    = base-small.eap
-validation.on     = true
-statistics.on     = true
+`model.filename    = base-small.eap`
 
-validation.scope  =
+`validation.on     = true`
+
+`statistics.on     = true`
+
+`validation.scope  = `
 
 If you are validating IEC 61850 UML models, there are several other properties; see documentation in {@link org.tanjakostic.jcleancim.common.Config}.
 
 If you have a big model, with potentially parts that are informative/buggy, you may want to set a filter and perform initial validation of your changes for only some top-level packages. For instance, to validate only standard CIM packages IEC61970 and IEC61968, you would set the `validation.scope` property so:
 
-validation.scope = WG13, WG14
+`validation.scope = WG13, WG14`
 
 and to validate only custom (non-IEC) extensions:
 
-validation.scope = OTHER\_CIM, OTHER\_IEC61850
+`validation.scope = OTHER\_CIM, OTHER\_IEC61850`
 
 It is recommended to _validate the full content of the EA model (by leaving the value of `validation.scope` property empty) at least before releasing the model_ , to ensure there are no cross-package issues. See classes in the package {@link org.tanjakostic.jcleancim.validation} for available validators and rules they fire - the names of classes should be descriptive enough.
 
@@ -163,14 +165,17 @@ You may want to disable validation and statistics when enabling document generat
 
 Because document generation takes pretty long, you will first want to ensure that the placeholders in your template are correct, without generating the full package content. Here the minimum configuration to do this for a CIM model (IEC61850 model needs more properties; see [config/config.properties]({@docRoot}/../../config/config.properties) file):
 
-model.filename = base-small.eap
+`model.filename = base-small.eap`
 
-docgen.on = true
-profiles.docgen.on =
-docgen.inTemplate = base-small-template.doc
-docgen.outDocument = base-small.doc
+`docgen.on = true`
 
-docgen.analysePlaceholders = true
+`profiles.docgen.on = `
+
+`docgen.inTemplate = base-small-template.doc`
+
+`docgen.outDocument = base-small.doc`
+
+`docgen.analysePlaceholders = true`
 
 Running only placeholder analysis ( `docgen.analysePlaceholders=true` ) will still produce the output document, but without UML package contents (classes, attributes, etc.). More importantly, that half-baked output document will contain placeholder errors, if any - do text search for string "$ERROR".
 
@@ -238,13 +243,13 @@ Checklist for the developer that produces jCleanCim distributions
 
 Once after you've fixed bugs or added new features to jCleanCim, follow these steps to build and publish the three jCleanCim distributions:
 
-1.  update release notes (including date and version) in the [readme]({@docRoot}/../../readme.html) file.
-2.  in the [version properties file]({@docRoot}/../../config/build.properties), update the property `project.version`.
-3.  if you provide new libraries or upgraded versions, ensure you update appropriate ant properties.
-4.  clean-up local config.properties file (keep only public defaults).
+1.  update release notes (including date and version) in the [README.md](./../../README.md) file.
+2.  in the [build.properties](./../../config/build.properties) file, update the property `project.version`.
+3.  if you provide new libraries or upgrade existing libraries, ensure you update appropriate ant properties.
+4.  clean-up local `config.properties` file (keep only public defaults).
 5.  run `ant clean, unzip-all` and verify that the content unzipped under the build directory is ok.
 6.  run jCleanCim from within both unzipped directories (to verify it actually runs as described)
-7.  (copy locally the content of dist directory into jCleanCim releases directory)
-8.  on CIMug SharePoint, create new sub-directory within jCleanCim directory under [CIM Methods & Tools for Enterprise Integration group Shared Documents](http://cimug.ucaiug.org/MTEI/Shared Documents); call it `jCleanCim-[version]`
+7.  (copy locally the content of `/dist` directory into jCleanCim releases directory)
+8.  on CIMug SharePoint, create new sub-directory within jCleanCim directory under [CIM Methods & Tools for Enterprise Integration group Shared Documents](http://cimug.ucaiug.org/MTEI/Shared Documents); call it `jCleanCim-[version]-[os]`
 9.  upload into that new sub-directory all artefacts from dist directory
 10.  notify CIM model managers, IEC61850 UML task force and known users

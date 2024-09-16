@@ -60,14 +60,15 @@ class QeaDbRepo extends AbstractDbRepo {
 	public String getVersion() {
 		return "n/a";
 	}
-
+	
 	@Override
 	public void open() throws ApplicationException {
 		// NOTE: Connection and Statement are AutoClosable. Don't forget to close them
 		// both in order to avoid leaks.
 		try {
 			// create a database connection
-			connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+			String connectionURL = "jdbc:sqlite:" + file.getAbsolutePath();
+			connection = DriverManager.getConnection(connectionURL);
 			statement = connection.createStatement();
 			if (statement != null) {
 				statement.setQueryTimeout(30); // set timeout to 60 sec.
