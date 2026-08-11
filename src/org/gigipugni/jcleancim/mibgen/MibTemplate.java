@@ -63,20 +63,15 @@ public class MibTemplate {
 		sb.append("        FROM INET-ADDRESS-MIB;").append(Util.NL);
 		sb.append("		").append(Util.NL);
 		sb.append("    $modulename$ MODULE-IDENTITY").append(Util.NL);
-		sb.append("        LAST-UPDATED        \"201706061000Z\"").append(Util.NL);
+		// v2024.09.07 change collect header information from UML model
+		sb.append("        LAST-UPDATED        \"$mibheaderrevision$\"").append(Util.NL);
 		sb.append("        ORGANIZATION        \"IEC\"").append(Util.NL);
 		sb.append("        CONTACT-INFO        \"IEC TC57 WG15\"").append(Util.NL);
-		sb.append(
-				"        DESCRIPTION         \"Copyright (C) IEC. This version of this MIB module is part")
-				.append(Util.NL);
-		sb.append("                             of IEC 57-62351-7-Ed1. ").append(Util.NL);
-		sb.append(
-				"                             See the IEC 57-62351-7-Ed1 for full legal notices. ")
-				.append(Util.NL);
+		sb.append("        DESCRIPTION         \"$mibheaderdescription$").append(Util.NL);
 		sb.append("                             $description$\"").append(Util.NL);
 		sb.append(Util.NL);
-		sb.append("        REVISION            \"201706061000Z\"").append(Util.NL);
-		sb.append("        DESCRIPTION         \"IEC 57-62351-7-Ed1\"").append(Util.NL);
+		sb.append("        REVISION            \"$mibheaderrevision$\"").append(Util.NL);
+		sb.append("        DESCRIPTION         \"Edition update\"").append(Util.NL);	
 		sb.append(Util.NL);
 		sb.append("        ::= { $branch$ $branchid$ }").append(Util.NL);
 		sb.append(Util.NL);
@@ -178,7 +173,7 @@ public class MibTemplate {
 		StringBuilder sb = new StringBuilder();
 		sb.append("    $name$ OBJECT-GROUP ").append(Util.NL);
 		sb.append("	OBJECTS {").append(Util.NL);
-		sb.append("	$enumerations$").append(Util.NL);
+		sb.append("$enumerations$").append(Util.NL);
 		sb.append("	}").append(Util.NL);
 		sb.append("        STATUS              $status$").append(Util.NL);
 		sb.append("    	DESCRIPTION         \"$description$\"").append(Util.NL);
@@ -192,8 +187,8 @@ public class MibTemplate {
 		sb.append("    $name$ MODULE-COMPLIANCE	").append(Util.NL);
 		sb.append("        STATUS              $status$").append(Util.NL);
 		sb.append("        DESCRIPTION         \"$description$\"").append(Util.NL);
-		sb.append("	MODULE").append(Util.NL);
-		sb.append("		$enumerations$").append(Util.NL);
+		sb.append("		MODULE").append(Util.NL);
+		sb.append(" $enumerations$").append(Util.NL);
 		sb.append("        ::= { $branch$ $branchid$ }").append(Util.NL);
 		sb.append(Util.NL);
 		return sb.toString();
