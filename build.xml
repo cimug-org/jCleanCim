@@ -153,6 +153,9 @@
 	          value="true"
 	          description="spawn a new jvm for junit tests: faster on multi-CPU machine; must be used with ant when depending on native libraries (otherwise, we would have to launch ant itself with the -Djava.library.path set to dlls)." />
 	<property name="junit.haltonfailure" value="yes" description="stop on first test failure." />
+	<property name="test.clipboard"
+	          value="true"
+	          description="set to false (-Dtest.clipboard=false) to skip tests needing exclusive access to the system clipboard; they fail intermittently if anything else copies while they run." />
 
 	<!-- ========================================================== -->
 	<!-- Deliverables                                               -->
@@ -364,6 +367,9 @@
 			       failureProperty="test.failed">
 				<classpath refid="test.run.classpath" />
 				<sysproperty key="java.library.path" value="${dlls.dir}" />
+				<!-- forkmode="once" runs tests in a separate JVM: -D properties set on the Ant
+				     JVM do NOT reach them unless forwarded explicitly, as below. -->
+				<sysproperty key="test.clipboard" value="${test.clipboard}" />
 
 				<assertions enablesystemassertions="yes" description="works only with forked jvm">
 					<enable />
