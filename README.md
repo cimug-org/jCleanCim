@@ -27,11 +27,11 @@ format.
 
 ## Requirements
 
-- Java 17 or later — a JRE for the binary distribution, a JDK for the source
+- **Java 17 or later**: a JRE for the binary distribution, a JDK for the source
   distribution. A 64-bit installation is recommended: it works with both `.eap(x)` and
   `.qea(x)` project files.
 - Enterprise Architect, at the version matching your project file format.
-- MS Word (optional, English installation) — required only for document generation.
+- MS Word (optional) — required only for document generation.
 
 Full prerequisites, the project-file-to-Java compatibility matrix, installation steps,
 bundled dependencies and configuration reference are on the
@@ -47,7 +47,7 @@ bundled dependencies and configuration reference are on the
 ## Support
 
 Please read the performance notes and troubleshooting hints on the
-[documentation site](https://jcleancim.ucaiug.io/) before reporting a problem — several
+[documentation site](https://jcleancim.ucaiug.io/) before reporting a problem. Several
 of the most commonly reported issues are configuration or MS Word environment issues
 covered there. Questions and bug reports go to
 [Issues](https://github.com/cimug-org/jCleanCim/issues);
