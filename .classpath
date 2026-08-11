@@ -34,6 +34,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jCleanCim/dlls"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib-x64/eaapi.jar"/>
+	<classpathentry kind="lib" path="lib/eaapi.jar"/>
 	<classpathentry kind="output" path="build/prod/classes"/>
 </classpath>

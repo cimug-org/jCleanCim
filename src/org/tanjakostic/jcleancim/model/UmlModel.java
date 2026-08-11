@@ -44,7 +44,7 @@ import org.tanjakostic.jcleancim.util.Util;
  * IEC TC57 UML we have three such models:
  * <ul>
  * <li>TC57CIM, with {@link Nature#CIM} (default),</li>
- * <li>TC57CIMProfiles, with {@link Nature#CIM_PROFILE} (must be specified in configuration),
+ * <li>TC57CIMProfiles, with {@code Nature.CIM_PROFILE} (must be specified in configuration),
  * and,</li>
  * <li>IEC61850Domain, with {@link Nature#IEC61850} (must be specified in configuration).</li>
  * </ul>

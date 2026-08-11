@@ -1,5 +1,6 @@
 /**
- * Copyright (C) 2009-2024 Tatjana (Tanja) Kostic
+ * Copyright (C) 2009-2019 Tatjana (Tanja) Kostic<br>
+ * Copyright (C) 2022-2026 UCA International Users Group and contributors
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
@@ -44,7 +45,7 @@ import org.tanjakostic.jcleancim.util.ApplicationException;
  * kind of documentation with diagrams, ensure you swap this implementation with
  * the one that can export XMI and diagrams.
  *
- * @author todd.viegut@gmail.com
+ * @author tviegut@ucaiug.org
  * @version $Id: QeaDbRepo.java 21 2024-04-21 15:44:50Z dev978 $
  */
 class QeaDbRepo extends AbstractDbRepo {

@@ -175,13 +175,13 @@ public enum OwningWg {
 	 * according to the IEC TC57 top-level package dependencies reverse order, as follows:
 	 * <p>
 	 * <code>
-	 * {@link #WG13} -> {@link #WG14}<p>
-	 * {@link #WG13} -> {@link #WG14} -> {@link #WG16}<p>
-	 * {@link #WG13} -> {@link #WG14} -> {@link #WG16} -> {@link #OTHER_CIM}<p>
-	 * {@link #WG10} -> {@link #WG17}<p>
-	 * {@link #WG10} -> {@link #WG18}<p>
-	 * {@link #WG10} -> {@link #JWG25}<p>
-	 * [{@link #WG13} -> {@link #WG14} | {@link #WG10} -> {@link #WG17} | {@link #WG10} -> {@link #WG18} | {@link #WG10} -> {@link #JWG25}] -> {@link #WG19}<p>
+	 * {@link #WG13} -> {@link #WG14}<br>
+	 * {@link #WG13} -> {@link #WG14} -> {@link #WG16}<br>
+	 * {@link #WG13} -> {@link #WG14} -> {@link #WG16} -> {@link #OTHER_CIM}<br>
+	 * {@link #WG10} -> {@link #WG17}<br>
+	 * {@link #WG10} -> {@link #WG18}<br>
+	 * {@link #WG10} -> {@link #JWG25}<br>
+	 * [{@link #WG13} -> {@link #WG14} | {@link #WG10} -> {@link #WG17} | {@link #WG10} -> {@link #WG18} | {@link #WG10} -> {@link #JWG25}] -> {@link #WG19}<br>
 	 * any -> {@link #OTHER_IEC61850}.
 	 * </code>
 	 * <p>

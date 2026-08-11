@@ -68,7 +68,7 @@ public class MibGen {
 	/**
 	 * Model package docs are indexed, the individual package docs contain their children
 	 * recursively; we use this map for logging only. The retained docs, including packages with the
-	 * same name, are in {@link #getNonSkippedPackageDocs()}.
+	 * same name, are in {@code getNonSkippedPackageDocs()}.
 	 */
 	private final Map<String, PackageDoc> _modelPackageDocs = new LinkedHashMap<String, PackageDoc>();
 

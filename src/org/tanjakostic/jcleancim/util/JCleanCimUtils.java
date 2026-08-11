@@ -1,5 +1,6 @@
 /**
- * Copyright (C) 2009-2019 Tatjana (Tanja) Kostic
+ * Copyright (C) 2009-2019 Tatjana (Tanja) Kostic<br>
+ * Copyright (C) 2022-2026 UCA International Users Group and contributors
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
@@ -21,14 +22,14 @@ import java.util.HashSet;
 /**
  * Utility methods.
  *
- * @author todd.viegut@gmail.com
+ * @author tviegut@ucaiug.org
  * @version $Id: JCleanCimUtils.java 31 2024-09-13 01:19:54Z dev978 $
  */
 public final class JCleanCimUtils {
 	
 	private JCleanCimUtils() {};
 	
-	/** Note, we will need to at .feap to the list once that is added in a future release of jCleanCim */
+	/** Note, we did not add .feap to the list of supported EA project types in jCleanCim as this type will not be supported. */
 	private final static HashSet<String> _supportedModelTypes = new HashSet<>(Arrays.asList(new String[] {".eap", ".eapx", ".qea", "qeax"}));
 
 	public static HashSet<String> getSupportedModelTypes() {

@@ -291,7 +291,7 @@ abstract public class AbstractUmlObject implements UmlObject {
 	}
 
 	/**
-	 * Extends <code>tokens</tokens> with custom (=non-built-in) stereotypes that are not already
+	 * Extends <code>tokens</code> with custom (=non-built-in) stereotypes that are not already
 	 * contained in <code>tokens</code>. This is useful not only to collect custom stereotype
 	 * tokens, but also when you have a stereotype token be built-in for one object nature, and
 	 * custom for another.

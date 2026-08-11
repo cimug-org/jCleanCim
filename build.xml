@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- $Id: build.xml 26 2019-11-12 18:50:35Z dev978 $ -->
 <project name="jCleanCim" default="jar" basedir="." xmlns:jc="http://jcleancim.tc57.iec.org">
 	<property file="config/build.properties" />
 	<property file="${user.home}/build.properties" />
@@ -14,7 +13,7 @@
 	<!-- ========================================================== -->
 	<!-- Properties                                                 -->
 	<!-- ========================================================== -->
-	<!--ANT 1.7.1 is required -->
+	<!-- ANT 1.8.0 or later is required (javac/@includeantruntime, grand-1.8) -->
 	<property name="proj.dir" location="${basedir}" />
 	<property name="macros.uri" value="http://jcleancim.tc57.iec.org" />
 	<property name="appclass.name" value="org.tanjakostic.jcleancim.JCleanCim" />
@@ -30,7 +29,6 @@
 	          description="documentation (including javadocs)" />
 	<property name="dlls.dir" location="${proj.dir}/dlls" description="dlls" />
 	<property name="lib.dir" location="${proj.dir}/lib" description="dependencies jars" />
-	<property name="lib.x32.dir" location="${proj.dir}/lib-x32" description="dependencies jars" />
 	<property name="libdoc.dir" location="${proj.dir}/lib-doc" description="dependencies javadocs" />
 	<property name="src.dir" location="${proj.dir}/src" description="source files" />
 	<property name="test.dir" location="${proj.dir}/test" description="test source files" />
@@ -91,15 +89,21 @@
 	<property name="eaapi.jar"
 	          value="eaapi.jar"
 	          description="Enterprise Archichitect API (compile dep)" />
-	<property name="eaapi.dll"
+	<property name="eaapi-x86.dll"
 	          value="SSJavaCOM.dll"
-	          description="Enterprise Archichitect API (compile dep)" />
+	          description="Enterprise Archichitect API 32-bit (compile dep)" />
+	<property name="eaapi-x64.dll"
+	          value="SSJavaCOM64.dll"
+	          description="Enterprise Archichitect API 64-bit (compile dep)" />
 	<property name="jacob.jar"
 	          value="jacob.jar"
 	          description="MS Word API binary/COM (compile dep)" />
-	<property name="jacob.dll"
+	<property name="jacob-x86.dll"
 	          value="jacob-1.21-x86.dll"
-	          description="MS Word API binary/COM (compile dep)" />
+	          description="MS Word API binary/COM 32-bit (compile dep)" />
+	<property name="jacob-x64.dll"
+	          value="jacob-1.21-x64.dll"
+	          description="MS Word API binary/COM 64-bit (compile dep)" />
 	<property name="poi-ooxml.jar"
 	          value="poi-ooxml-3.15-beta2.jar"
 	          description="MS Word API OOXML (compile dep)" />
@@ -109,6 +113,7 @@
 	<property name="commons-logging.jar"
 	          value="commons-logging-1.1.3.jar"
 	          description="(jackcess dep)" />
+
 	<property name="pdfdoclet.jar"
 	          value="pdfdoclet-1.0.2-all.jar"
 	          description="executable to create API as pdf (build dep)" />
@@ -120,10 +125,10 @@
 	          description="used to generate dependency graph of this file as pdf (build dep, requires GraphViz)" />
 	<property name="sqlite-jdbc.jar"
 	          value="sqlite-jdbc-3.45.2.0.jar"
-	          description="JDBC driver for SQLLite (build dep)" />
+	          description="JDBC driver for SQLite; needed at runtime, not to compile (runtime dep)" />
 	<property name="slf4j-api.jar"
 	          value="slf4j-api-1.7.36.jar"
-	          description="executable to create API as pdf (build dep)" />
+	          description="core API module of SLF4J (Simple Logging Facade for Java)" />
 
 	<!-- Java compiler -->
 	<property name="javac.debug" value="yes" description="always keep yes!" />
@@ -131,17 +136,18 @@
 	          value="iso8859-1"
 	          description="explicit (default value differs per OS)" />
 	<property name="javac.deprec" value="yes" description="always keep yes!" />
-	<property name="javac.source" value="17" description="using java 17 features" />
-	<property name="javac.target" value="17" description="using java 17 features" />
+	<property name="javac.release"
+	          value="17"
+	          description="javac --release: sets language level, bytecode level AND the system modules to the real JDK 17 API. Do not go back to source/target: those compile against whichever JDK runs the build, so code using a post-17 API compiles but fails at runtime on 17." />
 	<!-- Java runtime -->
 	<property name="jvm" value="java" description="jvm used for java command" />
 	<property name="jvm.maxMem" value="512m" description="maximum jvm memory" />
 	<property name="jvm.type" value="-server" description="server/client" />
 	<property name="jvm.gc.args"
-	          value="-Xincgc"
-	          description="garbage collection space-separated options" />
+	          value=""
+	          description="garbage collection space-separated options; was -Xincgc, which JDK 9 removed (JEP 214) - passing it makes the JVM refuse to start" />
 	<!-- Javadoc-->
-	<property name="jdk.javadoc" value="http://java.sun.com/javase/7/docs/api/" />
+	<property name="jdk.javadoc" value="https://docs.oracle.com/en/java/javase/17/docs/api/" />
 	<!-- JUnit -->
 	<property name="junit.fork"
 	          value="true"
@@ -157,8 +163,8 @@
 	<property name="pdfdoc.path" location="${build.dir}/${pdfdoc.name}" />
 
 	<property name="zip-common.path" location="${dist.dir}/${project.release}-common.zip" />
-	<property name="zip-bin.path" location="${dist.dir}/${project.release}-x32-bin.zip" />
-	<property name="zip-src.path" location="${dist.dir}/${project.release}-x32-src.zip" />
+	<property name="zip-bin.path" location="${dist.dir}/${project.release}-bin.zip" />
+	<property name="zip-src.path" location="${dist.dir}/${project.release}-src.zip" />
 
 	<!-- ========================================================== -->
 	<!-- Classpaths                                                 -->
@@ -167,7 +173,7 @@
 		<pathelement location="${lib.dir}/${log4j.jar}" />
 		<pathelement location="${lib.dir}/${commons-cli.jar}" />
 		<pathelement location="${lib.dir}/${commons-lang.jar}" />
-		<pathelement location="${lib.x32.dir}/${eaapi.jar}" />
+		<pathelement location="${lib.dir}/${eaapi.jar}" />
 		<pathelement location="${lib.dir}/${jacob.jar}" />
 		<pathelement location="${lib.dir}/${poi-ooxml.jar}" />
 		<pathelement location="${lib.dir}/${jackcess.jar}" />
@@ -188,6 +194,10 @@
 
 	<path id="run.classpath">
 		<path refid="manifest.classpath" />
+		<!-- Runtime-only: the JDBC driver and its logging facade are not needed to
+		     compile (java.sql is in the JDK), but are required to open .qea(x) files. -->
+		<pathelement location="${lib.dir}/${sqlite-jdbc.jar}" />
+		<pathelement location="${lib.dir}/${slf4j-api.jar}" />
 		<!-- <pathelement location="${build.prod.dir}/classes" /> -->
 		<pathelement location="${jar.path}" />
 	</path>
@@ -229,8 +239,7 @@
 		       debug="${javac.debug}"
 		       encoding="${javac.enc}"
 		       deprecation="${javac.deprec}"
-		       source="${javac.source}"
-		       target="${javac.target}"
+		       release="${javac.release}"
 		       includeantruntime="false">
 			<classpath refid="compile.classpath" />
 			<src path="${src.dir}" />
@@ -314,8 +323,7 @@
 		       debug="${javac.debug}"
 		       encoding="${javac.enc}"
 		       deprecation="${javac.deprec}"
-		       source="${javac.source}"
-		       target="${javac.target}"
+		       release="${javac.release}"
 			   includeantruntime="false">
 			<classpath refid="test.compile.classpath" />
 			<src path="${test.dir}" />
@@ -398,7 +406,12 @@
 				<available file="dot" filepath="${env.PATH}" />
 			</or>
 		</condition>
-		<echo>GraphViz found = ${graphviz.present} </echo>
+		<!-- Separate display-only property: NEVER default graphviz.present itself,
+		     because target if="graphviz.present" tests existence, not value. -->
+		<condition property="graphviz.present.msg" value="true" else="false">
+			<isset property="graphviz.present" />
+		</condition>
+		<echo>GraphViz found = ${graphviz.present.msg}</echo>
 	</target>
 
 	<target name="javadoc" depends="compile" description="create API documentation for developer">
@@ -437,8 +450,11 @@
 			<echo>cp = @{cp}</echo>
 			<javadoc sourcepath="@{srcdir}"
 			         destdir="@{destdir}"
+			         failonerror="true"
+			         encoding="${javac.enc}"
+			         docencoding="UTF-8"
+			         charset="UTF-8"
 			         packagenames="org.*"
-			         overview="${src.dir}/overview.html"
 			         author="yes"
 			         includenosourcepackages="yes"
 			         use="yes"
@@ -448,16 +464,20 @@
 			         linkoffline="${jdk.javadoc} ${jdk.javadoc}"
 			         windowtitle="${doc.title} (@{userKind})"
 			         doctitle="${project.release}"
-			         header="${project.release}"
-			         footer="${project.release}">
+			         header="${project.release}">
 				<bottom>
-					<![CDATA[Copyright 2009-2024 Tatjana (Tanja) Kostic]]>
+					<![CDATA[Copyright 2009-2019 Tatjana (Tanja) Kostic<br>Copyright 2022-2026 UCA International Users Group and contributors]]>
 				</bottom>
+				<!-- UMLGraph 5.6.6 is built against com.sun.javadoc, which JDK 13 removed;
+				     it made ALL javadoc generation fail, not just the UML diagrams. Retired
+				     until/unless UMLGraph 6.x (new jdk.javadoc API) is adopted. To restore,
+				     drop in the v6 jar and re-enable:
 				<doclet name="org.umlgraph.doclet.UmlGraphDoc" path="${lib.dir}/${UmlGraph.jar}">
 					<param name="-all" />
 					<param name="-nodefontclassabstractname" value="Arial Italic" />
 					<param name="-nodefontabstractname" value="Arial Italic" />
 				</doclet>
+				-->
 				<classpath refid="@{cp}" />
 			</javadoc>
 		</sequential>
@@ -479,23 +499,29 @@
 		</sequential>
 	</macrodef>
 
+	<!-- PDFDoclet 1.0.2 is built against com.sun.javadoc, which JDK 13 removed, and the
+	     project is unmaintained - there is no successor version. The target is retired and
+	     no longer part of dist-bin. Re-enable (and restore the pdfdoc zipfileset in
+	     dist-bin) only if a JDK-17-capable PDF doclet is adopted:
 	<target name="javadoc-user-pdf"
 	        depends="compile"
 	        description="create pdf API documentation for user; does not support several options, thus we keep it as a separate target.">
 		<delete file="${pdfdoc.path}" />
 		<javadoc doclet="com.tarsec.javadoc.pdfdoclet.PDFDoclet"
 		         docletpath="${lib.dir}/${pdfdoclet.jar}"
+		         failonerror="true"
+		         encoding="${javac.enc}"
 		         sourcepath="${src.dir}"
 		         packagenames="org.*"
-		         overview="${src.dir}/overview.html"
 		         author="yes"
 		         includenosourcepackages="yes"
 		         access="protected"
 		         version="yes"
-		         additionalparam="-pdf ${pdfdoc.path} -api.title.page -api.title.file readme.html -allow.printing -create.links">
+		         additionalparam="-pdf ${pdfdoc.path} -allow.printing -create.links">
 			<classpath refid="compile.classpath" />
 		</javadoc>
 	</target>
+	-->
 
 	<!-- ================================================================ -->
 	<!--                      Scripts and documentation                   -->
@@ -511,11 +537,8 @@
 	</target>
 
 	<target name="prepare-txt" depends="mkdirs">
-		<copy todir="${build.dir}" overwrite="yes" description="overwrite, since we use buildtime">
+		<copy todir="${build.dir}" overwrite="yes" description="overwrite: sources may have changed">
 			<fileset dir="${basedir}" includes="${txts.to.copy}" />
-			<filterset>
-				<filter token="TIMESTAMP" value="${buildtime}" />
-			</filterset>
 		</copy>
 	</target>
 
@@ -533,6 +556,7 @@
 		<include name="${log4j.jar}" />
 		<include name="${commons-cli.jar}" />
 		<include name="${commons-lang.jar}" />
+		<include name="${eaapi.jar}" />
 		<include name="${jacob.jar}" />
 		<include name="${poi-ooxml.jar}" />
 		<include name="${jackcess.jar}" />
@@ -540,16 +564,14 @@
 		<include name="${sqlite-jdbc.jar}" />
 		<include name="${slf4j-api.jar}" />
 	</zipfileset>
-	
-	<zipfileset id="app.x32.jars" dir="${lib.x32.dir}" prefix="${project.release}/lib">
-		<include name="${eaapi.jar}" />
-	</zipfileset>
-
-	<zipfileset id="all.jars" dir="${lib.dir}" prefix="${project.release}/lib" includes="**/*" />
 
 	<zipfileset id="all.dlls" dir="${dlls.dir}" prefix="${project.release}/dlls">
-		<include name="${eaapi.dll}" />
-		<include name="${jacob.dll}" />
+		<!-- 32-bit DLLs -->
+		<include name="${eaapi-x86.dll}" />
+		<include name="${jacob-x86.dll}" />
+		<!-- 64-bit DLLs -->
+		<include name="${eaapi-x64.dll}" />
+		<include name="${jacob-x64.dll}" />
 	</zipfileset>
 
 	<target name="pack-zip-common" depends="prepare-txt,testreport">
@@ -558,7 +580,6 @@
 		        description="this gets filled after running tests, we don't want these for distributions" />
 		<zip destfile="${zip-common.path}" duplicate="fail">
 			<zipfileset refid="app.jars" />
-			<zipfileset refid="app.x32.jars" />
 			<zipfileset refid="all.dlls" />
 			<!-- <zipfileset dir="${input.dir}" prefix="${project.release}/input" includes="*small*" /> -->
 			<zipfileset dir="${input.dir}"
@@ -576,13 +597,12 @@
 	</target>
 
 	<target name="dist-bin"
-	        depends="jar,pack-zip-common,javadoc-user,javadoc-with-uml-user,javadoc-user-pdf,scripts"
-	        description="generate binary distribution, with jar, user javadocs, pdf javadocs, and scripts in the root directory">
+	        depends="jar,pack-zip-common,javadoc-user,javadoc-with-uml-user,scripts"
+	        description="generate binary distribution, with jar, user javadocs, and scripts in the root directory">
 		<delete file="${zip-bin.path}" />
 		<zip destfile="${zip-bin.path}" duplicate="fail">
 			<zipfileset src="${zip-common.path}" />
 			<zipfileset dir="${build.dir}" prefix="${project.release}" includes="${jar.name}" />
-			<zipfileset dir="${build.dir}" prefix="${project.release}/doc" includes="${pdfdoc.name}" />
 			<zipfileset dir="${build.api-usr.dir}" prefix="${project.release}/doc/api" />
 			<zipfileset dir="${build.bin.dir}" prefix="${project.release}" filemode="755" />
 		</zip>
@@ -603,8 +623,28 @@
 		</exec>
 	</target>
 
+	<target name="check-dist-src-complete" depends="probe-for-graphviz">
+		<!-- build.dot is guarded by if="graphviz.present", and the doc/${build.graph}.pdf
+		     zipfileset below simply matches nothing when the target is skipped. Without this
+		     check dist-src reports SUCCESS while shipping a source distribution that silently
+		     lacks the Ant target dependency graph. -->
+		<condition property="dist-src.incomplete.ok">
+			<or>
+				<isset property="graphviz.present" />
+				<istrue value="${allow.incomplete.dist}" />
+			</or>
+		</condition>
+		<fail unless="dist-src.incomplete.ok">
+GraphViz was not found on the PATH, so the Ant target dependency graph
+(doc/${build.graph}.pdf) cannot be produced and the source distribution would be
+incomplete.
+  - install GraphViz (https://graphviz.org/download/) and re-run, or
+  - run "ant dist-src -Dallow.incomplete.dist=true" to build without that diagram.
+		</fail>
+	</target>
+
 	<target name="dist-src"
-	        depends="pack-zip-common,javadoc,javadoc-with-uml,scripts,build.dot"
+	        depends="check-dist-src-complete,pack-zip-common,javadoc,javadoc-with-uml,scripts,build.dot"
 	        description="generate source distribution, with developer javadocs, build file and its targets' graph, scripts in their own directory, and sources">
 		<delete file="${zip-src.path}" />
 		<zip destfile="${zip-src.path}" duplicate="fail">

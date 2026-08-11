@@ -17,11 +17,11 @@ package org.tanjakostic.jcleancim.util;
  * @author tatjana.kostic@ieee.org
  * @version $Id: UtilTest.java 31 2019-12-08 01:19:54Z dev978 $
  */
-public class UtilTest extends AbstractUtilTest {
+public class Util64BitTest extends AbstractUtilTest {
 
-	private static final String MODEL_FILE = "testCombined.eap";
+	private static final String MODEL_FILE = "testCombined.qea";
 
-	private static final String TEST_CONFIG = "testConfig.properties";
+	private static final String TEST_CONFIG = "testConfig-x64.properties";
 
 	private static final String IN_EXISTING = "inexisting.properties";
 

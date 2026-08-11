@@ -10,34 +10,36 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-package org.tanjakostic.jcleancim.util;
+package org.tanjakostic.jcleancim.common;
 
 /**
- * @author tatjana.kostic@ieee.org
- * @version $Id: UtilTest.java 31 2019-12-08 01:19:54Z dev978 $
+ * @author tviegut@ucaiug.org
+ * @version $Id: ConfigTest64Bit.java 34 2026-08-10 18:37:17Z dev978 $
  */
-public class UtilTest extends AbstractUtilTest {
+public class Config64BitTest extends AbstractConfigTest {
 
-	private static final String MODEL_FILE = "testCombined.eap";
-
-	private static final String TEST_CONFIG = "testConfig.properties";
-
-	private static final String IN_EXISTING = "inexisting.properties";
+	private static final String _PROPS_FILENAME = "testConfig-x64.properties";
+	private static final String _MODEL_CMDLINE_FILENAME = "testOverridenFromCmdLine.qea";
+	private static final String _MODEL_FILENAME = "testCombined.qea";
 
 	@Override
-	protected String getModelFile() {
-		return MODEL_FILE;
+	protected String getPropsFileName() {
+		return _PROPS_FILENAME;
 	}
 
 	@Override
-	protected String getTestConfigProperties() {
-		return TEST_CONFIG;
+	protected String getModelCmdLineFileName() {
+		return _MODEL_CMDLINE_FILENAME;
+	}
+
+	@Override
+	protected String getModelFileName() {
+		return _MODEL_FILENAME;
 	}
 
 	@Override
 	protected String getInExistingProperties() {
-		return IN_EXISTING;
+		return "inexisting.qea";
 	}
 
 }
