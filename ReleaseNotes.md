@@ -49,7 +49,7 @@ With the introduction of support for `.qea(x)` files the 64-bit execution with t
 
 ### Deprecated API
 
-*  N/A
+*   N/A
 
 ### Potential backwards compatibility breaking changes for the application user
 
@@ -57,7 +57,7 @@ With the introduction of support for `.qea(x)` files the 64-bit execution with t
 
 ### Potential forwards incompatibility for the application user: old jCleanCim with new EA
 
-*   \-
+*   N/A
 
 ### Other user-visible changes
 
@@ -66,15 +66,15 @@ With the introduction of support for `.qea(x)` files the 64-bit execution with t
 
 ### Validation rules:
 
-*   \-
+*   N/A
 
 ### Bug fixes:
 
-*   \-
+*   N/A
 
 ### Known issues / limitations:
 
-*   nothing new.
+*   N/A
 
 ### Implementation and packaging:
 
