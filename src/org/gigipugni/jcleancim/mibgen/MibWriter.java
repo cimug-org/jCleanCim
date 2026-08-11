@@ -1,5 +1,6 @@
 /**
- * Copyright (C) 2015-2017 Gian Luigi (Gigi) Pugni
+ * Copyright (C) 2015-2017 Gian Luigi (Gigi) Pugni<br>
+ * Copyright (C) 2022-2026 UCA International Users Group and contributors
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
