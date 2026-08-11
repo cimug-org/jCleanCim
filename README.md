@@ -21,17 +21,17 @@ distributions are available:
 | Binary | `jCleanCim-[version]-bin.zip` | Running jCleanCim from the console |
 | Source | `jCleanCim-[version]-src.zip` | Developing and building jCleanCim, with Apache Ant or Eclipse |
 
-There is no separate 32-bit or 64-bit download — bitness is a property of the Java
-installation you use, and is determined by your Enterprise Architect project file
-format.
+There is no separate 32-bit or 64-bit download. Bitness is a property of the Java
+installation you use, and is determined by which Sparx EA project file format that
+jCleanCim is being used for.
 
 ## Requirements
 
-- **Java 17 or later**: a JRE for the binary distribution, a JDK for the source
+- A **Java 17 or later** JRE for the binary distribution, a JDK for the source
   distribution. A 64-bit installation is recommended: it works with both `.eap(x)` and
   `.qea(x)` project files.
 - Enterprise Architect, at the version matching your project file format.
-- MS Word (optional) — required only for document generation.
+- MS Word (optional) is required only for document generation.
 
 Full prerequisites, the project-file-to-Java compatibility matrix, installation steps,
 bundled dependencies and configuration reference are on the
