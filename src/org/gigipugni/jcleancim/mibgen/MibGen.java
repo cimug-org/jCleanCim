@@ -1,5 +1,6 @@
 /**
- * Copyright (C) 2015-2017 Gian Luigi (Gigi) Pugni
+ * Copyright (C) 2015-2017 Gian Luigi (Gigi) Pugni<br>
+ * Copyright (C) 2022-2026 UCA International Users Group and contributors
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
@@ -54,6 +55,10 @@ public class MibGen {
 	private boolean _isAgent;
 	private boolean _isEntry;
 	private boolean _isEnumeration;
+	
+	//v2 variables
+	private String _mibHeaderDescription;
+	private String _mibHeaderRevision;
 
 	// package stack control
 	private int _currentPackageLevel;
@@ -68,7 +73,7 @@ public class MibGen {
 	/**
 	 * Model package docs are indexed, the individual package docs contain their children
 	 * recursively; we use this map for logging only. The retained docs, including packages with the
-	 * same name, are in {@link #getNonSkippedPackageDocs()}.
+	 * same name, are in {@code getNonSkippedPackageDocs()}.
 	 */
 	private final Map<String, PackageDoc> _modelPackageDocs = new LinkedHashMap<String, PackageDoc>();
 
@@ -134,6 +139,15 @@ public class MibGen {
 
 		System.out.println("Package: " + p.getName() + ": " + p.getDepth());
 
+// v2 change start - collect header information
+		if (p.getTaggedValues().get("mibHeaderDescription") != null) {
+			_mibHeaderDescription = p.getTaggedValues().get("mibHeaderDescription");
+		}
+		if (p.getTaggedValues().get("mibHeaderRevision") != null) {
+			_mibHeaderRevision = p.getTaggedValues().get("mibHeaderRevision");
+		}
+// v2 change end
+		
 		if (p.getTaggedValues().get("objectIdentity") != null) {
 			// first cleanup the upper stack if we are going down in hierarchy
 			while (_currentPackageLevel > p.getDepth()) {
@@ -198,9 +212,6 @@ public class MibGen {
 		}
 
 		if (p.getTaggedValues().get("mibName") != null) {
-			// close previous MIB
-			// if (_mibWriter.GetCurrentMibIdentity() != null)
-			// _mibWriter.CloseMib(_packageBranchIdCounter.peek());
 			// get new mib name
 			_mibName = p.getTaggedValues().get("mibName");
 			if (p.getTaggedValues().get("mibIdentity") != null) {
@@ -222,10 +233,11 @@ public class MibGen {
 				}
 
 			}
-
+			// v2 change: added _mibHeaderDescription, _mibHeaderRevision
 			_mibWriter.writeModuleHeader(_mibName, _mibIdentity, p.getDescription().toString(),
 					p.getContainingPackage().getTaggedValues().get("objectIdentity"),
-					Integer.toString(_packageBranchIdCounter.peek()), _enumeratedTypesList);
+					Integer.toString(_packageBranchIdCounter.peek()), _enumeratedTypesList,
+					_mibHeaderDescription, _mibHeaderRevision);
 			_agentBranchIdCounter = 1;
 		}
 

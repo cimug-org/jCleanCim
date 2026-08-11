@@ -112,9 +112,9 @@ import org.tanjakostic.jcleancim.util.Util;
  * below enclosed in "" to denote some text, but they should be typed in the properties file without
  * "":
  * <ul>
- * <li>Set {@value #KEY_XMIEXPORT_ON} = "true" to export the .eap model to the three XMI formats
+ * <li>Set {@value #KEY_XMIEXPORT_ON} = "true" to export the .eap/.qea model to the three XMI formats
  * (XMI 1.1, XMI 2.1 and CIMTool XMI 1.4/Rose); this option is independent from other top-level
- * options, but makes sense only if the .eap model file is available.</li>
+ * options, but makes sense only if the .eap/.qea model file is available.</li>
  * <li>Set {@value #KEY_VALIDATION_ON} = "true" to run model validation; this option is independent
  * from other top-level options.</li>
  * <li>Set {@value #KEY_STATISTICS_ON} = "true" to run model statistics; this option is independent
@@ -153,9 +153,9 @@ import org.tanjakostic.jcleancim.util.Util;
  * </ul>
  * </li>
  * <li>Property {@value #KEY_MODEL_BUILDER} allows you to choose the most performant loading of the
- * model .eap file given your usage requirements. For full support of diagram and XMI export use
+ * model .eap/.qea file given your usage requirements. For full support of diagram and XMI export use
  * {@link ModelBuilderKind#sqlxml}. This implementation is based on SQL queries for reading the
- * model .eap file (and replaces <code>model.useSql=true</code> option of 01v07). It is almost order
+ * model .eap/.qea file (and replaces <code>model.useSql=true</code> option of 01v07). It is almost order
  * of magnitude faster than the regular API calls (option {@link ModelBuilderKind#japi}). Since
  * 01v08, we have a rocket-fast implementation, with {@link ModelBuilderKind#db} in case you don't
  * need to export diagrams or XMI. Note that both non-API options work properly for the .eap file
@@ -1017,6 +1017,7 @@ public class Config {
 
 	private final ModelBuilderKind _modelBuilder;
 	private final String _modelFileAbsPath;
+	private final EAProjType _projectType;
 	private final String _modelPicsDirAbsPath;
 	private final List<String> _iec61850NaturePackages;
 	private final String _blankPngFileAbsPath;
@@ -1179,6 +1180,8 @@ public class Config {
 
 		_modelBuilder = initModelBuilder(KEY_MODEL_BUILDER, "model builder");
 		_modelFileAbsPath = initModelFileAbsPath(modelFilename, KEY_MODEL_FILENAME);
+		_projectType = EAProjType.toEAProjType((_modelFileAbsPath != null ? _modelFileAbsPath.substring(_modelFileAbsPath.lastIndexOf(".") + 1) : null));
+		
 		_iec61850NaturePackages = Util.splitCommaSeparatedTokens(value(KEY_MODEL_NATURE_IEC61850));
 		_blankPngFileAbsPath = initBlankPngFileAbsPath(DEFAULT_BLANK_PNG_FILENAME);
 
@@ -1521,7 +1524,7 @@ public class Config {
 		return defResult;
 	}
 
-	String getPropsFileName() {
+	public String getPropsFileName() {
 		return _propsFilename;
 	}
 
@@ -1579,6 +1582,11 @@ public class Config {
 	public String getModelFileAbsPath() {
 		return _modelFileAbsPath;
 	}
+	
+	/** Returns the specific type of EA project file that the model is built from. */
+	public EAProjType getEAProjectType() {
+		return _projectType;
+	}
 
 	/** Returns true when EA file is specified in configuration. */
 	public boolean hasUmlModel() {
@@ -1599,8 +1607,8 @@ public class Config {
 	}
 
 	/**
-	 * Returns whether export to XMI is enabled; applicable only if the source of the model is an
-	 * .eap file.
+	 * Returns whether export to XMI is enabled; applicable only if the source of the model is one
+	 * of our supported EA project files [.eap, .eapx, .qea, .qeax] file.
 	 */
 	public boolean isXmiexportOn() {
 		return _xmiexportOn;

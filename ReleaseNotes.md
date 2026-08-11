@@ -1,5 +1,6 @@
 # jCleanCim release notes
 
+*   [2.4.0](#release-notes-for-jcleancim-240)
 *   [2.3.0](#release-notes-for-jcleancim-230)
 *   [2.1.0](#release-notes-for-jcleancim-210)
 *   [2.0.0](#release-notes-for-jcleancim-200)
@@ -19,12 +20,85 @@
 [Readme file](README.md)
 
 ***
+## Release notes for jCleanCim-2.4.0
+***
+
+**Released on 10-Aug-2026**
+
+Note that there remains an outstanding documentation task to update the `.pptx` tutorial to include information on the enhancements made as part of the 2.3.0 release. This was delayed at that time due to time limitations and has been delayed once again for this release. Only relevant slides pertinent to the changes made for 2.4.0 have been updated in the presentation.
+
+### New features / enhancements
+
+Issue [#5](https://github.com/cimug-org/jCleanCim/issues/5) & [#8](https://github.com/cimug-org/jCleanCim/issues/8): Support Sparx EA's new 64-bit `.qea(x)` project files. Performance is significantly better when generating documentation using the new `.qea(x)` format. New tests were added to provide additional coverage for this file format.
+
+Issue [#32](https://github.com/cimug-org/jCleanCim/issues/32): IEC 62351 Protocol Table Layout Support - contribution by Gigi Pugni
+
+Added support for standard-specific document table layouts to accommodate requirements of the IEC 62351 protocol standards. The MIBs generation now includes a dedicated iec62351AttributesDoc implementation that provides customized table column definitions and content formatting for IEC 62351 documents, with extensible architecture for future standards-specific layouts.
+
+Issue [#33](https://github.com/cimug-org/jCleanCim/issues/33): Enhanced UML Information Collection and MODULE-COMPLIANCE Generation - contribution by Gigi Pugni
+
+Improved UML information collection to extract document version metadata directly from the model, eliminating the need for embedded template definitions. Enhanced the MODULE-COMPLIANCE section generation to produce improved OID assignments while preserving backward compatibility with previous MIB editions, supporting the requirements of IEC 62351-7 Edition 2.
+
+#### Credits
+
+Gigi Pugni has contributed the enhancements delivered as issues [#32](https://github.com/cimug-org/jCleanCim/issues/32) and [#33](https://github.com/cimug-org/jCleanCim/issues/33), extending the MIBs generation he originally contributed in release 2.3.0 with IEC 62351 standard-specific table layouts and improved MODULE-COMPLIANCE generation for IEC 62351-7 Edition 2.
+
+### Performance changes in release 2.4.0
+
+With the introduction of support for `.qea(x)` files the 64-bit execution with these files is notably more performant.
+
+### Deprecated API
+
+*  N/A
+
+### Potential backwards compatibility breaking changes for the application user
+
+*   N/A
+
+### Potential forwards incompatibility for the application user: old jCleanCim with new EA
+
+*   \-
+
+### Other user-visible changes
+
+*   The binary distribution no longer contains the PDF version of the javadoc (`doc/jCleanCim-[version].pdf`). It was produced by PDFDoclet, which is built against the pre-JDK-9 doclet API that JDK 13 removed, and the project is unmaintained. The HTML javadoc in `doc/api/` is unaffected.
+*   UML class diagrams are no longer embedded in the javadoc. UMLGraph 5.6.6 has the same JDK 13 doclet incompatibility, and it was preventing javadoc generation entirely rather than only the diagrams. The Ant build target dependency graph in the source distribution still uses GraphViz and is unaffected.
+
+### Validation rules:
+
+*   \-
+
+### Bug fixes:
+
+*   \-
+
+### Known issues / limitations:
+
+*   nothing new.
+
+### Implementation and packaging:
+
+*   added new test coverage for `.qea(x)` files.
+*   upgraded libraries: Sparx Enterprise Architect 17.1 (both jar and dll).
+*   upgraded Jacob Java-COM bridge and added .jar and .dll for 64-bit support.
+*   added the SQLite JDBC driver (`sqlite-jdbc`) to read the `.qea`/`.qeax` project file format introduced in EA 16.x, which is backed by SQLite rather than MS Access. This is an addition, not a replacement: both project file formats remain supported.
+*   upgraded Jackcess (2.1.0 to 2.2.3), which continues to read the legacy `.eap`/`.eapx` MS Access format; and Commons Logging (1.1.1 to 1.1.3).
+*   updated the PPT presentation to reflect 64-bit support and relevant changes.
+*   build: moved to `javac --release 17`; javadoc now fails the build on error instead of reporting it silently; retired the UMLGraph and PDFDoclet doclets (both incompatible with JDK 13+); corrected 16 malformed javadoc comments that the doclet failure had been masking.
+*   sources: updated copyright year where relevant.
+
+### Documentation:
+
+*   TODO update the presentation to include the outstanding documentation for both 2.3.0 enhancements as well as the contributions made by Gigi Pugni for his enhancements for this release.
+
+
+***
 ## Release notes for jCleanCim-2.3.0
 ***
 
 **Released on 20-Dec-2019**
 
-Note that there was no jCleanCim-2.2.0, but rather only 2 beta milestones (2.2.0.beta-2 and 2.2.0.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 2.2.0.beta-3 ended up being released as 2.3.0. Note that due to limited time a corresopnding update of the .pptx tutorial for 2.3.0 was not completed for the release.
+Note that there was no jCleanCim-2.2.0, but rather only 2 beta milestones (2.2.0.beta-2 and 2.2.0.beta-3) that were made available for the internal needs of WG13 and ENTSO-E CGMES SG work - needed to validate CIM canonical and profile models and produce various WG13 documents at that time. The 2.2.0.beta-3 ended up being released as 2.3.0. Note that due to limited time a corresponding update of the .pptx tutorial for 2.3.0 was not completed for the release.
 
 ### New features
 
@@ -36,7 +110,9 @@ From this release, you can add stereotype `informative` to _any_ UML model eleme
 
 Along with this change, filtering on printing informative elements (controlled by configuration option `docgen.includeInformative` ) has been largely improved, to ensure to really exclude informative content of any kind by default, i.e., when option is set to ("false", "", null). You may want to set that option to `true` to print the informative content for debuging purposes, or during extensions development, but never for official standard documents.
 
-#### New configuration option `docgen.showCustomStereotypes` (TODO - add to .ppt:docgen.showCustomStereotypes=true)
+#### New configuration option `docgen.showCustomStereotypes`
+
+_TODO (documentation): add to the .pptx presentation - `docgen.showCustomStereotypes=true`_
 
 If set "true", it allows to show in the generated document custom UML stereotypes on UML model elements, in addition to built-in stereotypes already handled per model nature. Default is ("false", "", null) to preserve old behaviour, in which all custom stereotypes (non-built-in for a model nature) are not explicitly shown in generated documents. UML model managers in standardisation bodies want to keep this empty/false for main standard documents, and set it to true for these use cases:
 
@@ -47,7 +123,9 @@ If set "true", it allows to show in the generated document custom UML stereotype
 
 Note: This option does not filter elements for document generation, it merely allows you to "hide" and show the custom stereotypes on UML elements in the generated document. For actual filtered printing based on custom stereotypes, see the next section.
 
-#### New configuration option `docgen.skipForCustomStereotypes` (TODO - add to .ppt e.g.: docgen.skipForCustomStereotypes=European,new)
+#### New configuration option `docgen.skipForCustomStereotypes`
+
+_TODO (documentation): add to the .pptx presentation - e.g. `docgen.skipForCustomStereotypes=European,new`_
 
 This new option allows for selective document generation from UML models of a given nature that contain both standard model parts and extensions tagged with a custom stereotype for that nature. You can use this option now to explicitly skip during document generation all UML elements that have any of the custom stereotypes in the list specified here. This is useful in at least these use cases:
 
@@ -62,7 +140,9 @@ Important: The list given here ignores any built-in stereotype per nature in ord
 *   `Primitive`, `CIMDatatype` for CIM classes - you cannot modify built-in behaviour for these in _CIM models_, but these are custom if ever used in non-CIM models; and inversly,
 *   `cond` for IEC61850 presence condition enumeration - you cannot modify built-in behaviour for these in _IEC61850 models_, but these are custom if ever used in non-IEC61850 models.
 
-#### New configuration option `docgen.showNamespacePackages` (TODO - add to .ppt model.showNamespacePackages = Base, Dynamics, Part303, IEC61968, IEC62325, ExtEuBase)
+#### New configuration option `docgen.showNamespacePackages`
+
+_TODO (documentation): add to the .pptx presentation - `model.showNamespacePackages = Base, Dynamics, Part303, IEC61968, IEC62325, ExtEuBase`_
 
 According to CIM modelling guidelines, we can use tagged values `nsuri` and `nsprefix` to support namespace definition within the UML model itself, as well as for extensions and for generation of various implementation afterfacts. We typically specify these two tagged values at the top level (e.g., TC57CIM) and then everything below that package will have the same namespace, unless an element of UML model overwrites it. Almost every element of UML that supports tagged values can use this mechanism. So, from this release, you can control document generation inclusion or not of this information, by specifying for which UML packages to output in the MS Word document a line of text with the namespace information. Examples include Base and ExtEuBase (for 61970-301 main part and Annex A, respectively), Dynamics (for 61970-302), etc. If you don't specify any package name, or use an older config.properties file, no namespace information gets printed (default).
 
@@ -70,13 +150,17 @@ Note that this mechanism of namespace (the usual URI and optional prefix) is sup
 
 However, IEC61850 has a special definition for document namespace and dedicated UML modelling for this. The IEC61850Namespace mechanism will be supported in the next jCleanCim release.
 
-#### New configuration option `docgen.word.includeInheritancePath` (TODO - add to .ppt:docgen.word.includeInheritancePath = true)
+#### New configuration option `docgen.word.includeInheritancePath`
 
-This options allows to include the list of classes along the inheritance path for a class. Default is false, as well as when the option is missing from the configuration, to preserve the default behaviour. In the supplied configuration file we have enabled this option as it is rather useful and you can see with the test run how the result looks like and whether to keep it.
+_TODO (documentation): add to the .pptx presentation - `docgen.word.includeInheritancePath = true`_
+
+This option allows you to include the list of classes along the inheritance path for a class. Default is false, as well as when the option is missing from the configuration, to preserve the default behaviour. In the supplied configuration file we have enabled this option as it is rather useful and you can see with the test run how the result looks like and whether to keep it.
 
 Important: jCleanCim does not support multiple inheritance, but it should not crash if it finds it in the model. The behaviour for multiple inheritance is undefined.
 
-#### Support for custom styles (TODO - update .ppt)
+#### Support for custom styles
+
+_TODO (documentation): update the .pptx presentation._
 
 _Disclaimer: The MS Word and its API are for certain features unpredictable, as are all the people who edited in the past 25 years the document you use as template. This is the best I can give at the moment. Please pay attention to the WARN or ERROR log entries (what you see on the screen and what gets saved in the ./log/jCleanCim.log file). And please, be careful about style names in MS Word (see [how MS Word can smart you out](https://word.tips.net/T007601_Style_Names_Can_Affect_Style_Definitions.html))._
 
@@ -87,7 +171,9 @@ You can now try using the following new configuration options:
 
 to specify a comma-separated list of style names, in order of your preference. To accommodate for non-portable style handling accross some application locales (English vs. non-English installation of MS Word), we expect the user to configure preferred styles in order of preference, and the first one found in the _existing document_ will be used all allong. If none of configured styles exists in the document, the built-in one from the document will be used. jCleanCim never modifies your PC registry and/or global application templates (such as Normal.dot for MS Word), so if you are unhappy with the fall-back solution, please go ahead and add in the document generation application (such as MS Word) the desired styles as custom and rerun document generation. On that next run, the document should contain your desired style name(s).
 
-#### MIBs generation (for IEC62351-7) - contribution by Gigi Pugni (TODO - add to .ppt)
+#### MIBs generation (for IEC62351-7) - contribution by Gigi Pugni
+
+_TODO (documentation): add to the .pptx presentation._
 
 This is the new feature developed by WG15 for their IEC62351-7. This jCleanCim release incorporates that new feature into the baseline with the code provided by Gigi Pugni, and it can be used by means of three new configuration options:
 
@@ -99,7 +185,9 @@ MIBs generation can be enabled simultaneously with the MS Word document generati
 
 Some small test model and template to exercise this function should be available in the next release. In the meantime, WG15 can use the feature now integrated into the baseline.
 
-#### New configuration option `statistics.tagsToIgnore` (TODO - add to .ppt statistics.tagsToIgnore = GUIDBasedOn)
+#### New configuration option `statistics.tagsToIgnore`
+
+_TODO (documentation): add to the .pptx presentation - `statistics.tagsToIgnore = GUIDBasedOn`_
 
 This option allows you to add which tags to NOT export into statistics log (to shorten log). You may want to use this in case you discover that the custom tool / add-on that you use heavily marks your model with tagged values and you don't want to end up with (tens of) thousands of lines of log listing every single item in your model. In the supplied configuration file we have already added one such tagged value, known to be present in CIM profiles created and maintained with [CimConteXtor](https://www.cimcontextor.net): `GUIDBasedOn` .
 
@@ -107,7 +195,7 @@ This option allows you to add which tags to NOT export into statistics log (to s
 
 Gigi Pugni has contributed java code package with fully functional generation of MIB syntax, based on the modelling as used to support IEC62351-7. He also provided documentation describing in detail how WG15 does modelling and generates MIBs.
 
-Laurent Guise has provided a prototype that inspired the implementation of most of IEC61850-specific features in this release. Thanks for beeing the sparring partner for non-English MS Word tests and discussions :-).
+Laurent Guise has provided a prototype that inspired the implementation of most of IEC61850-specific features in this release. Thanks for being the sparring partner for non-English MS Word tests and discussions :-).
 
 ### Performance changes in release 2.3.0
 
@@ -188,7 +276,7 @@ None. Note however that newer versions of Enterprise Architect seem to always be
 
 ### New home
 
-From 2016 through 2022, jCleanCim was officially hosted at [Tanja's web space](http://www.tanjakostic.org/jcleancim) - which was accessible also to non-CIMug members.  In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated to this repository as part of the CIMug's Open Source Intiatives effort.
+From 2016 through 2022, jCleanCim was officially hosted at [Tanja's web space](https://www.tanjakostic.org/jcleancim) - which was accessible also to non-CIMug members.  In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated to this repository as part of the CIMug's Open Source Intiatives effort.
 
 ### New features
 
@@ -424,7 +512,7 @@ None.
 *   non-eclipse source distribution now includes also the two eclipse project files, so you can simply unzip the -src distribution and "Import->Existing project" into eclipse workspace (without the hassle of specific eclipse archive). Note: advantage is that you can also have that unzipped distribution anywhere on the disk, not necessarily within an eclipse workspace.
 *   updated SSJavaCOM.dll of EA with versions coming with EA11.
 *   updated UmlGraph.jar to UMLGraph-5.6\_6.6-SNAPSHOT.
-*   verified code architecture with the great tool [Structure101 Studio](http://structure101.com/); thanks to Headway Software Technologies for providing free license for work on jCleanCim - see the last slide in `doc/jCleanCimIntro.pptx`.
+*   verified code architecture with the great tool [Structure101 Studio](https://structure101.com/); thanks to Headway Software Technologies for providing free license for work on jCleanCim - see the last slide in `doc/jCleanCimIntro.pptx`.
 
 ### Documentation:
 
@@ -519,7 +607,7 @@ Note that from this release, you will need Java 7 or higher.
 
 ### Bug fixes:
 
-*   builder.ea.db/sqlxml: Fixed NPE crash in the method `initRoleTagsPerConnectorUuid`, reported by Pat Brown to appear when reading the ENTSO-E profile model [ENTSOE\_v2\_4\_2](http://cimug.ucaiug.org/Groups/ENTSO-E_IOP/SDO_2013/Shared%20Documents/Profile/v2.4.2%20-%205%20March%202013/ENTSOE_v2_4_2_iec61970cim16v18_iec61968cim12v06a_iec62325cim02v07.zip), (generated by CimContextor) with `model.builder = sqlxml/db`. Reason for NPE: EA seems to store in the connector tags table tags not only for association ends, but also for unknown and impossible-to-deduce-or-find connector(s)... Now we can handle that.
+*   builder.ea.db/sqlxml: Fixed NPE crash in the method `initRoleTagsPerConnectorUuid`, reported by Pat Brown to appear when reading the ENTSO-E profile model [ENTSOE\_v2\_4\_2](https://cimug.ucaiug.org/Groups/ENTSO-E_IOP/SDO_2013/Shared%20Documents/Profile/v2.4.2%20-%205%20March%202013/ENTSOE_v2_4_2_iec61970cim16v18_iec61968cim12v06a_iec62325cim02v07.zip), (generated by CimContextor) with `model.builder = sqlxml/db`. Reason for NPE: EA seems to store in the connector tags table tags not only for association ends, but also for unknown and impossible-to-deduce-or-find connector(s)... Now we can handle that.
 *   collector, writer: Fixed order of columns and width for custom association ends printing (this may happen when option to print inheritance from meta-model is enabled). Also, now printing simply multiplicity, like for default association (and not M/O/C - this is not really defined for relationships, such as in meta-model on 61850-7-2).
 *   validation: (for IEC61850 only) Improved performance for validation related to abbreviations: now doing sorting of all abbreviated terms only once, before the loop on all abbreviations (instead within that loop).
 *   model: (for IEC61850 only) For case of same abbreviated term defined in multiple places, and with different description, now correctly concatenating all the descriptions (instead of overwriting the older ones).
@@ -538,7 +626,7 @@ Note that from this release, you will need Java 7 or higher.
 *   replaced use of dom4j/jaxen with the standard jvm's JAX-P. What a hell this API - this was certainly design by committee, not for developers! But it's standard java and we could remove two dependencies; and our XML doc generation for both CIM and IEC61850 models is now 2-4 times faster.
 *   fully adapted all validation rules to handle structured validation errors.
 *   moved non-completed builders' code into `experimental` package.
-*   verified code architecture with the great tool [Structure101](http://structure101.com/resources/videos/introductory.php); thanks to Headway Software Technologies for providing free license for work on jCleanCim.
+*   verified code architecture with the great tool [Structure101](https://structure101.com/resources/videos/introductory.php); thanks to Headway Software Technologies for providing free license for work on jCleanCim.
 
 ### Documentation:
 
@@ -564,7 +652,7 @@ _Note: The reason to not export `cimtool` by default along with others is that C
 
 ##### Fast loading of .eap file (if no need to export diagrams or XMI)
 
-We have added as an option, an extremely fast implementation for reading the .eap model file (thanks to Arnold deVos for the hint on a pure java library for reading M$ Access files: [Jackcess](http://jackcess.sourceforge.net/)). Our big standard UML models can now load in a couple of seconds, and this functionality is completely independent of the Enterprise Architect libraries. Consequently, this is totally platform independent and can run on any OS.
+We have added as an option, an extremely fast implementation for reading the .eap model file (thanks to Arnold deVos for the hint on a pure java library for reading M$ Access files: [Jackcess](https://jackcess.sourceforge.io/)). Our big standard UML models can now load in a couple of seconds, and this functionality is completely independent of the Enterprise Architect libraries. Consequently, this is totally platform independent and can run on any OS.
 
 The limitation of this new implementation is that we _cannot_ export diagrams or XMI, because those exports are performed by the EA repository API (not used with this implementation). Still, most of the time, you'll be doing model edit-validate-fix cycles, and this new implementation supports perfectly that use case: you can validate very quickly what you just edited.
 
@@ -774,7 +862,7 @@ base-small
 
 #### Potential backwards compatibility breaking changes for the application user
 
-*   With the new model [loading implementation](#db), we discarded the boolean option `model.useSql` in favour of choice option `model.builder`:
+*   With the new model [loading implementation](#fast-loading-of-eap-file-if-no-need-to-export-diagrams-or-xmi), we discarded the boolean option `model.useSql` in favour of choice option `model.builder`:
     *   `model.builder=db` (or empty, or null) is the new default, because fastest, and because it's suitable for quick validation and statistics printing, as well as for diagram-less MS Word or XML document generation.
     *   `model.builder=sqlxml` is equivalent of `model.useSql=true` from 01v07. Use it when packing a release (with XMI exports) or generating documentation (with full diagrams export).
     *   `model.builder=japi` is the equivalent of the old default; you will most likely never anymore need to use this one (but we keep it in case Sparx changes one day their underlying database schema - so we can still work before supporting new shema; or Sparx fulfils the expectation of their many customers and provides a rocket fast implementation of the API)
@@ -855,7 +943,7 @@ For IEC61850 UML model managers, at present there is no need to do any XMI expor
 
 #### Performance improvements in release 01v07
 
-Release 01v07 does contain a full new implementation of alternative way of initialising in-memory model from Enterprise Architect: instead of using simply the API, we now do the bulk SQL queries, and initialise the model from the returned XML data by using XPath. Performance improvement is huge, at a cost of potential need to trick the EA model: see [EA ordering errors](#eaErrorOrdering).
+Release 01v07 does contain a full new implementation of alternative way of initialising in-memory model from Enterprise Architect: instead of using simply the API, we now do the bulk SQL queries, and initialise the model from the returned XML data by using XPath. Performance improvement is huge, at a cost of potential need to trick the EA model: see [EA ordering errors](README.md#hints).
 
 The following numbers have been traced from runs on Lenovo ThinkPad T410 (i5 CPU, 3GB memory), **64-bit** Windows 7 Enterprise Edition, Office 2010, Enterprise Architect 9, 32-bit Java **1.7.0\_05**. Performance has been significantly improved for reading from EA file; there are no changes in timing for MS Word document generation (yet):
 
@@ -1587,7 +1675,7 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
     *   ClassesNeverUsedAsTypeForCIMAttribute
     *   AttributesWithInexistingEnumLiteralAsInitValue
 *   fixed bug where association ends were incorrectly set for recursive associations
-*   fixed problem with State (element) and Statechart (diagram) having both package and class as parent: see [forum topic](http://www.sparxsystems.com/cgi-bin/yabb/YaBB.cgi?num=1265719248/1#1).
+*   fixed problem with State (element) and Statechart (diagram) having both package and class as parent: see [forum topic](https://www.sparxsystems.com/cgi-bin/yabb/YaBB.cgi?num=1265719248/1#1).
 *   did some refactoring to remove circular dependency statistics-model
 *   in statistics package, started implementing owner filter
 *   added basic calculation and logging of cross-package dependencies
@@ -1603,10 +1691,7 @@ MS Word doc generation of IEC61850-7-4, with special table formatting
 
 ***
 
-Built on 2019-12-20T22:05:24
-
 [Copyright](copyright.md) [License](LICENSE)
 
-[Feedback](mailto:tatjana-dot-kostic-atNoSpam-ieee-dot-org)
+[Feedback](https://github.com/cimug-org/jCleanCim/issues)
 
-[![Valid XHTML 1.0 Strict](http://www.w3.org/Icons/valid-xhtml10)](http://validator.w3.org/check?uri=referer)

@@ -1,0 +1,51 @@
+# Jekyll configuration for the jCleanCim GitHub Pages site
+# (https://jcleancim.ucaiug.io/, built from the master branch).
+#
+# index.md is the site home page. README.md is the GitHub repository landing
+# page and is deliberately kept out of the published site.
+
+# ---------------------------------------------------------------------------
+# Site identity. Used for the browser title and the meta description; without
+# these, GitHub falls back to the repository name and description.
+# ---------------------------------------------------------------------------
+title: jCleanCim
+description: >-
+  Open source tool for validation and documentation generation from Sparx
+  Enterprise Architect UML models of IEC TC57 CIM and IEC 61850.
+url: https://jcleancim.ucaiug.io
+baseurl: ""
+
+# ---------------------------------------------------------------------------
+# jekyll-readme-index is enabled by default on GitHub Pages and would publish
+# README.md as a second page at /README/. index.md already exists and takes
+# precedence as the home page, so remove the README from the site output to
+# avoid two near-identical pages on the same domain.
+# ---------------------------------------------------------------------------
+readme_index:
+  remove_originals: true
+
+# ---------------------------------------------------------------------------
+# This repository is a Java project, not a web site. Without an exclude list
+# Jekyll copies the entire working tree into the published site - sources,
+# jars, DLLs and test inputs included. Everything referenced by index.md
+# (doc/, readme-icons/, ReleaseNotes.md, copyright.md, LICENSE) is kept.
+# ---------------------------------------------------------------------------
+exclude:
+  - bin/
+  - config/
+  - dlls/
+  - input/
+  - lib/
+  - lib-doc/
+  - src/
+  - test/
+  - build.xml
+  - .classpath
+  - .project
+  - .gitignore
+
+# ---------------------------------------------------------------------------
+# Optional: a theme changes how the site looks. The site currently has no
+# theme, so uncomment only when you are ready to review the visual result.
+# ---------------------------------------------------------------------------
+# theme: jekyll-theme-primer

@@ -1,5 +1,6 @@
 /**
- * Copyright (C) 2009-2019 Tatjana (Tanja) Kostic
+ * Copyright (C) 2009-2019 Tatjana (Tanja) Kostic<br>
+ * Copyright (C) 2022-2026 UCA International Users Group and contributors
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
+import org.tanjakostic.jcleancim.common.OwningWg;
 import org.tanjakostic.jcleancim.docgen.collector.BookmarkRegistry;
 import org.tanjakostic.jcleancim.docgen.collector.DocgenConfig;
 import org.tanjakostic.jcleancim.docgen.collector.TableSpec;
@@ -49,8 +51,9 @@ class DefaultAttributesDoc extends AbstractPropertiesDoc {
 		super(docgenCfg, c, "att", String.format(INTRO_FMT, c.getName()),
 				String.format(CAPTION_FMT, c.getQualifiedName()), TableSpec.ATTRS, null,
 				bmRegistry);
+		
 		log(_logger, "---- collecting doc for attributes of " + c.getName() + " ...");
-
+				
 		Collection<UmlAttribute> retainedNatives = new ArrayList<UmlAttribute>();
 		Collection<UmlAttribute> retainedInheriteds = new ArrayList<UmlAttribute>();
 		super.filterAttributes(c, retainedNatives, retainedInheriteds);
@@ -66,8 +69,9 @@ class DefaultAttributesDoc extends AbstractPropertiesDoc {
 
 			EntryDocImpl entry = EntryDocImpl.createData(bookmarkID, desc.formatInfo, a.getName(),
 					a.getMultiplicity().getBounds(), typeName, desc.text);
-			addEntry(entry);
 
+			addEntry(entry);
+			//gigi??? (end
 			// for xml:
 			initRawData(entry, a);
 			initAttributeRawData(entry, a);
@@ -84,9 +88,13 @@ class DefaultAttributesDoc extends AbstractPropertiesDoc {
 			TextDescription docInh = new TextDescription(
 					INHERITED_FROM + prepareForHyperlink(a.getContainingClass()));
 			CellText desc = deduceCellText(descPrefix, docInh, null, a);
+			
+			String st = c.getStereotype().value();
+			String mandatory = a.getMultiplicity().getBounds();
 
 			EntryDocImpl entry = EntryDocImpl.createData(bookmarkID, null, a.getName(),
-					a.getMultiplicity().getBounds(), typeName, desc.text);
+				a.getMultiplicity().getBounds(), typeName, desc.text);
+		
 			addEntry(entry);
 
 			// for xml:

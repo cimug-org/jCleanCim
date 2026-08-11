@@ -18,6 +18,8 @@ package org.tanjakostic.jcleancim.validation;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -26,6 +28,7 @@ import org.tanjakostic.jcleancim.common.Config;
 import org.tanjakostic.jcleancim.common.Nature;
 import org.tanjakostic.jcleancim.model.UmlModel;
 import org.tanjakostic.jcleancim.util.ApplicationException;
+import org.tanjakostic.jcleancim.util.JCleanCimUtils;
 import org.tanjakostic.jcleancim.util.Util;
 
 /**
@@ -43,7 +46,7 @@ public class ModelValidator {
 
 	private final File _reportFile;
 	private final ModelIssues _issues = new ModelIssues();
-
+	
 	public ModelValidator(UmlModel model) {
 		Config cfg = model.getCfg();
 		_validators = new ArrayList<AbstractValidator<?>>();
@@ -114,18 +117,18 @@ public class ModelValidator {
 	File deduceReportFilepath(Config cfg) throws ApplicationException {
 		String modelFileAbsPath = cfg.getModelFileAbsPath();
 		if (modelFileAbsPath == null) {
-			_logger.warn("Don't know how to report without .eap model.");
+			_logger.warn("Don't know how to report without a valid model specified in " + cfg.getPropsFileName() + " " + JCleanCimUtils.getSupportedModelTypes() + ".");
 			return null;
 		}
 		String eaModelFileName = new File(modelFileAbsPath).getName();
-		if (!eaModelFileName.endsWith(".eap")) {
-			_logger.warn("Expecting an .eap model file, and don't know how to report from "
+		if (!JCleanCimUtils.getSupportedModelTypes().contains(eaModelFileName.substring(eaModelFileName.lastIndexOf(".")).toLowerCase())) {
+			_logger.warn("Expecting a supported model file [" + JCleanCimUtils.getSupportedModelTypes() + " ], and don't know how to report from "
 					+ eaModelFileName + ".");
 			return null;
 		}
 
-		// remove the extension ".eap"
-		String outFileName = eaModelFileName.substring(0, eaModelFileName.length() - 4);
+		// remove the extension (e.g. ".eap")
+		String outFileName = eaModelFileName.substring(0, eaModelFileName.lastIndexOf("."));
 		return Util.getOutputFileRenameIfExists(Config.OUTPUT_DIR_NAME,
 				ModelValidator.PROBLEMS_REPORT_PREFIX + outFileName + ".csv");
 	}

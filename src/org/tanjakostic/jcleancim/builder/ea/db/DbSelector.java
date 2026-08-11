@@ -25,9 +25,8 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.tanjakostic.jcleancim.builder.ea.EaSelector;
+import org.tanjakostic.jcleancim.common.EAProjType;
 import org.tanjakostic.jcleancim.util.ApplicationException;
-
-import com.healthmarketscience.jackcess.Table;
 
 /**
  * EA repository supports a method to perform an SQL query and return the result set as XML. This
@@ -40,9 +39,11 @@ class DbSelector implements EaSelector {
 	private static final Logger _logger = Logger.getLogger(DbSelector.class.getName());
 
 	private final DbRepo _repo;
+	private final EAProjType _projectType;
 
-	public DbSelector(DbRepo repo) {
+	public DbSelector(DbRepo repo, EAProjType projectType) {
 		_repo = repo;
+		_projectType = projectType;
 	}
 
 	// ===== Impl. of org.tanjakostic.jcleancim.builder.ea.EaSelector methods =====
@@ -51,13 +52,15 @@ class DbSelector implements EaSelector {
 	public List<Map<String, String>> select(String tableName, String[] columnNames,
 			boolean skipTiming) throws ApplicationException {
 
+		columnNames = convert(_projectType, columnNames);
+		
 		long start = System.currentTimeMillis();
 		_logger.info("loading table " + tableName);
 
 		List<Map<String, String>> result = new ArrayList<Map<String, String>>();
 		Set<String> tags = new HashSet<String>(Arrays.asList(columnNames));
 
-		Table table = _repo.getTable(tableName);
+		Iterable<Map<String, Object>> table = _repo.getTable(tableName);
 		for (Map<String, Object> dbRow : table) {
 			Map<String, String> row = new HashMap<String, String>();
 			result.add(row);

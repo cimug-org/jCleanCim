@@ -1,5 +1,6 @@
 /**
- * Copyright (C) 2015-2017 Gian Luigi (Gigi) Pugni
+ * Copyright (C) 2015-2017 Gian Luigi (Gigi) Pugni<br>
+ * Copyright (C) 2022-2026 UCA International Users Group and contributors
  * <p>
  * This file belongs to jCleanCim, a tool supporting tasks of UML model managers for IEC TC57 CIM
  * and 61850 models.
@@ -185,7 +186,21 @@ public class MibWriter {
 		}
 		return object;
 	}
+	// v2 change added replaceHeaderDescription and replaceHeaderRevision methods
+	private String replaceHeaderDescription(String object, String description) {
+		if (description != null) {
+			return object.replace("$mibheaderdescription$", splitToMultipleLines(description, 29));
+		}
+		return object;
+	}
 
+	private String replaceHeaderRevision(String object, String description) {
+		if (description != null) {
+			return object.replace("$mibheaderrevision$", splitToMultipleLines(description, 29));
+		}
+		return object;
+	}
+	// v2 change end 
 	private String replaceEnumerations(String object, String enumerations) {
 		if (enumerations != null) {
 			return object.replace("$enumerations$", enumerations);
@@ -294,10 +309,9 @@ public class MibWriter {
 		}
 	}
 
-	// FIXME: initialising _outPrint here
-	// FIXME: do null test within replace() method
+	// v2 change: added String mibHeaderDescription, String mibHeaderRevision parameters
 	public void writeModuleHeader(String mibName, String moduleName, String description,
-			String branch, String branchid, String enums) {
+			String branch, String branchid, String enums, String mibHeaderDescription, String mibHeaderRevision) {
 		String object = _HeaderTemplate;
 		_mibName = mibName;
 		_mibIdentity = moduleName;
@@ -320,6 +334,10 @@ public class MibWriter {
 		object = replaceDescription(object, description);
 		object = replaceBranch(object, branch);
 		object = replaceBranchid(object, branchid);
+		// v2 change
+		object = replaceHeaderDescription(object, mibHeaderDescription);
+		object = replaceHeaderRevision(object, mibHeaderRevision);
+		// v2 change end 
 		if (enums != null) {
 			object = object.replace("$enums$", splitToMultipleLines(enums, 4));
 		}
@@ -439,26 +457,35 @@ public class MibWriter {
 		String groupComplianceList = "";
 
 		branchId++;
-
-		if (!_mandatoryObjects.isEmpty()) {
-			writeObjectGroup(_mibIdentity + "Group", "current",
-					_mibIdentity + " mandatory objects group", _mibIdentity,
-					Integer.toString(branchId++), _mandatoryObjects);
-			_mandatoryObjects.clear();
-			groupComplianceList = "MANDATORY-GROUPS" + Util.NL + "{" + _mibIdentity + "Group" + "}"
-					+ Util.NL;
-		}
-
+		
+		// 2024.09.07 change, write optional objects, before mandatory object to preserve object ID order with previous
+		// model version that didn't have mandatory objects, so swapped the two "if" sections
+		
 		if (!_optionalObjects.isEmpty()) {
 			writeObjectGroup(_mibIdentity + "GroupOptional", "current",
 					_mibIdentity + " optional objects group", _mibIdentity,
-					Integer.toString(branchId++), _optionalObjects);
+					Integer.toString(branchId), _optionalObjects);
 			_optionalObjects.clear();
 		}
-
-		writeModuleCompliance(_mibIdentity + "Compliance", "current", _mibIdentity + " Compliance",
-				_mibIdentity, Integer.toString(branchId), groupComplianceList);
-
+		
+		branchId++;
+		
+		if (!_mandatoryObjects.isEmpty()) {
+			// v2 change, module compliance only makes sense when we have mandatory groups, so, introduced check
+			groupComplianceList = "MANDATORY-GROUPS " + "{" + _mibIdentity + "Group" + "}"
+					+ Util.NL;
+			writeModuleCompliance(_mibIdentity + "Compliance", "current", _mibIdentity + " Compliance",
+					_mibIdentity, Integer.toString(branchId++), groupComplianceList);
+			// v2 change end
+			writeObjectGroup(_mibIdentity + "Group", "current",
+					_mibIdentity + " mandatory objects group", _mibIdentity,
+					Integer.toString(branchId), _mandatoryObjects);
+			_mandatoryObjects.clear();
+	
+		}
+		
+		// v2024.09.07 change end
+			
 		// close MIB file ... very important!
 		_outPrint.print(System.lineSeparator() + "END" + System.lineSeparator());
 		_outPrint.close();

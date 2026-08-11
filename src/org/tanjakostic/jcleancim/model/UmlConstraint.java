@@ -64,7 +64,7 @@ public class UmlConstraint extends AbstractUmlObject {
 		 * for doc of the constraint is:
 		 *
 		 * <pre>
-		 *   <comma separated attributes list>[: optional free text]
+		 *   &lt;comma separated attributes list&gt;[: optional free text]
 		 * </pre>
 		 */
 		CLASS("class attributes", "class attributes constraint", "Constraint",

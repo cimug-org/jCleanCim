@@ -306,7 +306,7 @@ public class UmlStereotype {
 	/**
 	 * {@inheritDoc}
 	 * <p>
-	 * Ensloses {@link #value()} into "<<" and ">>".
+	 * Encloses {@link #value()} into "&lt;&lt;" and "&gt;&gt;".
 	 */
 	@Override
 	public String toString() {

@@ -24,8 +24,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.tanjakostic.jcleancim.builder.ea.EA;
 import org.tanjakostic.jcleancim.builder.ea.EaSelector;
 import org.tanjakostic.jcleancim.builder.ea.EaSql2Xml;
+import org.tanjakostic.jcleancim.common.EAProjType;
 import org.tanjakostic.jcleancim.util.Util;
 import org.tanjakostic.jcleancim.xml.JaxpHelper;
 import org.tanjakostic.jcleancim.xml.XmlString;
@@ -45,9 +47,11 @@ public class SqlXmlSelector implements EaSelector {
 	private static final Logger _logger = Logger.getLogger(SqlXmlSelector.class.getName());
 
 	private final EaSql2Xml _queror;
+	private final EAProjType _projectType;
 
-	public SqlXmlSelector(EaSql2Xml queror) {
+	public SqlXmlSelector(EaSql2Xml queror, EAProjType projectType) {
 		_queror = queror;
+		_projectType = projectType;
 	}
 
 	private String sqlSelect(String what, String tableName, boolean skipTiming) {
@@ -133,6 +137,9 @@ public class SqlXmlSelector implements EaSelector {
 	@Override
 	public List<Map<String, String>> select(String tableName, String[] columnNames,
 			boolean logTime) {
+		
+		columnNames = convert(_projectType, columnNames);
+		
 		String what = Util.concatCharSeparatedTokens(",", Arrays.asList(columnNames));
 		String xmlResult = sqlSelect(what, tableName, logTime);
 

@@ -114,7 +114,7 @@ public class UmlOperation extends AbstractUmlObject {
 		private static final Data DEFAULT = new Data();
 
 		/**
-		 * Returns empty instance; sets default return kind to {@value ReturnKind#OP_RET_VOID}.
+		 * Returns empty instance; sets default return kind to {@link ReturnKind#OP_RET_VOID}.
 		 */
 
 		public static Data empty() {

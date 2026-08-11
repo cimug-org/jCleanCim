@@ -54,7 +54,7 @@ public class JapiModelBuilder extends EaModelBuilder<Package, Package> {
 	}
 
 	@Override
-	protected String initRepoAndGetVersion() {
+	protected String initRepoAndGetVersion(String nodelFileAbsPath) {
 		_repo = new JapiRepo();
 		return _repo.getVersion();
 	}
