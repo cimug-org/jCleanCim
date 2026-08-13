@@ -2,7 +2,7 @@
 
 ![jCleanCim](readme-icons/image-header-1.png)
 
-**Documentation: [jcleancim.ucaiug.io](https://jcleancim.ucaiug.io/)**
+**Public Website & Documentation: [jcleancim.ucaiug.io](https://jcleancim.ucaiug.io/)**
 
 **jCleanCim** is an open source tool for validation and documentation generation from
 [Enterprise Architect](https://sparxsystems.com/products/ea) UML models of IEC TC57 CIM
