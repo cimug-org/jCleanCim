@@ -1,8 +1,5 @@
 # jCleanCim
 
-![image](readme-icons/image-header-1.png)  
-\[[GitHub Repo](https://github.com/cimug-org/jcleancim)\]
-
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](https://sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
 Up until the end of 2015 it had been hosted by the [CIM Methods & Tools for Enterprise Integration group](https://cimug.ucaiug.org/MTEI/Shared%20Documents/jCleanCim) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only. To make it accessible to non-CIMug members, in 2016 it was transitioned to a fully open source tool and hosted at [Tanja's web space](https://www.tanjakostic.org/jcleancim). 
@@ -29,9 +26,9 @@ For a full history of all release notes see [here](ReleaseNotes.md).
 
 ## Latest Release
 
-  -   2.4.0
+  -   2.4.0 (released 10-Aug-2026)
 
-      - The latest release is available on GitHub at [jCleanCim-2.4.0](https://github.com/cimug-org/jCleanCim/releases) and is delivered as a ZIP file.
+      - The latest release is available on GitHub at [jCleanCim-2.4.0](https://github.com/cimug-org/jCleanCim/releases/tag/2.4.0) and is delivered as two ZIP files (binary and source).
       - Information on features and fixes for the release can be found in the [release notes](ReleaseNotes.md).
 
 ## Introduction to jCleanCim

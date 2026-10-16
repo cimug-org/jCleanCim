@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% seo %}
+    <link rel="icon" href="{{ "/favicon.ico" | relative_url }}" sizes="16x16 32x32 48x48">
+    <link rel="icon" href="{{ "/media/logo/jcleancim-mark.svg" | relative_url }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ "/media/logo/jcleancim-mark-180.png" | relative_url }}">
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      {%- comment -%}
+        Website header (CIM Model Management branding), shown on every page of the site:
+        index.md, ReleaseNotes.md and copyright.md. README.md is the GitHub repository page
+        and is not published on the site (see readme_index in _config.yml).
+        The release number and date come from jcleancim_version and jcleancim_release_date
+        in _config.yml.
+      {%- endcomment -%}
+      {%- assign v = site.jcleancim_version -%}
+      <div class="jc-hero">
+        <img class="jc-hero-mark" src="{{ "/media/brand/CIMug_mark.svg" | relative_url }}" alt="">
+        <div class="jc-hero-inner">
+          <a class="jc-hero-home" href="{{ "/" | relative_url }}"><img class="jc-hero-logo" src="{{ "/media/logo/jcleancim-logo-dark.svg" | relative_url }}" alt="jCleanCim"></a>
+          <span class="jc-hero-rule"></span>
+          <div class="jc-hero-text">
+            <div class="jc-hero-kicker">UCAIug open source tool · <span class="jc-nowrap">latest release {{ v }}</span> · <span class="jc-nowrap">{{ site.jcleancim_release_date }}</span></div>
+            <div class="jc-hero-tag">Validation and IEC document generation for CIM and IEC 61850 UML models</div>
+          </div>
+          <img class="jc-hero-cimmm" src="{{ "/media/brand/CIM_Model_Management_logo_white.svg" | relative_url }}" alt="CIM Model Management">
+        </div>
+        <div class="jc-hero-actions">
+          <a class="jc-btn primary" href="https://github.com/cimug-org/jCleanCim/releases/download/{{ v }}/jCleanCim-{{ v }}-bin.zip">Download {{ v }} <small>(binary .zip)</small></a>
+          <a class="jc-btn" href="https://github.com/cimug-org/jCleanCim/releases/download/{{ v }}/jCleanCim-{{ v }}-src.zip">Source <small>(.zip)</small></a>
+          <a class="jc-btn" href="{{ "/doc/jCleanCimIntro.pdf" | relative_url }}">Introduction <small>(PDF)</small></a>
+          <a class="jc-btn" href="{{ "/ReleaseNotes.html" | relative_url }}">Release notes</a>
+          <a class="jc-btn" href="https://github.com/cimug-org/jCleanCim">GitHub repo</a>
+        </div>
+      </div>
+
+      {{ content }}
+
+      {% if site.github.private != true and site.github.license %}
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. {% github_edit_link "Improve this page" %}.
+      </div>
+      {% endif %}
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,6 +1,4 @@
-# jCleanCim
-
-![jCleanCim](readme-icons/image-header-1.png)
+<h1 id="jcleancim"><img src="media/logo/jcleancim-logo.svg#gh-light-mode-only" alt="jCleanCim" height="64"><img src="media/logo/jcleancim-logo-dark.svg#gh-dark-mode-only" alt="jCleanCim" height="64"></h1>
 
 **Public Website & Documentation: [https://jcleancim.ucaiug.io](https://jcleancim.ucaiug.io/)**
 

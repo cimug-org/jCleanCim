@@ -16,6 +16,14 @@ url: https://jcleancim.ucaiug.io
 baseurl: ""
 
 # ---------------------------------------------------------------------------
+# Current release, shown in the website header (_layouts/default.html) and
+# used for its download buttons. Update both when a new release is published.
+# Release dates are DD-Mon-YYYY.
+# ---------------------------------------------------------------------------
+jcleancim_version: 2.4.0
+jcleancim_release_date: 10-Aug-2026
+
+# ---------------------------------------------------------------------------
 # jekyll-readme-index is enabled by default on GitHub Pages and would publish
 # README.md as a second page at /README/. index.md already exists and takes
 # precedence as the home page, so remove the README from the site output to
@@ -43,9 +51,10 @@ exclude:
   - .classpath
   - .project
   - .gitignore
+  - media/logo/README.md
 
 # ---------------------------------------------------------------------------
-# Optional: a theme changes how the site looks. The site currently has no
-# theme, so uncomment only when you are ready to review the visual result.
+# Theme: GitHub's Primer, with the CIM Model Management branding in
+# assets/css/style.scss and the navy header in _layouts/default.html.
 # ---------------------------------------------------------------------------
-# theme: jekyll-theme-primer
+theme: jekyll-theme-primer
