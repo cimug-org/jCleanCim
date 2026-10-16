@@ -64,5 +64,5 @@ Open Source Initiatives effort.
 ## License
 
 Since release 2.0.0, jCleanCim has been licensed under the GNU
-[LGPLv3](license.txt). See [copyright](copyright.md) for the copyright notice, which is
+[LGPLv3](LICENSE). See [copyright](copyright.md) for the copyright notice, which is
 also included in every distribution and in every Java source file.

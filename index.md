@@ -2,7 +2,7 @@
 
 **jCleanCim** is an open source tool for validation and documentation generation from [Enterprise Architect](https://sparxsystems.com/products/ea) UML models of IEC TC57 CIM and IEC61850 UML models.
 
-Up until the end of 2015 it had been hosted by the [CIM Methods & Tools for Enterprise Integration group](https://cimug.ucaiug.org/MTEI/Shared%20Documents/jCleanCim) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only. To make it accessible to non-CIMug members, in 2016 it was transitioned to a fully open source tool and hosted at [Tanja's web space](https://www.tanjakostic.org/jcleancim). 
+Up until the end of 2015 it had been hosted by the [CIM Methods & Tools for Enterprise Integration group](https://ucaiug.org/) on the CIM Users Group web site, with access limited to the CIM and IEC61850 users community members only. To make it accessible to non-CIMug members, in 2016 it was transitioned to a fully open source tool and hosted at [Tanja's web space](https://www.tanjakostic.org/jcleancim). 
 
 In November of 2022, with Tanja Kostic's approval, jCleanCim was officially migrated here as part of the CIMug's Open Source Initiatives effort.
 
@@ -132,7 +132,9 @@ install the CIMTool plug-in into that (or a more recent) Eclipse.
   dependency graph as a PDF for the source distribution. To verify whether you already
   have it installed, open the console window and type `dot -V`. If Graphviz is not
   installed, the target that depends on it is skipped and the rest of the build is
-  unaffected; only that one diagram is missing.
+  unaffected; only that one diagram is missing. The exception is `ant dist-src`, which
+  stops rather than produce a source distribution without the diagram (see the note
+  below).
 
 Graphviz is the only external install needed for the build. The other build-time
 tools — JUnit 4 and Grand — are bundled in the source
@@ -151,7 +153,7 @@ Note: This is the most flexible option if you are developing, as you can have th
 Eclipse project anywhere on your disk (not necessarily in an Eclipse workspace).
 
 
-_Note for source distribution (and if you need to create the distribution yourself)_: the Ant build file contains a target that invokes the GraphViz application to render the build target dependency graph as a PDF. If you do not have GraphViz installed on your local system, that target is simply skipped during the build. If you want to produce jCleanCim distributions complete with that diagram, install GraphViz.
+_Note for source distribution (and if you need to create the distribution yourself)_: the Ant build file contains a target that invokes the GraphViz application to render the build target dependency graph as a PDF. If you do not have GraphViz installed on your local system, that target is skipped during an ordinary build. Producing the source distribution (`ant dist-src`, also run by `ant all`) is different: it stops with an error rather than silently ship a distribution without the diagram. Either install GraphViz and re-run, or run `ant dist-src -Dallow.incomplete.dist=true` to build the source distribution without it.
 
 ## Dependencies
 To be self-contained, jCleanCim distributions bundle relevant third party open source/distributable libraries. Java jars are in the project's `lib` directory, and MS Windows dlls are in the `dlls` directory.
@@ -166,7 +168,7 @@ The following libraries are packaged with all the distributions of jCleanCim:
 *   For document generation functionality, we use [Jacob](https://sourceforge.net/projects/jacob-project/files/) library that enables access from Java to MS Word automation interface, wrapped into a dll for MS Windows. Since release 2.4.0 both 32-bit and 64-bit dlls are distributed, and the matching one is selected for the Java installation you run. The MS Word/Office used is the one on your local machine, and not distributed here.
 *   For logging, we use Apache's [log4j](https://logging.apache.org/log4j/).
 *   For command line processing, we use Apache's [Commons CLI](https://commons.apache.org/proper/commons-cli/).
-*   For string markup processing and some stopwatch functionality, we use Apache's [Commons Lang](https://commons.apache.org/proper/commons-lang/). Both the 2.x and 3.x lines are bundled.
+*   For string markup processing and some stopwatch functionality, we use Apache's [Commons Lang](https://commons.apache.org/proper/commons-lang/). The 2.x line (`commons-lang-2.6.jar`) is bundled; Jackcess also depends on it.
 *   Apache [Commons Logging](https://commons.apache.org/proper/commons-logging/) is bundled as a transitive dependency of the libraries above; it is not used directly from the jCleanCim source code.
 *   For the logging facade required by the SQLite JDBC driver, we bundle [SLF4J](https://www.slf4j.org/) (API only).
 *   For reading and writing OpenXML (`.docx`) documents, we bundle Apache [POI](https://poi.apache.org/) (`poi-ooxml`).
@@ -174,9 +176,9 @@ The following libraries are packaged with all the distributions of jCleanCim:
 The following libraries are packaged only with source distribution of jCleanCim:
 
 *   For unit testing, we use [JUnit 4](https://junit.org/junit4/). You will need this only if you run or develop tests, or if you are producing distributions (that include running tests and producing test reports).
-*   For generation of ant target dependencies graph, we use [Grand](https://ant-grand.github.io/Grand/grand.html) library; it will be ignored if you do not have [GraphViz](https://graphviz.org/download/) installed. These are not used from the jCleanCim source code.
-*   For enhancement of regular javadoc with the UML class diagrams, we use [UmlGraph](https://www.spinellis.gr/umlgraph/) library; it will be ignored if you do not have [GraphViz](https://graphviz.org/download/) installed. These are not used from the jCleanCim source code.
-*   PDF generation from the javadoc previously used the PDFDoclet application. It was built against the pre-JDK-9 doclet API, which JDK 13 removed, and the project is unmaintained; as of release 2.4.0 the PDF javadoc is no longer produced or distributed.
+*   For generation of ant target dependencies graph, we use [Grand](https://ant-grand.github.io/Grand/grand.html) library together with [GraphViz](https://graphviz.org/download/); without GraphViz the graph is skipped in ordinary builds, and `ant dist-src` stops unless run with `-Dallow.incomplete.dist=true`. These are not used from the jCleanCim source code.
+*   [UmlGraph](https://www.spinellis.gr/umlgraph/) (`UmlGraph.jar`) is still included, but as of release 2.4.0 the build no longer uses it: UmlGraph 5.6.6 is built against the javadoc doclet API that JDK 13 removed, so UML class diagrams are no longer embedded in the javadoc. Its configuration is kept, commented out, in `build.xml` until a JDK 17-capable UmlGraph is adopted.
+*   PDF generation from the javadoc previously used the PDFDoclet application. It was built against the pre-JDK-9 doclet API, which JDK 13 removed, and the project is unmaintained; as of release 2.4.0 the PDF javadoc is no longer produced or distributed. The `pdfdoclet-1.0.2-all.jar` file is still included but is not used by the build.
 
 ## Performance indicators
 
