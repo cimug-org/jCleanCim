@@ -14,6 +14,8 @@ description: >-
   Enterprise Architect UML models of IEC TC57 CIM and IEC 61850.
 url: https://jcleancim.ucaiug.io
 baseurl: ""
+# Link-preview (Open Graph / Twitter card) image, emitted by {% seo %} in _layouts/default.html.
+image: /media/logo/jcleancim-social-1280x640.png
 
 # ---------------------------------------------------------------------------
 # Current release, shown in the website header (_layouts/default.html) and
