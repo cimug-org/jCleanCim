@@ -9,6 +9,7 @@
 # these, GitHub falls back to the repository name and description.
 # ---------------------------------------------------------------------------
 title: jCleanCim
+tagline: Validation and IEC document generation for CIM UML models
 description: >-
   Open source tool for validation and documentation generation from Sparx
   Enterprise Architect UML models of IEC TC57 CIM and IEC 61850.
