@@ -15,8 +15,18 @@ description: >-
   Enterprise Architect UML models of IEC TC57 CIM and IEC 61850.
 url: https://jcleancim.ucaiug.io
 baseurl: ""
-# Link-preview (Open Graph / Twitter card) image, emitted by {% seo %} in _layouts/default.html.
-image: /media/logo/jcleancim-social-1280x640.png
+defaults:
+  # Link-preview (Open Graph / X card) image for every page, emitted by {% seo %}
+  # in the layout. jekyll-seo-tag only reads a page-level image, so it is set
+  # here as a front-matter default. The same PNG is the repo's Social preview.
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /media/logo/jcleancim-social-1280x640.png
+        width: 1280
+        height: 640
+        alt: "jCleanCim: Validation and IEC document generation for CIM UML models"
 
 # ---------------------------------------------------------------------------
 # Current release, shown in the website header (_layouts/default.html) and
